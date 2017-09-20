@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Xml;
@@ -13,6 +12,7 @@ using System.Xml;
 namespace MetroSet_UI
 {
     [DefaultProperty("Style")]
+    [Designer(typeof(StyleManagerDesigner))]
     public class StyleManager : Component
     {
 
@@ -112,13 +112,13 @@ namespace MetroSet_UI
         /// <summary>
         /// Gets or sets the The Author name associated with the theme.
         /// </summary>
-        [Category("MetroSet Framework")]
+        [Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
         public string ThemeAuthor { get; set; }
 
         /// <summary>
         /// Gets or sets the The Theme name associated with the theme.
         /// </summary>
-        [Category("MetroSet Framework")]
+        [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
         public string ThemeName { get; set; }
 
 

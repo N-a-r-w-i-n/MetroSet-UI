@@ -442,7 +442,7 @@ namespace MetroSet_UI.Controls
                             }
                             else if (varkey.Key == "TextAlign")
                             {
-                                switch (varkey.Value.ToString())
+                                switch (varkey.Value.ToString().ToLower())
                                 {
                                     case "left":
                                         prop.TextAlign = TextAlign.Left;
@@ -492,7 +492,7 @@ namespace MetroSet_UI.Controls
             try
             {
                 Font = new Font(prop.Font, prop.FontSize);
-                //Enabled = prop.Enabled;
+                Enabled = prop.Enabled;
                 ShowTitle = prop.DisplayHeader;
                 ShowLeftRect = prop.DrawLeftRect;
                 TextAlign = prop.TextAlign;

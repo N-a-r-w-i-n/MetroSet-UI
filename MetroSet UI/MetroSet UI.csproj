@@ -33,11 +33,13 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Design\StyleManagerDesigner.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
     <Compile Include="Property\LabelProperties.cs" />
@@ -72,11 +74,9 @@
     <Compile Include="Components\StyleManager.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tasks\StyleManagerTask.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Design\" />
-    <Folder Include="Tasks\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Controls\MetroSetForm.resx">
       <DependentUpon>MetroSetForm.cs</DependentUpon>

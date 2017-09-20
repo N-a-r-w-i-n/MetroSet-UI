@@ -35,19 +35,25 @@
             // 
             this.styleManager1.CustomTheme = "C:\\Users\\Stick\\Desktop\\MetroSet Theme.xml";
             this.styleManager1.MetroForm = this;
-            this.styleManager1.Style = MetroSet_UI.Design.Style.Light;
+            this.styleManager1.Style = MetroSet_UI.Design.Style.Custom;
             this.styleManager1.ThemeAuthor = "Narwin";
             this.styleManager1.ThemeName = "DarkUI";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(708, 379);
-            this.Font = new System.Drawing.Font("Segoe WP Light", 10F);
+            this.ClientSize = new System.Drawing.Size(809, 468);
+            this.Font = new System.Drawing.Font("Segoe WP Light", 12F);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
+            this.ShowHeader = true;
+            this.ShowLeftRect = false;
+            this.ShowTitle = true;
             this.SmallRectThickness = 2;
+            this.Style = MetroSet_UI.Design.Style.Custom;
             this.StyleManager = this.styleManager1;
             this.Text = "Metro UI";
             this.ThemeAuthor = "Narwin";
