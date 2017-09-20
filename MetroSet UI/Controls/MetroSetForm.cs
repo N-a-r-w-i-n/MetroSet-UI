@@ -469,6 +469,18 @@ namespace MetroSet_UI.Controls
                             {
                                 SmallRectThickness = int.Parse(varkey.Value.ToString());
                             }
+                            else if (varkey.Key == "ShowHeader")
+                            {
+                                ShowHeader = Convert.ToBoolean(varkey.Value);
+                            }
+                            else if (varkey.Key == "HeaderColor")
+                            {
+                                prop.HeaderColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "HeaderHeight")
+                            {
+                                prop.HeaderHeight = int.Parse(varkey.Value.ToString());
+                            }
                         }
                     SetProperties();
                     break;

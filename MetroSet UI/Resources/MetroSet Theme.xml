@@ -4,19 +4,22 @@
 <Author>Narwin</Author>
 </Theme>
   <Form>
-    <FontSize>10</FontSize>
-    <Font>Segoe UI</Font>
+    <FontSize>12</FontSize>
+    <Font>Segoe WP Light</Font>
 	<Enabled>true</Enabled>
     <ForeColor>#293955</ForeColor>
     <BackColor>#1e1e1e</BackColor>
-	<BorderColor>#1e1e1e</BorderColor>
+	<BorderColor>#b72828</BorderColor>
 	<SmallLineColor1>#F11199</SmallLineColor1>
 	<SmallLineColor2>#EA5216</SmallLineColor2>
 	<TextColor>#ffffff</TextColor>
 	<DrawLeftRect>true</DrawLeftRect>
 	<DisplayHeader>true</DisplayHeader>
 	<TextAlign>left</TextAlign>	
-	<SmallRectThickness>4</SmallRectThickness>
+	<SmallRectThickness>2</SmallRectThickness>
+	<ShowHeader>false</ShowHeader>	
+	<HeaderColor>#b72828</HeaderColor>
+	<HeaderHeight>35</HeaderHeight>
   </Form>
   <Button>
     <FontSize>12</FontSize>
