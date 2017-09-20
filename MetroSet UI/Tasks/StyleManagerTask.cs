@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Text;
+using System.Windows.Forms;
 using MetroSet_UI.Design;
 
 namespace MetroSet_UI.Tasks
@@ -40,11 +41,18 @@ namespace MetroSet_UI.Tasks
             set { styleManger.CustomTheme = value; }
         }
 
+        public Form OwnerForm
+        {
+            get { return styleManger.MetroForm; }
+            set { styleManger.MetroForm = value; }
+        }
+
         public override DesignerActionItemCollection GetSortedActionItems()
         {
             DesignerActionItemCollection items = new DesignerActionItemCollection
         {        
             new DesignerActionHeaderItem("MetroSet Framework"),
+            new DesignerActionPropertyItem("OwnerForm", "OwnerForm", "MetroSet Framework", "Gets or sets the form (MetroForm) to Apply themes for."),
             new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
             new DesignerActionPropertyItem("CustomTheme", "CustomTheme", "MetroSet Framework", "Gets or sets the custom theme file."),
 
