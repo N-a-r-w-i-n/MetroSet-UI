@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetLabel), "Form.png")]
+    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetLabel), "Form.bmp")]
     public class MetroSetForm : Form, iForm
     {
         #region Properties
@@ -180,7 +180,14 @@ namespace MetroSet_UI.Controls
 
             using (SolidBrush B = new SolidBrush(prop.BackgroundColor))
             {
-                e.Graphics.FillRectangle(B, new Rectangle(0, 0, Width, Height)); 
+                e.Graphics.FillRectangle(B, new Rectangle(0, 0, Width, Height));
+                if (BackgroundImage != null)
+                {
+                    using (TextureBrush tb = new TextureBrush(BackgroundImage))
+                    {
+                        e.Graphics.FillRectangle(tb, new Rectangle(0, 0, Width, Height));
+                    }
+                }
             }
             if (ShowBorder)
             {
