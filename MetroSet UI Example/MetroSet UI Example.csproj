@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{246951DC-5E33-4A86-9498-A03F9D784EFA}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0686644C-B939-4E46-B942-D01D81B4C6A7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MetroSet_UI</RootNamespace>
-    <AssemblyName>MetroSet UI</AssemblyName>
+    <RootNamespace>MetroSet_UI_Example</RootNamespace>
+    <AssemblyName>MetroSet UI Example</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +23,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -30,85 +32,48 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MetroSet UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MetroSet UI\bin\Debug\MetroSet UI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Property\ButtonProperties.cs" />
-    <Compile Include="Property\FormProperties.cs" />
-    <Compile Include="Property\LabelProperties.cs" />
-    <Compile Include="Controls\MetroSetButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\MetroSetForm.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\MetroSetLabel.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enums\Style.cs" />
-    <Compile Include="Enums\TextAlign.cs" />
-    <Compile Include="Extensions\Global Font.cs" />
-    <Compile Include="Extensions\Methods.cs" />
-    <Compile Include="Extensions\MouseSates.cs" />
-    <Compile Include="Extensions\Utilites.cs" />
-    <Compile Include="Interfaces\iControl.cs" />
-    <Compile Include="Interfaces\iForm.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Components\StyleManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Design\" />
-    <Folder Include="Tasks\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\MetroSetForm.resx">
-      <DependentUpon>MetroSetForm.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\SegoeWP-Bold.ttf" />
-    <None Include="Resources\SegoeWP-Light.ttf" />
-    <None Include="Resources\SegoeWP-Semibold.ttf" />
-    <None Include="Resources\SegoeWP-Semilight.ttf" />
-    <None Include="Resources\SegoeWP.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Button.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Form.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Label.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MetroSet Theme.xml" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

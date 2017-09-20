@@ -1,0 +1,42 @@
+﻿<MetroSetTheme>
+<Theme>
+<Name>DarkUI</Name>
+<Author>Narwin</Author>
+</Theme>
+  <Form>
+    <FontSize>10</FontSize>
+    <Font>Segoe UI</Font>
+	<Enabled>true</Enabled>
+    <ForeColor>#293955</ForeColor>
+    <BackColor>#1e1e1e</BackColor>
+	<BorderColor>#1e1e1e</BorderColor>
+	<SmallLineColor1>#F11199</SmallLineColor1>
+	<SmallLineColor2>#EA5216</SmallLineColor2>
+	<TextColor>#ffffff</TextColor>
+	<DrawLeftRect>true</DrawLeftRect>
+	<DisplayHeader>true</DisplayHeader>
+	<TextAlign>left</TextAlign>	
+	<SmallRectThickness>4</SmallRectThickness>
+  </Form>
+  <Button>
+    <FontSize>12</FontSize>
+    <Font>Segoe UI Light</Font>
+	<Enabled>true</Enabled>
+    <NormalColor>#b72828</NormalColor>
+    <NormalBorderColor>#000000</NormalBorderColor>
+    <NormalTextColor>#FFFFFF</NormalTextColor>
+    <HoverColor>#293A56</HoverColor>
+    <HoverBorderColor>#2B2B2B</HoverBorderColor>
+    <HoverTextColor>#FFFFFF</HoverTextColor>
+    <PressColor>#D6DBE9</PressColor>
+    <PressBorderColor>#2B2B2B</PressBorderColor>
+    <PressTextColor>#FFFFFF</PressTextColor>
+  </Button>
+  <Label>
+    <FontSize>10</FontSize>
+    <Font>Arial</Font>
+	<Enabled>true</Enabled>
+    <ForeColor>#b72828</ForeColor>
+    <BackColor>#00FFFFFF</BackColor>
+  </Label>
+</MetroSetTheme>
