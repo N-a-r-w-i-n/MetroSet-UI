@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetLabel), "Form.bmp")]
+    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
     public class MetroSetForm : Form, iForm
     {
         #region Properties

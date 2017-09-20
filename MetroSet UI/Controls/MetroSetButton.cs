@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetButton), "Button.bmp")]
+    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
     public class MetroSetButton : Control, iControl
     {
         #region Interfaces

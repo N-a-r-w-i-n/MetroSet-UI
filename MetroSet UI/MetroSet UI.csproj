@@ -99,13 +99,13 @@
     <None Include="Resources\SegoeWP.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Button.bmp" />
+    <None Include="Bitmaps\Button.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Form.bmp" />
+    <None Include="Bitmaps\Form.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Label.bmp" />
+    <None Include="Bitmaps\Label.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MetroSet Theme.xml" />

@@ -44,7 +44,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(669, 373);
+            this.ClientSize = new System.Drawing.Size(708, 379);
             this.Font = new System.Drawing.Font("Segoe WP Light", 10F);
             this.Name = "Form1";
             this.SmallRectThickness = 2;
