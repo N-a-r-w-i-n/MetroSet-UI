@@ -101,6 +101,13 @@ namespace MetroSet_UI.Controls
             set { textAlign = value; Invalidate(); }
         }
 
+
+        /// <summary>
+        /// Gets or sets whether show the header.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether show the header.")]
+        public bool ShowHeader { get; set; } = false;
+
         /// <summary>
         /// Gets or sets whether the small rectangle on top left of the window be shown.
         /// </summary>
@@ -155,6 +162,9 @@ namespace MetroSet_UI.Controls
                     e.Graphics.DrawRectangle(P, new Rectangle(0, 0, Width - 1, Height - 1));
                 }
             }
+
+
+
             if (ShowLeftRect)
             {
                 using (LinearGradientBrush B = new LinearGradientBrush(new Rectangle(0, 25, SmallRectThickness, 35), prop.SmallLineColor1, prop.SmallLineColor2, 90))
@@ -168,6 +178,16 @@ namespace MetroSet_UI.Controls
             }
             else
             {
+
+                if (ShowHeader)
+                {
+                    using (SolidBrush B = new SolidBrush(prop.HeaderColor))
+                    {
+                        int height = prop.HeaderHeight;
+                        e.Graphics.FillRectangle(B, new Rectangle(1, 1, Width - 1, height));
+                    }
+                }
+
                 SolidBrush textBrush = new SolidBrush(prop.TextColor);
                 if (ShowTitle)
                 {
@@ -316,6 +336,8 @@ namespace MetroSet_UI.Controls
                     prop.DrawLeftRect = true;
                     prop.SmallLineColor1 = Color.FromArgb(65, 177, 225);
                     prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
+                    prop.HeaderColor = Color.FromArgb(65, 177, 225);
+                    prop.HeaderHeight = 35;
                     Font = Global_Font.Light(prop.FontSize);
                     SetProperties();
                     break;
@@ -328,6 +350,8 @@ namespace MetroSet_UI.Controls
                     prop.BorderColor = Color.FromArgb(126, 56, 120);
                     prop.SmallLineColor1 = Color.FromArgb(126, 56, 120);
                     prop.SmallLineColor2 = Color.FromArgb(126, 56, 120);
+                    prop.HeaderColor = Color.FromArgb(126, 56, 120);
+                    prop.HeaderHeight = 35;
                     prop.TextColor = Color.White;
                     prop.DrawLeftRect = true;
                     Font = Global_Font.Light(prop.FontSize);

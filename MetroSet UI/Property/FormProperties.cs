@@ -69,5 +69,15 @@ namespace MetroSet_UI.Property
         /// </summary>
         public Color SmallLineColor2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the header color.
+        /// </summary>
+        public Color HeaderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header height.
+        /// </summary>
+        public int HeaderHeight { get; set; }
+
     }
 }
