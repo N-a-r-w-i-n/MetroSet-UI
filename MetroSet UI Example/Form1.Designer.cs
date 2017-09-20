@@ -43,8 +43,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 356);
-            this.Font = new System.Drawing.Font("Segoe WP Light", 10F);
+            this.ClientSize = new System.Drawing.Size(654, 356);
             this.Name = "Form1";
             this.ShowHeader = true;
             this.ShowLeftRect = false;
@@ -52,6 +51,7 @@
             this.SmallRectThickness = 2;
             this.StyleManager = this.styleManager1;
             this.Text = "Metro UI";
+            this.TextAlign = MetroSet_UI.Design.TextAlign.Right;
             this.ThemeAuthor = "Narwin";
             this.ThemeName = "DarkUI";
             this.Load += new System.EventHandler(this.Form1_Load);

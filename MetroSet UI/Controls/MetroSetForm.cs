@@ -106,13 +106,38 @@ namespace MetroSet_UI.Controls
         /// Gets or sets whether show the header.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets whether show the header.")]
-        public bool ShowHeader { get; set; } = false;
+        public bool ShowHeader
+        {
+            get { return showHeader; }
+            set
+            {
+                showHeader = value;
+                if (value)
+                {
+                    ShowLeftRect = false;
+                }
+                Invalidate();
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether the small rectangle on top left of the window be shown.
         /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the small rectangle on top left of the window be shown.")]
-        public bool ShowLeftRect { get; set; } = true;
+        [Category("MetroSet Framework"),
+         Description("Gets or sets whether the small rectangle on top left of the window be shown.")]
+        public bool ShowLeftRect
+        {
+            get { return showLeftRect; }
+            set
+            {
+                showLeftRect = value;
+                if (value)
+                {
+                    ShowHeader = false;
+                }
+                Invalidate();
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether the form can be move or not.
@@ -138,6 +163,8 @@ namespace MetroSet_UI.Controls
             utl = new Utilites();
             textAlign = TextAlign.Left;
             style = Style.Light;
+            showLeftRect = true;
+            showHeader = false;
             ApplyTheme();
         }
 
@@ -162,8 +189,7 @@ namespace MetroSet_UI.Controls
                     e.Graphics.DrawRectangle(P, new Rectangle(0, 0, Width - 1, Height - 1));
                 }
             }
-
-
+            
 
             if (ShowLeftRect)
             {
@@ -178,12 +204,12 @@ namespace MetroSet_UI.Controls
             }
             else
             {
-
+                int height = prop.HeaderHeight;
                 if (ShowHeader)
                 {
                     using (SolidBrush B = new SolidBrush(prop.HeaderColor))
                     {
-                        int height = prop.HeaderHeight;
+                       
                         e.Graphics.FillRectangle(B, new Rectangle(1, 1, Width - 1, height));
                     }
                 }
@@ -194,20 +220,23 @@ namespace MetroSet_UI.Controls
                     switch (TextAlign)
                     {
                         case TextAlign.Left:
-                            e.Graphics.DrawString(Text, Font, textBrush, new Point(20, 14));
+                            using (StringFormat stringFormat = new StringFormat() {LineAlignment = StringAlignment.Center})
+                            {
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(15, 0, Width, height), stringFormat);
+                            }
                             break;
 
                         case TextAlign.Center:
-                            using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Center })
+                            using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center})
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 14, Width - 21, Height), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 21, height), stringFormat);
                             }
                             break;
 
                         case TextAlign.Right:
-                            using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Far })
+                            using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center })
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Point(Width - 21, 14), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 26, height), stringFormat);
                             }
                             break;
                     }
@@ -312,6 +341,8 @@ namespace MetroSet_UI.Controls
         private const int HTCLIENT = 0x01;
         private const int HTCAPTION = 0x02;
         private StyleManager _StyleManager = null;
+        private bool showLeftRect;
+        private bool showHeader;
 
         #endregion Internal Vars
 
