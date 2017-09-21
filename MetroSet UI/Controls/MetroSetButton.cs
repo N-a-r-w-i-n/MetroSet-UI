@@ -107,7 +107,7 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             prop = new ButtonProperties();
-            BackColor = Color.Transparent;
+            //BackColor = Color.Transparent;
             Font = new Font("Segoe UI", 10);
             style = Style.Light;
             ApplyTheme();
@@ -281,6 +281,16 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Helper Methods
+
+        #region Properties
+
+        [Browsable(false)]
+        public new Color BackColor
+        {
+            get { return Color.Transparent; }
+        }
+
+        #endregion
 
         #region Events
 
