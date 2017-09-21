@@ -129,7 +129,7 @@ namespace MetroSet_UI.Controls
                 case Style.Light:
                     prop.FontSize = 10;
                     prop.Enabled = Enabled;
-                    prop.ForeColor = Color.Gray;
+                    prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
                     Font = Global_Font.SemiBold(prop.FontSize);
                     SetProperties();
@@ -138,7 +138,7 @@ namespace MetroSet_UI.Controls
                 case Style.Dark:
                     prop.FontSize = 10;
                     prop.Enabled = Enabled;
-                    prop.ForeColor = Color.White;
+                    prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
                     Font = Global_Font.SemiBold(prop.FontSize);
                     SetProperties();

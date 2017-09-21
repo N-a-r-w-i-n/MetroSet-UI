@@ -190,28 +190,28 @@ namespace MetroSet_UI.Controls
             {
                 case Style.Light:
                     prop.FontSize = 10;
-                    prop.NormalColor = Color.FromArgb(65, 177, 225);
-                    prop.NormalBorderColor = Color.Black;
-                    prop.NormalTextColor = Color.White;
-                    prop.HoverColor = Color.FromArgb(75, 187, 235);
-                    prop.HoverBorderColor = Color.Black;
+                    prop.NormalColor = Color.FromArgb(238, 238, 238);
+                    prop.NormalBorderColor = Color.FromArgb(204, 204, 204);
+                    prop.NormalTextColor = Color.Black;
+                    prop.HoverColor = Color.FromArgb(102, 102, 102);
+                    prop.HoverBorderColor = Color.FromArgb(102, 102, 102);
                     prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(55, 167, 215);
-                    prop.PressBorderColor = Color.Black;
+                    prop.PressColor = Color.FromArgb(51, 51, 51);
+                    prop.PressBorderColor = Color.FromArgb(51, 51, 51);
                     prop.PressTextColor = Color.White;
                     Font = Global_Font.Regular(prop.FontSize);
                     break;
 
                 case Style.Dark:
                     prop.FontSize = 10;
-                    prop.NormalColor = Color.FromArgb(255, 196, 13);
-                    prop.NormalBorderColor = Color.Black;
-                    prop.NormalTextColor = Color.White;
-                    prop.HoverColor = Color.FromArgb(75, 187, 235);
-                    prop.HoverBorderColor = Color.Black;
+                    prop.NormalColor = Color.FromArgb(32, 32, 32);
+                    prop.NormalBorderColor = Color.FromArgb(64, 64, 64);
+                    prop.NormalTextColor = Color.FromArgb(204, 204, 204);
+                    prop.HoverColor = Color.FromArgb(170, 170, 170);
+                    prop.HoverBorderColor = Color.FromArgb(170, 170, 170);
                     prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(55, 167, 215);
-                    prop.PressBorderColor = Color.Black;
+                    prop.PressColor = Color.FromArgb(240, 240, 240);
+                    prop.PressBorderColor = Color.FromArgb(240, 240, 240);
                     prop.PressTextColor = Color.White;
                     Font = Global_Font.Regular(prop.FontSize);
                     break;

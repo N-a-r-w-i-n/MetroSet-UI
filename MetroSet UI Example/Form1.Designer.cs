@@ -29,41 +29,27 @@
         private void InitializeComponent()
         {
             this.styleManager1 = new MetroSet_UI.StyleManager();
-            this.metroSetButton1 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.metroSetButton1 = new MetroSet_UI.Controls.MetroSetButton();
             this.SuspendLayout();
             // 
             // styleManager1
             // 
             this.styleManager1.CustomTheme = "C:\\Users\\Stick\\Desktop\\MetroSet Theme.xml";
             this.styleManager1.MetroForm = this;
-            this.styleManager1.Style = MetroSet_UI.Design.Style.Custom;
+            this.styleManager1.Style = MetroSet_UI.Design.Style.Light;
             this.styleManager1.ThemeAuthor = "Narwin";
             this.styleManager1.ThemeName = "DarkUI";
-            // 
-            // metroSetButton1
-            // 
-            this.metroSetButton1.Font = new System.Drawing.Font("Segoe WP Light", 12F);
-            this.metroSetButton1.Location = new System.Drawing.Point(313, 212);
-            this.metroSetButton1.Name = "metroSetButton1";
-            this.metroSetButton1.Size = new System.Drawing.Size(286, 57);
-            this.metroSetButton1.Style = MetroSet_UI.Design.Style.Custom;
-            this.metroSetButton1.StyleManager = this.styleManager1;
-            this.metroSetButton1.TabIndex = 0;
-            this.metroSetButton1.Text = "metroSetButton1";
-            this.metroSetButton1.ThemeAuthor = "Narwin";
-            this.metroSetButton1.ThemeName = "DarkUI";
             // 
             // metroSetLabel1
             // 
             this.metroSetLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.metroSetLabel1.Font = new System.Drawing.Font("Segoe WP", 10F);
-            this.metroSetLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.metroSetLabel1.Font = new System.Drawing.Font("Segoe WP Light", 10F);
+            this.metroSetLabel1.ForeColor = System.Drawing.Color.Gray;
             this.metroSetLabel1.Location = new System.Drawing.Point(399, 158);
             this.metroSetLabel1.Name = "metroSetLabel1";
             this.metroSetLabel1.Size = new System.Drawing.Size(100, 23);
-            this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Custom;
+            this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetLabel1.StyleManager = this.styleManager1;
             this.metroSetLabel1.TabIndex = 1;
             this.metroSetLabel1.Text = "metroSetLabel1";
@@ -71,29 +57,29 @@
             this.metroSetLabel1.ThemeName = "DarkUI";
             this.metroSetLabel1.Click += new System.EventHandler(this.metroSetLabel1_Click);
             // 
-            // button1
+            // metroSetButton1
             // 
-            this.button1.Location = new System.Drawing.Point(488, 323);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 54);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.metroSetButton1.Font = new System.Drawing.Font("Segoe WP Light", 10F);
+            this.metroSetButton1.Location = new System.Drawing.Point(361, 215);
+            this.metroSetButton1.Name = "metroSetButton1";
+            this.metroSetButton1.Size = new System.Drawing.Size(198, 42);
+            this.metroSetButton1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetButton1.StyleManager = this.styleManager1;
+            this.metroSetButton1.TabIndex = 2;
+            this.metroSetButton1.Text = "metroSetButton1";
+            this.metroSetButton1.ThemeAuthor = "Narwin";
+            this.metroSetButton1.ThemeName = "DarkUI";
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(812, 468);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.metroSetLabel1);
             this.Controls.Add(this.metroSetButton1);
-            this.Font = new System.Drawing.Font("Segoe WP Light", 12F);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
+            this.Controls.Add(this.metroSetLabel1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.SmallRectThickness = 2;
-            this.Style = MetroSet_UI.Design.Style.Custom;
             this.StyleManager = this.styleManager1;
             this.Text = "Metro UI";
             this.ThemeAuthor = "Narwin";
@@ -105,8 +91,7 @@
 
         #endregion
         private MetroSet_UI.StyleManager styleManager1;
-        private MetroSet_UI.Controls.MetroSetButton metroSetButton1;
         private MetroSet_UI.Controls.MetroSetLabel metroSetLabel1;
-        private System.Windows.Forms.Button button1;
+        private MetroSet_UI.Controls.MetroSetButton metroSetButton1;
     }
 }
