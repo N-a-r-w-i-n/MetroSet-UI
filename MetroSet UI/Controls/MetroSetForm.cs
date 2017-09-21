@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
+    [ToolboxItem(false), ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
     public class MetroSetForm : Form, iForm
     {
         #region Properties
@@ -347,7 +347,7 @@ namespace MetroSet_UI.Controls
         private const int WM_NCHITTEST = 0x0084;
         private const int HTCLIENT = 0x01;
         private const int HTCAPTION = 0x02;
-        private StyleManager _StyleManager = null;
+        private StyleManager _StyleManager;
         private bool showLeftRect;
         private bool showHeader;
 
@@ -504,5 +504,17 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Theme Changing
+
+        #region Events
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            AutoScaleMode = AutoScaleMode.None;
+            base.OnHandleCreated(e);
+        }
+
+        #endregion
+
     }
+
 }

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
+    [Designer(typeof(MetroSetButtonDesigner))]
     public class MetroSetButton : Control, iControl
     {
         #region Interfaces

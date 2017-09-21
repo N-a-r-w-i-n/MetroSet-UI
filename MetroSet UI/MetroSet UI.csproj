@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Components\StyleManager.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tasks\MetroSetButtonTask.cs" />
     <Compile Include="Tasks\StyleManagerTask.cs" />
   </ItemGroup>
   <ItemGroup />
