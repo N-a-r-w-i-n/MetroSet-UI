@@ -6,14 +6,21 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
+    [ToolboxItem(true)]
+    [ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
     [Designer(typeof(MetroSetButtonDesigner))]
+    [DefaultEvent("Click")]
+    [DefaultProperty("Text")]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetButton : Control, iControl
     {
+
         #region Interfaces
 
         /// <summary>

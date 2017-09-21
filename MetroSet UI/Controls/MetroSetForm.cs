@@ -7,11 +7,18 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(false), ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
+    [ToolboxItem(false)]
+    [ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
+    [DesignerCategory("Form")]
+    [DefaultEvent("Load")]
+    [DesignTimeVisible(false)]
+    [ComVisible(true)] [InitializationEvent("Load")]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetForm : Form, iForm
     {
         #region Properties

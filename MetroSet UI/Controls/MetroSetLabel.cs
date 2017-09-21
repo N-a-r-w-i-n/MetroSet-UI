@@ -5,11 +5,17 @@ using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true), ToolboxBitmap(typeof(MetroSetLabel), "Bitmaps.Label.bmp")]
+    [ToolboxItem(true)]
+    [ToolboxBitmap(typeof(MetroSetLabel), "Bitmaps.Label.bmp")]
+    [Designer(typeof(MetroSetLabelDesigner))]
+    [DefaultProperty("Text")]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetLabel : Label, iControl
     {
         #region Interfaces
