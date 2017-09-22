@@ -44,6 +44,7 @@
     </Compile>
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetLabelDesigner.cs" />
+    <Compile Include="Design\MetroSetLinkDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
@@ -59,7 +60,7 @@
     </Compile>
     <Compile Include="Enums\Style.cs" />
     <Compile Include="Enums\TextAlign.cs" />
-    <Compile Include="Extensions\Global Font.cs" />
+    <Compile Include="Extensions\MetroSetFonts.cs" />
     <Compile Include="Extensions\Methods.cs" />
     <Compile Include="Extensions\MouseSates.cs" />
     <Compile Include="Extensions\Utilites.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Property\LinkLabelProperties.cs" />
     <Compile Include="Tasks\MetroSetButtonTask.cs" />
     <Compile Include="Tasks\MetroSetLabelTask.cs" />
+    <Compile Include="Tasks\MetroSetLinkTask.cs" />
     <Compile Include="Tasks\StyleManagerTask.cs" />
   </ItemGroup>
   <ItemGroup>

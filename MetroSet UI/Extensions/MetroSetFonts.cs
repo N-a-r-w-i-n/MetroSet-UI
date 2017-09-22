@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace MetroSet_UI.Extensions
 {
-    public class Global_Font
+    public class MetroSetFonts
     {
 
         /// <summary>
@@ -15,14 +15,7 @@ namespace MetroSet_UI.Extensions
         /// <returns>The Segoe WP Semilight font with the given size.</returns>
         public static Font SemiLight(float size)
         {
-            using (PrivateFontCollection privateFontCollection = new PrivateFontCollection())
-            {
-                byte[] fnt = Properties.Resources.SegoeWP_Semilight;
-                IntPtr buffer = Marshal.AllocCoTaskMem(fnt.Length);
-                Marshal.Copy(fnt, 0, buffer, fnt.Length);
-                privateFontCollection.AddMemoryFont(buffer, fnt.Length);
-                return new Font(privateFontCollection.Families[0].Name, size);
-            }
+            return GetFont(Properties.Resources.SegoeWP_Semilight, size);
         }
 
         /// <summary>
@@ -32,14 +25,7 @@ namespace MetroSet_UI.Extensions
         /// <returns>The Segoe WP Light font with the given size.</returns>
         public static Font Light(float size)
         {
-            using (PrivateFontCollection privateFontCollection = new PrivateFontCollection())
-            {
-                byte[] fnt = Properties.Resources.SegoeWP_Light;
-                IntPtr buffer = Marshal.AllocCoTaskMem(fnt.Length);
-                Marshal.Copy(fnt, 0, buffer, fnt.Length);
-                privateFontCollection.AddMemoryFont(buffer, fnt.Length);
-                return new Font(privateFontCollection.Families[0].Name, size);
-            }
+            return GetFont(Properties.Resources.SegoeWP_Light, size);
         }
 
         /// <summary>
@@ -49,14 +35,7 @@ namespace MetroSet_UI.Extensions
         /// <returns>The Segoe WP SemiBold font with the given size.</returns>
         public static Font SemiBold(float size)
         {
-            using (PrivateFontCollection privateFontCollection = new PrivateFontCollection())
-            {
-                byte[] fnt = Properties.Resources.SegoeWP_Semibold;
-                IntPtr buffer = Marshal.AllocCoTaskMem(fnt.Length);
-                Marshal.Copy(fnt, 0, buffer, fnt.Length);
-                privateFontCollection.AddMemoryFont(buffer, fnt.Length);
-                return new Font(privateFontCollection.Families[0].Name, size);
-            }
+            return GetFont(Properties.Resources.SegoeWP_Semibold, size);
         }
 
         /// <summary>
@@ -66,14 +45,7 @@ namespace MetroSet_UI.Extensions
         /// <returns>The Segoe WP Bold font with the given size.</returns>
         public static Font Bold(float size)
         {
-            using (PrivateFontCollection privateFontCollection = new PrivateFontCollection())
-            {
-                byte[] fnt = Properties.Resources.SegoeWP_Bold;
-                IntPtr buffer = Marshal.AllocCoTaskMem(fnt.Length);
-                Marshal.Copy(fnt, 0, buffer, fnt.Length);
-                privateFontCollection.AddMemoryFont(buffer, fnt.Length);
-                return new Font(privateFontCollection.Families[0].Name, size);
-            }
+            return GetFont(Properties.Resources.SegoeWP_Bold, size);
         }
 
 
@@ -84,15 +56,27 @@ namespace MetroSet_UI.Extensions
         /// <returns>The Segoe WP font with the given size.</returns>
         public static Font Regular(float size)
         {
+            return GetFont(Properties.Resources.SegoeWP, size);
+        }
+
+        /// <summary>
+        /// Gets the font stored from resources.
+        /// </summary>
+        /// <param name="fontbyte">The Font stored from resources.</param>
+        /// <param name="size">The Desired size for the font</param>
+        /// <returns>The Font stored from resources with desired size.</returns>
+        public static Font GetFont(byte[] fontbyte, float size)
+        {
             using (PrivateFontCollection privateFontCollection = new PrivateFontCollection())
             {
-                byte[] fnt = Properties.Resources.SegoeWP;
+                byte[] fnt = fontbyte;
                 IntPtr buffer = Marshal.AllocCoTaskMem(fnt.Length);
                 Marshal.Copy(fnt, 0, buffer, fnt.Length);
                 privateFontCollection.AddMemoryFont(buffer, fnt.Length);
                 return new Font(privateFontCollection.Families[0].Name, size);
             }
         }
+
 
     }
 }

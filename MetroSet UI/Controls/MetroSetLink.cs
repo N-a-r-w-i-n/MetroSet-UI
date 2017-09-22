@@ -14,6 +14,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetLink), "Bitmaps.LinkLabel.bmp")]
+    [Designer(typeof(MetroSetLinkDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
@@ -82,7 +83,7 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static LinkLabelProperties prop;
+        private LinkLabelProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -106,8 +107,9 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             BackColor = Color.Transparent;
-            prop = new LinkLabelProperties();
-            style = Style.Light;
+            prop = new LinkLabelProperties() { LinkBehavior = LinkBehavior.HoverUnderline};
+            style = Style.Dark;
+            //ApplyTheme();
             mth = new Methods();
             utl = new Utilites();
         }
@@ -129,7 +131,6 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
-                    prop.LinkBehavior = LinkBehavior.HoverUnderline;
                     prop.ActiveLinkColor = utl.HexColor("#55c5f5");
                     prop.LinkColor = utl.HexColor("#41b1e1");
                     prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
@@ -141,7 +142,6 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
-                    prop.LinkBehavior = LinkBehavior.HoverUnderline;
                     prop.ActiveLinkColor = utl.HexColor("#55c5f5");
                     prop.LinkColor = utl.HexColor("#41b1e1");
                     prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
@@ -183,19 +183,19 @@ namespace MetroSet_UI.Controls
                                     break;
 
                                 case "LinkBehavior":
-                                    if ((string) varkey.Value == "HoverUnderline")
+                                    if ((string)varkey.Value == "HoverUnderline")
                                     {
                                         prop.LinkBehavior = LinkBehavior.HoverUnderline;
                                     }
-                                    else if ((string) varkey.Value == "AlwaysUnderline")
+                                    else if ((string)varkey.Value == "AlwaysUnderline")
                                     {
                                         prop.LinkBehavior = LinkBehavior.AlwaysUnderline;
                                     }
-                                    else if ((string) varkey.Value == "NeverUnderline")
+                                    else if ((string)varkey.Value == "NeverUnderline")
                                     {
                                         prop.LinkBehavior = LinkBehavior.NeverUnderline;
                                     }
-                                    else if ((string) varkey.Value == "SystemDefault")
+                                    else if ((string)varkey.Value == "SystemDefault")
                                     {
                                         prop.LinkBehavior = LinkBehavior.SystemDefault;
                                     }
@@ -220,7 +220,7 @@ namespace MetroSet_UI.Controls
                 ActiveLinkColor = prop.ActiveLinkColor;
                 VisitedLinkColor = prop.VisitedLinkColor;
                 LinkBehavior = prop.LinkBehavior;
-                Font = Global_Font.SemiLight(prop.FontSize);
+                Font = MetroSetFonts.Light(12);
                 Invalidate();
             }
             catch (Exception ex)
@@ -230,5 +230,11 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Theme Changing
+
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+            ApplyTheme();
+        }
     }
 }

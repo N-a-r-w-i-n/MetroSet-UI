@@ -131,7 +131,7 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
-                    Font = Global_Font.SemiBold(prop.FontSize);
+                    Font = MetroSetFonts.SemiBold(prop.FontSize);
                     SetProperties();
                     break;
 
@@ -140,7 +140,7 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
-                    Font = Global_Font.SemiBold(prop.FontSize);
+                    Font = MetroSetFonts.SemiBold(prop.FontSize);
                     SetProperties();
                     break;
 
@@ -187,7 +187,7 @@ namespace MetroSet_UI.Controls
                 Enabled = prop.Enabled;
                 BackColor = prop.BackColor;
                 ForeColor = prop.ForeColor;
-                Font = Global_Font.SemiBold(prop.FontSize);
+                Font = MetroSetFonts.SemiBold(prop.FontSize);
                 Invalidate();
             }
             catch (Exception ex)

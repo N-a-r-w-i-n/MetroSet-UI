@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MetroSet_UI.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using MetroSet_UI.Controls;
 
 namespace MetroSet_UI_Example
 {

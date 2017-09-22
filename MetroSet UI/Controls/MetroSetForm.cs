@@ -152,6 +152,13 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets whether the form can be move or not."), DefaultValue(true)]
         public bool Moveable { get; set; } = true;
 
+        [Browsable(false)]
+        private new AutoScaleMode AutoScaleMode
+        {
+            get { return AutoScaleMode.None; }
+            set { AutoScaleMode = AutoScaleMode.None; }
+        }
+
         #endregion Properties
 
         #region Constructor
@@ -164,7 +171,6 @@ namespace MetroSet_UI.Controls
                         ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            AutoScaleMode = AutoScaleMode.None;
             FormBorderStyle = FormBorderStyle.None;
             prop = new FormProperties();
             utl = new Utilites();
@@ -383,7 +389,7 @@ namespace MetroSet_UI.Controls
                     prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     prop.HeaderColor = Color.FromArgb(65, 177, 225);
                     prop.HeaderHeight = 35;
-                    Font = Global_Font.Light(prop.FontSize);
+                    Font = MetroSetFonts.Light(prop.FontSize);
                     SetProperties();
                     break;
 
@@ -399,7 +405,7 @@ namespace MetroSet_UI.Controls
                     prop.HeaderHeight = 35;
                     prop.TextColor = Color.White;
                     prop.DrawLeftRect = true;
-                    Font = Global_Font.Light(prop.FontSize);
+                    Font = MetroSetFonts.Light(prop.FontSize);
                     SetProperties();
                     break;
 
@@ -504,7 +510,7 @@ namespace MetroSet_UI.Controls
                 ShowLeftRect = prop.DrawLeftRect;
                 TextAlign = prop.TextAlign;
                 ForeColor = prop.ForeColor;
-                Font = Global_Font.Light(prop.FontSize);
+                Font = MetroSetFonts.Light(prop.FontSize);
                 Refresh();
             }
             catch (Exception ex) { throw new Exception(ex.StackTrace); }

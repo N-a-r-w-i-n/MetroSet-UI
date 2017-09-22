@@ -90,6 +90,7 @@ namespace MetroSet_UI.Controls
         #region Global Vars
 
         private Methods mth;
+        private Utilites utl;
 
         #endregion Global Vars
 
@@ -99,6 +100,7 @@ namespace MetroSet_UI.Controls
         private Style style;
         private StyleManager _StyleManager;
         private static ButtonProperties prop;
+
 
         #endregion Internal Vars
 
@@ -114,8 +116,8 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             prop = new ButtonProperties();
-            //BackColor = Color.Transparent;
-            Font = new Font("Segoe UI", 10);
+            Font = MetroSetFonts.Light(10);
+            utl = new Utilites();
             style = Style.Light;
             ApplyTheme();
             mth = new Methods();
@@ -189,8 +191,6 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.FontSize = 10;
-                    prop.NormalColor = Color.FromArgb(238, 238, 238);
                     prop.NormalBorderColor = Color.FromArgb(204, 204, 204);
                     prop.NormalTextColor = Color.Black;
                     prop.HoverColor = Color.FromArgb(102, 102, 102);
@@ -199,11 +199,9 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(51, 51, 51);
                     prop.PressBorderColor = Color.FromArgb(51, 51, 51);
                     prop.PressTextColor = Color.White;
-                    Font = Global_Font.Regular(prop.FontSize);
                     break;
 
                 case Style.Dark:
-                    prop.FontSize = 10;
                     prop.NormalColor = Color.FromArgb(32, 32, 32);
                     prop.NormalBorderColor = Color.FromArgb(64, 64, 64);
                     prop.NormalTextColor = Color.FromArgb(204, 204, 204);
@@ -213,7 +211,6 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(240, 240, 240);
                     prop.PressBorderColor = Color.FromArgb(240, 240, 240);
                     prop.PressTextColor = Color.White;
-                    Font = Global_Font.Regular(prop.FontSize);
                     break;
 
                 case Style.Custom:
@@ -225,69 +222,49 @@ namespace MetroSet_UI.Controls
                                 return;
                             }
 
-                            if (varkey.Key == "FontSize")
+                            if (varkey.Key == "NormalColor")
                             {
-                                prop.FontSize = Convert.ToInt32(varkey.Value);
-                            }
-                            else if (varkey.Key == "NormalColor")
-                            {
-                                prop.NormalColor = colorC((string)varkey.Value);
+                                prop.NormalColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "NormalBorderColor")
                             {
-                                prop.NormalBorderColor = colorC((string)varkey.Value);
+                                prop.NormalBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "NormalTextColor")
                             {
-                                prop.NormalTextColor = colorC((string)varkey.Value);
+                                prop.NormalTextColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverColor")
                             {
-                                prop.HoverColor = colorC((string)varkey.Value);
+                                prop.HoverColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverBorderColor")
                             {
-                                prop.HoverBorderColor = colorC((string)varkey.Value);
+                                prop.HoverBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverTextColor")
                             {
-                                prop.HoverTextColor = colorC((string)varkey.Value);
+                                prop.HoverTextColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressColor")
                             {
-                                prop.PressColor = colorC((string)varkey.Value);
+                                prop.PressColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressBorderColor")
                             {
-                                prop.PressBorderColor = colorC((string)varkey.Value);
+                                prop.PressBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressTextColor")
                             {
-                                prop.PressTextColor = colorC((string)varkey.Value);
+                                prop.PressTextColor = utl.HexColor((string)varkey.Value);
                             }
                         }
-                    Font = Global_Font.Light(prop.FontSize);
                     Refresh();
                     break;
             }
         }
 
         #endregion Theme Changing
-
-        #region Helper Methods
-
-        /// <summary>
-        /// Gets the value of specific key.
-        /// </summary>
-        /// <param name="item">The Key</param>
-        /// <returns></returns>
-
-        private Color colorC(string htmlColor)
-        {
-            return ColorTranslator.FromHtml(htmlColor);
-        }
-
-        #endregion Helper Methods
 
         #region Properties
 
