@@ -172,7 +172,7 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             FormBorderStyle = FormBorderStyle.None;
-            Font = MetroSetFonts.Light(10);
+            Font = MetroSetFonts.Light(13);
             prop = new FormProperties();
             utl = new Utilites();
             textAlign = TextAlign.Left;
@@ -389,7 +389,6 @@ namespace MetroSet_UI.Controls
                     prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     prop.HeaderColor = Color.FromArgb(65, 177, 225);
                     prop.HeaderHeight = 35;
-                    Font = MetroSetFonts.Light(prop.FontSize);
                     SetProperties();
                     break;
 
@@ -404,7 +403,6 @@ namespace MetroSet_UI.Controls
                     prop.HeaderHeight = 35;
                     prop.TextColor = Color.White;
                     prop.DrawLeftRect = true;
-                    Font = MetroSetFonts.Light(prop.FontSize);
                     SetProperties();
                     break;
 

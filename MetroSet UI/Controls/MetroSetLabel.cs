@@ -130,7 +130,6 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
-                    Font = MetroSetFonts.SemiBold(prop.FontSize);
                     SetProperties();
                     break;
 
@@ -138,7 +137,6 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
-                    Font = MetroSetFonts.SemiBold(prop.FontSize);
                     SetProperties();
                     break;
 
