@@ -45,10 +45,12 @@
     <Compile Include="Controls\MetroSetLink.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Design\MetroSetBadgeDesigner.cs" />
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetLabelDesigner.cs" />
     <Compile Include="Design\MetroSetLinkDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
+    <Compile Include="Enums\BageAlign.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
@@ -85,6 +87,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Property\LinkLabelProperties.cs" />
+    <Compile Include="Tasks\MetroSetBadgeTask.cs" />
     <Compile Include="Tasks\MetroSetButtonTask.cs" />
     <Compile Include="Tasks\MetroSetLabelTask.cs" />
     <Compile Include="Tasks\MetroSetLinkTask.cs" />

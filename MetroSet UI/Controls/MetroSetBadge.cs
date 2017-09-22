@@ -1,4 +1,5 @@
 ﻿using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
@@ -8,11 +9,19 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms;
+using System.Windows.Forms; 
 
 namespace MetroSet_UI.Controls
 {
+    [ToolboxItem(true)]
+    [ToolboxBitmap(typeof(MetroSetBadge), "Bitmaps.Button.bmp")]
+    [Designer(typeof(MetroSetBadgeDesigner))]
+    [DefaultEvent("Click")]
+    [DefaultProperty("Text")]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetBadge : Control, iControl
     {
 
@@ -120,31 +129,21 @@ namespace MetroSet_UI.Controls
 
         #endregion Constructors
 
-        public enum BadgeAlign
-        {
-            Topleft,
-            TopRight,
-            BottmLeft,
-            BottomRight
-        }
-
+        #region Properties
+        
         /// <summary>
         /// Gets or sets the badge alignment associated with the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the badge alignment associated with the control.")]
-        public BadgeAlign BadgeAlignent { get; set; } = BadgeAlign.TopRight;
-        
-        public void SetGraphics(Graphics e, SmoothingMode state = SmoothingMode.AntiAlias)
-        {
-            e.SmoothingMode = state;
-        }
+        public BadgeAlign BadgeAlignment { get; set; } = BadgeAlign.TopRight;
+
         /// <summary>
         /// Gets or sets the badge text associated with the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the badge text associated with the control.")]
         public string BadgeText { get; set; } = "3";
 
-
+        #endregion
 
         #region Draw Control
 
@@ -155,7 +154,7 @@ namespace MetroSet_UI.Controls
             Rectangle badge = default(Rectangle);
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            switch (BadgeAlignent)
+            switch (BadgeAlignment)
             {
                 case BadgeAlign.Topleft:
                     r = new Rectangle(18, 18, Width - 21, Height - 21);
@@ -188,7 +187,7 @@ namespace MetroSet_UI.Controls
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
                         G.DrawString(Text, Font, TB, r, mth.SetPosition()); 
-                        SetGraphics(G);
+                        SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
                         G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
                     }
@@ -207,7 +206,7 @@ namespace MetroSet_UI.Controls
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
                         G.DrawString(Text, Font, TB, r, mth.SetPosition());
-                        SetGraphics(G);
+                        SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
                         G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
                     }
@@ -225,7 +224,7 @@ namespace MetroSet_UI.Controls
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
                         G.DrawString(Text, Font, TB, r, mth.SetPosition());
-                        SetGraphics(G);
+                        SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
                         G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
                     }
@@ -392,6 +391,20 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Events
+
+        #region Methods
+        
+        /// <summary>
+        /// Sets the smoothingmode the the specific graphics.
+        /// </summary>
+        /// <param name="e">Graphics to Set the effect.</param>
+        /// <param name="state">state of smoothingmode.</param>
+        public void SmoothingType(Graphics e, SmoothingMode state = SmoothingMode.AntiAlias)
+        {
+            e.SmoothingMode = state;
+        }
+
+        #endregion
 
     }
 }
