@@ -4,8 +4,6 @@
     <Author>Narwin</Author>
   </Theme>
   <Form>
-    <FontSize>12</FontSize>
-    <Font>Segoe WP Light</Font>
     <Enabled>true</Enabled>
     <ForeColor>#293955</ForeColor>
     <BackColor>#1e1e1e</BackColor>
@@ -22,8 +20,6 @@
     <HeaderHeight>35</HeaderHeight>
   </Form>
   <Button>
-    <FontSize>12</FontSize>
-    <Font>Segoe WP Light</Font>
     <Enabled>true</Enabled>
     <NormalColor>#b72828</NormalColor>
     <NormalBorderColor>#000000</NormalBorderColor>
@@ -36,21 +32,17 @@
     <PressTextColor>#FFFFFF</PressTextColor>
   </Button>
   <Label>
-    <FontSize>10</FontSize>
-    <Font>Segoe WP Light</Font> 
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
   </Label>
   <LinkLabel>
-    <FontSize>10</FontSize>
-    <Font>Segoe WP Light</Font>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
     <LinkColor>#41b1e1</LinkColor>
     <ActiveLinkColor>#55c5f5</ActiveLinkColor>
     <VisitedLinkColor>#2d9dcd</VisitedLinkColor>
-    <LinkBehavior>HoverUnderline</LinkBehavior>
+    <LinkBehavior>HoverUnderline</LinkBehavior> <!--HoverUnderline, AlwaysUnderline, NeverUnderline, SystemDefault-->
   </LinkLabel>
 </MetroSetTheme>
