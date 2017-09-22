@@ -172,6 +172,7 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             FormBorderStyle = FormBorderStyle.None;
+            Font = MetroSetFonts.Light(10);
             prop = new FormProperties();
             utl = new Utilites();
             textAlign = TextAlign.Left;
@@ -378,7 +379,6 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.FontSize = 10;
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Gray;
                     prop.BackgroundColor = Color.White;
@@ -394,7 +394,6 @@ namespace MetroSet_UI.Controls
                     break;
 
                 case Style.Dark:
-                    prop.FontSize = 10;
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.White;
                     prop.BackgroundColor = Color.FromArgb(30, 30, 30);
@@ -417,15 +416,7 @@ namespace MetroSet_UI.Controls
                             {
                                 throw new Exception("FormDictionary is empty");
                             }
-                            if (varkey.Key == "FontSize")
-                            {
-                                prop.FontSize = Convert.ToInt32(varkey.Value);
-                            }
-                            else if (varkey.Key == "Font")
-                            {
-                                prop.Font = (string)varkey.Value;
-                            }
-                            else if (varkey.Key == "Enabled")
+                            if (varkey.Key == "Enabled")
                             {
                                 prop.Enabled = Convert.ToBoolean(varkey.Value);
                             }
@@ -504,13 +495,11 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                Font = new Font(prop.Font, prop.FontSize);
                 Enabled = prop.Enabled;
                 ShowTitle = prop.DisplayHeader;
                 ShowLeftRect = prop.DrawLeftRect;
                 TextAlign = prop.TextAlign;
                 ForeColor = prop.ForeColor;
-                Font = MetroSetFonts.Light(prop.FontSize);
                 Refresh();
             }
             catch (Exception ex) { throw new Exception(ex.StackTrace); }

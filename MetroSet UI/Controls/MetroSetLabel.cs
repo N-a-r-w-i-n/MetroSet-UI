@@ -104,7 +104,7 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-
+            Font = MetroSetFonts.SemiBold(10);
             BackColor = Color.Transparent;
             Font = new Font("Segoe UI", 10);
             prop = new LabelProperties();
@@ -127,7 +127,6 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.FontSize = 10;
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
@@ -136,7 +135,6 @@ namespace MetroSet_UI.Controls
                     break;
 
                 case Style.Dark:
-                    prop.FontSize = 10;
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
@@ -150,14 +148,6 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "FontSize":
-                                    prop.FontSize = Convert.ToInt32(varkey.Value);
-                                    break;
-
-                                case "Font":
-                                    prop.Font = (string)varkey.Value;
-                                    break;
-
                                 case "Enabled":
                                     prop.Enabled = Convert.ToBoolean(varkey.Value);
                                     break;
@@ -183,11 +173,9 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                Font = new Font(prop.Font, prop.FontSize);
                 Enabled = prop.Enabled;
                 BackColor = prop.BackColor;
                 ForeColor = prop.ForeColor;
-                Font = MetroSetFonts.SemiBold(prop.FontSize);
                 Invalidate();
             }
             catch (Exception ex)

@@ -107,9 +107,10 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             BackColor = Color.Transparent;
+            Font = MetroSetFonts.Light(12);
             prop = new LinkLabelProperties() { LinkBehavior = LinkBehavior.HoverUnderline};
             style = Style.Dark;
-            //ApplyTheme();
+            ApplyTheme();
             mth = new Methods();
             utl = new Utilites();
         }
@@ -127,7 +128,6 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.FontSize = 10;
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
@@ -138,7 +138,6 @@ namespace MetroSet_UI.Controls
                     break;
 
                 case Style.Dark:
-                    prop.FontSize = 10;
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
@@ -154,10 +153,6 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "FontSize":
-                                    prop.FontSize = Convert.ToInt32(varkey.Value);
-                                    break;
-
                                 case "Enabled":
                                     prop.Enabled = Convert.ToBoolean(varkey.Value);
                                     break;
@@ -220,7 +215,6 @@ namespace MetroSet_UI.Controls
                 ActiveLinkColor = prop.ActiveLinkColor;
                 VisitedLinkColor = prop.VisitedLinkColor;
                 LinkBehavior = prop.LinkBehavior;
-                Font = MetroSetFonts.Light(12);
                 Invalidate();
             }
             catch (Exception ex)
@@ -231,10 +225,5 @@ namespace MetroSet_UI.Controls
 
         #endregion Theme Changing
 
-        protected override void OnCreateControl()
-        {
-            base.OnCreateControl();
-            ApplyTheme();
-        }
     }
 }

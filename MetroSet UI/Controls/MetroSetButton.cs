@@ -100,8 +100,7 @@ namespace MetroSet_UI.Controls
         private Style style;
         private StyleManager _StyleManager;
         private static ButtonProperties prop;
-
-
+        
         #endregion Internal Vars
 
         #region Constructors
