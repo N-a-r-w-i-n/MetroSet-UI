@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetLabel), "Bitmaps.Label.bmp")]
+    [ToolboxBitmap(typeof(MetroSetLabel), "Bitmaps.Label.bmp")] 
     [Designer(typeof(MetroSetLabelDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
