@@ -4,14 +4,12 @@ using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
@@ -24,7 +22,6 @@ namespace MetroSet_UI.Controls
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetBadge : Control, iControl
     {
-
         #region Interfaces
 
         /// <summary>
@@ -130,7 +127,7 @@ namespace MetroSet_UI.Controls
         #endregion Constructors
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the badge alignment associated with the control.
         /// </summary>
@@ -143,7 +140,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the badge text associated with the control.")]
         public string BadgeText { get; set; } = "3";
 
-        #endregion
+        #endregion Properties
 
         #region Draw Control
 
@@ -158,16 +155,19 @@ namespace MetroSet_UI.Controls
             {
                 case BadgeAlign.Topleft:
                     r = new Rectangle(18, 18, Width - 21, Height - 21);
-                    badge = new Rectangle(5,5, 29, 29);
+                    badge = new Rectangle(5, 5, 29, 29);
                     break;
+
                 case BadgeAlign.TopRight:
                     r = new Rectangle(0, 18, Width - 18, Height - 21);
                     badge = new Rectangle(Width - 35, 1, 29, 29);
                     break;
+
                 case BadgeAlign.BottmLeft:
                     r = new Rectangle(18, 0, Width - 19, Height - 18);
                     badge = new Rectangle(1, Height - 35, 29, 29);
                     break;
+
                 case BadgeAlign.BottomRight:
                     r = new Rectangle(0, 0, Width - 19, Height - 18);
                     badge = new Rectangle(Width - 35, Height - 35, 29, 29);
@@ -186,7 +186,7 @@ namespace MetroSet_UI.Controls
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, r, mth.SetPosition()); 
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
                         SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
                         G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
@@ -351,7 +351,6 @@ namespace MetroSet_UI.Controls
                             {
                                 prop.PressBadgeTextColor = utl.HexColor((string)varkey.Value);
                             }
-
                         }
                     Refresh();
                     break;
@@ -393,7 +392,7 @@ namespace MetroSet_UI.Controls
         #endregion Events
 
         #region Methods
-        
+
         /// <summary>
         /// Sets the smoothingmode the the specific graphics.
         /// </summary>
@@ -404,7 +403,6 @@ namespace MetroSet_UI.Controls
             e.SmoothingMode = state;
         }
 
-        #endregion
-
+        #endregion Methods
     }
 }

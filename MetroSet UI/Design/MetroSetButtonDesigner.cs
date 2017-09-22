@@ -32,7 +32,7 @@ namespace MetroSet_UI.Design
                 if (actionListCollection == null)
                 {
                     actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new MetroSetButtonTask(Component));
+                    actionListCollection.Add(new MetroSetButtonActionList(Component));
                 }
 
                 return actionListCollection;

@@ -11,11 +11,11 @@ using static System.Windows.Forms.LinkLabel;
 
 namespace MetroSet_UI.Tasks
 {
-    class MetroSetLinkTask : DesignerActionList
+    class MetroSetLinkActionList : DesignerActionList
     {
         private readonly MetroSetLink metroSetLink;
 
-        public MetroSetLinkTask(IComponent component) : base(component)
+        public MetroSetLinkActionList(IComponent component) : base(component)
         {
             metroSetLink = (MetroSetLink)component;
         }

@@ -20,7 +20,7 @@ namespace MetroSet_UI.Design
                 if (actionListCollection == null)
                 {
                     actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new MetroSetLabelTask(Component));
+                    actionListCollection.Add(new MetroSetLabelActionList(Component));
                 }
 
                 return actionListCollection;

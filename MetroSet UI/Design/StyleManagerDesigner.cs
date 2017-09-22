@@ -17,7 +17,7 @@ namespace MetroSet_UI.Design
                 if (actionListCollection == null)
                 {
                     actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new StyleManagerTask(Component));
+                    actionListCollection.Add(new StyleManagerActionList(Component));
                 }
 
                 return actionListCollection;

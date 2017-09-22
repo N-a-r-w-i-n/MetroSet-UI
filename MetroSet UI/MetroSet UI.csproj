@@ -87,11 +87,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Property\LinkLabelProperties.cs" />
-    <Compile Include="Tasks\MetroSetBadgeTask.cs" />
-    <Compile Include="Tasks\MetroSetButtonTask.cs" />
-    <Compile Include="Tasks\MetroSetLabelTask.cs" />
-    <Compile Include="Tasks\MetroSetLinkTask.cs" />
-    <Compile Include="Tasks\StyleManagerTask.cs" />
+    <Compile Include="Actions\MetroSetBadgeActionList.cs" />
+    <Compile Include="Actions\MetroSetButtonActionList.cs" />
+    <Compile Include="Actions\MetroSetLabelActionList.cs" />
+    <Compile Include="Actions\MetroSetLinkActionList.cs" />
+    <Compile Include="Actions\StyleManagerActionList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dialogs\" />

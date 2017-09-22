@@ -7,11 +7,11 @@ using System.Drawing;
 
 namespace MetroSet_UI.Tasks
 {
-    public class MetroSetBadgeTask : DesignerActionList
+    public class MetroSetBadgeActionList : DesignerActionList
     {
         private readonly MetroSetBadge metroSetBadge;
 
-        public MetroSetBadgeTask(IComponent component) : base(component)
+        public MetroSetBadgeActionList(IComponent component) : base(component)
         {
             metroSetBadge = (MetroSetBadge)component;
         }

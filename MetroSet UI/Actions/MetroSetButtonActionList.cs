@@ -1,55 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MetroSet_UI.Controls;
+using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Text;
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 
 namespace MetroSet_UI.Tasks
 {
-    class MetroSetLabelTask : DesignerActionList
+    public class MetroSetButtonActionList : DesignerActionList
     {
-        private readonly MetroSetLabel metroSetLabel;
+        private readonly MetroSetButton metroSetButton;
 
-        public MetroSetLabelTask(IComponent component) : base(component)
+        public MetroSetButtonActionList(IComponent component) : base(component)
         {
-            metroSetLabel = (MetroSetLabel)component;
+            metroSetButton = (MetroSetButton)component;
         }
 
         public Style Style
         {
-            get { return metroSetLabel.Style; }
-            set { metroSetLabel.Style = value; }
+            get { return metroSetButton.Style; }
+            set { metroSetButton.Style = value; }
         }
 
         public string ThemeAuthor
         {
-            get { return metroSetLabel.ThemeAuthor; }
+            get { return metroSetButton.ThemeAuthor; }
         }
 
         public string ThemeName
         {
-            get { return metroSetLabel.ThemeName; }
+            get { return metroSetButton.ThemeName; }
         }
 
         public StyleManager StyleManager
         {
-            get { return metroSetLabel.StyleManager; }
-            set { metroSetLabel.StyleManager = value; }
+            get { return metroSetButton.StyleManager; }
+            set { metroSetButton.StyleManager = value; }
         }
 
         public string Text
         {
-            get { return metroSetLabel.Text; }
-            set { metroSetLabel.Text = value; }
+            get { return metroSetButton.Text; }
+            set { metroSetButton.Text = value; }
         }
 
         public Font Font
         {
-            get { return metroSetLabel.Font; }
-            set { metroSetLabel.Font = value; }
+            get { return metroSetButton.Font; }
+            set { metroSetButton.Font = value; }
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

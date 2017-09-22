@@ -9,11 +9,11 @@ using MetroSet_UI.Design;
 
 namespace MetroSet_UI.Tasks
 {
-    class StyleManagerTask : DesignerActionList
+    class StyleManagerActionList : DesignerActionList
     {
         private readonly StyleManager styleManger;
 
-        public StyleManagerTask(IComponent component) : base(component)
+        public StyleManagerActionList(IComponent component) : base(component)
         {
             styleManger = (StyleManager)component;
         }

@@ -18,7 +18,7 @@ namespace MetroSet_UI.Design
                 if (actionListCollection == null)
                 {
                     actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new MetroSetLinkTask(Component));
+                    actionListCollection.Add(new MetroSetLinkActionList(Component));
                 }
 
                 return actionListCollection;
