@@ -152,13 +152,6 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets whether the form can be move or not."), DefaultValue(true)]
         public bool Moveable { get; set; } = true;
 
-        [Browsable(false)]
-        private new AutoScaleMode AutoScaleMode
-        {
-            get { return AutoScaleMode.None; }
-            set { AutoScaleMode = AutoScaleMode.None; }
-        }
-
         #endregion Properties
 
         #region Constructor
