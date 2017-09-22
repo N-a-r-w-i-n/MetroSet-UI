@@ -14,7 +14,6 @@ namespace MetroSet_UI_Example
         public Form1()
         {
             InitializeComponent();
-            
         }
     }
 }

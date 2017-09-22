@@ -51,7 +51,7 @@ namespace MetroSet_UI.Controls
                         ApplyTheme();
                         break;
                 }
-                Invalidate();
+                Refresh();
             }
         }
 
@@ -62,7 +62,7 @@ namespace MetroSet_UI.Controls
         public StyleManager StyleManager
         {
             get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            set { _StyleManager = value; Refresh(); }
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the The Theme name associated with the theme.
         /// </summary>
-        [Category("MetroSet Framework")]
+        [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
         public string ThemeName { get; set; }
 
         #endregion Interfaces

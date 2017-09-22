@@ -76,7 +76,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the The Theme name associated with the theme.
         /// </summary>
-        [Category("MetroSet Framework")]
+        [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
         public string ThemeName { get; set; }
 
         #endregion Interfaces
@@ -103,16 +103,18 @@ namespace MetroSet_UI.Controls
             SetStyle(
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
-                ControlStyles.SupportsTransparentBackColor, true);
+                ControlStyles.SupportsTransparentBackColor, true
+                );
             DoubleBuffered = true;
             UpdateStyles();
             BackColor = Color.Transparent;
-            Font = MetroSetFonts.Light(12);
-            prop = new LinkLabelProperties() { LinkBehavior = LinkBehavior.HoverUnderline};
-            style = Style.Dark;
-            ApplyTheme();
+            Font = MetroSetFonts.Light(10);
+            prop = new LinkLabelProperties();
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Dark;
+            ApplyTheme();
+            LinkBehavior = LinkBehavior.HoverUnderline;
         }
 
         #endregion Constructors
@@ -154,7 +156,7 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
+                                    prop.Enabled = bool.Parse((string)varkey.Value);
                                     break;
 
                                 case "ForeColor":
@@ -215,11 +217,11 @@ namespace MetroSet_UI.Controls
                 ActiveLinkColor = prop.ActiveLinkColor;
                 VisitedLinkColor = prop.VisitedLinkColor;
                 LinkBehavior = prop.LinkBehavior;
-                Invalidate();
+                Refresh();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.StackTrace);
+                throw new Exception(ex.Message);
             }
         }
 

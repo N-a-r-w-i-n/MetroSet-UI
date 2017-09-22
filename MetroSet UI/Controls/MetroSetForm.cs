@@ -105,7 +105,7 @@ namespace MetroSet_UI.Controls
         public TextAlign TextAlign
         {
             get { return textAlign; }
-            set { textAlign = value; Invalidate(); }
+            set { textAlign = value; Refresh(); }
         }
 
 
@@ -123,7 +123,7 @@ namespace MetroSet_UI.Controls
                 {
                     ShowLeftRect = false;
                 }
-                Invalidate();
+                Refresh();
             }
         }
 
@@ -308,7 +308,7 @@ namespace MetroSet_UI.Controls
                         ApplyTheme(Style.Custom);
                         break;
                 }
-                Invalidate();
+                Refresh();
             }
         }
 
@@ -322,7 +322,7 @@ namespace MetroSet_UI.Controls
             set
             {
                 _StyleManager = value;
-                Invalidate();
+                Refresh();
             }
         }
 
