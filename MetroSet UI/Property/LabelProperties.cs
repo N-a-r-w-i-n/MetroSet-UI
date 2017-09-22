@@ -19,8 +19,14 @@ namespace MetroSet_UI.Property
         /// </summary>
         public float FontSize { get; set; }
 
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
         public Color ForeColor { get; set; }
 
+        /// <summary>
+        /// Gets or sets backcolor used by the control
+        /// </summary>
         public Color BackColor { get; set; }
     }
 }

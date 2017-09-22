@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\MetroSetLink.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetLabelDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
@@ -76,11 +79,14 @@
     <Compile Include="Components\StyleManager.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Property\LinkLabelProperties.cs" />
     <Compile Include="Tasks\MetroSetButtonTask.cs" />
     <Compile Include="Tasks\MetroSetLabelTask.cs" />
     <Compile Include="Tasks\StyleManagerTask.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dialogs\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\MetroSetForm.resx">
       <DependentUpon>MetroSetForm.cs</DependentUpon>
@@ -113,6 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MetroSet Theme.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bitmaps\LinkLabel.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

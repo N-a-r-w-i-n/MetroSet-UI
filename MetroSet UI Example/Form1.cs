@@ -9,7 +9,7 @@ using MetroSet_UI.Controls;
 
 namespace MetroSet_UI_Example
 {
-    public partial class Form1 : MetroSetForm 
+    public partial class Form1 : MetroSetForm
     {
         public Form1()
         {
@@ -17,11 +17,6 @@ namespace MetroSet_UI_Example
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void metroSetLabel1_Click(object sender, EventArgs e)
         {
 
         }

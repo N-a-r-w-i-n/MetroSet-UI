@@ -240,6 +240,11 @@ namespace MetroSet_UI
         public Dictionary<string, object> LabelDictionary = new Dictionary<string, object>();
 
         /// <summary>
+        /// The LinkLabel properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> LinkLabelDictionary = new Dictionary<string, object>();
+
+        /// <summary>
         /// The TextBox properties from custom theme will be stored into this dictionary.
         /// </summary>
         public Dictionary<string, object> TextBoxDictionary = new Dictionary<string, object>();
@@ -282,6 +287,10 @@ namespace MetroSet_UI
 
                             case "Label":
                                 LabelDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
+
+                            case "LinkLabel":
+                                LinkLabelDictionary.Add(childNode.Name, childNode.InnerText);
                                 break;
 
                             case "TextBox":

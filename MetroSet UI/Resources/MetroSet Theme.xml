@@ -1,30 +1,30 @@
 ﻿<MetroSetTheme>
-<Theme>
-<Name>DarkUI</Name>
-<Author>Narwin</Author>
-</Theme>
+  <Theme>
+    <Name>DarkUI</Name>
+    <Author>Narwin</Author>
+  </Theme>
   <Form>
     <FontSize>12</FontSize>
     <Font>Segoe WP Light</Font>
-	<Enabled>true</Enabled>
+    <Enabled>true</Enabled>
     <ForeColor>#293955</ForeColor>
     <BackColor>#1e1e1e</BackColor>
-	<BorderColor>#b72828</BorderColor>
-	<SmallLineColor1>#F11199</SmallLineColor1>
-	<SmallLineColor2>#EA5216</SmallLineColor2>
-	<TextColor>#ffffff</TextColor>
-	<DrawLeftRect>true</DrawLeftRect>
-	<DisplayHeader>true</DisplayHeader>
-	<TextAlign>left</TextAlign>	
-	<SmallRectThickness>2</SmallRectThickness>
-	<ShowHeader>false</ShowHeader>	
-	<HeaderColor>#b72828</HeaderColor>
-	<HeaderHeight>35</HeaderHeight>
+    <BorderColor>#b72828</BorderColor>
+    <SmallLineColor1>#F11199</SmallLineColor1>
+    <SmallLineColor2>#EA5216</SmallLineColor2>
+    <TextColor>#ffffff</TextColor>
+    <DrawLeftRect>true</DrawLeftRect>
+    <DisplayHeader>true</DisplayHeader>
+    <TextAlign>left</TextAlign>	
+    <SmallRectThickness>2</SmallRectThickness>
+    <ShowHeader>false</ShowHeader>	
+    <HeaderColor>#b72828</HeaderColor>
+    <HeaderHeight>35</HeaderHeight>
   </Form>
   <Button>
     <FontSize>12</FontSize>
-    <Font>Segoe UI Light</Font>
-	<Enabled>true</Enabled>
+    <Font>Segoe WP Light</Font>
+    <Enabled>true</Enabled>
     <NormalColor>#b72828</NormalColor>
     <NormalBorderColor>#000000</NormalBorderColor>
     <NormalTextColor>#FFFFFF</NormalTextColor>
@@ -37,9 +37,20 @@
   </Button>
   <Label>
     <FontSize>10</FontSize>
-    <Font>Arial</Font>
-	<Enabled>true</Enabled>
+    <Font>Segoe WP Light</Font> 
+    <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
   </Label>
+  <LinkLabel>
+    <FontSize>10</FontSize>
+    <Font>Segoe WP Light</Font>
+    <Enabled>true</Enabled>
+    <ForeColor>#b72828</ForeColor>
+    <BackColor>#00FFFFFF</BackColor>
+    <LinkColor>#41b1e1</LinkColor>
+    <ActiveLinkColor>#55c5f5</ActiveLinkColor>
+    <VisitedLinkColor>#2d9dcd</VisitedLinkColor>
+    <LinkBehavior>HoverUnderline</LinkBehavior>
+  </LinkLabel>
 </MetroSetTheme>
