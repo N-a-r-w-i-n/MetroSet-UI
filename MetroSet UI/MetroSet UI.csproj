@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\MetroSetBadge.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetLink.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -46,6 +49,7 @@
     <Compile Include="Design\MetroSetLabelDesigner.cs" />
     <Compile Include="Design\MetroSetLinkDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
+    <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
     <Compile Include="Property\LabelProperties.cs" />

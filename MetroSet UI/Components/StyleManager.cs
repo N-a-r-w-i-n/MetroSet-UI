@@ -57,7 +57,7 @@ namespace MetroSet_UI
             if (MetroForm.Controls.Count > 0)
                 UpdateControls(MetroForm.Controls);
 
-            MetroForm.Refresh();
+            MetroForm.Invalidate();
         }
 
         /// <summary>
@@ -254,10 +254,15 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> FormDictionary = new Dictionary<string, object>();
 
+        /// <summary>
+        /// The Badge properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> BadgeDictionary = new Dictionary<string, object>();
+
         #endregion
 
         #region Reader
-        
+
         /// <summary>
         /// Reads the theme file and put elements properties to dictionaries.
         /// </summary>
@@ -299,6 +304,10 @@ namespace MetroSet_UI
 
                             case "Form":
                                 FormDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
+
+                            case "Badge":
+                                BadgeDictionary.Add(childNode.Name, childNode.InnerText);
                                 break;
 
                             case "Theme":

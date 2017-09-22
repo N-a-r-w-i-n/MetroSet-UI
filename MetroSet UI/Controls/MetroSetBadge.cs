@@ -3,22 +3,17 @@ using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
-    [Designer(typeof(MetroSetButtonDesigner))]
-    [DefaultEvent("Click")]
-    [DefaultProperty("Text")]
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class MetroSetButton : Control, iControl
+    public class MetroSetBadge : Control, iControl
     {
 
         #region Interfaces
@@ -99,13 +94,13 @@ namespace MetroSet_UI.Controls
         private MouseMode State;
         private Style style;
         private StyleManager _StyleManager;
-        private static ButtonProperties prop;
-        
+        private static BadgeProperties prop;
+
         #endregion Internal Vars
 
         #region Constructors
 
-        public MetroSetButton()
+        public MetroSetBadge()
         {
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint |
@@ -114,7 +109,8 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            prop = new ButtonProperties();
+            BackColor = Color.Transparent;
+            prop = new BadgeProperties();
             Font = MetroSetFonts.Light(10);
             utl = new Utilites();
             style = Style.Light;
@@ -124,13 +120,60 @@ namespace MetroSet_UI.Controls
 
         #endregion Constructors
 
+        public enum BadgeAlign
+        {
+            Topleft,
+            TopRight,
+            BottmLeft,
+            BottomRight
+        }
+
+        /// <summary>
+        /// Gets or sets the badge alignment associated with the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the badge alignment associated with the control.")]
+        public BadgeAlign BadgeAlignent { get; set; } = BadgeAlign.TopRight;
+        
+        public void SetGraphics(Graphics e, SmoothingMode state = SmoothingMode.AntiAlias)
+        {
+            e.SmoothingMode = state;
+        }
+        /// <summary>
+        /// Gets or sets the badge text associated with the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the badge text associated with the control.")]
+        public string BadgeText { get; set; } = "3";
+
+
+
         #region Draw Control
 
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics G = e.Graphics;
-            Rectangle r = new Rectangle(0, 0, Width - 1, Height - 1);
+            Rectangle r = default(Rectangle);
+            Rectangle badge = default(Rectangle);
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+            switch (BadgeAlignent)
+            {
+                case BadgeAlign.Topleft:
+                    r = new Rectangle(18, 18, Width - 21, Height - 21);
+                    badge = new Rectangle(5,5, 29, 29);
+                    break;
+                case BadgeAlign.TopRight:
+                    r = new Rectangle(0, 18, Width - 18, Height - 21);
+                    badge = new Rectangle(Width - 35, 1, 29, 29);
+                    break;
+                case BadgeAlign.BottmLeft:
+                    r = new Rectangle(18, 0, Width - 19, Height - 18);
+                    badge = new Rectangle(1, Height - 35, 29, 29);
+                    break;
+                case BadgeAlign.BottomRight:
+                    r = new Rectangle(0, 0, Width - 19, Height - 18);
+                    badge = new Rectangle(Width - 35, Height - 35, 29, 29);
+                    break;
+            }
 
             switch (State)
             {
@@ -139,10 +182,15 @@ namespace MetroSet_UI.Controls
                     using (SolidBrush BG = new SolidBrush(prop.NormalColor))
                     using (Pen P = new Pen(prop.NormalBorderColor))
                     using (SolidBrush TB = new SolidBrush(prop.NormalTextColor))
+                    using (SolidBrush bdgBrush = new SolidBrush(prop.NormalBadgeColor))
+                    using (SolidBrush bdgtxtBrush = new SolidBrush(prop.NormalBadgeTextColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition()); 
+                        SetGraphics(G);
+                        G.FillEllipse(bdgBrush, badge);
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
                     }
 
                     break;
@@ -153,10 +201,15 @@ namespace MetroSet_UI.Controls
                     using (SolidBrush BG = new SolidBrush(prop.HoverColor))
                     using (Pen P = new Pen(prop.HoverBorderColor))
                     using (SolidBrush TB = new SolidBrush(prop.HoverTextColor))
+                    using (SolidBrush bdgBrush = new SolidBrush(prop.HoverBadgeColor))
+                    using (SolidBrush bdgtxtBrush = new SolidBrush(prop.HoverBadgeTextColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        SetGraphics(G);
+                        G.FillEllipse(bdgBrush, badge);
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
                     }
 
                     break;
@@ -166,10 +219,15 @@ namespace MetroSet_UI.Controls
                     using (SolidBrush BG = new SolidBrush(prop.PressColor))
                     using (Pen P = new Pen(prop.PressBorderColor))
                     using (SolidBrush TB = new SolidBrush(prop.PressTextColor))
+                    using (SolidBrush bdgBrush = new SolidBrush(prop.PressBadgeColor))
+                    using (SolidBrush bdgtxtBrush = new SolidBrush(prop.PressBadgeTextColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        SetGraphics(G);
+                        G.FillEllipse(bdgBrush, badge);
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
                     }
 
                     break;
@@ -190,6 +248,7 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
+                    prop.NormalColor = Color.FromArgb(238, 238, 238);
                     prop.NormalBorderColor = Color.FromArgb(204, 204, 204);
                     prop.NormalTextColor = Color.Black;
                     prop.HoverColor = Color.FromArgb(102, 102, 102);
@@ -198,6 +257,12 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(51, 51, 51);
                     prop.PressBorderColor = Color.FromArgb(51, 51, 51);
                     prop.PressTextColor = Color.White;
+                    prop.NormalBadgeColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalBadgeTextColor = Color.White;
+                    prop.HoverBadgeColor = Color.FromArgb(85, 187, 245);
+                    prop.HoverBadgeTextColor = Color.White;
+                    prop.PressBadgeColor = Color.FromArgb(45, 147, 205);
+                    prop.PressBadgeTextColor = Color.White;
                     break;
 
                 case Style.Dark:
@@ -210,11 +275,17 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(240, 240, 240);
                     prop.PressBorderColor = Color.FromArgb(240, 240, 240);
                     prop.PressTextColor = Color.White;
+                    prop.NormalBadgeColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalBadgeTextColor = Color.White;
+                    prop.HoverBadgeColor = Color.FromArgb(85, 187, 245);
+                    prop.HoverBadgeTextColor = Color.White;
+                    prop.PressBadgeColor = Color.FromArgb(45, 147, 205);
+                    prop.PressBadgeTextColor = Color.White;
                     break;
 
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.ButtonDictionary)
+                        foreach (var varkey in StyleManager.BadgeDictionary)
                         {
                             if ((varkey.Key == null) || varkey.Key == null)
                             {
@@ -257,6 +328,31 @@ namespace MetroSet_UI.Controls
                             {
                                 prop.PressTextColor = utl.HexColor((string)varkey.Value);
                             }
+                            else if (varkey.Key == "NormalBadgeColor")
+                            {
+                                prop.NormalBadgeColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "NormalBadgeTextColor")
+                            {
+                                prop.NormalBadgeTextColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "HoverBadgeColor")
+                            {
+                                prop.HoverBadgeColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "HoverBadgeTextColor")
+                            {
+                                prop.HoverBadgeTextColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "PressBadgeColor")
+                            {
+                                prop.PressBadgeColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "PressBadgeTextColor")
+                            {
+                                prop.PressBadgeTextColor = utl.HexColor((string)varkey.Value);
+                            }
+
                         }
                     Refresh();
                     break;
@@ -264,16 +360,6 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Theme Changing
-
-        #region Properties
-
-        [Browsable(false)]
-        public new Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
-
-        #endregion
 
         #region Events
 
@@ -306,5 +392,6 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Events
+
     }
 }

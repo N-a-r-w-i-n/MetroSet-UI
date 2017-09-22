@@ -31,6 +31,24 @@
     <PressBorderColor>#2B2B2B</PressBorderColor>
     <PressTextColor>#FFFFFF</PressTextColor>
   </Button>
+  <Badge>
+    <Enabled>true</Enabled>
+    <NormalColor>#b72828</NormalColor>
+    <NormalBorderColor>#000000</NormalBorderColor>
+    <NormalTextColor>#FFFFFF</NormalTextColor>
+    <HoverColor>#293A56</HoverColor>
+    <HoverBorderColor>#2B2B2B</HoverBorderColor>
+    <HoverTextColor>#FFFFFF</HoverTextColor>
+    <PressColor>#D6DBE9</PressColor>
+    <PressBorderColor>#2B2B2B</PressBorderColor>
+    <PressTextColor>#FFFFFF</PressTextColor>
+    <NormalBadgeColor>#b72828</NormalBadgeColor>
+    <NormalBadgeTextColor>#FFFFFF</NormalBadgeTextColor>
+    <HoverBadgeColor>#cb2828</HoverBadgeColor>
+    <HoverBadgeTextColor>#FFFFFF</HoverBadgeTextColor>
+    <PressBadgeColor>#a31414</PressBadgeColor>
+    <PressBadgeTextColor>#FFFFFF</PressBadgeTextColor>    
+  </Badge>
   <Label>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>

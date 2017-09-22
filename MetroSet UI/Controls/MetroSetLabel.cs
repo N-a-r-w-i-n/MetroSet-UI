@@ -51,7 +51,7 @@ namespace MetroSet_UI.Controls
                         ApplyTheme();
                         break;
                 }
-                Refresh();
+                Invalidate();
             }
         }
 
@@ -62,7 +62,7 @@ namespace MetroSet_UI.Controls
         public StyleManager StyleManager
         {
             get { return _StyleManager; }
-            set { _StyleManager = value; Refresh(); }
+            set { _StyleManager = value; Invalidate(); }
         }
 
         /// <summary>

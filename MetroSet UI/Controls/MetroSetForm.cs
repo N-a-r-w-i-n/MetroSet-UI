@@ -308,7 +308,7 @@ namespace MetroSet_UI.Controls
                         ApplyTheme(Style.Custom);
                         break;
                 }
-                Refresh();
+                Invalidate();
             }
         }
 
@@ -322,7 +322,7 @@ namespace MetroSet_UI.Controls
             set
             {
                 _StyleManager = value;
-                Refresh();
+                Invalidate();
             }
         }
 
