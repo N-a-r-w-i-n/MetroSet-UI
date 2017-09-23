@@ -15,6 +15,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetDivider), "Bitmaps.Divider.bmp")]
+    [Designer(typeof(MetroSetDividerDesigner))]
     [DefaultProperty("Orientation")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
