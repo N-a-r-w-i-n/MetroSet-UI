@@ -4,6 +4,26 @@ MetroSet UI Framework
 
 ---
 
+Supported platforms
+-------------------
+:arrow_right: Windows XP SP1/SP2/SP3
+
+:arrow_right: Windows Vista
+
+:arrow_right: Windows 7
+
+:arrow_right: Windows 8
+
+:arrow_right: Windows 10
+
+---
+
+Dependency
+------------
+:arrow_right_hook: .NET Framework 2.0 or higher.
+
+---
+
 ## Components Available
 
 :arrow_down: | Components | Smart Tag
