@@ -2,7 +2,7 @@ MetroSet UI Framework
 =====================
 ### The Windows Forms Metro Style Skin for applications.
 
-### 
+## 
 
 Supported platforms
 -------------------
@@ -16,21 +16,21 @@ Supported platforms
 
 :arrow_right: Windows 10
 
-### 
+## 
 
 Dependency
 ------------
 :arrow_right_hook: .NET Framework 2.0 or higher.
 
-### 
+## 
 
 ## Components Available
 
-:arrow_down: | Components | Smart Tag
-:---:|:---|:---:|
-:arrow_right: | StyleManager | :heavy_check_mark:
+:arrow_down: | Components | Skin Support | Smart Tag
+:---:|:---|:---:|:---:|
+:arrow_right: | StyleManager | :heavy_check_mark:| :heavy_check_mark:
 
-### 
+## 
 
 ## Controls Available
 
