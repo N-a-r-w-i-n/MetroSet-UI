@@ -54,6 +54,12 @@
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
   </Label>
+  <Divider>
+    <Orientation>Horizontal</Orientation><!--Horizontal, Vertical-->
+    <Thickness>1</Thickness>
+    <ForeColor>#b72828</ForeColor>
+    <BackColor>#00FFFFFF</BackColor>
+  </Divider>
   <LinkLabel>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>

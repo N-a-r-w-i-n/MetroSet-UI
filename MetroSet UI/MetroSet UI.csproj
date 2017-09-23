@@ -42,6 +42,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetDivider.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetLink.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -51,9 +54,11 @@
     <Compile Include="Design\MetroSetLinkDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
     <Compile Include="Enums\BageAlign.cs" />
+    <Compile Include="Enums\DividerStyle.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
+    <Compile Include="Property\DividerProperties.cs" />
     <Compile Include="Property\LabelProperties.cs" />
     <Compile Include="Controls\MetroSetButton.cs">
       <SubType>Component</SubType>
@@ -130,6 +135,7 @@
     <None Include="Resources\MetroSet Theme.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bitmaps\Divider.png" />
     <Content Include="Bitmaps\LinkLabel.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

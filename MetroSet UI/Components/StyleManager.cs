@@ -259,6 +259,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> BadgeDictionary = new Dictionary<string, object>();
 
+        /// <summary>
+        /// The Divider properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> DividerDictionary = new Dictionary<string, object>();
+
         #endregion
 
         #region Reader
@@ -308,6 +313,10 @@ namespace MetroSet_UI
 
                             case "Badge":
                                 BadgeDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
+
+                            case "Divider":
+                                DividerDictionary.Add(childNode.Name, childNode.InnerText);
                                 break;
 
                             case "Theme":
