@@ -2,7 +2,7 @@ MetroSet UI Framework
 =====================
 ### The Windows Forms Metro Style Skin for applications.
 
----
+### 
 
 Supported platforms
 -------------------
@@ -16,13 +16,13 @@ Supported platforms
 
 :arrow_right: Windows 10
 
----
+### 
 
 Dependency
 ------------
 :arrow_right_hook: .NET Framework 2.0 or higher.
 
----
+### 
 
 ## Components Available
 
@@ -30,7 +30,7 @@ Dependency
 :---:|:---|:---:|
 :arrow_right: | StyleManager | :heavy_check_mark:
 
----
+### 
 
 ## Controls Available
 
@@ -42,5 +42,5 @@ Dependency
 :arrow_right: | MetroSetBadge |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetLabel |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetLink |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
-
+:arrow_right: | MetroSetDevider |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 
