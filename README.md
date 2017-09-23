@@ -4,7 +4,7 @@ MetroSet UI Framework
 
 ---
 
-##Components Available
+## Components Available
 
 :arrow_down: | Components | Smart Tag
 :---:|:---|:---:|
