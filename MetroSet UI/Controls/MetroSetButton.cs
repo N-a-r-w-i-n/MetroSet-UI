@@ -117,9 +117,9 @@ namespace MetroSet_UI.Controls
             prop = new ButtonProperties();
             Font = MetroSetFonts.Light(10);
             utl = new Utilites();
+            mth = new Methods();
             style = Style.Light;
             ApplyTheme();
-            mth = new Methods();
         }
 
         #endregion Constructors

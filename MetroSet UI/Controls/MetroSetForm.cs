@@ -169,9 +169,9 @@ namespace MetroSet_UI.Controls
             prop = new FormProperties();
             utl = new Utilites();
             textAlign = TextAlign.Left;
-            style = Style.Light;
             showLeftRect = true;
             showHeader = false;
+            style = Style.Light;
             ApplyTheme();
         }
 

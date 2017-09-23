@@ -108,10 +108,10 @@ namespace MetroSet_UI.Controls
             BackColor = Color.Transparent;
             Font = new Font("Segoe UI", 10);
             prop = new LabelProperties();
-            style = Style.Light;
-            ApplyTheme();
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Light;
+            ApplyTheme();
         }
 
         #endregion Constructors

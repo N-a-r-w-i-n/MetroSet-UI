@@ -109,9 +109,9 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             BackColor = Color.Transparent;
             prop = new DividerProperties();
-            style = Style.Light;
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Light;
             ApplyTheme();
         }
 

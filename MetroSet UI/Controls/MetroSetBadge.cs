@@ -119,9 +119,9 @@ namespace MetroSet_UI.Controls
             prop = new BadgeProperties();
             Font = MetroSetFonts.Light(10);
             utl = new Utilites();
+            mth = new Methods();
             style = Style.Light;
             ApplyTheme();
-            mth = new Methods();
         }
 
         #endregion Constructors
