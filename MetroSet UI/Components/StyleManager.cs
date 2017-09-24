@@ -271,6 +271,12 @@ namespace MetroSet_UI
         /// The CheckBox properties from custom theme will be stored into this dictionary.
         /// </summary>
         public Dictionary<string, object> CheckBoxDictionary;
+
+        /// <summary>
+        /// The RadioButton properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> RadioButtonDictionary;
+
         #endregion
 
         #region Methods 
@@ -286,6 +292,7 @@ namespace MetroSet_UI
             BadgeDictionary.Clear();
             DividerDictionary.Clear();
             CheckBoxDictionary.Clear();
+            RadioButtonDictionary.Clear();
         }
 
         #endregion
@@ -302,7 +309,7 @@ namespace MetroSet_UI
             BadgeDictionary = new Dictionary<string, object>();
             DividerDictionary = new Dictionary<string, object>();
             CheckBoxDictionary = new Dictionary<string, object>();
-
+            RadioButtonDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -363,7 +370,11 @@ namespace MetroSet_UI
                             case "CheckBox":
                                 CheckBoxDictionary.Add(childNode.Name, childNode.InnerText);
                                 break;
-                                                                
+
+                            case "RadioButton":
+                                RadioButtonDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
+
                             case "Theme":
                                 if (childNode.Name == "Name")
                                 {

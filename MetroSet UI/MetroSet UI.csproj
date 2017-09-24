@@ -44,6 +44,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -66,6 +69,7 @@
     <Compile Include="Enums\SignStyle.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
+    <Compile Include="Property\RadioProperties.cs" />
     <Compile Include="Property\CheckProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
     <Compile Include="Property\DividerProperties.cs" />
@@ -148,6 +152,7 @@
     <Content Include="Bitmaps\CheckBox.bmp" />
     <Content Include="Bitmaps\Divider.png" />
     <Content Include="Bitmaps\LinkLabel.bmp" />
+    <Content Include="Bitmaps\RadioButton.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
