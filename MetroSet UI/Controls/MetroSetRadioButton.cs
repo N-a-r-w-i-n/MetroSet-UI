@@ -16,6 +16,7 @@ namespace MetroSet_UI.Controls
 
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetRadioButton), "Bitmaps.RadioButton.bmp")]
+    [Designer(typeof(MetroSetRadioButtonDesigner))]
     [DefaultEvent("CheckedChanged")]
     [DefaultProperty("Checked")]
     [ComVisible(true)]

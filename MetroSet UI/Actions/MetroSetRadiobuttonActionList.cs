@@ -6,47 +6,53 @@ using System.ComponentModel.Design;
 
 namespace MetroSet_UI.Tasks
 {
-    internal class MetroSetRadioButtonActionList : DesignerActionList
+    internal class MetroSetCheckBoxActionList : DesignerActionList
     {
-        private readonly MetroSetRadioButton metroSetRadioButton;
+        private readonly MetroSetCheckBox metroSetCheckBox;
 
-        public MetroSetRadioButtonActionList(IComponent component) : base(component)
+        public MetroSetCheckBoxActionList(IComponent component) : base(component)
         {
-            metroSetRadioButton = (MetroSetRadioButton)component;
+            metroSetCheckBox = (MetroSetCheckBox)component;
         }
 
         public Style Style
         {
-            get { return metroSetRadioButton.Style; }
-            set { metroSetRadioButton.Style = value; }
+            get { return metroSetCheckBox.Style; }
+            set { metroSetCheckBox.Style = value; }
         }
 
         public string ThemeAuthor
         {
-            get { return metroSetRadioButton.ThemeAuthor; }
+            get { return metroSetCheckBox.ThemeAuthor; }
         }
 
         public string ThemeName
         {
-            get { return metroSetRadioButton.ThemeName; }
+            get { return metroSetCheckBox.ThemeName; }
         }
 
         public StyleManager StyleManager
         {
-            get { return metroSetRadioButton.StyleManager; }
-            set { metroSetRadioButton.StyleManager = value; }
+            get { return metroSetCheckBox.StyleManager; }
+            set { metroSetCheckBox.StyleManager = value; }
         }
 
         public string Text
         {
-            get { return metroSetRadioButton.Text; }
-            set { metroSetRadioButton.Text = value; }
+            get { return metroSetCheckBox.Text; }
+            set { metroSetCheckBox.Text = value; }
         }
 
         public bool Checked
         {
-            get { return metroSetRadioButton.Checked; }
-            set { metroSetRadioButton.Checked = value; }
+            get { return metroSetCheckBox.Checked; }
+            set { metroSetCheckBox.Checked = value; }
+        }
+
+        public SignStyle SignStyle
+        {
+            get { return metroSetCheckBox.SignStyle; }
+            set { metroSetCheckBox.SignStyle = value; }
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()
@@ -64,7 +70,7 @@ namespace MetroSet_UI.Tasks
             new DesignerActionHeaderItem("Appearance"),
             new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
             new DesignerActionPropertyItem("Checked", "Checked", "Appearance", "Gets or sets a value indicating whether the control is checked."),
-
+            new DesignerActionPropertyItem("SignStyle", "SignStyle", "Appearance", "Gets or sets the the sign style of check.")
         };
 
             return items;

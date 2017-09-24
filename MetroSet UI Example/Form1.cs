@@ -25,5 +25,10 @@ namespace MetroSet_UI_Example
         {
 
         }
+
+        private void metroSetRadioButton1_CheckedChanged(object sender)
+        {
+
+        }
     }
 }

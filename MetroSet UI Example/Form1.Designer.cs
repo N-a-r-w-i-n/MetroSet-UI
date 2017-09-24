@@ -48,6 +48,8 @@
             this.SmallRectThickness = 2;
             this.StyleManager = this.styleManager1;
             this.Text = "Form1";
+            this.ThemeAuthor = "Narwin";
+            this.ThemeName = "DarkUI";
             this.ResumeLayout(false);
 
         }
