@@ -8,10 +8,19 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
+
+    [ToolboxItem(true)]
+    [ToolboxBitmap(typeof(MetroSetCheckBox), "Bitmaps.CheckBox.bmp")]
+    [Designer(typeof(MetroSetCheckBoxDesigner))]
+    [DefaultEvent("CheckedChanged")]
+    [DefaultProperty("Checked")]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetCheckBox : Control, iControl
     {
         #region Interfaces
