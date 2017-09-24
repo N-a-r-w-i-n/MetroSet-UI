@@ -1,6 +1,7 @@
 ﻿using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using static MetroSet_UI.Native.User32;
 
 namespace MetroSet_UI.Controls
 {
@@ -152,6 +154,12 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets whether the form can be move or not."), DefaultValue(true)]
         public bool Moveable { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets whether the form use animation.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether the form use animation.")]
+        public bool UseSlideAnimation { get; set; } = false;
+
         #endregion Properties
 
         #region Constructor
@@ -168,6 +176,7 @@ namespace MetroSet_UI.Controls
             Font = MetroSetFonts.SemiLight(13);
             prop = new FormProperties();
             utl = new Utilites();
+            user32 = new User32();
             textAlign = TextAlign.Left;
             showLeftRect = true;
             showHeader = false;
@@ -338,11 +347,16 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
         public string ThemeName { get; set; }
 
+        internal User32 User32 => User321;
+
+        internal User32 User321 => user32;
+
         #endregion Interfaces
 
         #region Global Vars
 
         private readonly Utilites utl;
+        private readonly User32 user32;
 
         #endregion Global Vars
 
@@ -504,6 +518,25 @@ namespace MetroSet_UI.Controls
         {
             AutoScaleMode = AutoScaleMode.None;
             base.OnHandleCreated(e);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            // https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func
+            AnimateWindow(Handle, 1000, AnimateWindowFlags.AW_ACTIVATE | (UseSlideAnimation ?
+                  AnimateWindowFlags.AW_HOR_POSITIVE | AnimateWindowFlags.AW_SLIDE : AnimateWindowFlags.AW_BLEND));
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            // https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func
+            if (e.Cancel == false)
+            {
+                AnimateWindow(Handle, 1000, User32.AW_HIDE | (UseSlideAnimation ?
+                              AnimateWindowFlags.AW_HOR_NEGATIVE | AnimateWindowFlags.AW_SLIDE : AnimateWindowFlags.AW_BLEND));
+            }
         }
 
         #endregion

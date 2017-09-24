@@ -30,5 +30,10 @@ namespace MetroSet_UI_Example
         {
 
         }
+
+        private void metroSetButton1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

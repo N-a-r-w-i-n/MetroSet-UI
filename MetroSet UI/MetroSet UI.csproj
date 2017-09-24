@@ -69,6 +69,7 @@
     <Compile Include="Enums\CheckState.cs" />
     <Compile Include="Enums\DividerStyle.cs" />
     <Compile Include="Enums\SignStyle.cs" />
+    <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\RadioProperties.cs" />
