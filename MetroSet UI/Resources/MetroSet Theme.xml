@@ -57,11 +57,11 @@
   <CheckBox>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
+    <CheckColor>#b72828</CheckColor>
     <BackColor>#00FFFFFF</BackColor>
     <BordeColor>#b72828</BordeColor>
     <DisabledBorderColor>#999999</DisabledBorderColor>
-    <CheckSignColor>#b72828</CheckSignColor>
-    <CheckedStyle>Sign</CheckedStyle> <!--Sign, Shape-->
+    <CheckedStyle>Shape</CheckedStyle> <!--Sign, Shape-->
   </CheckBox>
   <Divider>
     <Orientation>Horizontal</Orientation><!--Horizontal, Vertical-->

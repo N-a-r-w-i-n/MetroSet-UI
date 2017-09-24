@@ -109,14 +109,14 @@ namespace MetroSet_UI.Controls
             prop = new CheckProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
-            ApplyTheme();
             timer = new Timer()
             {
-                Interval = 1,
+                Interval = 10,
                 Enabled = false
             };
             timer.Tick += SetCheckedChanged;
+            style = Style.Light;
+            ApplyTheme();
         }
 
         #endregion Constructors
@@ -175,7 +175,11 @@ namespace MetroSet_UI.Controls
                                     prop.BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
-                                case "CheckSignColor":
+                                case "DisabledBorderColor":
+                                    prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    break;
+
+                                case "CheckColor":
                                     prop.CheckSignColor = utl.HexColor((string)varkey.Value);
                                     break;
 
@@ -206,7 +210,6 @@ namespace MetroSet_UI.Controls
             try
             {
                 Enabled = prop.Enabled;
-                BackColor = prop.BackColor;
                 ForeColor = prop.ForeColor;
                 SignStyle = prop.CheckedStyle;
                 Invalidate();
@@ -245,6 +248,7 @@ namespace MetroSet_UI.Controls
                                         G.FillRectangle(BackBrush, rect);
                                         G.DrawRectangle(P, rect);
                                         DrawSymbol(G, CheckMarkPen, CheckMarkBrush);
+
                                         G.DrawString(Text, Font, TB, new Rectangle(19, 2, Width, Height - 4), SF);
                                     }
                                 }
@@ -306,6 +310,7 @@ namespace MetroSet_UI.Controls
 
         public delegate void CheckedChangedEventHandler(object sender);
 
+
         /// <summary>
         /// The Method that increases and decreases the alpha of check symbol which it make the control animate.
         /// </summary>
@@ -331,7 +336,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Here we will handle the checking state in runtime.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">EventArgs</param>
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
@@ -400,5 +405,6 @@ namespace MetroSet_UI.Controls
         public Enums.CheckState CheckState { get;set; }
 
         #endregion Properties
+
     }
 }

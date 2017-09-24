@@ -28,17 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.styleManager1 = new MetroSet_UI.StyleManager();
+            this.metroSetButton1 = new MetroSet_UI.Controls.MetroSetButton();
             this.metroSetCheckBox1 = new MetroSet_UI.Controls.MetroSetCheckBox();
+            this.styleManager1 = new MetroSet_UI.StyleManager();
             this.SuspendLayout();
             // 
-            // styleManager1
+            // metroSetButton1
             // 
-            this.styleManager1.CustomTheme = "C:\\Users\\Stick\\Desktop\\MetroSet Theme.xml";
-            this.styleManager1.MetroForm = this;
-            this.styleManager1.Style = MetroSet_UI.Design.Style.Custom;
-            this.styleManager1.ThemeAuthor = "Narwin";
-            this.styleManager1.ThemeName = "DarkUI";
+            this.metroSetButton1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
+            this.metroSetButton1.Location = new System.Drawing.Point(280, 132);
+            this.metroSetButton1.Name = "metroSetButton1";
+            this.metroSetButton1.Size = new System.Drawing.Size(194, 37);
+            this.metroSetButton1.Style = MetroSet_UI.Design.Style.Custom;
+            this.metroSetButton1.StyleManager = this.styleManager1;
+            this.metroSetButton1.TabIndex = 1;
+            this.metroSetButton1.Text = "metroSetButton1";
+            this.metroSetButton1.ThemeAuthor = null;
+            this.metroSetButton1.ThemeName = null;
+            this.metroSetButton1.Click += new System.EventHandler(this.metroSetButton1_Click);
             // 
             // metroSetCheckBox1
             // 
@@ -47,38 +54,45 @@
             this.metroSetCheckBox1.CheckState = MetroSet_UI.Enums.CheckState.Checked;
             this.metroSetCheckBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.metroSetCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.metroSetCheckBox1.Location = new System.Drawing.Point(329, 227);
+            this.metroSetCheckBox1.Location = new System.Drawing.Point(299, 233);
             this.metroSetCheckBox1.Name = "metroSetCheckBox1";
             this.metroSetCheckBox1.SignStyle = MetroSet_UI.Enums.SignStyle.Sign;
-            this.metroSetCheckBox1.Size = new System.Drawing.Size(199, 16);
+            this.metroSetCheckBox1.Size = new System.Drawing.Size(153, 16);
             this.metroSetCheckBox1.Style = MetroSet_UI.Design.Style.Custom;
             this.metroSetCheckBox1.StyleManager = this.styleManager1;
-            this.metroSetCheckBox1.TabIndex = 0;
+            this.metroSetCheckBox1.TabIndex = 2;
             this.metroSetCheckBox1.Text = "metroSetCheckBox1";
-            this.metroSetCheckBox1.ThemeAuthor = "Narwin";
-            this.metroSetCheckBox1.ThemeName = "DarkUI";
+            this.metroSetCheckBox1.ThemeAuthor = null;
+            this.metroSetCheckBox1.ThemeName = null;
+            // 
+            // styleManager1
+            // 
+            this.styleManager1.CustomTheme = "C:\\Users\\Stick\\Desktop\\MetroSet Theme.xml";
+            this.styleManager1.MetroForm = this;
+            this.styleManager1.Style = MetroSet_UI.Design.Style.Custom;
+            this.styleManager1.ThemeAuthor = null;
+            this.styleManager1.ThemeName = null;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 356);
             this.Controls.Add(this.metroSetCheckBox1);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
+            this.Controls.Add(this.metroSetButton1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "Form1";
             this.SmallRectThickness = 2;
             this.Style = MetroSet_UI.Design.Style.Custom;
             this.StyleManager = this.styleManager1;
             this.Text = "Form1";
-            this.ThemeAuthor = "Narwin";
-            this.ThemeName = "DarkUI";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private MetroSet_UI.StyleManager styleManager1;
+        private MetroSet_UI.Controls.MetroSetButton metroSetButton1;
         private MetroSet_UI.Controls.MetroSetCheckBox metroSetCheckBox1;
+        private MetroSet_UI.StyleManager styleManager1;
     }
 }
