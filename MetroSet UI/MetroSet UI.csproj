@@ -43,6 +43,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetDivider.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -56,9 +59,12 @@
     <Compile Include="Design\MetroSetLinkDesigner.cs" />
     <Compile Include="Design\StyleManagerDesigner.cs" />
     <Compile Include="Enums\BageAlign.cs" />
+    <Compile Include="Enums\CheckState.cs" />
     <Compile Include="Enums\DividerStyle.cs" />
+    <Compile Include="Enums\SignStyle.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
+    <Compile Include="Property\CheckProperties.cs" />
     <Compile Include="Property\FormProperties.cs" />
     <Compile Include="Property\DividerProperties.cs" />
     <Compile Include="Property\LabelProperties.cs" />

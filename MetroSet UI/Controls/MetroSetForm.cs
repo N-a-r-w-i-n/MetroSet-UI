@@ -165,7 +165,7 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             FormBorderStyle = FormBorderStyle.None;
-            Font = MetroSetFonts.Light(13);
+            Font = MetroSetFonts.SemiLight(13);
             prop = new FormProperties();
             utl = new Utilites();
             textAlign = TextAlign.Left;

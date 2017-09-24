@@ -31,6 +31,7 @@ namespace MetroSet_UI
                 var themeFile = Properties.Settings.Default.ThemeFile;
                 _CustomTheme = File.Exists(themeFile) ? themeFile : ThemeFilePath(themeFile);
             }
+            EvaluateDicts();
         }
 
         #endregion
@@ -228,41 +229,83 @@ namespace MetroSet_UI
         #endregion Open Theme
 
         #region Dictionaries
+        
+        #region Declartions
 
         /// <summary>
         /// The Button properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> ButtonDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> ButtonDictionary;
 
         /// <summary>
         /// The Label properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> LabelDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> LabelDictionary;
 
         /// <summary>
         /// The LinkLabel properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> LinkLabelDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> LinkLabelDictionary;
 
         /// <summary>
         /// The TextBox properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> TextBoxDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> TextBoxDictionary;
 
         /// <summary>
         /// The Form properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> FormDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> FormDictionary;
 
         /// <summary>
         /// The Badge properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> BadgeDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> BadgeDictionary;
 
         /// <summary>
         /// The Divider properties from custom theme will be stored into this dictionary.
         /// </summary>
-        public Dictionary<string, object> DividerDictionary = new Dictionary<string, object>();
+        public Dictionary<string, object> DividerDictionary;
+
+        /// <summary>
+        /// The CheckBox properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> CheckBoxDictionary;
+        #endregion
+
+        #region Methods 
+
+        private void Clear()
+        {
+            ButtonDictionary.Clear();
+            FormDictionary.Clear();
+            LabelDictionary.Clear();
+            TextBoxDictionary.Clear();
+            LabelDictionary.Clear();
+            LinkLabelDictionary.Clear();
+            BadgeDictionary.Clear();
+            DividerDictionary.Clear();
+            CheckBoxDictionary.Clear();
+        }
+
+        #endregion
+
+        #region Evaluate
+
+        private void EvaluateDicts()
+        {
+            ButtonDictionary = new Dictionary<string, object>();
+            LabelDictionary = new Dictionary<string, object>();
+            LinkLabelDictionary = new Dictionary<string, object>();
+            TextBoxDictionary = new Dictionary<string, object>();
+            FormDictionary = new Dictionary<string, object>();
+            BadgeDictionary = new Dictionary<string, object>();
+            DividerDictionary = new Dictionary<string, object>();
+            CheckBoxDictionary = new Dictionary<string, object>();
+
+        }
+
+#endregion
 
         #endregion
 
@@ -275,10 +318,8 @@ namespace MetroSet_UI
         public void ControlProperties(string path)
         {
             // We clear every dictionary for avoid the "the key is already exist in dictionary" exception.
-            ButtonDictionary.Clear();
-            FormDictionary.Clear();
-            LabelDictionary.Clear();
-            TextBoxDictionary.Clear();
+
+            Clear();
 
             // Here we will load the theme contents that we get in Custom Theme Dialog property
             XmlDocument doc = new XmlDocument();
@@ -319,6 +360,10 @@ namespace MetroSet_UI
                                 DividerDictionary.Add(childNode.Name, childNode.InnerText);
                                 break;
 
+                            case "CheckBox":
+                                CheckBoxDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
+                                                                
                             case "Theme":
                                 if (childNode.Name == "Name")
                                 {
