@@ -15,15 +15,13 @@ namespace MetroSet_UI.Controls
 {
 
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetRadioButton), "Bitmaps.RadioButton.bmp")]
-    [Designer(typeof(MetroSetRadioButtonDesigner))]
-    [DefaultEvent("CheckedChanged")]
-    [DefaultProperty("Checked")]
+    [ToolboxBitmap(typeof(MetroSetSwitch), "Bitmaps.Switch.bmp")]
+    [DefaultEvent("SwitchedChanged")]
+    [DefaultProperty("Switched")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class MetroSetRadioButton : Control, iControl
+    public class MetroSetSwitch : Control, iControl
     {
-
         #region Interfaces
 
         /// <summary>
@@ -87,25 +85,25 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static CheckProperties prop;
         private Methods mth;
+        private SwitchProperties prop;
         private Utilites utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
         private StyleManager _StyleManager;
-        private bool _Checked;
+        private bool _Switched;
+        private Style style;
+        private int Switchlocation = 0;
         private Timer timer;
-        private int Alpha;
 
         #endregion Internal Vars
 
         #region Constructors
 
-        public MetroSetRadioButton()
+        public MetroSetSwitch()
         {
             SetStyle(
                 ControlStyles.ResizeRedraw |
@@ -113,20 +111,16 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            Font = MetroSetFonts.SemiBold(10);
             BackColor = Color.Transparent;
-            Font = new Font("Segoe UI", 10);
-            prop = new CheckProperties();
+            prop = new SwitchProperties();
             mth = new Methods();
             utl = new Utilites();
-            Alpha = 0;
-
             timer = new Timer()
             {
-                Interval = 10,
+                Interval = 1,
                 Enabled = false
             };
-            timer.Tick += SetCheckedChanged;            
+            timer.Tick += SetCheckedChanged;
             style = Style.Light;
             ApplyTheme();
         }
@@ -134,6 +128,20 @@ namespace MetroSet_UI.Controls
         #endregion Constructors
 
         #region ApplyTheme
+
+        public void SetProperties()
+        {
+            try
+            {
+                Enabled = prop.Enabled;
+                ForeColor = prop.ForeColor;
+                Invalidate();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.StackTrace);
+            }
+        }
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -146,11 +154,14 @@ namespace MetroSet_UI.Controls
                 case Style.Light:
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.White;
-                    prop.BorderColor = Color.FromArgb(155, 155, 155);
+                    prop.BackColor = Color.White; 
+                    prop.BorderColor = Color.FromArgb(165, 159, 147);
                     prop.DisabledBorderColor = Color.FromArgb(205, 205, 205);
-                    prop.CheckSignColor = Color.FromArgb(65, 177, 225);
-                    prop.CheckedStyle = SignStyle.Sign;
+                    prop.SymbolColor = Color.FromArgb(92, 92, 92);
+                    prop.UnCheckColor = Color.FromArgb(155, 155, 155);
+                    prop.CheckColor = Color.FromArgb(65, 177, 225);
+                    prop.DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
+                    prop.DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     SetProperties();
@@ -158,12 +169,15 @@ namespace MetroSet_UI.Controls
 
                 case Style.Dark:
                     prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
+                    prop.ForeColor = Color.FromArgb(170, 170, 170); 
                     prop.BackColor = Color.FromArgb(30, 30, 30);
                     prop.BorderColor = Color.FromArgb(155, 155, 155);
-                    prop.DisabledBorderColor = Color.FromArgb(85, 85, 85);
-                    prop.CheckSignColor = Color.FromArgb(126, 56, 120);
-                    prop.CheckedStyle = SignStyle.Sign;
+                    prop.DisabledBorderColor = Color.FromArgb(85, 85, 85); 
+                    prop.SymbolColor = Color.FromArgb(92, 92, 92);
+                    prop.UnCheckColor = Color.FromArgb(155, 155, 155);
+                    prop.CheckColor = Color.FromArgb(126, 56, 120);
+                    prop.DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
+                    prop.DisabledCheckColor = Color.FromArgb(100, 126, 56, 120);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     SetProperties();
@@ -171,7 +185,7 @@ namespace MetroSet_UI.Controls
 
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.RadioButtonDictionary)
+                        foreach (var varkey in StyleManager.SwitchBoxDictionary)
                         {
                             switch (varkey.Key)
                             {
@@ -195,33 +209,35 @@ namespace MetroSet_UI.Controls
                                     prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
+                                case "SymbolColor":
+                                    prop.SymbolColor = utl.HexColor((string)varkey.Value);
+                                    break;
+
+                                case "UnCheckColor":
+                                    prop.UnCheckColor = utl.HexColor((string)varkey.Value);
+                                    break;
+
                                 case "CheckColor":
-                                    prop.CheckSignColor = utl.HexColor((string)varkey.Value);
+                                    prop.CheckColor = utl.HexColor((string)varkey.Value);
+                                    break;
+                                    
+                                case "DisabledUnCheckColor":
+                                    prop.DisabledUnCheckColor = utl.HexColor((string)varkey.Value);
+                                    break;
+
+                                case "DisabledCheckColor":
+                                    prop.DisabledCheckColor = utl.HexColor((string)varkey.Value); 
                                     break;
 
                                 default:
                                     return;
                             }
-                        }
+                        }                      
+
                     SetProperties();
                     break;
             }
         }
-
-        public void SetProperties()
-        {
-            try
-            {
-                Enabled = prop.Enabled;
-                ForeColor = prop.ForeColor;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
-        }
-
         #endregion Theme Changing
 
         #region Draw Control
@@ -230,23 +246,30 @@ namespace MetroSet_UI.Controls
         {
             Graphics G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            G.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Rectangle rect = new Rectangle(0, 0, 17, 16);
+            Rectangle rect = new Rectangle(1, 1, 56, 20);
+
+            Rectangle rect2 = new Rectangle(3, 3, 52, 16);
 
             if (Enabled)
             {
                 using (SolidBrush BackBrush = new SolidBrush(prop.BackColor))
                 {
-                    using (SolidBrush CheckMarkBrush = new SolidBrush(Checked ? Color.FromArgb(Alpha, prop.CheckSignColor) : prop.BackColor))
+                    using (SolidBrush Checkback = new SolidBrush(Switched ? prop.CheckColor : prop.UnCheckColor))
                     {
-                        using (Pen P = new Pen(prop.BorderColor))
+                        using (SolidBrush CheckMarkBrush = new SolidBrush(prop.SymbolColor))
                         {
-                            using (SolidBrush TB = new SolidBrush(ForeColor))
+                            using (Pen P = new Pen(prop.BorderColor, 2))
                             {
-                                G.FillEllipse(BackBrush, rect);
-                                G.DrawEllipse(P, rect);
-                                G.FillEllipse(CheckMarkBrush, new Rectangle(3, 3, 11, 10));
+
+                                G.FillRectangle(BackBrush, rect);
+
+                                G.FillRectangle(Checkback, rect2);
+
+                                G.DrawRectangle(P, rect);
+
+                                G.FillRectangle(CheckMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (Switchlocation / 180.0))), 0, 16, 22));
+
                             }
                         }
                     }
@@ -254,56 +277,63 @@ namespace MetroSet_UI.Controls
             }
             else
             {
-                using (Brush BackBrush = new SolidBrush(Color.FromArgb(238, 238, 238)))
+                using (Brush BackBrush = new SolidBrush(prop.BackColor))
                 {
-                    using (Pen CheckMarkPen = new Pen(prop.DisabledBorderColor))
+                    using (Pen CheckMarkPen = new Pen(prop.DisabledBorderColor , 2))
                     {
-                        using (SolidBrush CheckMarkBrush = new SolidBrush(prop.DisabledBorderColor))
+                        using (SolidBrush Checkback = new SolidBrush(Switched ? prop.DisabledCheckColor : prop.DisabledUnCheckColor))
                         {
-                            G.FillEllipse(BackBrush, rect);
-                            G.FillEllipse(CheckMarkBrush, new Rectangle(3, 3, 11, 10));
-                            G.DrawEllipse(CheckMarkPen, rect);
+                            using (SolidBrush CheckMarkBrush = new SolidBrush(prop.SymbolColor))
+                            {
+                                G.FillRectangle(BackBrush, rect);
+
+                                G.FillRectangle(Checkback, rect2);
+
+                                G.DrawRectangle(CheckMarkPen, rect);
+
+                                G.FillRectangle(CheckMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (Switchlocation / 180.0))), 0, 16, 22));
+
+                            }
                         }
                     }
                 }
             }
-            G.SmoothingMode = SmoothingMode.Default;
-            using (SolidBrush TB = new SolidBrush(ForeColor))
-            {
-                using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
-                {
-                    G.DrawString(Text, Font, TB, new Rectangle(19, 2, Width, Height - 4), SF);
-                }
-            }
         }
+
 
         #endregion Draw Control
 
         #region Events
 
-        public event CheckedChangedEventHandler CheckedChanged;
-        public delegate void CheckedChangedEventHandler(object sender);
+        public delegate void SwitchedChangedEventHandler(object sender);
 
-
+        public event SwitchedChangedEventHandler SwitchedChanged;
         /// <summary>
-        /// The Method that increases and decreases the alpha of radio symbol which it make the control animate.
+        /// The Method that increases and decreases the location symbol which it make the control animate.
         /// </summary>
         /// <param name="o">object</param>
         /// <param name="args">EventArgs</param>
         public void SetCheckedChanged(object o, EventArgs args)
         {
-            if (Checked)
+            if (Switched)
             {
-                if (Alpha < 255)
+                if (Switchlocation < 131)
                 {
-                    Alpha += 1;
-                    Invalidate();
+                    Switchlocation += 5;
+                    Invalidate(false);
+                    if (Switchlocation == 132)
+                        timer.Enabled = false;
                 }
             }
-            else if (Alpha > 0)
+            else
             {
-                Alpha -= 1;
-                Invalidate();
+                if (Switchlocation > 0)
+                {
+                    Switchlocation -= 5;
+                    Invalidate(false);
+                    if (Switchlocation == 0)
+                        timer.Enabled = false;
+                }
             }
         }
 
@@ -314,13 +344,13 @@ namespace MetroSet_UI.Controls
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            if (Checked)
+            if (Switched)
             {
-                Checked = false;
+                Switched = false;
             }
             else
             {
-                Checked = true;
+                Switched = true;
             }
             Invalidate();
         }
@@ -332,46 +362,33 @@ namespace MetroSet_UI.Controls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            Height = 17;
+            Size = new Size(58, 22);
             Invalidate();
         }
-
-        /// <summary>
-        /// This Methods prevents checikng two radios in the same container.
-        /// </summary>
-        private void UpdateState()
-        {
-            if (!IsHandleCreated || !Checked)
-                return;
-            foreach (Control C in Parent.Controls)
-            {
-                if (!ReferenceEquals(C, this) && C is MetroSetRadioButton && ((MetroSetRadioButton)C).Group == Group)
-                {
-                    ((MetroSetRadioButton)C).Checked = false;
-                }
-            }
-            CheckedChanged?.Invoke(this);
-        }
-
 
         #endregion Events
 
         #region Properties
 
         /// <summary>
+        /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
+        /// </summary>
+        [Browsable(false)]
+        public Enums.CheckState CheckState { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the control is checked.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the control is checked.")]
-        public bool Checked
+        public bool Switched
         {
-            get { return _Checked; }
+            get { return _Switched; }
             set
             {
-                _Checked = value;                
-                CheckedChanged?.Invoke(this);
+                _Switched = value;                
+                SwitchedChanged?.Invoke(this);
                 SetCheckedChanged(this, null);
-                timer.Enabled = value;
-                UpdateState();
+                timer.Enabled = true;
                 switch (value)
                 {
                     case true:
@@ -384,18 +401,6 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
-
-        /// <summary>
-        /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
-        /// </summary>
-        [Browsable(false)]
-        public Enums.CheckState CheckState { get;set; }
-
-
-        [Category("MetroSet Framework")]
-        public int Group { get; set; } = 1;
-
-
         #endregion Properties
 
     }

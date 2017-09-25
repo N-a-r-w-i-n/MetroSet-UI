@@ -19,7 +19,7 @@ namespace MetroSet_UI.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -62,24 +62,22 @@ namespace MetroSet_UI.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;MetroSetTheme&gt;
-        ///&lt;Theme&gt;
-        ///&lt;Name&gt;DarkUI&lt;/Name&gt;
-        ///&lt;Author&gt;Narwin&lt;/Author&gt;
-        ///&lt;/Theme&gt;
+        ///  &lt;Theme&gt;
+        ///    &lt;Name&gt;DarkUI&lt;/Name&gt;
+        ///    &lt;Author&gt;Narwin&lt;/Author&gt;
+        ///  &lt;/Theme&gt;
         ///  &lt;Form&gt;
-        ///    &lt;FontSize&gt;10&lt;/FontSize&gt;
-        ///    &lt;Font&gt;Segoe UI&lt;/Font&gt;
-        ///	&lt;Enabled&gt;true&lt;/Enabled&gt;
+        ///    &lt;Enabled&gt;true&lt;/Enabled&gt;
         ///    &lt;ForeColor&gt;#293955&lt;/ForeColor&gt;
         ///    &lt;BackColor&gt;#1e1e1e&lt;/BackColor&gt;
-        ///	&lt;BorderColor&gt;#1e1e1e&lt;/BorderColor&gt;
-        ///	&lt;SmallLineColor1&gt;#F11199&lt;/SmallLineColor1&gt;
-        ///	&lt;SmallLineColor2&gt;#EA5216&lt;/SmallLineColor2&gt;
-        ///	&lt;TextColor&gt;#ffffff&lt;/TextColor&gt;
-        ///	&lt;DrawLeftRect&gt;true&lt;/DrawLeftRect&gt;
-        ///	&lt;DisplayHeader&gt;true&lt;/DisplayHeader&gt;
-        ///	&lt;TextAlign&gt;left&lt;/TextAlign&gt;	
-        ///	 [rest of string was truncated]&quot;;.
+        ///    &lt;BorderColor&gt;#b72828&lt;/BorderColor&gt;
+        ///    &lt;SmallLineColor1&gt;#F11199&lt;/SmallLineColor1&gt;
+        ///    &lt;SmallLineColor2&gt;#EA5216&lt;/SmallLineColor2&gt;
+        ///    &lt;TextColor&gt;#ffffff&lt;/TextColor&gt;
+        ///    &lt;DrawLeftRect&gt;true&lt;/DrawLeftRect&gt;
+        ///    &lt;DisplayHeader&gt;true&lt;/DisplayHeader&gt;
+        ///    &lt;TextAlign&gt;left&lt;/TextAlign&gt;	
+        ///    &lt;SmallRectThickne [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MetroSet_Theme {
             get {

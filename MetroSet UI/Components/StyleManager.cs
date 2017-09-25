@@ -3,6 +3,7 @@ using MetroSet_UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Design;
 using System.IO;
 using System.Windows.Forms;
@@ -13,6 +14,8 @@ namespace MetroSet_UI
 {
     [DefaultProperty("Style")]
     [Designer(typeof(StyleManagerDesigner))]
+    [ToolboxItem(true)]
+    [ToolboxBitmap(typeof(StyleManager), "Style.bmp")]
     public class StyleManager : Component
     {
 
@@ -152,6 +155,17 @@ namespace MetroSet_UI
             set
             {
                 style = value;
+                switch (value)
+                {
+                    case Style.Light:
+                        ThemeAuthor = "Narwin";
+                        ThemeName = "MetroLite";
+                        break;
+                    case Style.Dark:
+                        ThemeAuthor = "Narwin";
+                        ThemeName = "MetroDark";
+                        break;
+                }
                 UpdateForm();
             }
         }
@@ -221,7 +235,7 @@ namespace MetroSet_UI
         public string ThemeFilePath(string str)
         {
             string content = str;
-            string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Templates) + "\\ThemeFile.xml"}";
+            string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Templates) + @"\ThemeFile.xml"}";
             File.WriteAllText(path, content);
             return path;
         }
@@ -277,6 +291,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> RadioButtonDictionary;
 
+        /// <summary>
+        /// The Switch properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> SwitchBoxDictionary;
+
         #endregion
 
         #region Methods 
@@ -293,6 +312,7 @@ namespace MetroSet_UI
             DividerDictionary.Clear();
             CheckBoxDictionary.Clear();
             RadioButtonDictionary.Clear();
+            SwitchBoxDictionary.Clear();
         }
 
         #endregion
@@ -310,6 +330,7 @@ namespace MetroSet_UI
             DividerDictionary = new Dictionary<string, object>();
             CheckBoxDictionary = new Dictionary<string, object>();
             RadioButtonDictionary = new Dictionary<string, object>();
+            SwitchBoxDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -373,6 +394,10 @@ namespace MetroSet_UI
 
                             case "RadioButton":
                                 RadioButtonDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
+
+                            case "SwitchBox":
+                                SwitchBoxDictionary.Add(childNode.Name, childNode.InnerText);
                                 break;
 
                             case "Theme":

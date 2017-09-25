@@ -16,24 +16,14 @@ namespace MetroSet_UI_Example
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void metroSetButton1_Click(object sender, EventArgs e)
         {
             styleManager1.OpenTheme();
-        }
-
-        private void metroSetCheckBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void metroSetRadioButton1_CheckedChanged(object sender)
-        {
-
-        }
-
-        private void metroSetButton1_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

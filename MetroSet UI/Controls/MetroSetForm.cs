@@ -374,7 +374,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Internal Vars
 
-        #region Theme Changing
+        #region ApplyTheme
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -389,13 +389,22 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Gray;
                     prop.BackgroundColor = Color.White;
-                    prop.BorderColor = Color.FromArgb(65, 177, 225);
-                    prop.TextColor = Color.Gray;
+                    prop.BorderColor = Color.FromArgb(65, 177, 225);                    
+                    if (ShowHeader)
+                    {
+                        prop.TextColor = Color.White;
+                    }
+                    else
+                    {
+                        prop.TextColor = Color.Gray;
+                    }
                     prop.DrawLeftRect = true;
                     prop.SmallLineColor1 = Color.FromArgb(65, 177, 225);
                     prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     prop.HeaderColor = Color.FromArgb(65, 177, 225);
                     prop.HeaderHeight = 35;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroLite";
                     SetProperties();
                     break;
 
@@ -408,8 +417,18 @@ namespace MetroSet_UI.Controls
                     prop.SmallLineColor2 = Color.FromArgb(126, 56, 120);
                     prop.HeaderColor = Color.FromArgb(126, 56, 120);
                     prop.HeaderHeight = 35;
+
+                    if (ShowHeader)
+                    {
+                        prop.TextColor = Color.Gray;
+                    }
+                    else
+                    {
                     prop.TextColor = Color.White;
+                    }
                     prop.DrawLeftRect = true;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroDark";
                     SetProperties();
                     break;
 

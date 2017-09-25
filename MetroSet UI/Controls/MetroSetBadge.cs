@@ -22,6 +22,7 @@ namespace MetroSet_UI.Controls
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetBadge : Control, iControl
     {
+
         #region Interfaces
 
         /// <summary>
@@ -235,7 +236,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Draw Control
 
-        #region Theme Changing
+        #region ApplyTheme
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -262,6 +263,8 @@ namespace MetroSet_UI.Controls
                     prop.HoverBadgeTextColor = Color.White;
                     prop.PressBadgeColor = Color.FromArgb(45, 147, 205);
                     prop.PressBadgeTextColor = Color.White;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroLite";
                     break;
 
                 case Style.Dark:
@@ -280,6 +283,8 @@ namespace MetroSet_UI.Controls
                     prop.HoverBadgeTextColor = Color.White;
                     prop.PressBadgeColor = Color.FromArgb(45, 147, 205);
                     prop.PressBadgeTextColor = Color.White;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroDark";
                     break;
 
                 case Style.Custom:
@@ -352,7 +357,7 @@ namespace MetroSet_UI.Controls
                                 prop.PressBadgeTextColor = utl.HexColor((string)varkey.Value);
                             }
                         }
-                    Refresh();
+                    Invalidate();
                     break;
             }
         }
@@ -404,5 +409,6 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Methods
+
     }
 }

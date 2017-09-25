@@ -114,7 +114,6 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             Font = MetroSetFonts.SemiBold(10);
             BackColor = Color.Transparent;
-            Font = new Font("Segoe UI", 10);
             prop = new CheckProperties();
             mth = new Methods();
             utl = new Utilites();
@@ -130,7 +129,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Constructors
 
-        #region Theme Changing
+        #region ApplyTheme
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -148,6 +147,8 @@ namespace MetroSet_UI.Controls
                     prop.DisabledBorderColor = Color.FromArgb(205, 205, 205);
                     prop.CheckSignColor = Color.FromArgb(65, 177, 225);
                     prop.CheckedStyle = SignStyle.Sign;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroLite";
                     SetProperties();
                     break;
 
@@ -159,6 +160,8 @@ namespace MetroSet_UI.Controls
                     prop.DisabledBorderColor = Color.FromArgb(85, 85, 85);
                     prop.CheckSignColor = Color.FromArgb(126, 56, 120);
                     prop.CheckedStyle = SignStyle.Sign;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroDark";
                     SetProperties();
                     break;
 

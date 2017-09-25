@@ -63,6 +63,18 @@
     <DisabledBorderColor>#999999</DisabledBorderColor>
     <CheckedStyle>Shape</CheckedStyle> <!--Sign, Shape-->
   </CheckBox>
+  <Switch>
+    <Enabled>true</Enabled>
+    <ForeColor>#b72828</ForeColor>
+    <SymbolColor>#5C5C5C</SymbolColor>
+    <BackColor>#00FFFFFF</BackColor>
+    <BordeColor>#b72828</BordeColor>
+    <DisabledBorderColor>#b72828</DisabledBorderColor>
+    <UnCheckColor>#b72828</UnCheckColor>
+    <CheckColor>#b72828</CheckColor>
+    <DisabledUnCheckColor>#b72828</DisabledUnCheckColor>
+    <DisabledCheckColor>#b72828</DisabledCheckColor>
+  </Switch>
   <RadioButton>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>

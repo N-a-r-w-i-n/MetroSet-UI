@@ -119,7 +119,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Constructors
 
-        #region Theme Changing
+        #region ApplyTheme
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -136,6 +136,8 @@ namespace MetroSet_UI.Controls
                     prop.ActiveLinkColor = utl.HexColor("#55c5f5");
                     prop.LinkColor = utl.HexColor("#41b1e1");
                     prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroLite";
                     SetProperties();
                     break;
 
@@ -146,6 +148,8 @@ namespace MetroSet_UI.Controls
                     prop.ActiveLinkColor = utl.HexColor("#55c5f5");
                     prop.LinkColor = utl.HexColor("#41b1e1");
                     prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroDark";
                     SetProperties();
                     break;
 

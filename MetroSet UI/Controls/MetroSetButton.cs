@@ -178,7 +178,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Draw Control
 
-        #region Theme Changing
+        #region ApplyTheme
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -190,6 +190,7 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
+                    prop.NormalColor = Color.FromArgb(238, 238, 238);
                     prop.NormalBorderColor = Color.FromArgb(204, 204, 204);
                     prop.NormalTextColor = Color.Black;
                     prop.HoverColor = Color.FromArgb(102, 102, 102);
@@ -198,6 +199,8 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(51, 51, 51);
                     prop.PressBorderColor = Color.FromArgb(51, 51, 51);
                     prop.PressTextColor = Color.White;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroLite";
                     break;
 
                 case Style.Dark:
@@ -210,8 +213,10 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(240, 240, 240);
                     prop.PressBorderColor = Color.FromArgb(240, 240, 240);
                     prop.PressTextColor = Color.White;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroDark";
                     break;
-
+                    
                 case Style.Custom:
                     if (StyleManager != null)
                         foreach (var varkey in StyleManager.ButtonDictionary)

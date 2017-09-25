@@ -117,7 +117,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Constructors
 
-        #region Theme Changing
+        #region ApplyTheme
 
         /// <summary>
         /// Gets or sets the style provided by the user.
@@ -132,6 +132,8 @@ namespace MetroSet_UI.Controls
                     prop.Thickness = 1;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroLite";
                     SetProperties();
                     break;
 
@@ -140,6 +142,8 @@ namespace MetroSet_UI.Controls
                     prop.Thickness = 1;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
+                    ThemeAuthor = "Narwin";
+                    ThemeName = "MetroDark";
                     SetProperties();
                     break;
 
