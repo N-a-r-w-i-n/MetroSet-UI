@@ -16,6 +16,7 @@ namespace MetroSet_UI.Controls
 
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetSwitch), "Bitmaps.Switch.bmp")]
+    [Designer(typeof(MetroSetSwitchDesigner))]
     [DefaultEvent("SwitchedChanged")]
     [DefaultProperty("Switched")]
     [ComVisible(true)]

@@ -60,7 +60,7 @@
             this.metroSetSwitch1.BackColor = System.Drawing.Color.Transparent;
             this.metroSetSwitch1.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
             this.metroSetSwitch1.ForeColor = System.Drawing.Color.Black;
-            this.metroSetSwitch1.Location = new System.Drawing.Point(473, 191);
+            this.metroSetSwitch1.Location = new System.Drawing.Point(488, 200);
             this.metroSetSwitch1.Name = "metroSetSwitch1";
             this.metroSetSwitch1.Size = new System.Drawing.Size(58, 22);
             this.metroSetSwitch1.Style = MetroSet_UI.Design.Style.Light;
@@ -73,7 +73,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 415);
             this.Controls.Add(this.metroSetSwitch1);
