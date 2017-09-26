@@ -26,9 +26,10 @@ Dependency
 
 ## Components Available
 
-:arrow_down: | Components | Skin Support | Smart Tag
-:---:|:---|:---:|:---:|
-:arrow_right: | StyleManager | :heavy_check_mark:| :heavy_check_mark:
+:arrow_down: | Components | Skin Support | Custom Theme Support | Smart Tag
+:---:|:---|:---:|:---:|:---:|
+:arrow_right: | StyleManager |:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:
+:arrow_right: | MetroSetToolTip |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:
 
 ## 
 
@@ -43,6 +44,8 @@ Dependency
 :arrow_right: | MetroSetLabel |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetCheckBox |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetRadioButton |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:
+:arrow_right: | MetroSetRadioSwitch |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetLink |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetDevider |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
+
 
