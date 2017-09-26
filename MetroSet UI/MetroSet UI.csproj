@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\MetroSetToolTipActionList.cs" />
     <Compile Include="Actions\MetroSetSwitchActionList.cs" />
     <Compile Include="Actions\MetroSetRadiobuttonActionList.cs" />
     <Compile Include="Actions\MetroSetDividerActionList.cs" />
@@ -66,6 +67,7 @@
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
+    <Compile Include="Design\MetroSetToolTipDesigner.cs" />
     <Compile Include="Design\MetroSetSwitchDesigner.cs" />
     <Compile Include="Design\MetroSetRadioButtonDesigner.cs" />
     <Compile Include="Design\MetroSetCheckBoxDesigner.cs" />

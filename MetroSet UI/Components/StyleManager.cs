@@ -355,41 +355,27 @@ namespace MetroSet_UI
 
             Clear();
 
-            // Here we will load the theme contents that we get in Custom Theme Dialog property
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-            if (doc.DocumentElement != null)
-                foreach (XmlNode node in doc.DocumentElement)
-                {
-                    string nodeName = node.Name;
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        switch (nodeName)
-                        {
-                            case "Button":
-                                ButtonDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            FormDictionary = GetValues(path, "Form");
 
-                            case "Label":
-                                LabelDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            ButtonDictionary = GetValues(path, "Button");
 
-                            case "LinkLabel":
-                                LinkLabelDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            LabelDictionary = GetValues(path, "Label");
 
-                            case "TextBox":
-                                TextBoxDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            LinkLabelDictionary = GetValues(path, "LinkLabel");
 
-                            case "Form":
-                                FormDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            BadgeDictionary = GetValues(path, "Badge");
 
-                            case "Badge":
-                                BadgeDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            DividerDictionary = GetValues(path, "Divider");
 
+            CheckBoxDictionary = GetValues(path, "CheckBox");
+
+            RadioButtonDictionary = GetValues(path, "RadioButton");
+
+            SwitchBoxDictionary = GetValues(path, "SwitchBox");
+
+            ToolTipDictionary = GetValues(path, "ToolTip");
+
+            ThemeDetailsReader(path);
 
             UpdateForm();
 
@@ -423,17 +409,17 @@ namespace MetroSet_UI
         /// <returns>The Dictionary of childnodes names and values of a specific node.</returns>
         private Dictionary<string, object> GetValues(string path, string nodename)
         {
-            Dictionary<string, object> a = new Dictionary<string, object>();
+            Dictionary<string, object> dict = new Dictionary<string, object>();
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
             if (doc.DocumentElement == null) { return null; }
 
             XmlNode xnl = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
             foreach (XmlNode node in xnl.ChildNodes)
-            {                
-                a.Add(node.Name, node.InnerText);
+            {
+                dict.Add(node.Name, node.InnerText);
             }
-            return a;
+            return dict;
         }
 
         #endregion Reader

@@ -13,6 +13,7 @@ namespace MetroSet_UI.Components
 
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetToolTip), "Bitmaps.ToolTip.bmp")]
+    [Designer(typeof(MetroSetToolTipDesigner))]
     [DefaultEvent("Popup")]
     public class MetroSetToolTip : ToolTip, iControl
     { 
