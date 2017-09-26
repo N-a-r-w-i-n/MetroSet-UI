@@ -13,7 +13,8 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetLabel), "Bitmaps.TextBox.bmp")] 
+    [ToolboxBitmap(typeof(MetroSetTextBox), "Bitmaps.TextBox.bmp")] 
+    [Designer(typeof(MetroSetTextBoxDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
@@ -691,7 +692,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets how text is aligned in a TextBox control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets how text is aligned in a TextBox control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets how text is aligned in a TextBox control.")]
         public HorizontalAlignment TextAlign
         {
             get { return _TextAlign; }
@@ -711,7 +712,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets how text is aligned in a TextBox control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets how text is aligned in a TextBox control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets how text is aligned in a TextBox control.")]
         public int MaxLength
         {
             get { return _MaxLength; }
@@ -730,7 +731,9 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the background color of the control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the background color of the control.")]
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the background color of the control.")]
+        [Browsable(false)]
         public override Color BackColor
         {
             get { return _BackColor; }
@@ -747,7 +750,9 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the color of the control whenever hovered.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the color of the control whenever hovered.")]
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the color of the control whenever hovered.")]
+        [Browsable(false)]
         public Color HoverColor
         {
             get { return _HoverColor; }
@@ -762,7 +767,9 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the border color of the control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the border color of the control.")]
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the border color of the control.")]
+        [Browsable(false)]
         public Color BorderColor
         {
             get { return _BorderColor; }
@@ -777,7 +784,9 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the foreground color of the control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the foreground color of the control.")]
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the foreground color of the control.")]
+        [Browsable(false)]
         public override Color ForeColor
         {
             get { return _ForeColor; }
@@ -794,7 +803,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets a value indicating whether text in the text box is read-only.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets a value indicating whether text in the text box is read-only.")]
+        [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether text in the text box is read-only.")]
         public bool ReadOnly
         {
             get { return _ReadOnly; }
@@ -812,7 +821,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets a value indicating whether the text in the TextBox control should appear as the default password character.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets a value indicating whether the text in the TextBox control should appear as the default password character.")]
+        [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the text in the TextBox control should appear as the default password character.")]
         public bool UseSystemPasswordChar
         {
             get { return _UseSystemPasswordChar; }
@@ -830,7 +839,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets a value indicating whether this is a multiline TextBox control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets a value indicating whether this is a multiline TextBox control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether this is a multiline TextBox control.")]
         public bool Multiline
         {
             get { return _Multiline; }
@@ -865,7 +874,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the current text in the TextBox.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the current text in the TextBox.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the current text in the TextBox.")]
         public override string Text
         {
             get { return T.Text; }
@@ -883,7 +892,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the text in the TextBox while being empty.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the text in the TextBox while being empty.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the text in the TextBox while being empty.")]
         public string WatermarkText
         {
             get { return _WatermarkText; }
@@ -899,7 +908,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the image of the control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the image of the control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the image of the control.")]
         public Image Image
         {
             get { return _Image; }
@@ -914,7 +923,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets a value specifying the source of complete strings used for automatic completion.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets a value specifying the source of complete strings used for automatic completion.")]
+        [Category("MetroSet Framework"), Description("Gets or sets a value specifying the source of complete strings used for automatic completion.")]
         public AutoCompleteSource AutoCompleteSource
         {
             get { return _AutoCompleteSource; }
@@ -933,7 +942,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets a value specifying the source of complete strings used for automatic completion.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets a value specifying the source of complete strings used for automatic completion.")]
+        [Category("MetroSet Framework"), Description("Gets or sets a value specifying the source of complete strings used for automatic completion.")]
         public AutoCompleteStringCollection AutoCompleteCustomSource
         {
             get { return _AutoCompleteCustomSource; }
@@ -952,7 +961,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets an option that controls how automatic completion works for the TextBox.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets an option that controls how automatic completion works for the TextBox.")]
+        [Category("MetroSet Framework"), Description("Gets or sets an option that controls how automatic completion works for the TextBox.")]
         public AutoCompleteMode AutoCompleteMode
         {
             get { return _AutoCompleteMode; }
@@ -970,7 +979,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the font of the text displayed by the control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the font of the text displayed by the control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the font of the text displayed by the control.")]
         public override Font Font
         {
             get { return base.Font; }
@@ -990,7 +999,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the lines of text in the control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the lines of text in the control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the lines of text in the control.")]
         public string[] Lines
         {
             get { return _Lines; }
@@ -1007,7 +1016,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the ContextMenuStrip associated with this control.
         /// </summary>
-        [Category("Custom Properties"), Description("Gets or sets the ContextMenuStrip associated with this control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the ContextMenuStrip associated with this control.")]
         public override ContextMenuStrip ContextMenuStrip
         {
             get { return base.ContextMenuStrip; }
