@@ -15,7 +15,7 @@ namespace MetroSet_UI.Components
     [ToolboxBitmap(typeof(MetroSetToolTip), "Bitmaps.ToolTip.bmp")]
     [DefaultEvent("Popup")]
     public class MetroSetToolTip : ToolTip, iControl
-    {
+    { 
 
         #region Interfaces
 
