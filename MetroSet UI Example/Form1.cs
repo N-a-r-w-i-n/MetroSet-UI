@@ -20,5 +20,10 @@ namespace MetroSet_UI_Example
         {
              
         }
+
+        private void metroSetButton1_Click(object sender, EventArgs e)
+        {
+            styleManager1.OpenTheme();
+        }
     }
 }

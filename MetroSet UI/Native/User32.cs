@@ -34,6 +34,9 @@ namespace MetroSet_UI.Native
             throw new NotImplementedException();
         }
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, string lParam);
+
         #endregion
 
     }

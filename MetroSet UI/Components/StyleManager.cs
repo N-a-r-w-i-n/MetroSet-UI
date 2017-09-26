@@ -375,6 +375,8 @@ namespace MetroSet_UI
 
             ToolTipDictionary = GetValues(path, "ToolTip");
 
+            TextBoxDictionary = GetValues(path, "TextBox");
+
             ThemeDetailsReader(path);
 
             UpdateForm();

@@ -50,6 +50,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetSwitch.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -82,6 +85,7 @@
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
+    <Compile Include="Property\TextBoxProperties.cs" />
     <Compile Include="Property\ToolTipProperties.cs" />
     <Compile Include="Property\SwitchProperties.cs" />
     <Compile Include="Property\RadioProperties.cs" />
@@ -172,6 +176,7 @@
     <Content Include="Bitmaps\RadioButton.bmp" />
     <Content Include="Bitmaps\Style.bmp" />
     <Content Include="Bitmaps\Switch.bmp" />
+    <Content Include="Bitmaps\TextBox.bmp" />
     <Content Include="Bitmaps\ToolTip.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

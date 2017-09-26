@@ -54,6 +54,20 @@
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
   </Label>
+  <TextBox>
+    <Enabled>true</Enabled>
+    <ForeColor>#CCCCCC</ForeColor>
+    <BackColor>#222222</BackColor>
+    <HoverColor>#b72828</HoverColor>
+    <BorderColor>#6E6E6E</BorderColor>
+    <WatermarkText>n</WatermarkText>
+    <ReadOnly>false</ReadOnly>
+    <UseSystemPasswordChar>false</UseSystemPasswordChar>
+    <Multiline>false</Multiline>
+    <DisabledBackColor>#505050</DisabledBackColor>
+    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledForeColor>#6D6D6D</DisabledForeColor>
+  </TextBox>
   <CheckBox>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
@@ -74,7 +88,7 @@
     <DisabledUnCheckColor>#CDCDCD</DisabledUnCheckColor>
     <DisabledCheckColor>#DF5050</DisabledCheckColor>
   </SwitchBox>
-  <RadioButton>
+  <RadioButton> 
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
     <CheckColor>#b72828</CheckColor>
