@@ -143,8 +143,7 @@ namespace MetroSet_UI
                 }
             }
         }
-
-
+        
         /// <summary>
         /// Gets or sets the style for the button.
         /// </summary>
@@ -349,71 +348,73 @@ namespace MetroSet_UI
 
             Clear();
 
-            // Here we will load the theme contents that we get in Custom Theme Dialog property
+            // Here we will fill all dictionaries based on given xustom theme file.
+
+            SwitchBoxDictionary = GetValues(path, "SwitchBox");
+
+            ButtonDictionary = GetValues(path, "Button");
+
+            LabelDictionary = GetValues(path, "Label");
+
+            LinkLabelDictionary = GetValues(path, "LinkLabel");
+
+            FormDictionary = GetValues(path, "Form");
+
+            BadgeDictionary = GetValues(path, "Badge");
+
+            DividerDictionary = GetValues(path, "Divider");
+
+            CheckBoxDictionary = GetValues(path, "CheckBox");
+
+            RadioButtonDictionary = GetValues(path, "RadioButton");
+
+
+            ThemeDetailsReader(path);
+
+
+            UpdateForm();
+
+        }
+
+
+        /// <summary>
+        /// The Method get the custom theme name and author.
+        /// </summary>
+        /// <param name="path"></param>
+        private void ThemeDetailsReader(string path)
+        {
+            foreach(var item in GetValues(path, "Theme"))
+            {
+                if (item.Key == "Name")
+                {
+                    ThemeName = item.Value.ToString();
+                }
+                else if(item.Key == "Author")
+                {
+                    ThemeAuthor = item.Value.ToString();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The Method to load the custom xml theme file and add a childnodes from a specific node into a dectionary.
+        /// </summary>
+        /// <param name="path">The Path of custom theme file (XML file).</param>
+        /// <param name="nodename">The Node name to get the childnodes from.</param>
+        /// <returns>The Dictionary of childnodes names and values of a specific node.</returns>
+        private Dictionary<string, object> GetValues(string path, string nodename)
+        {
+            Dictionary<string, object> a = new Dictionary<string, object>();
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
-            if (doc.DocumentElement != null)
-                foreach (XmlNode node in doc.DocumentElement)
-                {
-                    string nodeName = node.Name;
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        switch (nodeName)
-                        {
-                            case "Button":
-                                ButtonDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
+            if (doc.DocumentElement == null) { return null; }
 
-                            case "Label":
-                                LabelDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "LinkLabel":
-                                LinkLabelDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "TextBox":
-                                TextBoxDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "Form":
-                                FormDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "Badge":
-                                BadgeDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "Divider":
-                                DividerDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "CheckBox":
-                                CheckBoxDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "RadioButton":
-                                RadioButtonDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "SwitchBox":
-                                SwitchBoxDictionary.Add(childNode.Name, childNode.InnerText);
-                                break;
-
-                            case "Theme":
-                                if (childNode.Name == "Name")
-                                {
-                                    ThemeName = childNode.InnerText;
-                                }
-                                else if (childNode.Name == "Author")
-                                {
-                                    ThemeAuthor = childNode.InnerText;
-                                }
-                                break;
-                        }
-                    }
-                    UpdateForm();
-                }
+            XmlNode xnl = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
+            foreach (XmlNode node in xnl.ChildNodes)
+            {                
+                a.Add(node.Name, node.InnerText);
+            }
+            return a;
         }
 
         #endregion Reader
