@@ -1,19 +1,16 @@
 ﻿using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetSwitch), "Bitmaps.Switch.bmp")]
     [Designer(typeof(MetroSetSwitchDesigner))]
@@ -87,13 +84,14 @@ namespace MetroSet_UI.Controls
         #region Global Vars
 
         private Methods mth;
-        private SwitchProperties prop;
+
         private Utilites utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
+        private SwitchProperties prop;
         private StyleManager _StyleManager;
         private bool _Switched;
         private Style style;
@@ -135,7 +133,6 @@ namespace MetroSet_UI.Controls
             try
             {
                 Enabled = prop.Enabled;
-                ForeColor = prop.ForeColor;
                 Invalidate();
             }
             catch (Exception ex)
@@ -155,7 +152,7 @@ namespace MetroSet_UI.Controls
                 case Style.Light:
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.White; 
+                    prop.BackColor = Color.White;
                     prop.BorderColor = Color.FromArgb(165, 159, 147);
                     prop.DisabledBorderColor = Color.FromArgb(205, 205, 205);
                     prop.SymbolColor = Color.FromArgb(92, 92, 92);
@@ -170,10 +167,10 @@ namespace MetroSet_UI.Controls
 
                 case Style.Dark:
                     prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170); 
+                    prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.FromArgb(30, 30, 30);
                     prop.BorderColor = Color.FromArgb(155, 155, 155);
-                    prop.DisabledBorderColor = Color.FromArgb(85, 85, 85); 
+                    prop.DisabledBorderColor = Color.FromArgb(85, 85, 85);
                     prop.SymbolColor = Color.FromArgb(92, 92, 92);
                     prop.UnCheckColor = Color.FromArgb(155, 155, 155);
                     prop.CheckColor = Color.FromArgb(126, 56, 120);
@@ -185,6 +182,7 @@ namespace MetroSet_UI.Controls
                     break;
 
                 case Style.Custom:
+
                     if (StyleManager != null)
                         foreach (var varkey in StyleManager.SwitchBoxDictionary)
                         {
@@ -192,10 +190,6 @@ namespace MetroSet_UI.Controls
                             {
                                 case "Enabled":
                                     prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
-
-                                case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
@@ -221,25 +215,25 @@ namespace MetroSet_UI.Controls
                                 case "CheckColor":
                                     prop.CheckColor = utl.HexColor((string)varkey.Value);
                                     break;
-                                    
+
                                 case "DisabledUnCheckColor":
                                     prop.DisabledUnCheckColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledCheckColor":
-                                    prop.DisabledCheckColor = utl.HexColor((string)varkey.Value); 
+                                    prop.DisabledCheckColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
                                     return;
                             }
-                        }                      
-
+                        }
                     SetProperties();
                     break;
             }
         }
-        #endregion Theme Changing
+
+        #endregion ApplyTheme
 
         #region Draw Control
 
@@ -262,7 +256,6 @@ namespace MetroSet_UI.Controls
                         {
                             using (Pen P = new Pen(prop.BorderColor, 2))
                             {
-
                                 G.FillRectangle(BackBrush, rect);
 
                                 G.FillRectangle(Checkback, rect2);
@@ -270,7 +263,6 @@ namespace MetroSet_UI.Controls
                                 G.DrawRectangle(P, rect);
 
                                 G.FillRectangle(CheckMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (Switchlocation / 180.0))), 0, 16, 22));
-
                             }
                         }
                     }
@@ -280,7 +272,7 @@ namespace MetroSet_UI.Controls
             {
                 using (Brush BackBrush = new SolidBrush(prop.BackColor))
                 {
-                    using (Pen CheckMarkPen = new Pen(prop.DisabledBorderColor , 2))
+                    using (Pen CheckMarkPen = new Pen(prop.DisabledBorderColor, 2))
                     {
                         using (SolidBrush Checkback = new SolidBrush(Switched ? prop.DisabledCheckColor : prop.DisabledUnCheckColor))
                         {
@@ -293,14 +285,12 @@ namespace MetroSet_UI.Controls
                                 G.DrawRectangle(CheckMarkPen, rect);
 
                                 G.FillRectangle(CheckMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (Switchlocation / 180.0))), 0, 16, 22));
-
                             }
                         }
                     }
                 }
             }
         }
-
 
         #endregion Draw Control
 
@@ -309,6 +299,7 @@ namespace MetroSet_UI.Controls
         public delegate void SwitchedChangedEventHandler(object sender);
 
         public event SwitchedChangedEventHandler SwitchedChanged;
+
         /// <summary>
         /// The Method that increases and decreases the location symbol which it make the control animate.
         /// </summary>
@@ -386,7 +377,7 @@ namespace MetroSet_UI.Controls
             get { return _Switched; }
             set
             {
-                _Switched = value;                
+                _Switched = value;
                 SwitchedChanged?.Invoke(this);
                 SetCheckedChanged(this, null);
                 timer.Enabled = true;
@@ -395,6 +386,7 @@ namespace MetroSet_UI.Controls
                     case true:
                         CheckState = Enums.CheckState.Checked;
                         break;
+
                     case false:
                         CheckState = Enums.CheckState.Unchecked;
                         break;
@@ -402,7 +394,7 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
-        #endregion Properties
 
+        #endregion Properties
     }
 }

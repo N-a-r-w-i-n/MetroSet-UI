@@ -1,11 +1,11 @@
-﻿using MetroSet_UI.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using MetroSet_UI.Controls;
 
 namespace MetroSet_UI_Example
 {
@@ -18,12 +18,8 @@ namespace MetroSet_UI_Example
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+             
         }
 
-        private void metroSetButton1_Click(object sender, EventArgs e)
-        {
-            styleManager1.OpenTheme();
-        }
     }
 }
