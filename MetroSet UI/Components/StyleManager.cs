@@ -355,29 +355,40 @@ namespace MetroSet_UI
 
             Clear();
 
-            // Here we will fill all dictionaries based on given xustom theme file.
+            // Here we will load the theme contents that we get in Custom Theme Dialog property
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+            if (doc.DocumentElement != null)
+                foreach (XmlNode node in doc.DocumentElement)
+                {
+                    string nodeName = node.Name;
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        switch (nodeName)
+                        {
+                            case "Button":
+                                ButtonDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
 
-            SwitchBoxDictionary = GetValues(path, "SwitchBox");
+                            case "Label":
+                                LabelDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
 
-            ButtonDictionary = GetValues(path, "Button");
+                            case "LinkLabel":
+                                LinkLabelDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
 
-            LabelDictionary = GetValues(path, "Label");
+                            case "TextBox":
+                                TextBoxDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
 
-            LinkLabelDictionary = GetValues(path, "LinkLabel");
+                            case "Form":
+                                FormDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
 
-            FormDictionary = GetValues(path, "Form");
-
-            BadgeDictionary = GetValues(path, "Badge");
-
-            DividerDictionary = GetValues(path, "Divider");
-
-            CheckBoxDictionary = GetValues(path, "CheckBox");
-
-            RadioButtonDictionary = GetValues(path, "RadioButton");
-
-            ToolTipDictionary = GetValues(path, "ToolTip");
-
-            ThemeDetailsReader(path);
+                            case "Badge":
+                                BadgeDictionary.Add(childNode.Name, childNode.InnerText);
+                                break;
 
 
             UpdateForm();
