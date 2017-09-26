@@ -266,6 +266,11 @@ namespace MetroSet_UI
         public Dictionary<string, object> TextBoxDictionary;
 
         /// <summary>
+        /// The RichTextBox properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> RichTextBoxDictionary;
+
+        /// <summary>
         /// The Form properties from custom theme will be stored into this dictionary.
         /// </summary>
         public Dictionary<string, object> FormDictionary;
@@ -318,6 +323,7 @@ namespace MetroSet_UI
             RadioButtonDictionary.Clear();
             SwitchBoxDictionary.Clear();
             ToolTipDictionary.Clear();
+            RichTextBoxDictionary.Clear();
         }
 
         #endregion
@@ -330,6 +336,7 @@ namespace MetroSet_UI
             LabelDictionary = new Dictionary<string, object>();
             LinkLabelDictionary = new Dictionary<string, object>();
             TextBoxDictionary = new Dictionary<string, object>();
+            RichTextBoxDictionary = new Dictionary<string, object>();
             FormDictionary = new Dictionary<string, object>();
             BadgeDictionary = new Dictionary<string, object>();
             DividerDictionary = new Dictionary<string, object>();
@@ -376,6 +383,8 @@ namespace MetroSet_UI
             ToolTipDictionary = GetValues(path, "ToolTip");
 
             TextBoxDictionary = GetValues(path, "TextBox");
+
+            RichTextBoxDictionary = GetValues(path, "RichTextBox");
 
             ThemeDetailsReader(path);
 
