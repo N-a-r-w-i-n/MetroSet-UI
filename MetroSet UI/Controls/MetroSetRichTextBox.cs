@@ -12,6 +12,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetRichTextBox), "Bitmaps.RitchTextBox.bmp")]
+    [Designer(typeof(MetroSetRichTextBoxDesigner))]
     [DefaultProperty("Text")]
     [DefaultEvent("TextChanged")]
     [ComVisible(true)]
@@ -741,7 +742,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets how text is aligned in a TextBox control.
         /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets how text is aligned in a TextBox control.")]
+        [Category("MetroSet Framework"), Description("Gets or sets how text is aligned in a RichTextBox control.")]
         public int MaxLength
         {
             get { return _MaxLength; }
@@ -827,7 +828,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets a value indicating whether text in the text box is read-only.
         /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether text in the text box is read-only.")]
+        [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether text in the RichTextBox is read-only.")]
         public bool ReadOnly
         {
             get { return _ReadOnly; }
@@ -853,7 +854,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the current text in the TextBox.
         /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the current text in the TextBox.")]
+        [Category("MetroSet Framework"), Description("Gets or sets the current text in the RichTextBox.")]
         public override string Text
         {
             get { return T.Text; }
