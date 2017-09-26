@@ -295,6 +295,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> SwitchBoxDictionary;
 
+        /// <summary>
+        /// The ToolTip properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ToolTipDictionary;
+
         #endregion
 
         #region Methods 
@@ -312,6 +317,7 @@ namespace MetroSet_UI
             CheckBoxDictionary.Clear();
             RadioButtonDictionary.Clear();
             SwitchBoxDictionary.Clear();
+            ToolTipDictionary.Clear();
         }
 
         #endregion
@@ -330,6 +336,7 @@ namespace MetroSet_UI
             CheckBoxDictionary = new Dictionary<string, object>();
             RadioButtonDictionary = new Dictionary<string, object>();
             SwitchBoxDictionary = new Dictionary<string, object>();
+            ToolTipDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -368,6 +375,7 @@ namespace MetroSet_UI
 
             RadioButtonDictionary = GetValues(path, "RadioButton");
 
+            ToolTipDictionary = GetValues(path, "ToolTip");
 
             ThemeDetailsReader(path);
 

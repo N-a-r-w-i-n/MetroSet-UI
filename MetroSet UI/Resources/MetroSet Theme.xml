@@ -63,18 +63,17 @@
     <DisabledBorderColor>#999999</DisabledBorderColor>
     <CheckedStyle>Shape</CheckedStyle> <!--Sign, Shape-->
   </CheckBox>
-  <Switch>
+  <SwitchBox>
     <Enabled>true</Enabled>
-    <ForeColor>#b72828</ForeColor>
     <SymbolColor>#5C5C5C</SymbolColor>
-    <BackColor>#00FFFFFF</BackColor>
-    <BordeColor>#b72828</BordeColor>
-    <DisabledBorderColor>#b72828</DisabledBorderColor>
-    <UnCheckColor>#b72828</UnCheckColor>
+    <BackColor>#1E1E1E</BackColor>
+    <BorderColor>#9B9B9B</BorderColor>
+    <DisabledBorderColor>#555555</DisabledBorderColor>
+    <UnCheckColor>#9B9B9B</UnCheckColor>
     <CheckColor>#b72828</CheckColor>
-    <DisabledUnCheckColor>#b72828</DisabledUnCheckColor>
-    <DisabledCheckColor>#b72828</DisabledCheckColor>
-  </Switch>
+    <DisabledUnCheckColor>#CDCDCD</DisabledUnCheckColor>
+    <DisabledCheckColor>#DF5050</DisabledCheckColor>
+  </SwitchBox>
   <RadioButton>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
@@ -98,4 +97,9 @@
     <VisitedLinkColor>#2d9dcd</VisitedLinkColor>
     <LinkBehavior>HoverUnderline</LinkBehavior> <!--HoverUnderline, AlwaysUnderline, NeverUnderline, SystemDefault-->
   </LinkLabel>
+  <ToolTip>
+    <ForeColor>#ffffff</ForeColor>
+    <BackColor>#1e1e1e</BackColor>
+    <BorderColor>#b72828</BorderColor>
+  </ToolTip>
 </MetroSetTheme>

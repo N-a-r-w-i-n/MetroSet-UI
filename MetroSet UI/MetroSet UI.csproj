@@ -43,6 +43,9 @@
     <Compile Include="Actions\MetroSetRadiobuttonActionList.cs" />
     <Compile Include="Actions\MetroSetDividerActionList.cs" />
     <Compile Include="Actions\MetroSetCheckBoxActionList.cs" />
+    <Compile Include="Components\MetroSetToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -77,6 +80,7 @@
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
+    <Compile Include="Property\ToolTipProperties.cs" />
     <Compile Include="Property\SwitchProperties.cs" />
     <Compile Include="Property\RadioProperties.cs" />
     <Compile Include="Property\CheckProperties.cs" />
@@ -166,6 +170,7 @@
     <Content Include="Bitmaps\RadioButton.bmp" />
     <Content Include="Bitmaps\Style.bmp" />
     <Content Include="Bitmaps\Switch.bmp" />
+    <Content Include="Bitmaps\ToolTip.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

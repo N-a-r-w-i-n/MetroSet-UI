@@ -20,6 +20,5 @@ namespace MetroSet_UI_Example
         {
              
         }
-
     }
 }
