@@ -43,9 +43,9 @@
             // metroSetButton1
             // 
             this.metroSetButton1.Font = new System.Drawing.Font("Segoe WP Light", 10F);
-            this.metroSetButton1.Location = new System.Drawing.Point(297, 182);
+            this.metroSetButton1.Location = new System.Drawing.Point(350, 159);
             this.metroSetButton1.Name = "metroSetButton1";
-            this.metroSetButton1.Size = new System.Drawing.Size(251, 57);
+            this.metroSetButton1.Size = new System.Drawing.Size(120, 36);
             this.metroSetButton1.Style = MetroSet_UI.Design.Style.Custom;
             this.metroSetButton1.StyleManager = this.styleManager1;
             this.metroSetButton1.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 353);
             this.Controls.Add(this.metroSetButton1);

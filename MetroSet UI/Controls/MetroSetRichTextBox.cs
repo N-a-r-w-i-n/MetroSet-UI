@@ -144,6 +144,7 @@ namespace MetroSet_UI.Controls
         public MetroSetRichTextBox()
         {
             SetStyle(
+                ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);

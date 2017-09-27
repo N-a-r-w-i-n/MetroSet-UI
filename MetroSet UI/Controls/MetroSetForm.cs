@@ -124,8 +124,13 @@ namespace MetroSet_UI.Controls
                 if (value)
                 {
                     ShowLeftRect = false;
+                    Padding = new Padding(2, prop.HeaderHeight + 2, 2, 2);
                 }
-                Refresh();
+                else
+                {
+                    Padding = new Padding(12, 70, 12, 12);
+                }
+                Invalidate();
             }
         }
 
@@ -160,6 +165,13 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets whether the form use animation.")]
         public bool UseSlideAnimation { get; set; } = false;
 
+        [Browsable(false)]
+        public new Padding Padding
+        {
+            get { return base.Padding; }
+            set { base.Padding = value; }
+        }
+
         #endregion Properties
 
         #region Constructor
@@ -172,6 +184,7 @@ namespace MetroSet_UI.Controls
                         ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
+            Padding = new Padding(12, 70, 12, 12);
             FormBorderStyle = FormBorderStyle.None;
             Font = MetroSetFonts.SemiLight(13);
             prop = new FormProperties();
