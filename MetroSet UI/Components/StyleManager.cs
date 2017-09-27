@@ -271,6 +271,11 @@ namespace MetroSet_UI
         public Dictionary<string, object> RichTextBoxDictionary;
 
         /// <summary>
+        /// The ComboBox properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ComboBoxDictionary;
+
+        /// <summary>
         /// The Form properties from custom theme will be stored into this dictionary.
         /// </summary>
         public Dictionary<string, object> FormDictionary;
@@ -324,6 +329,7 @@ namespace MetroSet_UI
             SwitchBoxDictionary.Clear();
             ToolTipDictionary.Clear();
             RichTextBoxDictionary.Clear();
+            ComboBoxDictionary.Clear();
         }
 
         #endregion
@@ -344,6 +350,7 @@ namespace MetroSet_UI
             RadioButtonDictionary = new Dictionary<string, object>();
             SwitchBoxDictionary = new Dictionary<string, object>();
             ToolTipDictionary = new Dictionary<string, object>();
+            ComboBoxDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -385,6 +392,8 @@ namespace MetroSet_UI
             TextBoxDictionary = GetValues(path, "TextBox");
 
             RichTextBoxDictionary = GetValues(path, "RichTextBox");
+
+            ComboBoxDictionary = GetValues(path, "ComboBox");
 
             ThemeDetailsReader(path);
 

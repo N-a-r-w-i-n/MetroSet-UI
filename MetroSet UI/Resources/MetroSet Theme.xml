@@ -1,4 +1,5 @@
-﻿<MetroSetTheme>
+﻿<?xml version='1.0' encoding='utf-8'?>
+  <MetroSetTheme>
   <Theme>
     <Name>DarkUI</Name>
     <Author>Narwin</Author>
@@ -54,6 +55,18 @@
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
   </Label>
+  <ComboBox>
+    <Enabled>true</Enabled>
+    <ForeColor>#CCCCCC</ForeColor>
+    <BackColor>#222222</BackColor>
+    <BorderColor>#6E6E6E</BorderColor>
+    <ArrowColor>#6E6E6E</ArrowColor>
+    <SelectedItemBackColor>#b72828</SelectedItemBackColor>
+    <SelectedItemForeColor>#FFFFFF</SelectedItemForeColor>
+    <DisabledBackColor>#505050</DisabledBackColor>
+    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledForeColor>#6D6D6D</DisabledForeColor>
+  </ComboBox>
   <TextBox>
     <Enabled>true</Enabled>
     <ForeColor>#CCCCCC</ForeColor>

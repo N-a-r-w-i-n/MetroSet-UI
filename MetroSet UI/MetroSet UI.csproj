@@ -52,6 +52,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -92,6 +95,7 @@
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
+    <Compile Include="Property\ComboBoxProperties.cs" />
     <Compile Include="Property\RichTextBoxProperties.cs" />
     <Compile Include="Property\TextBoxProperties.cs" />
     <Compile Include="Property\ToolTipProperties.cs" />
@@ -179,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bitmaps\CheckBox.bmp" />
+    <Content Include="Bitmaps\ComoBox.bmp" />
     <Content Include="Bitmaps\Divider.png" />
     <Content Include="Bitmaps\LinkLabel.bmp" />
     <Content Include="Bitmaps\RadioButton.bmp" />

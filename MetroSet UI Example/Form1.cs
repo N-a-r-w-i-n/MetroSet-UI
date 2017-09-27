@@ -18,7 +18,11 @@ namespace MetroSet_UI_Example
 
         private void Form1_Load(object sender, EventArgs e)
         {
-             
+             for (int i = 0; i < 10; i++)
+            {
+                metroSetComboBox1.Items.Add($"MetroSetItem{i}");
+            }
+              
         }
 
         private void metroSetButton1_Click(object sender, EventArgs e)
