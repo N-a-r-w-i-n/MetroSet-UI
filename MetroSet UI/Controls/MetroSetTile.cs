@@ -1,4 +1,5 @@
 ﻿using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
@@ -12,13 +13,12 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetEllipse), "Bitmaps.Ellipse.bmp")]
-    [Designer(typeof(MetroSetEllipseDesigner))]
+    [ToolboxBitmap(typeof(MetroSetTile), "Bitmaps.Button.bmp")]
     [DefaultEvent("Click")]
     [DefaultProperty("Text")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class MetroSetEllipse : Control, iControl
+    public class MetroSetTile : Control, iControl
     {
 
         #region Interfaces
@@ -99,13 +99,13 @@ namespace MetroSet_UI.Controls
         private MouseMode State;
         private Style style;
         private StyleManager _StyleManager;
-        private static EllipseProperties prop;
+        private static TileProperties prop;
         
         #endregion Internal Vars
 
         #region Constructors
 
-        public MetroSetEllipse()
+        public MetroSetTile()
         {
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint |
@@ -114,8 +114,7 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            BackColor = Color.Transparent;
-            prop = new EllipseProperties();
+            prop = new TileProperties();
             Font = MetroSetFonts.Light(10);
             utl = new Utilites();
             mth = new Methods();
@@ -130,62 +129,120 @@ namespace MetroSet_UI.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics G = e.Graphics;
-            Rectangle r = new Rectangle(BorderThickness, BorderThickness, Width - ((BorderThickness * 2) + 1), Height - ((BorderThickness * 2) + 1));
+            Rectangle r = new Rectangle(2, 2, Width - 4, Height - 4);
+            //Rectangle r = new Rectangle(0, 0, Width - 1, Height - 1);
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            G.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            StringFormat SF = new StringFormat();
+
+            switch (TileAlign) 
+            {
+                case TileAlign.BottmLeft:
+                    SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Far };
+                    break;
+                case TileAlign.BottomRight:
+                    SF = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
+                    break;
+                case TileAlign.Topleft:
+                    SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Near };
+                    break;
+                case TileAlign.TopRight:
+                    SF = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Near };
+                    break;
+                case TileAlign.TopCenter:
+                    SF = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Near };
+                    break;
+                case TileAlign.BottomCenter:
+                    SF = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far };
+                    break;
+            }
 
             switch (State)
             {
                 case MouseMode.Normal:
 
                     using (SolidBrush BG = new SolidBrush(prop.NormalColor))
-                    using (Pen P = new Pen(prop.NormalBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(prop.NormalTextColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        using (Pen P = new Pen(prop.NormalBorderColor, 2))
+                        {
+                            using (SolidBrush TB = new SolidBrush(prop.NormalTextColor))
+                            {
+                                if (BackgroundImage != null)
+                                {
+                                    G.DrawImage(BackgroundImage, r);
+                                }
+                                else
+                                {
+                                    G.FillRectangle(BG, r);
+                                }
+                                G.DrawString(Text, Font, TB, r, SF);
+                                G.DrawRectangle(P, r);
+                            }
+                        }
                     }
-
                     break;
 
                 case MouseMode.Hovered:
 
                     Cursor = Cursors.Hand;
                     using (SolidBrush BG = new SolidBrush(prop.HoverColor))
-                    using (Pen P = new Pen(prop.HoverBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(prop.HoverTextColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        using (Pen P = new Pen(prop.HoverBorderColor, 2))
+                        {
+                            using (SolidBrush TB = new SolidBrush(prop.HoverTextColor))
+                            {
+                                if (BackgroundImage != null)
+                                {
+                                    G.DrawImage(BackgroundImage, r);
+                                }
+                                else
+                                {
+                                    G.FillRectangle(BG, r);
+                                }
+                                G.DrawString(Text, Font, TB, r, SF);
+                                G.DrawRectangle(P, r);
+                            }
+                        }
                     }
-
                     break;
 
                 case MouseMode.Pushed:
 
                     using (SolidBrush BG = new SolidBrush(prop.PressColor))
-                    using (Pen P = new Pen(prop.PressBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(prop.PressTextColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
-                    }
+                        using (Pen P = new Pen(prop.PressBorderColor, 2))
+                        {
+                            using (SolidBrush TB = new SolidBrush(prop.PressTextColor))
+                            {
+                                if (BackgroundImage != null)
+                                {
+                                    G.DrawImage(BackgroundImage, r);
+                                }
+                                else
+                                {
+                                    G.FillRectangle(BG, r);
+                                }
+                                G.DrawString(Text, Font, TB, r, SF);
+                                G.DrawRectangle(P, r);
 
+                            }
+                        }
+                    }
                     break;
 
                 case MouseMode.Disabled:
                     using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
-                    using (Pen P = new Pen(prop.DisabledBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        using (Pen P = new Pen(prop.DisabledBorderColor))
+                        {
+                            using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
+                            {
+                                G.FillRectangle(BG, r);
+                                G.DrawString(Text, Font, TB, r, SF);
+                                G.DrawRectangle(P, r);
+                            }
+                        }
                     }
-
                     break;
             }
         }
@@ -204,14 +261,14 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.NormalColor = Color.FromArgb(238, 238, 238);
-                    prop.NormalBorderColor = Color.FromArgb(204, 204, 204);
-                    prop.NormalTextColor = Color.Black;
-                    prop.HoverColor = Color.FromArgb(102, 102, 102);
-                    prop.HoverBorderColor = Color.FromArgb(102, 102, 102);
+                    prop.NormalColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalBorderColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalTextColor = Color.White;
+                    prop.HoverColor = Color.FromArgb(65, 177, 225);
+                    prop.HoverBorderColor = Color.FromArgb(230, 230, 230);
                     prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(51, 51, 51);
-                    prop.PressBorderColor = Color.FromArgb(51, 51, 51);
+                    prop.PressColor = Color.FromArgb(65, 177, 225);
+                    prop.PressBorderColor = Color.FromArgb(65, 177, 225);
                     prop.PressTextColor = Color.White;
                     prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
                     prop.DisabledBorderColor = Color.FromArgb(155, 155, 155);
@@ -221,14 +278,14 @@ namespace MetroSet_UI.Controls
                     break;
 
                 case Style.Dark:
-                    prop.NormalColor = Color.FromArgb(32, 32, 32);
-                    prop.NormalBorderColor = Color.FromArgb(64, 64, 64);
-                    prop.NormalTextColor = Color.FromArgb(204, 204, 204);
-                    prop.HoverColor = Color.FromArgb(170, 170, 170);
-                    prop.HoverBorderColor = Color.FromArgb(170, 170, 170);
+                    prop.NormalColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalBorderColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalTextColor = Color.White;
+                    prop.HoverColor = Color.FromArgb(65, 177, 225);
+                    prop.HoverBorderColor = Color.FromArgb(102, 102, 102);
                     prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(240, 240, 240);
-                    prop.PressBorderColor = Color.FromArgb(240, 240, 240);
+                    prop.PressColor = Color.FromArgb(65, 177, 225);
+                    prop.PressBorderColor = Color.FromArgb(51, 51, 51);
                     prop.PressTextColor = Color.White;
                     prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
                     prop.DisabledBorderColor = Color.FromArgb(109, 109, 109);
@@ -239,7 +296,7 @@ namespace MetroSet_UI.Controls
                     
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.TileDictionary)
+                        foreach (var varkey in StyleManager.ButtonDictionary)
                         {
                             if ((varkey.Key == null) || varkey.Key == null)
                             {
@@ -305,13 +362,10 @@ namespace MetroSet_UI.Controls
         #region Properties
 
         [Browsable(false)]
-        public override Color BackColor { get; set; }
-        
-        /// <summary>
-        /// Gets or sets the border thickness with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border thickness associated with the control.")]
-        public int BorderThickness { get; set; } = 7;
+        public override Color BackColor
+        {
+            get { return Color.Transparent; }
+        }
 
         [Category("MetroSet Framework")]
         public new bool Enabled
@@ -320,13 +374,25 @@ namespace MetroSet_UI.Controls
             set
             {
                 base.Enabled = value;
-                if(value == false)
+                if (value == false)
                 {
-                    State = MouseMode.Disabled;                    
+                    State = MouseMode.Disabled;
                 }
                 Invalidate();
             }
-        } 
+        }
+
+        /// <summary>
+        /// Gets or sets the BackgroundImage associated with the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the BackgroundImage associated with the control.")]
+        public override Image BackgroundImage { get => base.BackgroundImage; set => base.BackgroundImage = value; }
+
+        /// <summary>
+        /// Gets or sets the TileAlign associated with the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the TileAlign associated with the control.")]
+        public TileAlign TileAlign { get; set; } = TileAlign.BottmLeft;
 
         #endregion
 
@@ -361,5 +427,7 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Events
+
     }
+
 }

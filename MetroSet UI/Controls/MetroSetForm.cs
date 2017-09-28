@@ -19,7 +19,8 @@ namespace MetroSet_UI.Controls
     [DesignerCategory("Form")]
     [DefaultEvent("Load")]
     [DesignTimeVisible(false)]
-    [ComVisible(true)] [InitializationEvent("Load")]
+    [ComVisible(true)]
+    [InitializationEvent("Load")]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetForm : Form, iForm
     {
@@ -125,6 +126,8 @@ namespace MetroSet_UI.Controls
                 {
                     ShowLeftRect = false;
                     Padding = new Padding(2, prop.HeaderHeight + 2, 2, 2);
+                    Text = Text.ToUpper();
+                    prop.TextColor = Color.White;
                 }
                 else
                 {
@@ -258,7 +261,7 @@ namespace MetroSet_UI.Controls
                         case TextAlign.Left:
                             using (StringFormat stringFormat = new StringFormat() {LineAlignment = StringAlignment.Center})
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(15, 0, Width, height), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(12, 0, Width, height), stringFormat);
                             }
                             break;
 

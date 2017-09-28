@@ -35,6 +35,7 @@
             this.metroSetTextBox1 = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetEllipse1 = new MetroSet_UI.Controls.MetroSetEllipse();
             this.metroSetEllipse2 = new MetroSet_UI.Controls.MetroSetEllipse();
+            this.metroSetTile1 = new MetroSet_UI.Controls.MetroSetTile();
             this.SuspendLayout();
             // 
             // styleManager1
@@ -152,11 +153,26 @@
             this.metroSetEllipse2.ThemeAuthor = "Narwin";
             this.metroSetEllipse2.ThemeName = "MetroLite";
             // 
+            // metroSetTile1
+            // 
+            this.metroSetTile1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
+            this.metroSetTile1.Location = new System.Drawing.Point(489, 279);
+            this.metroSetTile1.Name = "metroSetTile1";
+            this.metroSetTile1.Size = new System.Drawing.Size(193, 88);
+            this.metroSetTile1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetTile1.StyleManager = this.styleManager1;
+            this.metroSetTile1.TabIndex = 8;
+            this.metroSetTile1.Text = "metroSetTile1";
+            this.metroSetTile1.ThemeAuthor = "Narwin";
+            this.metroSetTile1.ThemeName = "MetroLite";
+            this.metroSetTile1.TileAlign = MetroSet_UI.Enums.TileAlign.BottmLeft;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 353);
+            this.ClientSize = new System.Drawing.Size(749, 444);
+            this.Controls.Add(this.metroSetTile1);
             this.Controls.Add(this.metroSetEllipse2);
             this.Controls.Add(this.metroSetEllipse1);
             this.Controls.Add(this.metroSetTextBox1);
@@ -164,9 +180,13 @@
             this.Controls.Add(this.metroSetComboBox1);
             this.Controls.Add(this.metroSetButton1);
             this.Name = "Form1";
+            this.Padding = new System.Windows.Forms.Padding(2, 37, 2, 2);
+            this.ShowHeader = true;
+            this.ShowLeftRect = false;
+            this.ShowTitle = true;
             this.SmallRectThickness = 2;
             this.StyleManager = this.styleManager1;
-            this.Text = "Form1";
+            this.Text = "Main Window";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -180,5 +200,6 @@
         private MetroSet_UI.Controls.MetroSetTextBox metroSetTextBox1;
         private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse1;
         private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse2;
+        private MetroSet_UI.Controls.MetroSetTile metroSetTile1;
     }
 }
