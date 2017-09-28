@@ -52,6 +52,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetEllipse.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -97,6 +100,7 @@
     <Compile Include="Enums\SignStyle.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
+    <Compile Include="Property\EllipseProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
     <Compile Include="Property\NumericProperties.cs" />
     <Compile Include="Property\ComboBoxProperties.cs" />
@@ -189,6 +193,7 @@
     <Content Include="Bitmaps\CheckBox.bmp" />
     <Content Include="Bitmaps\ComoBox.bmp" />
     <Content Include="Bitmaps\Divider.png" />
+    <Content Include="Bitmaps\Ellipse.bmp" />
     <Content Include="Bitmaps\LinkLabel.bmp" />
     <Content Include="Bitmaps\Numeric.bmp" />
     <Content Include="Bitmaps\RadioButton.bmp" />

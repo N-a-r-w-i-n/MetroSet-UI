@@ -315,6 +315,12 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> NumericDictionary;
 
+        /// <summary>
+        /// The ToolTip properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> EllipseDictionary;
+
+
         #endregion
 
         #region Methods 
@@ -336,6 +342,7 @@ namespace MetroSet_UI
             RichTextBoxDictionary.Clear();
             ComboBoxDictionary.Clear();
             NumericDictionary.Clear();
+            EllipseDictionary.Clear();
         }
 
         #endregion
@@ -358,6 +365,7 @@ namespace MetroSet_UI
             ToolTipDictionary = new Dictionary<string, object>();
             ComboBoxDictionary = new Dictionary<string, object>();
             NumericDictionary = new Dictionary<string, object>();
+            EllipseDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -403,6 +411,8 @@ namespace MetroSet_UI
             ComboBoxDictionary = GetValues(path, "ComboBox");
 
             NumericDictionary = GetValues(path, "Numeric");
+
+            EllipseDictionary = GetValues(path, "Ellipse");
 
             ThemeDetailsReader(path);
 
