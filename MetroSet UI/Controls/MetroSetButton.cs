@@ -173,6 +173,17 @@ namespace MetroSet_UI.Controls
                     }
 
                     break;
+
+                case MouseMode.Disabled:
+                    using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
+                    using (Pen P = new Pen(prop.DisabledBorderColor))
+                    using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
+                    {
+                        G.FillRectangle(BG, r);
+                        G.DrawRectangle(P, r);
+                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                    }
+                    break;
             }
         }
 
@@ -199,6 +210,9 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(51, 51, 51);
                     prop.PressBorderColor = Color.FromArgb(51, 51, 51);
                     prop.PressTextColor = Color.White;
+                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
+                    prop.DisabledBorderColor = Color.FromArgb(155, 155, 155);
+                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     break;
@@ -213,6 +227,9 @@ namespace MetroSet_UI.Controls
                     prop.PressColor = Color.FromArgb(240, 240, 240);
                     prop.PressBorderColor = Color.FromArgb(240, 240, 240);
                     prop.PressTextColor = Color.White;
+                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    prop.DisabledBorderColor = Color.FromArgb(109, 109, 109);
+                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;
@@ -262,6 +279,18 @@ namespace MetroSet_UI.Controls
                             {
                                 prop.PressTextColor = utl.HexColor((string)varkey.Value);
                             }
+                            else if (varkey.Key == "DisabledBackColor")
+                            {
+                                prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "DisabledBorderColor")
+                            {
+                                prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "DisabledForeColor")
+                            {
+                                prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                            }
                         }
                     Refresh();
                     break;
@@ -276,6 +305,21 @@ namespace MetroSet_UI.Controls
         public new Color BackColor
         {
             get { return Color.Transparent; }
+        }
+
+        [Category("MetroSet Framework")]
+        public new bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+                if (value == false)
+                {
+                    State = MouseMode.Disabled;
+                }
+                Invalidate();
+            }
         }
 
         #endregion
