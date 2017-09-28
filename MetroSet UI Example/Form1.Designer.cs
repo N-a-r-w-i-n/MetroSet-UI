@@ -81,7 +81,7 @@
             // 
             this.metroSetNumeric1.BackColor = System.Drawing.Color.Transparent;
             this.metroSetNumeric1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
-            this.metroSetNumeric1.Location = new System.Drawing.Point(489, 245);
+            this.metroSetNumeric1.Location = new System.Drawing.Point(489, 247);
             this.metroSetNumeric1.Maximum = 100;
             this.metroSetNumeric1.Minimum = 0;
             this.metroSetNumeric1.Name = "metroSetNumeric1";
@@ -138,7 +138,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 353);
             this.Controls.Add(this.metroSetEllipse1);

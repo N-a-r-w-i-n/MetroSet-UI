@@ -13,6 +13,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetNumeric), "Bitmaps.Numeric.bmp")]
+    [Designer(typeof(MetroSetNumericDesigner))] 
     [DefaultProperty("Text")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
