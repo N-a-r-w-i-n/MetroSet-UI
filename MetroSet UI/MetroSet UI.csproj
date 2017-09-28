@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\MetroSetProgressBarActionList.cs" />
     <Compile Include="Actions\MetroSetTileActionList.cs" />
     <Compile Include="Actions\MetroSetEllipseActionList.cs" />
     <Compile Include="Actions\MetroSetNumericActionList.cs" />
@@ -92,6 +93,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
+    <Compile Include="Design\MetroSetProgressBarDesigner.cs" />
     <Compile Include="Design\MetroSetTileDesigner.cs" />
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetEllipseDesigner.cs" />

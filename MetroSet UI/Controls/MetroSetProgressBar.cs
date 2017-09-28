@@ -8,11 +8,13 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MetroSet_UI.Controls
+namespace MetroSet_UI.Controls 
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetProgressBar), "Bitmaps.Progress.bmp")] 
-    [DefaultProperty("Text")]
+    [ToolboxBitmap(typeof(MetroSetProgressBar), "Bitmaps.Progress.bmp")]
+    [Designer(typeof(MetroSetProgressBarDesigner))]
+    [DefaultEvent("ValueChanged")]
+    [DefaultProperty("Value")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetProgressBar : Label, iControl
