@@ -14,6 +14,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetTile), "Bitmaps.Button.bmp")]
+    [Designer(typeof(MetroSetTileDesigner))]
     [DefaultEvent("Click")]
     [DefaultProperty("Text")]
     [ComVisible(true)]
@@ -130,7 +131,6 @@ namespace MetroSet_UI.Controls
         {
             Graphics G = e.Graphics;
             Rectangle r = new Rectangle(2, 2, Width - 4, Height - 4);
-            //Rectangle r = new Rectangle(0, 0, Width - 1, Height - 1);
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             StringFormat SF = new StringFormat();
