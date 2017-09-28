@@ -36,6 +36,7 @@
             this.metroSetEllipse1 = new MetroSet_UI.Controls.MetroSetEllipse();
             this.metroSetEllipse2 = new MetroSet_UI.Controls.MetroSetEllipse();
             this.metroSetTile1 = new MetroSet_UI.Controls.MetroSetTile();
+            this.metroSetProgressBar1 = new MetroSet_UI.Controls.MetroSetProgressBar();
             this.SuspendLayout();
             // 
             // styleManager1
@@ -167,11 +168,27 @@
             this.metroSetTile1.ThemeName = "MetroLite";
             this.metroSetTile1.TileAlign = MetroSet_UI.Enums.TileAlign.BottmLeft;
             // 
+            // metroSetProgressBar1
+            // 
+            this.metroSetProgressBar1.Location = new System.Drawing.Point(97, 279);
+            this.metroSetProgressBar1.Maximum = 100;
+            this.metroSetProgressBar1.Minimum = 0;
+            this.metroSetProgressBar1.Name = "metroSetProgressBar1";
+            this.metroSetProgressBar1.Size = new System.Drawing.Size(352, 23);
+            this.metroSetProgressBar1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetProgressBar1.StyleManager = this.styleManager1;
+            this.metroSetProgressBar1.TabIndex = 9;
+            this.metroSetProgressBar1.Text = "metroSetProgressBar1";
+            this.metroSetProgressBar1.ThemeAuthor = "Narwin";
+            this.metroSetProgressBar1.ThemeName = "MetroLite";
+            this.metroSetProgressBar1.Value = 80;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 444);
+            this.Controls.Add(this.metroSetProgressBar1);
             this.Controls.Add(this.metroSetTile1);
             this.Controls.Add(this.metroSetEllipse2);
             this.Controls.Add(this.metroSetEllipse1);
@@ -201,5 +218,6 @@
         private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse1;
         private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse2;
         private MetroSet_UI.Controls.MetroSetTile metroSetTile1;
+        private MetroSet_UI.Controls.MetroSetProgressBar metroSetProgressBar1;
     }
 }

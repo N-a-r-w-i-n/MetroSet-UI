@@ -55,6 +55,9 @@
     <Compile Include="Controls\MetroSetBadge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetTile.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -110,6 +113,7 @@
     <Compile Include="Enums\TileAlign.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
+    <Compile Include="Property\ProgressBarProperties.cs" />
     <Compile Include="Property\TileProperties.cs" />
     <Compile Include="Property\EllipseProperties.cs" />
     <Compile Include="Property\ButtonProperties.cs" />
@@ -207,6 +211,7 @@
     <Content Include="Bitmaps\Ellipse.bmp" />
     <Content Include="Bitmaps\LinkLabel.bmp" />
     <Content Include="Bitmaps\Numeric.bmp" />
+    <Content Include="Bitmaps\Progress.bmp" />
     <Content Include="Bitmaps\RadioButton.bmp" />
     <Content Include="Bitmaps\RitchTextBox.bmp" />
     <Content Include="Bitmaps\Style.bmp" />

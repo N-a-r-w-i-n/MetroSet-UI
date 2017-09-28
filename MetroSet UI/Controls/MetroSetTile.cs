@@ -101,7 +101,7 @@ namespace MetroSet_UI.Controls
         private Style style;
         private StyleManager _StyleManager;
         private static TileProperties prop;
-        
+
         #endregion Internal Vars
 
         #region Constructors
@@ -135,7 +135,7 @@ namespace MetroSet_UI.Controls
 
             StringFormat SF = new StringFormat();
 
-            switch (TileAlign) 
+            switch (TileAlign)
             {
                 case TileAlign.BottmLeft:
                     SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Far };
@@ -293,7 +293,7 @@ namespace MetroSet_UI.Controls
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;
-                    
+
                 case Style.Custom:
                     if (StyleManager != null)
                         foreach (var varkey in StyleManager.ButtonDictionary)
