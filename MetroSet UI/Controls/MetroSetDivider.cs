@@ -1,15 +1,37 @@
-﻿using MetroSet_UI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿/**
+ * MetroSet UI - MetroSet UI Framewrok
+ * 
+ * The MIT License (MIT)
+ * Copyright (c) 2011 Narwin, https://github.com/N-a-r-w-i-n
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of 
+ * this software and associated documentation files (the "Software"), to deal in the 
+ * Software without restriction, including without limitation the rights to use, copy, 
+ * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
+ * and to permit persons to whom the Software is furnished to do so, subject to the 
+ * following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in 
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 using MetroSet_UI.Design;
-using MetroSet_UI.Property;
-using System.ComponentModel;
-using MetroSet_UI.Extensions;
-using System.Drawing;
 using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
+using MetroSet_UI.Property;
+using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
@@ -158,14 +180,14 @@ namespace MetroSet_UI.Controls
                                     {
                                         prop.Orientation = DividerStyle.Horizontal;
                                     }
-                                    else if((string)varkey.Value == "Vertical")
+                                    else if ((string)varkey.Value == "Vertical")
                                     {
                                         prop.Orientation = DividerStyle.Vertical;
                                     }
                                     break;
 
                                 case "Thickness":
-                                    prop.Thickness =((int)varkey.Value);
+                                    prop.Thickness = ((int)varkey.Value);
                                     break;
 
                                 case "ForeColor":
@@ -199,7 +221,7 @@ namespace MetroSet_UI.Controls
             }
         }
 
-        #endregion Theme Changing
+        #endregion ApplyTheme
 
         #region Draw Control
 
@@ -213,15 +235,15 @@ namespace MetroSet_UI.Controls
                     case DividerStyle.Horizontal:
                         G.DrawLine(P, 0, prop.Thickness, Width, prop.Thickness);
                         break;
+
                     case DividerStyle.Vertical:
                         G.DrawLine(P, prop.Thickness, 0, prop.Thickness, Height);
                         break;
                 }
             }
-
         }
 
-        #endregion
+        #endregion Draw Control
 
         #region Properties
 
@@ -245,7 +267,7 @@ namespace MetroSet_UI.Controls
             set { prop.Thickness = value; Invalidate(); }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Events
 
@@ -262,7 +284,6 @@ namespace MetroSet_UI.Controls
             }
         }
 
-        #endregion
-
+        #endregion Events
     }
 }
