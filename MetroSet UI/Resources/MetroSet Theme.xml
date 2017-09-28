@@ -186,4 +186,13 @@
     <BackColor>#1e1e1e</BackColor>
     <BorderColor>#b72828</BorderColor>
   </ToolTip>
+  <Progress>
+    <Enabled>true</Enabled>
+    <BackColor>#262626</BackColor>
+    <BorderColor>#262626</BorderColor>
+    <ProgressColor>#41B1E1</ProgressColor>
+    <DisabledBackColor>#69D9FF</DisabledBackColor>
+    <DisabledBorderColor>#69D9FF</DisabledBorderColor>
+    <DisabledProgressColor>#69D9FF</DisabledProgressColor>
+  </Progress>
 </MetroSetTheme>

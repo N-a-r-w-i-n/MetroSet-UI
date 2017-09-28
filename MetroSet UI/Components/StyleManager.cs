@@ -325,6 +325,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> TileDictionary;
 
+        /// <summary>
+        /// The Tile properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ProgressDictionary;
+
 
         #endregion
 
@@ -349,6 +354,7 @@ namespace MetroSet_UI
             NumericDictionary.Clear();
             EllipseDictionary.Clear();
             TileDictionary.Clear();
+            ProgressDictionary.Clear();
         }
 
         #endregion
@@ -373,6 +379,7 @@ namespace MetroSet_UI
             NumericDictionary = new Dictionary<string, object>();
             EllipseDictionary = new Dictionary<string, object>();
             TileDictionary = new Dictionary<string, object>();
+            ProgressDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -422,6 +429,8 @@ namespace MetroSet_UI
             EllipseDictionary = GetValues(path, "Ellipse");
 
             TileDictionary = GetValues(path, "Tile");
+
+            ProgressDictionary = GetValues(path, "Progress");
 
             ThemeDetailsReader(path);
 

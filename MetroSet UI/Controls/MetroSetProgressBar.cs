@@ -129,6 +129,9 @@ namespace MetroSet_UI.Controls
                     prop.ProgressColor = Color.FromArgb(65, 177, 225);
                     prop.BorderColor = Color.FromArgb(238, 238, 238);
                     prop.BackColor = Color.FromArgb(238, 238, 238);
+                    prop.DisabledProgressColor = Color.FromArgb(120, 65, 177, 225);
+                    prop.DisabledBorderColor = Color.FromArgb(238, 238, 238);
+                    prop.DisabledBackColor = Color.FromArgb(238, 238, 238);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     SetProperties();
@@ -139,6 +142,9 @@ namespace MetroSet_UI.Controls
                     prop.ProgressColor = Color.FromArgb(65, 177, 225);
                     prop.BackColor = Color.FromArgb(38, 38, 38);
                     prop.BorderColor = Color.FromArgb(38, 38, 38);
+                    prop.DisabledProgressColor = Color.FromArgb(120, 65, 177, 225);
+                    prop.DisabledBackColor = Color.FromArgb(38, 38, 38);
+                    prop.DisabledBorderColor = Color.FromArgb(38, 38, 38);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     SetProperties();
@@ -146,7 +152,7 @@ namespace MetroSet_UI.Controls
 
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.LabelDictionary)
+                        foreach (var varkey in StyleManager.ProgressDictionary)
                         {
                             switch (varkey.Key)
                             {
@@ -208,18 +214,39 @@ namespace MetroSet_UI.Controls
         {
             Graphics G = e.Graphics;
             Rectangle Rect = new Rectangle(0, 0, Width - 1, Height - 1);
-            using (SolidBrush BG = new SolidBrush(prop.BackColor))
+            if (Enabled)
             {
-                using (Pen P = new Pen(prop.BorderColor))
+                using (SolidBrush BG = new SolidBrush(prop.BackColor))
                 {
-                    using (SolidBrush PS = new SolidBrush(prop.ProgressColor))
+                    using (Pen P = new Pen(prop.BorderColor))
                     {
-                        G.FillRectangle(BG, Rect);
-                        if (CurrentValue != 0)
+                        using (SolidBrush PS = new SolidBrush(prop.ProgressColor))
                         {
-                            G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                            G.FillRectangle(BG, Rect);
+                            if (CurrentValue != 0)
+                            {
+                                G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                            }
+                            G.DrawRectangle(P, Rect);
                         }
-                        G.DrawRectangle(P, Rect);
+                    }
+                }
+            }
+            else
+            {
+                using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
+                {
+                    using (Pen P = new Pen(prop.DisabledBorderColor))
+                    {
+                        using (SolidBrush PS = new SolidBrush(prop.DisabledProgressColor))
+                        {
+                            G.FillRectangle(BG, Rect);
+                            if (CurrentValue != 0)
+                            {
+                                G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                            }
+                            G.DrawRectangle(P, Rect);
+                        }
                     }
                 }
             }
