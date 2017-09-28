@@ -156,7 +156,7 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            Font = MetroSetFonts.SemiBold(10);
+            Font = MetroSetFonts.Regular(10);
             EvaluateVars();
             style = Style.Light;
             ApplyTheme();

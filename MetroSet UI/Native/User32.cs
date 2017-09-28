@@ -9,6 +9,9 @@ namespace MetroSet_UI.Native
 
         #region Flags
 
+        public const int WM_SETCURSOR = 0x0020;
+        public const int IDC_HAND = 32649;
+
         public enum AnimateWindowFlags : uint
         {
             AW_HOR_POSITIVE = 0x00000001,
@@ -36,6 +39,12 @@ namespace MetroSet_UI.Native
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, string lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern IntPtr LoadCursor(IntPtr hInstance, int lpCursorName);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr SetCursor(IntPtr hCursor);
 
         #endregion
 

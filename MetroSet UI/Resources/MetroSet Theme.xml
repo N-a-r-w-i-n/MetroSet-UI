@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-  <MetroSetTheme>
+<MetroSetTheme>
   <Theme>
     <Name>DarkUI</Name>
     <Author>Narwin</Author>
@@ -14,9 +14,9 @@
     <TextColor>#ffffff</TextColor>
     <DrawLeftRect>true</DrawLeftRect>
     <DisplayHeader>true</DisplayHeader>
-    <TextAlign>left</TextAlign>	
+    <TextAlign>left</TextAlign>
     <SmallRectThickness>2</SmallRectThickness>
-    <ShowHeader>false</ShowHeader>	
+    <ShowHeader>false</ShowHeader>
     <HeaderColor>#b72828</HeaderColor>
     <HeaderHeight>35</HeaderHeight>
   </Form>
@@ -48,7 +48,7 @@
     <HoverBadgeColor>#cb2828</HoverBadgeColor>
     <HoverBadgeTextColor>#FFFFFF</HoverBadgeTextColor>
     <PressBadgeColor>#a31414</PressBadgeColor>
-    <PressBadgeTextColor>#FFFFFF</PressBadgeTextColor>    
+    <PressBadgeTextColor>#FFFFFF</PressBadgeTextColor>
   </Badge>
   <Label>
     <Enabled>true</Enabled>
@@ -92,6 +92,16 @@
     <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </RichTextBox>
+  <Numeric>
+    <Enabled>true</Enabled>
+    <ForeColor>#CCCCCC</ForeColor>
+    <BackColor>#222222</BackColor>
+    <BorderColor>#6E6E6E</BorderColor>
+    <SymbolsColor>#b72828</SymbolsColor>
+    <DisabledBackColor>#505050</DisabledBackColor>
+    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledForeColor>#6D6D6D</DisabledForeColor>
+  </Numeric>
   <CheckBox>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
@@ -99,7 +109,8 @@
     <BackColor>#00FFFFFF</BackColor>
     <BordeColor>#b72828</BordeColor>
     <DisabledBorderColor>#999999</DisabledBorderColor>
-    <CheckedStyle>Shape</CheckedStyle> <!--Sign, Shape-->
+    <CheckedStyle>Shape</CheckedStyle>
+    <!--Sign, Shape-->
   </CheckBox>
   <SwitchBox>
     <Enabled>true</Enabled>
@@ -112,7 +123,7 @@
     <DisabledUnCheckColor>#CDCDCD</DisabledUnCheckColor>
     <DisabledCheckColor>#DF5050</DisabledCheckColor>
   </SwitchBox>
-  <RadioButton> 
+  <RadioButton>
     <Enabled>true</Enabled>
     <ForeColor>#b72828</ForeColor>
     <CheckColor>#b72828</CheckColor>
@@ -121,7 +132,8 @@
     <DisabledBorderColor>#999999</DisabledBorderColor>
   </RadioButton>
   <Divider>
-    <Orientation>Horizontal</Orientation><!--Horizontal, Vertical-->
+    <Orientation>Horizontal</Orientation>
+    <!--Horizontal, Vertical-->
     <Thickness>1</Thickness>
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
@@ -133,7 +145,8 @@
     <LinkColor>#41b1e1</LinkColor>
     <ActiveLinkColor>#55c5f5</ActiveLinkColor>
     <VisitedLinkColor>#2d9dcd</VisitedLinkColor>
-    <LinkBehavior>HoverUnderline</LinkBehavior> <!--HoverUnderline, AlwaysUnderline, NeverUnderline, SystemDefault-->
+    <LinkBehavior>HoverUnderline</LinkBehavior>
+    <!--HoverUnderline, AlwaysUnderline, NeverUnderline, SystemDefault-->
   </LinkLabel>
   <ToolTip>
     <ForeColor>#ffffff</ForeColor>
