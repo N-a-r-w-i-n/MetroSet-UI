@@ -140,6 +140,22 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the badge text associated with the control.")]
         public string BadgeText { get; set; } = "3";
+        
+        [Category("MetroSet Framework")]
+        public new bool Enabled
+        {
+            get => base.Enabled;
+            set
+            {
+                base.Enabled = value;
+                if (value == false)
+                {
+                    State = MouseMode.Disabled;
+                }
+                Invalidate();
+            }
+        }
+
 
         #endregion Properties
 
@@ -231,6 +247,24 @@ namespace MetroSet_UI.Controls
                     }
 
                     break;
+
+                case MouseMode.Disabled:
+
+                    using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
+                    using (Pen P = new Pen(prop.DisabledBorderColor))
+                    using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
+                    using (SolidBrush bdgBrush = new SolidBrush(prop.PressBadgeColor))
+                    using (SolidBrush bdgtxtBrush = new SolidBrush(prop.PressBadgeTextColor))
+                    {
+                        G.FillRectangle(BG, r);
+                        G.DrawRectangle(P, r);
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        SmoothingType(G);
+                        G.FillEllipse(bdgBrush, badge);
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
+                    }
+
+                    break;
             }
         }
 
@@ -263,6 +297,9 @@ namespace MetroSet_UI.Controls
                     prop.HoverBadgeTextColor = Color.White;
                     prop.PressBadgeColor = Color.FromArgb(45, 147, 205);
                     prop.PressBadgeTextColor = Color.White;
+                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
+                    prop.DisabledBorderColor = Color.FromArgb(155, 155, 155);
+                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     break;
@@ -283,6 +320,9 @@ namespace MetroSet_UI.Controls
                     prop.HoverBadgeTextColor = Color.White;
                     prop.PressBadgeColor = Color.FromArgb(45, 147, 205);
                     prop.PressBadgeTextColor = Color.White;
+                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    prop.DisabledBorderColor = Color.FromArgb(109, 109, 109);
+                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;
@@ -355,6 +395,18 @@ namespace MetroSet_UI.Controls
                             else if (varkey.Key == "PressBadgeTextColor")
                             {
                                 prop.PressBadgeTextColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "DisabledBackColor")
+                            {
+                                prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "DisabledBorderColor")
+                            {
+                                prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                            }
+                            else if (varkey.Key == "DisabledForeColor")
+                            {
+                                prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
                             }
                         }
                     Invalidate();
