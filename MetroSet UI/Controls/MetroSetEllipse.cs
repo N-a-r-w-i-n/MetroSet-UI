@@ -13,6 +13,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetEllipse), "Bitmaps.Ellipse.bmp")]
+    [Designer(typeof(MetroSetEllipseDesigner))]
     [DefaultEvent("Click")]
     [DefaultProperty("Text")]
     [ComVisible(true)]

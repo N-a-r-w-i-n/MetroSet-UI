@@ -126,7 +126,7 @@
             // 
             this.metroSetEllipse1.BorderThickness = 7;
             this.metroSetEllipse1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
-            this.metroSetEllipse1.Location = new System.Drawing.Point(309, 104);
+            this.metroSetEllipse1.Location = new System.Drawing.Point(295, 104);
             this.metroSetEllipse1.Name = "metroSetEllipse1";
             this.metroSetEllipse1.Size = new System.Drawing.Size(164, 140);
             this.metroSetEllipse1.Style = MetroSet_UI.Design.Style.Light;

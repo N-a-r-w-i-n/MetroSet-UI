@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\MetroSetEllipseActionList.cs" />
     <Compile Include="Actions\MetroSetNumericActionList.cs" />
     <Compile Include="Actions\MetroSetRichTextBoxActionList.cs" />
     <Compile Include="Actions\MetroSetTextBoxActionList.cs" />
@@ -85,6 +86,7 @@
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
+    <Compile Include="Design\MetroSetEllipseDesigner.cs" />
     <Compile Include="Design\MetroSetNumericDesigner.cs" />
     <Compile Include="Design\MetroSetRichTextBoxDesigner.cs" />
     <Compile Include="Design\MetroSetTextBoxDesigner.cs" />
