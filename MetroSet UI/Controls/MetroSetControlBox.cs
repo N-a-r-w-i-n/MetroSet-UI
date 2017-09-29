@@ -36,7 +36,8 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetControlBox), "Bitmaps.ControlButton.bmp")] 
+    [ToolboxBitmap(typeof(MetroSetControlBox), "Bitmaps.ControlButton.bmp")]
+    [Designer(typeof(MetroSetControBoxDesigner))]
     [DefaultProperty("Click")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
@@ -175,7 +176,7 @@ namespace MetroSet_UI.Controls
                     prop.MinimizeHoverBackColor = Color.FromArgb(238, 238, 238);
                     prop.MinimizeHoverForeColor = Color.Gray;
                     prop.MinimizeNormalForeColor = Color.Gray;
-                    prop.DisabledForeColor = Color.DimGray;
+                    prop.DisabledForeColor = Color.Silver; 
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;

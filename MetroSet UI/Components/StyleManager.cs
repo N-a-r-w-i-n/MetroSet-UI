@@ -463,7 +463,7 @@ namespace MetroSet_UI
 
             ProgressDictionary = GetValues(path, "Progress");
 
-            ControlBoxDictionary = GetValues(path, "ControlBox");
+            ControlBoxDictionary = GetValues(path, "ControlBox"); 
 
             ThemeDetailsReader(path);
 

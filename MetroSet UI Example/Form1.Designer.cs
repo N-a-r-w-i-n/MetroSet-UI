@@ -144,7 +144,7 @@
             // 
             this.metroSetEllipse1.BorderThickness = 7;
             this.metroSetEllipse1.Font = new System.Drawing.Font("Segoe WP Light", 10F);
-            this.metroSetEllipse1.Location = new System.Drawing.Point(324, 104);
+            this.metroSetEllipse1.Location = new System.Drawing.Point(316, 113);
             this.metroSetEllipse1.Name = "metroSetEllipse1";
             this.metroSetEllipse1.Size = new System.Drawing.Size(137, 125);
             this.metroSetEllipse1.Style = MetroSet_UI.Design.Style.Light;
@@ -167,7 +167,7 @@
             this.metroSetTile1.ThemeAuthor = "Narwin";
             this.metroSetTile1.ThemeName = "MetroLite";
             this.metroSetTile1.TileAlign = MetroSet_UI.Enums.TileAlign.BottmLeft;
-            //  
+            // 
             // metroSetControlBox1
             // 
             this.metroSetControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -175,8 +175,8 @@
             this.metroSetControlBox1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
             this.metroSetControlBox1.ForeColor = System.Drawing.Color.Black;
             this.metroSetControlBox1.Location = new System.Drawing.Point(634, 6);
-            this.metroSetControlBox1.MaximizeBox = true;
-            this.metroSetControlBox1.MinimizeBox = true;
+            this.metroSetControlBox1.MaximizeBox = false;
+            this.metroSetControlBox1.MinimizeBox = false;
             this.metroSetControlBox1.Name = "metroSetControlBox1";
             this.metroSetControlBox1.Size = new System.Drawing.Size(100, 25);
             this.metroSetControlBox1.Style = MetroSet_UI.Design.Style.Light;
@@ -188,7 +188,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 444);
             this.Controls.Add(this.metroSetControlBox1);
