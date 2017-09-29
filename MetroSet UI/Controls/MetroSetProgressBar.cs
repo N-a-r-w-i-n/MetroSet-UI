@@ -41,7 +41,7 @@ namespace MetroSet_UI.Controls
     [DefaultProperty("Value")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class MetroSetProgressBar : Label, iControl
+    public class MetroSetProgressBar : Control, iControl
     {
         #region Interfaces
 

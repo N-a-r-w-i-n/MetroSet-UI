@@ -320,7 +320,7 @@ namespace MetroSet_UI.Controls
 
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.ButtonDictionary)
+                        foreach (var varkey in StyleManager.TileDictionary)
                         {
                             if ((varkey.Key == null) || varkey.Key == null)
                             {

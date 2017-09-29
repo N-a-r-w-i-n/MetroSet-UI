@@ -263,7 +263,7 @@ namespace MetroSet_UI.Controls
                     
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.TileDictionary)
+                        foreach (var varkey in StyleManager.EllipseDictionary)
                         {
                             if ((varkey.Key == null) || varkey.Key == null)
                             {

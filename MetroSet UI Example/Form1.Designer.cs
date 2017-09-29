@@ -33,9 +33,10 @@
             this.metroSetComboBox1 = new MetroSet_UI.Controls.MetroSetComboBox();
             this.metroSetNumeric1 = new MetroSet_UI.Controls.MetroSetNumeric();
             this.metroSetTextBox1 = new MetroSet_UI.Controls.MetroSetTextBox();
+            this.metroSetProgressBar1 = new MetroSet_UI.Controls.MetroSetProgressBar();
             this.metroSetEllipse1 = new MetroSet_UI.Controls.MetroSetEllipse();
-            this.metroSetEllipse2 = new MetroSet_UI.Controls.MetroSetEllipse();
             this.metroSetTile1 = new MetroSet_UI.Controls.MetroSetTile();
+            this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
             this.SuspendLayout();
             // 
             // styleManager1
@@ -70,7 +71,7 @@
             this.metroSetComboBox1.Font = new System.Drawing.Font("Segoe WP SemiLight", 11F);
             this.metroSetComboBox1.FormattingEnabled = true;
             this.metroSetComboBox1.ItemHeight = 20;
-            this.metroSetComboBox1.Location = new System.Drawing.Point(489, 203);
+            this.metroSetComboBox1.Location = new System.Drawing.Point(489, 180);
             this.metroSetComboBox1.Name = "metroSetComboBox1";
             this.metroSetComboBox1.Size = new System.Drawing.Size(193, 26);
             this.metroSetComboBox1.Style = MetroSet_UI.Design.Style.Light;
@@ -83,7 +84,7 @@
             // 
             this.metroSetNumeric1.BackColor = System.Drawing.Color.Transparent;
             this.metroSetNumeric1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
-            this.metroSetNumeric1.Location = new System.Drawing.Point(489, 247);
+            this.metroSetNumeric1.Location = new System.Drawing.Point(489, 212);
             this.metroSetNumeric1.Maximum = 100;
             this.metroSetNumeric1.Minimum = 0;
             this.metroSetNumeric1.Name = "metroSetNumeric1";
@@ -108,7 +109,7 @@
             this.metroSetTextBox1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.metroSetTextBox1.Image = null;
             this.metroSetTextBox1.Lines = null;
-            this.metroSetTextBox1.Location = new System.Drawing.Point(489, 156);
+            this.metroSetTextBox1.Location = new System.Drawing.Point(489, 146);
             this.metroSetTextBox1.MaxLength = 32767;
             this.metroSetTextBox1.Multiline = false;
             this.metroSetTextBox1.Name = "metroSetTextBox1";
@@ -124,69 +125,84 @@
             this.metroSetTextBox1.UseSystemPasswordChar = false;
             this.metroSetTextBox1.WatermarkText = "";
             // 
+            // metroSetProgressBar1
+            // 
+            this.metroSetProgressBar1.Location = new System.Drawing.Point(97, 279);
+            this.metroSetProgressBar1.Maximum = 100;
+            this.metroSetProgressBar1.Minimum = 0;
+            this.metroSetProgressBar1.Name = "metroSetProgressBar1";
+            this.metroSetProgressBar1.Size = new System.Drawing.Size(291, 23);
+            this.metroSetProgressBar1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetProgressBar1.StyleManager = this.styleManager1;
+            this.metroSetProgressBar1.TabIndex = 9;
+            this.metroSetProgressBar1.Text = "metroSetProgressBar1";
+            this.metroSetProgressBar1.ThemeAuthor = "Narwin";
+            this.metroSetProgressBar1.ThemeName = "MetroLite";
+            this.metroSetProgressBar1.Value = 50;
+            // 
             // metroSetEllipse1
             // 
             this.metroSetEllipse1.BorderThickness = 7;
-            this.metroSetEllipse1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
-            this.metroSetEllipse1.Location = new System.Drawing.Point(296, 104);
+            this.metroSetEllipse1.Font = new System.Drawing.Font("Segoe WP Light", 10F);
+            this.metroSetEllipse1.Location = new System.Drawing.Point(324, 104);
             this.metroSetEllipse1.Name = "metroSetEllipse1";
-            this.metroSetEllipse1.Size = new System.Drawing.Size(164, 140);
+            this.metroSetEllipse1.Size = new System.Drawing.Size(137, 125);
             this.metroSetEllipse1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetEllipse1.StyleManager = this.styleManager1;
-            this.metroSetEllipse1.TabIndex = 6;
-            this.metroSetEllipse1.Text = "Metro";
+            this.metroSetEllipse1.TabIndex = 10;
+            this.metroSetEllipse1.Text = "metroSetEllipse1";
             this.metroSetEllipse1.ThemeAuthor = "Narwin";
             this.metroSetEllipse1.ThemeName = "MetroLite";
-            // 
-            // metroSetEllipse2
-            // 
-            this.metroSetEllipse2.BorderThickness = 7;
-            this.metroSetEllipse2.Enabled = false;
-            this.metroSetEllipse2.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
-            this.metroSetEllipse2.Location = new System.Drawing.Point(97, 104);
-            this.metroSetEllipse2.Name = "metroSetEllipse2";
-            this.metroSetEllipse2.Size = new System.Drawing.Size(164, 140);
-            this.metroSetEllipse2.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetEllipse2.StyleManager = this.styleManager1;
-            this.metroSetEllipse2.TabIndex = 7;
-            this.metroSetEllipse2.Text = "Metro";
-            this.metroSetEllipse2.ThemeAuthor = "Narwin";
-            this.metroSetEllipse2.ThemeName = "MetroLite";
             // 
             // metroSetTile1
             // 
             this.metroSetTile1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
-            this.metroSetTile1.Location = new System.Drawing.Point(489, 279);
+            this.metroSetTile1.Location = new System.Drawing.Point(489, 244);
             this.metroSetTile1.Name = "metroSetTile1";
-            this.metroSetTile1.Size = new System.Drawing.Size(193, 88);
+            this.metroSetTile1.Size = new System.Drawing.Size(193, 99);
             this.metroSetTile1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetTile1.StyleManager = this.styleManager1;
-            this.metroSetTile1.TabIndex = 8;
+            this.metroSetTile1.TabIndex = 11;
             this.metroSetTile1.Text = "metroSetTile1";
             this.metroSetTile1.ThemeAuthor = "Narwin";
             this.metroSetTile1.ThemeName = "MetroLite";
             this.metroSetTile1.TileAlign = MetroSet_UI.Enums.TileAlign.BottmLeft;
+            //  
+            // metroSetControlBox1
+            // 
+            this.metroSetControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroSetControlBox1.BackColor = System.Drawing.Color.Transparent;
+            this.metroSetControlBox1.Font = new System.Drawing.Font("Segoe WP Semibold", 10F);
+            this.metroSetControlBox1.ForeColor = System.Drawing.Color.Black;
+            this.metroSetControlBox1.Location = new System.Drawing.Point(634, 6);
+            this.metroSetControlBox1.MaximizeBox = true;
+            this.metroSetControlBox1.MinimizeBox = true;
+            this.metroSetControlBox1.Name = "metroSetControlBox1";
+            this.metroSetControlBox1.Size = new System.Drawing.Size(100, 25);
+            this.metroSetControlBox1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetControlBox1.StyleManager = this.styleManager1;
+            this.metroSetControlBox1.TabIndex = 12;
+            this.metroSetControlBox1.Text = "metroSetControlBox1";
+            this.metroSetControlBox1.ThemeAuthor = "Narwin";
+            this.metroSetControlBox1.ThemeName = "MetroLite";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 444);
+            this.Controls.Add(this.metroSetControlBox1);
             this.Controls.Add(this.metroSetTile1);
-            this.Controls.Add(this.metroSetEllipse2);
             this.Controls.Add(this.metroSetEllipse1);
+            this.Controls.Add(this.metroSetProgressBar1);
             this.Controls.Add(this.metroSetTextBox1);
             this.Controls.Add(this.metroSetNumeric1);
             this.Controls.Add(this.metroSetComboBox1);
             this.Controls.Add(this.metroSetButton1);
             this.Name = "Form1";
-            this.Padding = new System.Windows.Forms.Padding(2, 37, 2, 2);
-            this.ShowHeader = true;
-            this.ShowLeftRect = false;
-            this.ShowTitle = true;
             this.SmallRectThickness = 2;
             this.StyleManager = this.styleManager1;
-            this.Text = "Main Window";
+            this.Text = "MAIN WINDOW";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -198,8 +214,9 @@
         private MetroSet_UI.Controls.MetroSetComboBox metroSetComboBox1;
         private MetroSet_UI.Controls.MetroSetNumeric metroSetNumeric1;
         private MetroSet_UI.Controls.MetroSetTextBox metroSetTextBox1;
-        private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse1;
-        private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse2;
+        private MetroSet_UI.Controls.MetroSetProgressBar metroSetProgressBar1;
         private MetroSet_UI.Controls.MetroSetTile metroSetTile1;
+        private MetroSet_UI.Controls.MetroSetEllipse metroSetEllipse1;
+        private MetroSet_UI.Controls.MetroSetControlBox metroSetControlBox1;
     }
 }

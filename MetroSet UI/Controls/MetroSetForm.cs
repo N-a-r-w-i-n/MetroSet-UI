@@ -48,6 +48,7 @@ namespace MetroSet_UI.Controls
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetForm : Form, iForm
     {
+
         #region Properties
 
         /// <summary>
@@ -152,10 +153,12 @@ namespace MetroSet_UI.Controls
                     Padding = new Padding(2, prop.HeaderHeight + 2, 2, 2);
                     Text = Text.ToUpper();
                     prop.TextColor = Color.White;
+                    ShowTitle = true;
                 }
                 else
                 {
                     Padding = new Padding(12, 70, 12, 12);
+                    ShowTitle = false;
                 }
                 Invalidate();
             }
@@ -205,10 +208,12 @@ namespace MetroSet_UI.Controls
 
         public MetroSetForm()
         {
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint |
-                        ControlStyles.ResizeRedraw |
-                        ControlStyles.OptimizedDoubleBuffer |
-                        ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(
+                ControlStyles.UserPaint | 
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.ResizeRedraw |
+                ControlStyles.OptimizedDoubleBuffer |
+                ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
             Padding = new Padding(12, 70, 12, 12);

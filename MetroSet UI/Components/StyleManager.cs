@@ -354,6 +354,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> ProgressDictionary;
 
+        /// <summary>
+        /// The ControlBox properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ControlBoxDictionary;
+
 
         #endregion
 
@@ -379,6 +384,7 @@ namespace MetroSet_UI
             EllipseDictionary.Clear();
             TileDictionary.Clear();
             ProgressDictionary.Clear();
+            ControlBoxDictionary.Clear();
         }
 
         #endregion
@@ -404,6 +410,7 @@ namespace MetroSet_UI
             EllipseDictionary = new Dictionary<string, object>();
             TileDictionary = new Dictionary<string, object>();
             ProgressDictionary = new Dictionary<string, object>();
+            ControlBoxDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -436,7 +443,7 @@ namespace MetroSet_UI
 
             CheckBoxDictionary = GetValues(path, "CheckBox");
 
-            RadioButtonDictionary = GetValues(path, "RadioButton");
+            RadioButtonDictionary = GetValues(path, "RadioButton"); 
 
             SwitchBoxDictionary = GetValues(path, "SwitchBox");
 
@@ -455,6 +462,8 @@ namespace MetroSet_UI
             TileDictionary = GetValues(path, "Tile");
 
             ProgressDictionary = GetValues(path, "Progress");
+
+            ControlBoxDictionary = GetValues(path, "ControlBox");
 
             ThemeDetailsReader(path);
 
