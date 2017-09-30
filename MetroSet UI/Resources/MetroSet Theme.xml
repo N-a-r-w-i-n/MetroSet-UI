@@ -167,7 +167,7 @@
     <DisabledBorderColor>#999999</DisabledBorderColor>
   </RadioButton>
   <Divider>
-    <Orientation>Horizontal</Orientation><!--Horizontal, Vertical-->
+    <Orientation>Horizontal</Orientation> <!--Horizontal, Vertical-->
     <Thickness>1</Thickness>
     <ForeColor>#b72828</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
@@ -195,4 +195,22 @@
     <DisabledBorderColor>#69D9FF</DisabledBorderColor>
     <DisabledProgressColor>#69D9FF</DisabledProgressColor>
   </Progress>
+  <ControlBox>
+  <TabControl>
+    <BackColor>#1e1e1e</BackColor>
+    <BorderColor>#B72828</BorderColor>
+	<UnselectedTextColor>#B72828</UnselectedTextColor>
+	<SelectedTextColor>#FFFFFF</SelectedTextColor>
+  </TabControl>
+  <ControlBox>
+    <CloseHoverBackColor>#B72828</CloseHoverBackColor>
+    <CloseHoverForeColor>#FFFFFF</CloseHoverForeColor>
+    <CloseNormalForeColor>#808080</CloseNormalForeColor>
+    <MaximizeHoverBackColor>#EEEEEE</MaximizeHoverBackColor>
+    <MaximizeHoverForeColor>#808080</MaximizeHoverForeColor>
+    <MaximizeNormalForeColor>#808080</MaximizeNormalForeColor>
+    <MinimizeHoverBackColor>#EEEEEE</MinimizeHoverBackColor>
+	<MinimizeHoverForeColor>#808080</MinimizeHoverForeColor>
+    <MinimizeNormalForeColor>#808080</MinimizeNormalForeColor>
+  </ControlBox>
 </MetroSetTheme>

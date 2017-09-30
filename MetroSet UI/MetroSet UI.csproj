@@ -51,6 +51,10 @@
     <Compile Include="Actions\MetroSetRadiobuttonActionList.cs" />
     <Compile Include="Actions\MetroSetDividerActionList.cs" />
     <Compile Include="Actions\MetroSetCheckBoxActionList.cs" />
+    <Compile Include="Child\MetroSetTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Child\MetroSetTabPageCollectionEditor.cs" />
     <Compile Include="Components\MetroSetToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -58,6 +62,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetControlBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroSetTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetProgressBar.cs">
@@ -99,6 +106,7 @@
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
     <Compile Include="Design\MetroSetControBoxDesigner.cs" />
     <Compile Include="Design\MetroSetProgressBarDesigner.cs" />
+    <Compile Include="Design\MetroSetTabPageDesigner.cs" />
     <Compile Include="Design\MetroSetTileDesigner.cs" />
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetEllipseDesigner.cs" />
@@ -121,6 +129,7 @@
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ControlBoxProperties.cs" />
+    <Compile Include="Property\TabControlProperties.cs" />
     <Compile Include="Property\ProgressBarProperties.cs" />
     <Compile Include="Property\TileProperties.cs" />
     <Compile Include="Property\EllipseProperties.cs" />
@@ -188,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Compile Include="Design\MetroSetTabControlDesigner.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -225,6 +235,7 @@
     <Content Include="Bitmaps\RitchTextBox.bmp" />
     <Content Include="Bitmaps\Style.bmp" />
     <Content Include="Bitmaps\Switch.bmp" />
+    <Content Include="Bitmaps\TabControl.bmp" />
     <Content Include="Bitmaps\TextBox.bmp" />
     <Content Include="Bitmaps\ToolTip.bmp" />
   </ItemGroup>

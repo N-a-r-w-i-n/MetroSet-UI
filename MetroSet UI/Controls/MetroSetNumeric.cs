@@ -1,26 +1,26 @@
 ﻿/**
- * MetroSet UI - MetroSet UI Framewrok
- * 
- * The MIT License (MIT)
- * Copyright (c) 2011 Narwin, https://github.com/N-a-r-w-i-n
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
- * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+* MetroSet UI - MetroSet UI Framewrok
+* 
+* The MIT License (MIT)
+* Copyright (c) 2011 Narwin, https://github.com/N-a-r-w-i-n
+* 
+* Permission is hereby granted, free of charge, to any person obtaining a copy of 
+* this software and associated documentation files (the "Software"), to deal in the 
+* Software without restriction, including without limitation the rights to use, copy, 
+* modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
+* and to permit persons to whom the Software is furnished to do so, subject to the 
+* following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in 
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+* INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+* PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+* CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+* OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
@@ -37,7 +37,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetNumeric), "Bitmaps.Numeric.bmp")]
-    [Designer(typeof(MetroSetNumericDesigner))] 
+    [Designer(typeof(MetroSetNumericDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
@@ -175,7 +175,7 @@ namespace MetroSet_UI.Controls
                                         G.DrawString(Value.ToString(), Font, TB, new Rectangle(0, 0, Width - 50, Height - 1), mth.SetPosition(StringAlignment.Far));
                                         G.DrawRectangle(P, rect);
                                     }
-                                }                                
+                                }
                             }
                         }
                     }
@@ -313,7 +313,7 @@ namespace MetroSet_UI.Controls
         #endregion Theme Changing
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the maximum number of the Numeric.
         /// </summary>
@@ -391,7 +391,7 @@ namespace MetroSet_UI.Controls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            Height = 26;        
+            Height = 26;
         }
 
         #endregion

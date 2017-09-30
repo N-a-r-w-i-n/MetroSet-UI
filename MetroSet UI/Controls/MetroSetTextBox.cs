@@ -1,26 +1,26 @@
 ﻿/**
- * MetroSet UI - MetroSet UI Framewrok
- * 
- * The MIT License (MIT)
- * Copyright (c) 2011 Narwin, https://github.com/N-a-r-w-i-n
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of 
- * this software and associated documentation files (the "Software"), to deal in the 
- * Software without restriction, including without limitation the rights to use, copy, 
- * modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the 
- * following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+* MetroSet UI - MetroSet UI Framewrok
+* 
+* The MIT License (MIT)
+* Copyright (c) 2011 Narwin, https://github.com/N-a-r-w-i-n
+* 
+* Permission is hereby granted, free of charge, to any person obtaining a copy of 
+* this software and associated documentation files (the "Software"), to deal in the 
+* Software without restriction, including without limitation the rights to use, copy, 
+* modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
+* and to permit persons to whom the Software is furnished to do so, subject to the 
+* following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in 
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+* INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+* PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+* CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+* OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
@@ -37,7 +37,7 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetTextBox), "Bitmaps.TextBox.bmp")] 
+    [ToolboxBitmap(typeof(MetroSetTextBox), "Bitmaps.TextBox.bmp")]
     [Designer(typeof(MetroSetTextBoxDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
@@ -135,7 +135,7 @@ namespace MetroSet_UI.Controls
         private Color _ForeColor;
         private Color _BorderColor;
         private Color _HoverColor;
-        
+
         #region Base TextBox
 
         private TextBox T = new TextBox();
@@ -166,7 +166,7 @@ namespace MetroSet_UI.Controls
             }
         }
 
-#endregion
+        #endregion
 
         #endregion Internal Vars
 
@@ -216,7 +216,7 @@ namespace MetroSet_UI.Controls
             T.Multiline = _Multiline;
             T.Cursor = Cursors.IBeam;
             T.BackColor = BackColor;
-            
+
             T.ForeColor = ForeColor;
             T.BorderStyle = BorderStyle.None;
             T.Location = new Point(7, 8);
@@ -328,7 +328,7 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(204, 204, 204);
                     prop.BackColor = Color.FromArgb(34, 34, 34);
-                    prop.HoverColor = Color.FromArgb(170, 170, 170);
+                    prop.HoverColor = Color.FromArgb(65, 177, 225);
                     prop.BorderColor = Color.FromArgb(110, 110, 110);
                     prop.WatermarkText = "";
                     prop.ReadOnly = false;
@@ -508,7 +508,7 @@ namespace MetroSet_UI.Controls
             base.OnMouseEnter(e);
             Invalidate();
         }
-                
+
 
         /// <summary>
         /// 

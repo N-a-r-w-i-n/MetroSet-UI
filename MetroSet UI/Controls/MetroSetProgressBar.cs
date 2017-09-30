@@ -325,7 +325,7 @@ namespace MetroSet_UI.Controls
         public int Minimum { get; set; } = 0;
 
         [Browsable(false)]
-        public new Color BackColor
+        public override Color BackColor
         {
             get { return Color.Transparent; }
         }

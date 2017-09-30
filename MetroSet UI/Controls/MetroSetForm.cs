@@ -150,10 +150,18 @@ namespace MetroSet_UI.Controls
                 if (value)
                 {
                     ShowLeftRect = false;
-                    Padding = new Padding(2, prop.HeaderHeight + 2, 2, 2);
+                    Padding = new Padding(2, prop.HeaderHeight + 30, 2, 2);
                     Text = Text.ToUpper();
                     prop.TextColor = Color.White;
                     ShowTitle = true;
+                    foreach(Control C in Controls)
+                    {
+                        if (C.GetType() == typeof(MetroSetControlBox))
+                        {
+                            C.BringToFront();
+                            C.Location = new Point(643, 3);
+                        }
+                    }
                 }
                 else
                 {
@@ -290,7 +298,7 @@ namespace MetroSet_UI.Controls
                         case TextAlign.Left:
                             using (StringFormat stringFormat = new StringFormat() {LineAlignment = StringAlignment.Center})
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(12, 0, Width, height), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 20, Width, height), stringFormat);
                             }
                             break;
 
@@ -321,12 +329,12 @@ namespace MetroSet_UI.Controls
         {
             base.WndProc(ref m);
 
-            if (m.Msg == WM_NCHITTEST)
+            if (m.Msg == _WM_NCHITTEST)
             {
                 if (Moveable)
                 {
-                    if ((int)m.Result == HTCLIENT)
-                        m.Result = new IntPtr(HTCAPTION);
+                    if ((int)m.Result == _HTCLIENT)
+                        m.Result = new IntPtr(_HTCAPTION);
                 }
             }
         }
@@ -410,9 +418,6 @@ namespace MetroSet_UI.Controls
         private Style style;
         private FormProperties prop;
         private TextAlign textAlign;
-        private const int WM_NCHITTEST = 0x0084;
-        private const int HTCLIENT = 0x01;
-        private const int HTCAPTION = 0x02;
         private StyleManager _StyleManager;
         private bool showLeftRect;
         private bool showHeader;
@@ -457,9 +462,9 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.White;
                     prop.BackgroundColor = Color.FromArgb(30, 30, 30);
-                    prop.BorderColor = Color.FromArgb(126, 56, 120);
-                    prop.SmallLineColor1 = Color.FromArgb(126, 56, 120);
-                    prop.SmallLineColor2 = Color.FromArgb(126, 56, 120);
+                    prop.BorderColor = Color.FromArgb(65, 177, 225);
+                    prop.SmallLineColor1 = Color.FromArgb(65, 177, 225);
+                    prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     prop.HeaderColor = Color.FromArgb(126, 56, 120);
                     prop.HeaderHeight = 35;
 

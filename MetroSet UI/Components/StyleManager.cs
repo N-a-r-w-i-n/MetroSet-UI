@@ -22,6 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
 using MetroSet_UI.Interfaces;
 using System;
@@ -103,7 +104,22 @@ namespace MetroSet_UI
                     control.ThemeName = ThemeName;
                     control.StyleManager = this;
                 }
+                if (control is MetroSetTabControl)
+                {
+                    foreach (TabPage C in ((MetroSetTabControl)control).TabPages)
+                    {
+                        if (C is iControl)
+                        {
+                            control.Style = Style;
+                            control.StyleManager = this;
+                            control.ThemeAuthor = ThemeAuthor;
+                            control.ThemeName = ThemeName;
+                            UpdateControls(C.Controls);
+                        }
+                    }
+                }
             }
+            
         }
 
         /// <summary>
@@ -359,6 +375,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> ControlBoxDictionary;
 
+        /// <summary>
+        /// The TabControl properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> TabControlDictionary;
+
 
         #endregion
 
@@ -385,6 +406,7 @@ namespace MetroSet_UI
             TileDictionary.Clear();
             ProgressDictionary.Clear();
             ControlBoxDictionary.Clear();
+            TabControlDictionary.Clear();
         }
 
         #endregion
@@ -411,6 +433,7 @@ namespace MetroSet_UI
             TileDictionary = new Dictionary<string, object>();
             ProgressDictionary = new Dictionary<string, object>();
             ControlBoxDictionary = new Dictionary<string, object>();
+            TabControlDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -463,7 +486,9 @@ namespace MetroSet_UI
 
             ProgressDictionary = GetValues(path, "Progress");
 
-            ControlBoxDictionary = GetValues(path, "ControlBox"); 
+            ControlBoxDictionary = GetValues(path, "ControlBox");
+
+            TabControlDictionary = GetValues(path, "TabControl");
 
             ThemeDetailsReader(path);
 
@@ -503,7 +528,6 @@ namespace MetroSet_UI
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
             if (doc.DocumentElement == null) { return null; }
-
             XmlNode xnl = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
             foreach (XmlNode node in xnl.ChildNodes)
             {
@@ -551,5 +575,6 @@ namespace MetroSet_UI
         }
 
 #endregion
+
     }
 }

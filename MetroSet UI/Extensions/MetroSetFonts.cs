@@ -83,6 +83,11 @@ namespace MetroSet_UI.Extensions
             return GetFont(Properties.Resources.SegoeWP, size);
         }
 
+        public static Font UIRegular(float size)
+        {
+            return new Font("Segoe UI", size);
+        }
+
         /// <summary>
         /// Gets the font stored from resources.
         /// </summary>
