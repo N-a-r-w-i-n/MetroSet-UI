@@ -4,6 +4,16 @@ MetroSet UI Framework
 
 ## 
 
+## Install via NuGet
+------------------
+    Install-Package MetroSet_UI
+
+## Direct to NuGet
+
+> [Link](https://www.nuget.org/packages/MetroSet_UI/)
+
+## 
+
 Supported platforms
 -------------------
 :arrow_right: Windows XP SP1/SP2/SP3
@@ -54,6 +64,7 @@ Dependency
 :arrow_right: | MetroSetNumeric |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetTile |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetProgress |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
+:arrow_right: | MetroSetControlBox |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 
 ## 
 
