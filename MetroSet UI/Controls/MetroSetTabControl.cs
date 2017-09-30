@@ -24,6 +24,7 @@
 
 using MetroSet_UI.Child;
 using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
@@ -283,6 +284,13 @@ namespace MetroSet_UI.Controls
         [Browsable(false)]
         private Color SelectedTextColor { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the tancontrol apperance style
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
+        public TabStyle TabStyle { get; set; } = TabStyle.Style1;
+
         #endregion Properties
 
         #region Draw Control
@@ -293,38 +301,57 @@ namespace MetroSet_UI.Controls
 
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            //var C = Style == Style.Light ? Color.White : Color.FromArgb(30, 30, 30);
-
             G.Clear(BaseColor);
 
-            //try
-            //{
-            //    SelectedTab.BackColor = C;
-            //}
-            //catch { }
             var h = ItemSize.Height + 2;
 
-            using (Pen SB = new Pen(ForeroundColor, 2))
+            switch (TabStyle)
             {
-                G.DrawLine(SB, 2, h, Width - 3, h);
-            }
-
-            for (int i = 0; i <= TabCount - 1; i++)
-            {
-                var r = GetTabRect(i);
-
-                if (i == SelectedIndex)
-                {
-                    using (SolidBrush SB = new SolidBrush(ForeroundColor))
+                case TabStyle.Style1:
+                    
+                    using (Pen SB = new Pen(ForeroundColor, 2))
                     {
-                        G.FillRectangle(SB, r);
+                        G.DrawLine(SB, 2, h, Width - 3, h);
                     }
-                }
-                using (SolidBrush TB = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
-                {
-                    G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
-                }
+
+                    for (int i = 0; i <= TabCount - 1; i++)
+                    {
+                        var r = GetTabRect(i);
+
+                        if (i == SelectedIndex)
+                        {
+                            using (SolidBrush SB = new SolidBrush(ForeroundColor))
+                            {
+                                G.FillRectangle(SB, r);
+                            }
+                        }
+                        using (SolidBrush TB = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
+                        {
+                            G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
+                        }
+                    }
+                    break;
+                case TabStyle.Style2:
+
+                    for (int i = 0; i <= TabCount - 1; i++)
+                    {
+                        var r = GetTabRect(i);
+
+                        if (i == SelectedIndex)
+                        {
+                            using (Pen SB = new Pen(ForeroundColor, 2))
+                            {
+                                G.DrawLine(SB, r.X, r.Height, r.X + r.Width, r.Height);
+                            }
+                        }
+                        using (SolidBrush TB = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
+                        {
+                            G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
+                        }
+                    }
+                    break;
             }
+
         }
 
         #endregion Draw Control

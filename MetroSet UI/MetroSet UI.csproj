@@ -125,6 +125,7 @@
     <Compile Include="Enums\CheckState.cs" />
     <Compile Include="Enums\DividerStyle.cs" />
     <Compile Include="Enums\SignStyle.cs" />
+    <Compile Include="Enums\TabStyle.cs" />
     <Compile Include="Enums\TileAlign.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />

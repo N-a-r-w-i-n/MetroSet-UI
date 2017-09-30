@@ -67,13 +67,14 @@ namespace MetroSet_UI_Example
             this.metroSetTabControl1.Style = MetroSet_UI.Design.Style.Dark;
             this.metroSetTabControl1.StyleManager = null;
             this.metroSetTabControl1.TabIndex = 0;
+            this.metroSetTabControl1.TabStyle = MetroSet_UI.Enums.TabStyle.Style1;
             this.metroSetTabControl1.ThemeAuthor = "Narwin";
             this.metroSetTabControl1.ThemeName = "MetroDark";
             this.metroSetTabControl1.UseAnimation = true;
             // 
             // metroSetTabPage1
             // 
-            this.metroSetTabPage1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.metroSetTabPage1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabPage1.Controls.Add(this.metroSetEllipse1);
             this.metroSetTabPage1.ImageIndex = 0;
             this.metroSetTabPage1.ImageKey = null;
@@ -104,7 +105,7 @@ namespace MetroSet_UI_Example
             // 
             // metroSetTabPage2
             // 
-            this.metroSetTabPage2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.metroSetTabPage2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabPage2.Controls.Add(this.metroSetTextBox1);
             this.metroSetTabPage2.Controls.Add(this.metroSetRadioButton1);
             this.metroSetTabPage2.Controls.Add(this.metroSetProgressBar1);
@@ -238,7 +239,7 @@ namespace MetroSet_UI_Example
             // 
             // metroSetTabPage3
             // 
-            this.metroSetTabPage3.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.metroSetTabPage3.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.metroSetTabPage3.Controls.Add(this.metroSetComboBox1);
             this.metroSetTabPage3.ImageIndex = 0;
             this.metroSetTabPage3.ImageKey = null;
