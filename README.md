@@ -5,7 +5,7 @@ MetroSet UI Framework
 ## 
 
 ## Install via NuGet
---------------------
+
     Install-Package MetroSet_UI
 
 ## Direct to NuGet
@@ -46,7 +46,7 @@ Dependency
 ## Controls Available
 
 
-:arrow_down: | Controls | Skin Support | Custom Theme Support | Animation | Disable | Custom Smart Tags
+:arrow_down: | Controls | Skin Support | Custom Theme Support | Animation | Disabling | Custom Smart Tags
 :---:|:---|:---:|:---:|:---:|:---:|:---:|
 :arrow_right: | MetroSetForm |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:
 :arrow_right: | MetroSetButton |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
@@ -68,6 +68,8 @@ Dependency
 :arrow_right: | MetroSetTabControl |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:
 :arrow_right: | MetroSetScrollBar |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetPanel |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_multiplication_x:
+:arrow_right: | MetroSetTrackBar |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
+
 ## 
 
 ## Using MetroSetForm
@@ -102,10 +104,13 @@ public class Form1 : Inherits MetroSetForm
     
 End Class
 ```
-### Credits
+## Credits
 
 >  Burak Ozdiken : [TabControlDesigner](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20UI/Design/MetroSetTabControlDesigner.cs)
 
 >  Mavamaarten : [TabControl Transition Method](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/29e65d1d2e4d12105f9b9639e9def96af0b93da2/MetroSet%20UI/Controls/MetroSetTabControl.cs#L363-L463)
 
+## License
+
+>  [MIT License](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/LICENSE.md)
 
