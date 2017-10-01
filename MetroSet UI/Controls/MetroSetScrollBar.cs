@@ -37,6 +37,7 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetScrollBar), "Bitmaps.ScrollBar.bmp")]
+    [Designer(typeof(MetroSetScrollBarDesigner))] 
     [DefaultEvent("Scroll")]
     [DefaultProperty("Value")]
     [ComVisible(true)]

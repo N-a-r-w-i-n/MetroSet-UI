@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\MetroSetControlBoxActionList.cs" />
+    <Compile Include="Actions\MetroSetScrollBarActionList.cs" />
     <Compile Include="Actions\MetroSetProgressBarActionList.cs" />
     <Compile Include="Actions\MetroSetTileActionList.cs" />
     <Compile Include="Actions\MetroSetEllipseActionList.cs" />
@@ -125,6 +126,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
+    <Compile Include="Design\MetroSetScrollBarDesigner.cs" />
     <Compile Include="Design\MetroSetControBoxDesigner.cs" />
     <Compile Include="Design\MetroSetProgressBarDesigner.cs" />
     <Compile Include="Design\MetroSetTabPageDesigner.cs" />
