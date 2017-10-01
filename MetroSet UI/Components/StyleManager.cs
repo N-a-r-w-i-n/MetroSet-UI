@@ -2,7 +2,7 @@
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)
- * Copyright (c) 2011 Narwin, https://github.com/N-a-r-w-i-n
+ * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of 
  * this software and associated documentation files (the "Software"), to deal in the 
@@ -391,6 +391,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> PanelDictionary;
 
+        /// <summary>
+        /// The TrackBar properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> TrackBarDictionary;
+
 
         #endregion
 
@@ -420,6 +425,7 @@ namespace MetroSet_UI
             TabControlDictionary.Clear();
             ScrollBarDictionary.Clear();
             PanelDictionary.Clear();
+            TrackBarDictionary.Clear();
         }
 
         #endregion
@@ -449,6 +455,7 @@ namespace MetroSet_UI
             TabControlDictionary = new Dictionary<string, object>();
             ScrollBarDictionary = new Dictionary<string, object>();
             PanelDictionary = new Dictionary<string, object>();
+            TrackBarDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -508,6 +515,8 @@ namespace MetroSet_UI
             ScrollBarDictionary = GetValues(path, "ScrollBar");
 
             PanelDictionary = GetValues(path, "Panel");
+
+            TrackBarDictionary = GetValues(path, "TrackBar");
 
             ThemeDetailsReader(path);
 

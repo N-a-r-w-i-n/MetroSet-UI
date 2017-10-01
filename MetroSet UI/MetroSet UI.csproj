@@ -83,6 +83,9 @@
     <Compile Include="Controls\MetroSetControlBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -156,6 +159,7 @@
     <Compile Include="Enums\TileAlign.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
+    <Compile Include="Property\TrackBarProperties.cs" />
     <Compile Include="Property\ControlBoxProperties.cs" />
     <Compile Include="Property\PanelProperties.cs" />
     <Compile Include="Property\TabControlProperties.cs" />
@@ -269,6 +273,7 @@
     <Content Include="Bitmaps\TabControl.bmp" />
     <Content Include="Bitmaps\TextBox.bmp" />
     <Content Include="Bitmaps\ToolTip.bmp" />
+    <Content Include="Bitmaps\Track.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

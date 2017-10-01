@@ -23,11 +23,10 @@
  */
 
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace MetroSet_UI.Property
 {
-    internal class LinkLabelProperties
+    internal class TrackBarProperties
     {
         /// <summary>
         /// Gets or sets whether the control enabled.
@@ -35,33 +34,33 @@ namespace MetroSet_UI.Property
         public bool Enabled { get; set; }
 
         /// <summary>
-        /// Gets or sets forecolor used by the control
-        /// </summary>
-        public Color ForeColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets backcolor used by the control
+        /// Gets or sets the background color in normal mouse sate.
         /// </summary>
         public Color BackColor { get; set; }
 
         /// <summary>
-        /// Gets or sets LinkColor used by the control
+        /// Gets or sets the value color in normal mouse sate.
         /// </summary>
-        public Color LinkColor { get; set; }
+        public Color ValueColor { get; set; }
 
         /// <summary>
-        /// Gets or sets ActiveLinkColor used by the control
+        /// Gets or sets the handler color.
         /// </summary>
-        public Color ActiveLinkColor { get; set; }
+        public Color HandlerColor { get; set; }
 
         /// <summary>
-        /// Gets or sets VisitedLinkColor used by the control
+        /// Gets or sets backcolor used by the control while disabled.
         /// </summary>
-        public Color VisitedLinkColor { get; set; }
+        public Color DisabledBackColor { get; set; }
 
         /// <summary>
-        /// Gets or sets LinkBehavior used by the control
+        /// Gets or sets the value color of the control whenever while disabled.
         /// </summary>
-        public LinkBehavior LinkBehavior { get; set; }
+        public Color DisabledValueColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler color of the control while disabled.
+        /// </summary>
+        public Color DisabledHandlerColor { get; set; }
     }
 }
