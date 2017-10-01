@@ -22,6 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using MetroSet_UI.Child;
 using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
 using MetroSet_UI.Interfaces;
@@ -103,10 +104,10 @@ namespace MetroSet_UI
                     control.ThemeAuthor = ThemeAuthor;
                     control.ThemeName = ThemeName;
                     control.StyleManager = this;
-                }
-                if (control is MetroSetTabControl)
+                }  
+                if (control is TabControl)
                 {
-                    foreach (TabPage C in ((MetroSetTabControl)control).TabPages)
+                    foreach (TabPage C in ((TabControl)control).TabPages)
                     {
                         if (C is iControl)
                         {
@@ -114,8 +115,8 @@ namespace MetroSet_UI
                             control.StyleManager = this;
                             control.ThemeAuthor = ThemeAuthor;
                             control.ThemeName = ThemeName;
-                            UpdateControls(C.Controls);
                         }
+                            UpdateControls(C.Controls);
                     }
                 }
             }
@@ -380,6 +381,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> TabControlDictionary;
 
+        /// <summary>
+        /// The ScrollBar properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ScrollBarDictionary;
+
 
         #endregion
 
@@ -407,6 +413,7 @@ namespace MetroSet_UI
             ProgressDictionary.Clear();
             ControlBoxDictionary.Clear();
             TabControlDictionary.Clear();
+            ScrollBarDictionary.Clear();
         }
 
         #endregion
@@ -434,6 +441,7 @@ namespace MetroSet_UI
             ProgressDictionary = new Dictionary<string, object>();
             ControlBoxDictionary = new Dictionary<string, object>();
             TabControlDictionary = new Dictionary<string, object>();
+            ScrollBarDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -490,6 +498,8 @@ namespace MetroSet_UI
 
             TabControlDictionary = GetValues(path, "TabControl");
 
+            ScrollBarDictionary = GetValues(path, "ScrollBar");
+
             ThemeDetailsReader(path);
 
             UpdateForm();
@@ -517,7 +527,7 @@ namespace MetroSet_UI
         }
 
         /// <summary>
-        /// The Method to load the custom xml theme file and add a childnodes from a specific node into a dectionary.
+        /// The Method to load the custom xml theme file and add a childnodes from a specific node into a dectionary. 
         /// </summary>
         /// <param name="path">The Path of custom theme file (XML file).</param>
         /// <param name="nodename">The Node name to get the childnodes from.</param>

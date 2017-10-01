@@ -117,6 +117,7 @@ namespace MetroSet_UI.Controls
 
         private Style style;
         private StyleManager _StyleManager;
+        private TabStyle tabStyle;
 
         #endregion Internal Vars
 
@@ -132,6 +133,7 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
+            tabStyle = TabStyle.Style1;
             ItemSize = new Size(100, 38);
             DrawMode = TabDrawMode.Normal;
             SizeMode = TabSizeMode.Fixed;
@@ -171,7 +173,7 @@ namespace MetroSet_UI.Controls
                     prop.UnselectedTextColor = Color.Gray;
                     prop.SelectedTextColor = Color.White;
                     ThemeAuthor = "Narwin";
-                    ThemeName = "MetroDark";
+                    ThemeName = "MetroDark"; 
                     SetProperties();
                     break;
 
@@ -283,13 +285,20 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework")]
         [Browsable(false)]
         private Color SelectedTextColor { get; set; }
-
-
+        
         /// <summary>
         /// Gets or sets the tancontrol apperance style
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
-        public TabStyle TabStyle { get; set; } = TabStyle.Style1;
+        public TabStyle TabStyle
+        {
+            get { return tabStyle; }
+            set
+            {
+                tabStyle = value;
+                Invalidate();
+            }
+        }
 
         #endregion Properties
 
@@ -301,7 +310,7 @@ namespace MetroSet_UI.Controls
 
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            G.Clear(BaseColor);
+            G.Clear(BaseColor);                      
 
             var h = ItemSize.Height + 2;
 

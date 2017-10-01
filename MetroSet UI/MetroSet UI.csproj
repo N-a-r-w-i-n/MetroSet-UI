@@ -29,6 +29,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -62,6 +80,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetControlBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroSetScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetTabControl.cs">
@@ -124,6 +145,7 @@
     <Compile Include="Enums\BageAlign.cs" />
     <Compile Include="Enums\CheckState.cs" />
     <Compile Include="Enums\DividerStyle.cs" />
+    <Compile Include="Enums\ScrollOrientation.cs" />
     <Compile Include="Enums\SignStyle.cs" />
     <Compile Include="Enums\TabStyle.cs" />
     <Compile Include="Enums\TileAlign.cs" />
@@ -234,6 +256,7 @@
     <Content Include="Bitmaps\Progress.bmp" />
     <Content Include="Bitmaps\RadioButton.bmp" />
     <Content Include="Bitmaps\RitchTextBox.bmp" />
+    <Content Include="Bitmaps\ScrollBar.bmp" />
     <Content Include="Bitmaps\Style.bmp" />
     <Content Include="Bitmaps\Switch.bmp" />
     <Content Include="Bitmaps\TabControl.bmp" />

@@ -30,7 +30,14 @@ namespace MetroSet_UI.Native
 {
     internal class User32
     {
+        
+        #region Properties
+
         public AnimateWindowFlags AW_HIDE { get; internal set; }
+
+#endregion
+
+        #region Structure
 
         [StructLayout(LayoutKind.Sequential)]
         public struct TCHITTESTINFO
@@ -57,6 +64,7 @@ namespace MetroSet_UI.Native
             }
         }
 
+#endregion
 
         #region Flags
 
@@ -76,6 +84,31 @@ namespace MetroSet_UI.Native
             AW_BLEND = 0x00080000
         }
 
+        [Flags]
+        public enum TabControlHitTest
+        {
+            /// <summary>
+            /// The position is not over a tab.
+            /// </summary>
+            TCHT_NOWHERE = 1,
+
+            /// <summary>
+            /// The position is over a tab's icon.
+            /// </summary>
+            TCHT_ONITEMICON = 2,
+
+            /// <summary>
+            /// The position is over a tab's text.
+            /// </summary>
+            TCHT_ONITEMLABEL = 4,
+
+            /// <summary>
+            /// The position is over a tab but not over its icon or its text. For owner-drawn tab controls, this value is specified if the position is anywhere over a tab.
+            /// TCHT_ONITEM is a bitwise-OR operation on TCHT_ONITEMICON and TCHT_ONITEMLABEL.
+            /// </summary>
+            TCHT_ONITEM = TCHT_ONITEMICON | TCHT_ONITEMLABEL
+        };
+        
         #endregion
 
         #region Methods
@@ -111,40 +144,15 @@ namespace MetroSet_UI.Native
         public const int _WM_NCHITTEST = 0x0084;
         public const int _HTCLIENT = 0x01;
         public const int _HTCAPTION = 0x02;
-        //internal const int _SRC_COPY = 0xCC0020;
-        //internal const int _CS_DROPSHADOW = 0x20000;
-        //internal const int _TCM_ADJUSTRECT = 0x1328;
-        //internal const int _TCN_FIRST = -550;
-        //internal const int _TCN_SELCHANGE = -551;
-        //internal const int _TCN_SELCHANGING = -552;
+        public const int _SRC_COPY = 0xCC0020;
+        public const int _CS_DROPSHADOW = 0x20000;
+        public const int _TCM_ADJUSTRECT = 0x1328;
+        public const int _TCN_FIRST = -550;
+        public const int _TCN_SELCHANGE = -551;
+        public const int _TCN_SELCHANGING = -552;
 
         #endregion
-
-        [Flags]
-        public enum TabControlHitTest
-        {
-            /// <summary>
-            /// The position is not over a tab.
-            /// </summary>
-            TCHT_NOWHERE = 1,
-
-            /// <summary>
-            /// The position is over a tab's icon.
-            /// </summary>
-            TCHT_ONITEMICON = 2,
-
-            /// <summary>
-            /// The position is over a tab's text.
-            /// </summary>
-            TCHT_ONITEMLABEL = 4,
-
-            /// <summary>
-            /// The position is over a tab but not over its icon or its text. For owner-drawn tab controls, this value is specified if the position is anywhere over a tab.
-            /// TCHT_ONITEM is a bitwise-OR operation on TCHT_ONITEMICON and TCHT_ONITEMLABEL.
-            /// </summary>
-            TCHT_ONITEM = TCHT_ONITEMICON | TCHT_ONITEMLABEL
-        };
-
+        
         #region Windows Messages
 
         /// <summary>
