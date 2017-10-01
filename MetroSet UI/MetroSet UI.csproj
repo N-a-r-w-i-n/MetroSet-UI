@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\MetroSetTrackBarActionList.cs" />
     <Compile Include="Actions\MetroSetControlBoxActionList.cs" />
     <Compile Include="Actions\MetroSetScrollBarActionList.cs" />
     <Compile Include="Actions\MetroSetProgressBarActionList.cs" />
@@ -132,6 +133,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
+    <Compile Include="Design\MetroSetTrackBarDesigner.cs" />
     <Compile Include="Design\MetroSetScrollBarDesigner.cs" />
     <Compile Include="Design\MetroSetControBoxDesigner.cs" />
     <Compile Include="Design\MetroSetProgressBarDesigner.cs" />

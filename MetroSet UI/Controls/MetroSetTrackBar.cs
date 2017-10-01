@@ -36,7 +36,8 @@ namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetTrackBar), "Bitmaps.Track.bmp")]
-    //[DefaultProperty("Text")]
+    [Designer(typeof(MetroSetTrackBarDesigner))]
+    [DefaultProperty("Value")]
     [DefaultEvent("Scroll")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
