@@ -5,7 +5,7 @@ MetroSet UI Framework
 ## 
 
 ## Install via NuGet
-------------------
+--------------------
     Install-Package MetroSet_UI
 
 ## Direct to NuGet
@@ -66,7 +66,8 @@ Dependency
 :arrow_right: | MetroSetProgress |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetControlBox |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetTabControl |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:
-
+:arrow_right: | MetroSetScrollBar |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
+:arrow_right: | MetroSetPanel |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_multiplication_x:
 ## 
 
 ## Using MetroSetForm
