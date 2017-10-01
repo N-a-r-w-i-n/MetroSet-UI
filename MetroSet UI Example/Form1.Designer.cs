@@ -37,7 +37,7 @@ namespace MetroSet_UI_Example
             // 
             this.styleManager1.CustomTheme = "C:\\Users\\Stick\\Desktop\\MetroSet Theme.xml";
             this.styleManager1.MetroForm = this;
-            this.styleManager1.Style = MetroSet_UI.Design.Style.Custom;
+            this.styleManager1.Style = MetroSet_UI.Design.Style.Dark;
             this.styleManager1.ThemeAuthor = "Narwin";
             this.styleManager1.ThemeName = "MetroDark";
             // 
@@ -46,11 +46,11 @@ namespace MetroSet_UI_Example
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(558, 319);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
+            this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.SmallRectThickness = 2;
-            this.Style = MetroSet_UI.Design.Style.Custom;
+            this.Style = MetroSet_UI.Design.Style.Dark;
             this.StyleManager = this.styleManager1;
             this.Text = "MetroSet UI";
             this.ThemeName = "MetroDark";

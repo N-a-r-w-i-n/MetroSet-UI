@@ -83,6 +83,9 @@
     <Compile Include="Controls\MetroSetControlBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroSetPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroSetScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -154,6 +157,7 @@
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
     <Compile Include="Property\ControlBoxProperties.cs" />
+    <Compile Include="Property\PanelProperties.cs" />
     <Compile Include="Property\TabControlProperties.cs" />
     <Compile Include="Property\ProgressBarProperties.cs" />
     <Compile Include="Property\TileProperties.cs" />
@@ -255,6 +259,7 @@
     <Content Include="Bitmaps\Ellipse.bmp" />
     <Content Include="Bitmaps\LinkLabel.bmp" />
     <Content Include="Bitmaps\Numeric.bmp" />
+    <Content Include="Bitmaps\Panel.bmp" />
     <Content Include="Bitmaps\Progress.bmp" />
     <Content Include="Bitmaps\RadioButton.bmp" />
     <Content Include="Bitmaps\RitchTextBox.bmp" />

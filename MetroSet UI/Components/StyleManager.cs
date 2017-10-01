@@ -386,6 +386,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> ScrollBarDictionary;
 
+        /// <summary>
+        /// The Panel properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> PanelDictionary;
+
 
         #endregion
 
@@ -414,6 +419,7 @@ namespace MetroSet_UI
             ControlBoxDictionary.Clear();
             TabControlDictionary.Clear();
             ScrollBarDictionary.Clear();
+            PanelDictionary.Clear();
         }
 
         #endregion
@@ -442,6 +448,7 @@ namespace MetroSet_UI
             ControlBoxDictionary = new Dictionary<string, object>();
             TabControlDictionary = new Dictionary<string, object>();
             ScrollBarDictionary = new Dictionary<string, object>();
+            PanelDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -499,6 +506,8 @@ namespace MetroSet_UI
             TabControlDictionary = GetValues(path, "TabControl");
 
             ScrollBarDictionary = GetValues(path, "ScrollBar");
+
+            PanelDictionary = GetValues(path, "Panel");
 
             ThemeDetailsReader(path);
 
