@@ -101,8 +101,10 @@ public class Form1 : Inherits MetroSetForm
     
 End Class
 ```
-### Credists
+### Credits
 
->  Burak Ozdiken : [TabControlDesigner](https://www.codeproject.com/Articles/38014/KRBTabControl)
+>  Burak Ozdiken : [TabControlDesigner](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20UI/Design/MetroSetTabControlDesigner.cs)
+
+>  Mavamaarten : [TabControl Transition Method](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/29e65d1d2e4d12105f9b9639e9def96af0b93da2/MetroSet%20UI/Controls/MetroSetTabControl.cs#L363-L463)
 
 
