@@ -396,6 +396,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> TrackBarDictionary;
 
+        /// <summary>
+        /// The ContextMenuStrip properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ContextMenuDictionary;
+
 
         #endregion
 
@@ -426,6 +431,7 @@ namespace MetroSet_UI
             ScrollBarDictionary.Clear();
             PanelDictionary.Clear();
             TrackBarDictionary.Clear();
+            ContextMenuDictionary.Clear();
         }
 
         #endregion
@@ -456,6 +462,7 @@ namespace MetroSet_UI
             ScrollBarDictionary = new Dictionary<string, object>();
             PanelDictionary = new Dictionary<string, object>();
             TrackBarDictionary = new Dictionary<string, object>();
+            ContextMenuDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -517,6 +524,8 @@ namespace MetroSet_UI
             PanelDictionary = GetValues(path, "Panel");
 
             TrackBarDictionary = GetValues(path, "TrackBar");
+
+            ContextMenuDictionary = GetValues(path, "ContextMenu");
 
             ThemeDetailsReader(path);
 

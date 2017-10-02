@@ -22,14 +22,7 @@ namespace MetroSet_UI_Example
 
         }
 
-        private void metroSetTrackBar1_Scroll(object sender)
-        {
-         
-        }
 
-        private void metroSetTrackBar1_Scroll_1(object sender)
-        {
-
-        }
+       
     }
 }

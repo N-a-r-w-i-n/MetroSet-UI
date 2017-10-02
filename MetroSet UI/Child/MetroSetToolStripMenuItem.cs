@@ -22,22 +22,35 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
-using System;
-using System.ComponentModel.Design;
+using MetroSet_UI.Controls;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Child
 {
-    internal class MetroSetTabPageCollectionEditor : CollectionEditor
+    public sealed class MetroSetToolStripMenuItem : ToolStripMenuItem
     {
-        public MetroSetTabPageCollectionEditor(Type type)
-            : base(type)
-        { }
+        #region Constructors
 
-        protected override Type[] CreateNewItemTypes()
+        public MetroSetToolStripMenuItem()
         {
-            return new[] { typeof(TabPage), typeof(MetroSetTabPage) };
+            AutoSize = false;
+            Size = new Size(160, 30);
         }
+
+        #endregion Constructors
+
+        #region Adding DropDowns
+
+        protected override ToolStripDropDown CreateDefaultDropDown()
+        {
+            if (DesignMode)
+            { return base.CreateDefaultDropDown(); }
+            MetroSetContextMenuStrip DP = new MetroSetContextMenuStrip();
+            DP.Items.AddRange(base.CreateDefaultDropDown().Items);
+            return DP;
+        }
+
+        #endregion Adding DropDowns
     }
 }

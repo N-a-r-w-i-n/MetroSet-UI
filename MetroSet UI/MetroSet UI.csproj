@@ -75,6 +75,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Child\MetroSetTabPageCollectionEditor.cs" />
+    <Compile Include="Child\MetroSetToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\MetroSetToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -82,6 +85,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetControlBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroSetContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetTrackBar.cs">
@@ -161,6 +167,7 @@
     <Compile Include="Enums\TileAlign.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
+    <Compile Include="Property\ContextMenuProperties.cs" />
     <Compile Include="Property\TrackBarProperties.cs" />
     <Compile Include="Property\ControlBoxProperties.cs" />
     <Compile Include="Property\PanelProperties.cs" />
@@ -260,6 +267,7 @@
   <ItemGroup>
     <Content Include="Bitmaps\CheckBox.bmp" />
     <Content Include="Bitmaps\ComoBox.bmp" />
+    <Content Include="Bitmaps\ContextMenu.bmp" />
     <Content Include="Bitmaps\ControlButton.bmp" />
     <Content Include="Bitmaps\Divider.png" />
     <Content Include="Bitmaps\Ellipse.bmp" />

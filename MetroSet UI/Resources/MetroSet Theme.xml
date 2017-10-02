@@ -195,13 +195,40 @@
     <DisabledBorderColor>#69D9FF</DisabledBorderColor>
     <DisabledProgressColor>#69D9FF</DisabledProgressColor>
   </Progress>
-  <ControlBox>
+  <TrackBar>
+    <Enabled>true</Enabled>
+    <BackColor>#5A5A5A</BackColor>
+    <HandlerColor>#8F8F8F</HandlerColor>
+    <ValueColor>#b72828</ValueColor>
+    <DisabledBackColor>#505050</DisabledBackColor>
+    <DisabledValueColor>#6D6D6D</DisabledValueColor>
+    <DisabledHandlerColor>#5A5A5A</DisabledHandlerColor>
+  </TrackBar>
+  <ContextMenu>
+    <BackColor>#1E1E1E</BackColor>
+    <ForeColor>#AAAAAA</ForeColor>
+    <ArrowColor>#808080</ArrowColor>
+    <SeparatorColor>#808080</SeparatorColor>
+    <SelectedItemColor>#FFFFFF</SelectedItemColor>
+    <SelectedItemBackColor>#b72828</SelectedItemBackColor>
+    <DisabledForeColor>#C0C0C0</DisabledForeColor>
+  </ContextMenu>
   <TabControl>
     <BackColor>#1e1e1e</BackColor>
-    <BorderColor>#B72828</BorderColor>
-	<UnselectedTextColor>#B72828</UnselectedTextColor>
+    <ForeColor>#B72828</ForeColor>
+	<UnselectedTextColor>#808080</UnselectedTextColor>
 	<SelectedTextColor>#FFFFFF</SelectedTextColor>
   </TabControl>
+  <ScrollBar>
+    <Enabled>true</Enabled>
+    <BackColor>#1e1e1e</BackColor>
+    <ForeColor>#B72828</ForeColor>
+  </ScrollBar>
+  <Panel>
+    <Enabled>true</Enabled>
+    <BackColor>#1e1e1e</BackColor>
+    <BorderColor>#6E6E6E</BorderColor>
+  </Panel>
   <ControlBox>
     <CloseHoverBackColor>#B72828</CloseHoverBackColor>
     <CloseHoverForeColor>#FFFFFF</CloseHoverForeColor>
