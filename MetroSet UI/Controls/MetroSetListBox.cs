@@ -37,8 +37,9 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true)]
+    [ToolboxItem(true)] 
     [ToolboxBitmap(typeof(MetroSetListBox), "Bitmaps.ListBox.bmp")]
+    [Designer(typeof(MetroSetListBoxDesigner))]
     [DefaultProperty("Items")]
     [DefaultEvent("SelectedIndexChanged")]
     [ComVisible(true)]
@@ -394,6 +395,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets a collection containing the currently selected items in the ListBox.
         /// </summary>
+        [Browsable(false)]
         [Category("MetroSet Framework"), Description("Gets a collection containing the currently selected items in the ListBox.")]
         public List<object> SelectedItems
         {
@@ -455,7 +457,7 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets the the number of items stored in items collection.
         /// </summary>
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
         public int Count
         {
             get { return _Items.Count; }
@@ -489,6 +491,10 @@ namespace MetroSet_UI.Controls
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override Color ForeColor { get => base.ForeColor; set => base.ForeColor = value; }
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override string Text { get => base.Text; set => base.Text = value; }
 
         #endregion Properties
 

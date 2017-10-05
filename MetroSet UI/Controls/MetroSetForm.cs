@@ -593,7 +593,7 @@ namespace MetroSet_UI.Controls
         {
             base.OnLoad(e);
             // https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func
-            AnimateWindow(Handle, 1000, AnimateWindowFlags.AW_ACTIVATE | (UseSlideAnimation ?
+            AnimateWindow(Handle, 800, AnimateWindowFlags.AW_ACTIVATE | (UseSlideAnimation ?
                   AnimateWindowFlags.AW_HOR_POSITIVE | AnimateWindowFlags.AW_SLIDE : AnimateWindowFlags.AW_BLEND));
         }
 
@@ -603,7 +603,7 @@ namespace MetroSet_UI.Controls
             // https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func
             if (e.Cancel == false)
             {
-                AnimateWindow(Handle, 1000, User32.AW_HIDE | (UseSlideAnimation ?
+                AnimateWindow(Handle, 800, User32.AW_HIDE | (UseSlideAnimation ?
                               AnimateWindowFlags.AW_HOR_NEGATIVE | AnimateWindowFlags.AW_SLIDE : AnimateWindowFlags.AW_BLEND));
             }
         }
