@@ -35,7 +35,7 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetTrackBar), "Bitmaps.Track.bmp")]
+    [ToolboxBitmap(typeof(MetroSetTrackBar), "Bitmaps.Slider.bmp")]
     [Designer(typeof(MetroSetTrackBarDesigner))]
     [DefaultProperty("Value")]
     [DefaultEvent("Scroll")]

@@ -44,6 +44,7 @@ namespace MetroSet_UI.Controls
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetScrollBar : Control, iControl
     {
+
         #region Interfaces
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static LabelProperties prop;
+        private static ScrollBarProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -119,12 +120,9 @@ namespace MetroSet_UI.Controls
         private StyleManager _StyleManager;
         private int minimum;
         private int maximum;
-        private int value;
-        private int smallChange;
+        private int _value;
         private int val;
-        private int largeChange;
-        private Point mouseLocation;
-        private Rectangle shaft;
+        private Rectangle bar;
         private Rectangle thumb;
         private bool showThumb;
         private int thumbSize;
@@ -146,11 +144,9 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             SetDefaults();
-            Font = MetroSetFonts.SemiBold(10);
-            prop = new LabelProperties();
+            prop = new ScrollBarProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
             ApplyTheme();
 
         }
@@ -159,10 +155,7 @@ namespace MetroSet_UI.Controls
         {
             minimum = 0;
             maximum = 100;
-            value = 0;
-            mouseLocation = new Point(0, 0);
-            smallChange = 1;
-            largeChange = 10;
+            _value = 0;
             thumbSize = 20;
         }
 
@@ -182,6 +175,8 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(65, 177, 225);
                     prop.BackColor = Color.White;
+                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
+                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     SetProperties();
@@ -191,6 +186,8 @@ namespace MetroSet_UI.Controls
                     prop.Enabled = Enabled;
                     prop.ForeColor = Color.FromArgb(65, 177, 225);
                     prop.BackColor = Color.FromArgb(30, 30, 30);
+                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     SetProperties();
@@ -198,7 +195,7 @@ namespace MetroSet_UI.Controls
 
                 case Style.Custom:
                     if (StyleManager != null)
-                        foreach (var varkey in StyleManager.LabelDictionary)
+                        foreach (var varkey in StyleManager.ScrollBarDictionary)
                         {
                             switch (varkey.Key)
                             {
@@ -212,6 +209,14 @@ namespace MetroSet_UI.Controls
 
                                 case "BackColor":
                                     prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    break;
+
+                                case "DisabledBackColor":
+                                    prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    break;
+
+                                case "DisabledForeColor":
+                                    prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -228,8 +233,6 @@ namespace MetroSet_UI.Controls
             try
             {
                 Enabled = prop.Enabled;
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
                 Invalidate();
             }
             catch (Exception ex)
@@ -241,13 +244,20 @@ namespace MetroSet_UI.Controls
         #endregion Theme Changing
 
         #region Draw Control
+
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics G = e.Graphics;
-            G.Clear(BackColor);
-            using (SolidBrush ThumbBrush = new SolidBrush(ForeColor))
+
+            Rectangle r = new Rectangle(0, 0, Width, Height);
+
+            using (SolidBrush BG = new SolidBrush(Enabled ? prop.BackColor : prop.DisabledBackColor))
             {
-                G.FillRectangle(ThumbBrush, thumb);
+                using (SolidBrush ThumbBrush = new SolidBrush(Enabled ? prop.ForeColor : prop.DisabledForeColor))
+                {
+                    G.FillRectangle(BG, r);
+                    G.FillRectangle(ThumbBrush, thumb);
+                }
             }
         }
 
@@ -265,9 +275,9 @@ namespace MetroSet_UI.Controls
             set
             {
                 minimum = value;
-                if (value > this.value)
+                if (value > this._value)
                 {
-                    this.value = value;
+                    this._value = value;
                 }
                 else if (value > maximum)
                 {
@@ -287,14 +297,29 @@ namespace MetroSet_UI.Controls
             get { return maximum; }
             set
             {
-                if (value < this.value)
+               if (value < _value)
                 {
-                    this.value = value;
+                    _value = value;
                 }
-                else if (value < minimum)
+                else if (value > minimum)
                 {
-                    minimum = value;
+                    maximum = value;
                 }
+                if (Orientation == ScrollOrientate.Vertical)
+                {
+                    if (value > Height)
+                        thumbSize = Convert.ToInt32(Height * (Height / (double)maximum));
+                    else
+                        thumbSize = 0;
+                }
+                else if (Orientation == ScrollOrientate.Horizontal)
+                {
+                    if (value > Width)
+                        thumbSize = Convert.ToInt32(Width * (Width / (double)maximum));
+                    else
+                        thumbSize = 0;
+                }
+
                 InvalidateLayout();
             }
         }
@@ -306,20 +331,20 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a numeric value that represents the current position of the scroll bar box.")]
         public int Value
         {
-            get { return value; }
+            get { return _value; }
             set
             {
-                if (value > maximum)
+                if (value > Maximum)
                 {
-                    throw new Exception("Already reached to the maximum value.");
+                    _value = Maximum;
                 }
-                else if (value < minimum)
+                else if (value < Minimum)
                 {
-                    throw new Exception("Already reached to the minimum value.");
+                    _value = Minimum;
                 }
                 else
                 {
-                    this.value = value;
+                    _value = value;
                 }
                 InvalidatePosition();
                 Scroll?.Invoke(this);
@@ -331,32 +356,15 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the distance to move a scroll bar in response to a small scroll command.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the distance to move a scroll bar in response to a small scroll command.")]
-        public int SmallChange
-        {
-            get { return smallChange; }
-            set
-            {
-                smallChange = value;
-                Invalidate();
-
-            }
-        }
+        public int SmallChange { get; set; } = 1;
 
 
         /// <summary>
         /// Gets or sets the distance to move a scroll bar in response to a large scroll command.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the distance to move a scroll bar in response to a large scroll command.")]
-        public int LargeChange
-        {
-            get { return largeChange; }
-            set
-            {
-                largeChange = value;
-                Invalidate();
-            }
-        }
-        
+        public int LargeChange { get; set; } = 10;
+
 
         /// <summary>
         /// Gets or sets the scroll bar orientation.
@@ -383,20 +391,20 @@ namespace MetroSet_UI.Controls
 
         private void InvalidateLayout()
         {
-            shaft = new Rectangle(0, 0, Width, Height);
+            bar = new Rectangle(0, 0, Width, Height);
             showThumb = (Maximum - Minimum) > 0;
             switch (Orientation)
             {
                 case ScrollOrientate.Vertical:
-                    if (showThumb)
-                        thumb = new Rectangle(0, 0, Width, Convert.ToInt32(Height / 8));
+                    if (showThumb) 
+                        thumb = new Rectangle(0, 0, Width, thumbSize);
                     break;
                 case ScrollOrientate.Horizontal:
                     if (showThumb)
-                        thumb = new Rectangle(0, 0, Convert.ToInt32(Width / 8) - 2, Height);
+                        thumb = new Rectangle(0, 0, Width, thumbSize);
                     break;
             }
-
+            
             Scroll?.Invoke(this);
             InvalidatePosition();
         }
@@ -409,21 +417,23 @@ namespace MetroSet_UI.Controls
             switch (Orientation)
             {
                 case ScrollOrientate.Vertical:
-                    thumb.Y = Convert.ToInt32((double)(Value - Minimum) / (Maximum - Minimum) * (shaft.Height - thumbSize));
+                    thumb.Y = Convert.ToInt32(CurrentValue() * (bar.Height - thumbSize));
                     break;
                 case ScrollOrientate.Horizontal:
-                    thumb.X = Convert.ToInt32(((((double)(Value - Minimum)) / (Maximum - Minimum)) * (shaft.Width - thumbSize)));
+                    thumb.X = Convert.ToInt32((CurrentValue() * (bar.Width - thumbSize)));
                     break;
             }
             
             Invalidate(); 
         }
 
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
             if (e.Button == MouseButtons.Left && showThumb)
             {
+
                 if (thumb.Contains(e.Location))
                 {
                     _ThumbState = MouseMode.Pushed;
@@ -441,28 +451,28 @@ namespace MetroSet_UI.Controls
                 }
 
                 Value = Math.Min(Math.Max(val, Minimum), Maximum);
-                Invalidate();
                 InvalidatePosition();
             }
         }
+
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (_ThumbState == MouseMode.Pushed | !showThumb)
             {
                 int thumbPosition;
-                int thumbBounds = shaft.Height - thumbSize;
+                int thumbBounds = bar.Height - thumbSize;
                 switch (Orientation)
                 {
                     case ScrollOrientate.Vertical:
                         thumbPosition = (e.Y) - (thumbSize / 2);
-                        thumbBounds = shaft.Height - thumbSize;
+                        thumbBounds = bar.Height - thumbSize;
                         val = Convert.ToInt32(((double)(thumbPosition) / thumbBounds) * (Maximum - Minimum)) - Minimum;
                         break;
 
                     case ScrollOrientate.Horizontal:
                         thumbPosition = (e.X) - (thumbSize / 2);
-                        thumbBounds = shaft.Width - thumbSize;
+                        thumbBounds = bar.Width - thumbSize;
                         val = Convert.ToInt32(((double)(thumbPosition) / thumbBounds) * (Maximum - Minimum)) - Minimum;
                         break;
                 }
@@ -484,9 +494,9 @@ namespace MetroSet_UI.Controls
                 case ScrollOrientate.Horizontal:
                     _ThumbState = (e.Location.X < 16 | e.Location.X > Width - 16) ? MouseMode.Hovered : MouseMode.Normal;
                     break;
-            }            
+            }
             Invalidate();
-        }
+        }              
 
         protected override void OnMouseLeave(EventArgs e)
         {
@@ -494,13 +504,15 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
-        protected override void OnMouseEnter(EventArgs e)
+        private double CurrentValue()
         {
-            base.OnMouseEnter(e);
-            Invalidate();
+            return ((double)(Value - Minimum)) / (Maximum - Minimum);
         }
 
         #endregion
 
     }
+
+    
+
 }

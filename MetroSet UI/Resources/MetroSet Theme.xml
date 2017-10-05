@@ -223,7 +223,21 @@
     <Enabled>true</Enabled>
     <BackColor>#1e1e1e</BackColor>
     <ForeColor>#B72828</ForeColor>
+	<DisabledBackColor>#505050</DisabledBackColor>
+    <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </ScrollBar>
+  <ListBox>
+    <Enabled>true</Enabled>
+    <BackColor>#1e1e1e</BackColor>
+    <ForeColor>#808080</ForeColor>
+    <BorderColor>#404040</BorderColor>
+	<SelectedItemColor>#FFFFFF</SelectedItemColor>
+    <SelectedItemBackColor>#B72828</SelectedItemBackColor>
+	<HoveredItemColor>#000000</HoveredItemColor>
+    <HoveredItemBackColor>#808080</HoveredItemBackColor>
+	<DisabledBackColor>#505050</DisabledBackColor>
+    <DisabledForeColor>#6D6D6D</DisabledForeColor>
+  </ListBox>
   <Panel>
     <Enabled>true</Enabled>
     <BackColor>#1e1e1e</BackColor>

@@ -123,8 +123,7 @@ namespace MetroSet_UI.Controls
 
         public MetroSetDivider()
         {
-            SetStyle(
-                ControlStyles.ResizeRedraw |
+            SetStyle(                
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
@@ -133,7 +132,7 @@ namespace MetroSet_UI.Controls
             prop = new DividerProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
+            prop.Orientation = DividerStyle.Horizontal;
             ApplyTheme();
         }
 
@@ -150,7 +149,6 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Orientation = DividerStyle.Horizontal;
                     prop.Thickness = 1;
                     prop.ForeColor = Color.Black;
                     prop.BackColor = Color.Transparent;
@@ -160,7 +158,6 @@ namespace MetroSet_UI.Controls
                     break;
 
                 case Style.Dark:
-                    prop.Orientation = DividerStyle.Horizontal;
                     prop.Thickness = 1;
                     prop.ForeColor = Color.FromArgb(170, 170, 170);
                     prop.BackColor = Color.Transparent;
@@ -254,7 +251,11 @@ namespace MetroSet_UI.Controls
         public DividerStyle Orientation
         {
             get { return prop.Orientation; }
-            set { prop.Orientation = value; Invalidate(); }
+            set
+            {
+                prop.Orientation = value;
+                Invalidate();
+            }
         }
 
         /// <summary>
@@ -264,7 +265,11 @@ namespace MetroSet_UI.Controls
         public int Thickness
         {
             get { return prop.Thickness; }
-            set { prop.Thickness = value; Invalidate(); }
+            set
+            {
+                prop.Thickness = value;
+                Invalidate();
+            }
         }
 
         #endregion Properties

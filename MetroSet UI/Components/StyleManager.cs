@@ -75,8 +75,7 @@ namespace MetroSet_UI
             if (MetroForm == null)
                 return;
 
-            var form = MetroForm as iForm;
-            if (form != null && CustomTheme != null)
+            if (MetroForm is iForm form && CustomTheme != null)
             {
                 form.Style = Style;
                 form.ThemeAuthor = ThemeAuthor;
@@ -119,6 +118,16 @@ namespace MetroSet_UI
                             UpdateControls(C.Controls);
                     }
                 }
+                if (ctrl.Controls != null)
+                {
+                    foreach (iControl child in ctrl.Controls)
+                    {
+                        child.Style = Style;
+                        child.StyleManager = this;
+                        child.ThemeAuthor = ThemeAuthor;
+                        child.ThemeName = ThemeName;                        
+                    }
+                }
             }
             
         }
@@ -128,8 +137,7 @@ namespace MetroSet_UI
         /// </summary>
         private void ControlAdded(object sender, ControlEventArgs e)
         {
-            var control = e.Control as iControl;
-            if (control != null && CustomTheme != null)
+            if (e.Control is iControl control && CustomTheme != null)
             {
                 control.Style = Style;
                 control.ThemeAuthor = ThemeAuthor;
@@ -401,6 +409,11 @@ namespace MetroSet_UI
         /// </summary>
         public Dictionary<string, object> ContextMenuDictionary;
 
+        /// <summary>
+        /// The ListBox properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> ListBoxDictionary;
+
 
         #endregion
 
@@ -432,6 +445,7 @@ namespace MetroSet_UI
             PanelDictionary.Clear();
             TrackBarDictionary.Clear();
             ContextMenuDictionary.Clear();
+            ListBoxDictionary.Clear();
         }
 
         #endregion
@@ -463,6 +477,7 @@ namespace MetroSet_UI
             PanelDictionary = new Dictionary<string, object>();
             TrackBarDictionary = new Dictionary<string, object>();
             ContextMenuDictionary = new Dictionary<string, object>();
+            ListBoxDictionary = new Dictionary<string, object>();
         }
 
 #endregion
@@ -480,6 +495,8 @@ namespace MetroSet_UI
             // We clear every dictionary for avoid the "the key is already exist in dictionary" exception.
 
             Clear();
+
+            // Here we refill the dictionaries with information we get in custom theme.
 
             FormDictionary = GetValues(path, "Form");
 
@@ -527,6 +544,8 @@ namespace MetroSet_UI
 
             ContextMenuDictionary = GetValues(path, "ContextMenu");
 
+            ListBoxDictionary = GetValues(path, "ListBox");
+
             ThemeDetailsReader(path);
 
             UpdateForm();
@@ -537,7 +556,7 @@ namespace MetroSet_UI
         /// <summary>
         /// The Method get the custom theme name and author.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The Path of the custom theme file.</param>
         private void ThemeDetailsReader(string path)
         {
             foreach(var item in GetValues(path, "Theme"))
@@ -552,6 +571,7 @@ namespace MetroSet_UI
                 }
             }
         }
+
 
         /// <summary>
         /// The Method to load the custom xml theme file and add a childnodes from a specific node into a dectionary. 
@@ -572,6 +592,7 @@ namespace MetroSet_UI
             }
             return dict;
         }
+
 
         #endregion Reader
 
