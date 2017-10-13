@@ -60,12 +60,10 @@
 
 <h2 align="center">Components Available</h2>
 
-:arrow_down: | Components | Skin Support | Custom Theme Support | Smart Tag
-:---:|:---|:---:|:---:|:---:|
-:arrow_right: | StyleManager |:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:
-:arrow_right: | MetroSetToolTip |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:
-
-
+:arrow_down: | Components | Skin Support | Custom Theme Support | Animation | Disabling | Custom Smart Tags
+:---:|:---|:---:|:---:|:---:|:---:|:---:|
+:arrow_right: | StyleManager |:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
+:arrow_right: | MetroSetToolTip |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 
 <h2 align="center">Forms Available</h2>
 
