@@ -47,7 +47,7 @@ namespace MetroSet_UI
 
         #region Constructor
 
-        public StyleManager(Form ownerForm)
+        public StyleManager(System.Windows.Forms.Form ownerForm)
         {
             MetroForm = ownerForm;
         }

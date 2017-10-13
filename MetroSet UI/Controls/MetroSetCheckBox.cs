@@ -45,7 +45,7 @@ namespace MetroSet_UI.Controls
     [DefaultProperty("Checked")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class MetroSetCheckBox : Control, iControl
+    public class MetroSetCheckBox : Control, iControl , IDisposable
     {
         #region Interfaces
 
@@ -441,6 +441,28 @@ namespace MetroSet_UI.Controls
         public Enums.CheckState CheckState { get; set; }
 
         #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Disposing Methods.
+        /// </summary>
+        public new void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                timer.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #endregion
 
     }
 }

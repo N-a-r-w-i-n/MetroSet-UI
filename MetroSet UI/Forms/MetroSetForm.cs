@@ -22,6 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
@@ -36,7 +37,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static MetroSet_UI.Native.User32;
 
-namespace MetroSet_UI.Controls
+namespace MetroSet_UI.Dialogs
 {
     [ToolboxItem(false)]
     [ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
@@ -210,6 +211,25 @@ namespace MetroSet_UI.Controls
             set { base.Padding = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the backgroundimage transparency.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the backgroundimage transparency.")]
+        public float BackgroundImageTransparency
+        {
+            get
+            {
+                return backgorundImageTrasparency;
+            }
+            set
+            {
+                if(value > 1)                
+                    throw new Exception("The Value must be between 0-1.");
+
+                backgorundImageTrasparency = value;
+                Invalidate();
+            }
+        }
         #endregion Properties
 
         #region Constructor
@@ -226,8 +246,10 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             Padding = new Padding(12, 70, 12, 12);
             FormBorderStyle = FormBorderStyle.None;
+            backgorundImageTrasparency = 0.90f;
             Font = MetroSetFonts.SemiLight(13);
             prop = new FormProperties();
+            mth = new Methods();
             utl = new Utilites();
             user32 = new User32();
             textAlign = TextAlign.Left;
@@ -235,6 +257,7 @@ namespace MetroSet_UI.Controls
             showHeader = false;
             style = Style.Light;
             ApplyTheme();
+
         }
 
         #endregion Constructor
@@ -252,10 +275,7 @@ namespace MetroSet_UI.Controls
                 e.Graphics.FillRectangle(B, new Rectangle(0, 0, Width, Height));
                 if (BackgroundImage != null)
                 {
-                    using (TextureBrush tb = new TextureBrush(BackgroundImage))
-                    {
-                        e.Graphics.FillRectangle(tb, new Rectangle(0, 0, Width, Height));
-                    }
+                    mth.DrawImageWithTransparency(e.Graphics, BackgroundImageTransparency, BackgroundImage, ClientRectangle);
                 }
             }
             if (ShowBorder)
@@ -410,6 +430,7 @@ namespace MetroSet_UI.Controls
 
         private readonly Utilites utl;
         private readonly User32 user32;
+        private readonly Methods mth;
 
         #endregion Global Vars
 
@@ -421,6 +442,7 @@ namespace MetroSet_UI.Controls
         private StyleManager _StyleManager;
         private bool showLeftRect;
         private bool showHeader;
+        private float backgorundImageTrasparency;
 
         #endregion Internal Vars
 
@@ -467,7 +489,6 @@ namespace MetroSet_UI.Controls
                     prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     prop.HeaderColor = Color.FromArgb(126, 56, 120);
                     prop.HeaderHeight = 35;
-
                     if (ShowHeader)
                     {
                         prop.TextColor = Color.Gray;

@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Metro-Folders-OS-Windows-8-Metro.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -145,6 +148,9 @@
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
     <Compile Include="Design\MetroSetListBoxDesigner.cs" />
+    <Compile Include="Forms\MetroSetMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Design\MetroSetTrackBarDesigner.cs" />
     <Compile Include="Design\MetroSetScrollBarDesigner.cs" />
     <Compile Include="Design\MetroSetControBoxDesigner.cs" />
@@ -198,7 +204,7 @@
     <Compile Include="Controls\MetroSetButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\MetroSetForm.cs">
+    <Compile Include="Forms\MetroSetForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetLabel.cs">
@@ -234,10 +240,10 @@
     <Compile Include="Actions\StyleManagerActionList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dialogs\" />
+    <Content Include="Metro-Folders-OS-Windows-8-Metro.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\MetroSetForm.resx">
+    <EmbeddedResource Include="Forms\MetroSetForm.resx">
       <DependentUpon>MetroSetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

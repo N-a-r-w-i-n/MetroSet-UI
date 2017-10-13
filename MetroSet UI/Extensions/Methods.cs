@@ -127,8 +127,9 @@ namespace MetroSet_UI.Extensions
         /// The Matrix array of single from color.
         /// </summary>
         /// <param name="C">The Color.</param>
+        /// /// <param name="alpha">The Opacity.</param>
         /// <returns>The Matrix array of single from the given color</returns>
-        public float[][] ColorToMatrix(Color C)
+        public float[][] ColorToMatrix(float alpha, Color C)
         {
             return new[]
             {
@@ -140,11 +141,23 @@ namespace MetroSet_UI.Extensions
                 Convert.ToSingle(C.R / 255),
                 Convert.ToSingle(C.G / 255),
                 Convert.ToSingle(C.B / 255),
-                0f,
+                alpha,
                 Convert.ToSingle(C.A / 255)
             }
         };
         }
+
+
+        public void DrawImageWithTransparency(Graphics G, float alpha, Image image, Rectangle rect)
+        {
+            ColorMatrix colorMatrix = new ColorMatrix { Matrix33 = alpha };
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.SetColorMatrix(colorMatrix);
+            G.DrawImage(image, new Rectangle(rect.X, rect.Y, image.Width, image.Height), rect.X, rect.Y, image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
+            imageAttributes.Dispose();
+        }
+
+        
 
         /// <summary>
         /// The Image from encoded base64 image.

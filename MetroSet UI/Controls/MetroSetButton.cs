@@ -325,8 +325,8 @@ namespace MetroSet_UI.Controls
 
         #region Properties
 
-        [Browsable(false)]
-        public new Color BackColor
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Color BackColor
         {
             get { return Color.Transparent; }
         }

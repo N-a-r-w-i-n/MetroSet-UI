@@ -42,7 +42,7 @@ namespace MetroSet_UI.Controls
     [DefaultProperty("Switched")]
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    public class MetroSetSwitch : Control, iControl
+    public class MetroSetSwitch : Control, iControl, IDisposable
     {
         #region Interfaces
 
@@ -420,5 +420,28 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Properties
+
+        #region Methods
+
+        /// <summary>
+        /// Disposing Methods.
+        /// </summary>
+        public new void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                timer.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #endregion
+
     }
 }
