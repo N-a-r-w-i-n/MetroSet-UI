@@ -43,6 +43,16 @@ Dependency
 
 ## 
 
+## Forms Available
+
+
+:arrow_down: | Forms | Skin Support | Custom Theme Support | Animation | Disabling | Custom Smart Tags
+:---:|:---|:---:|:---:|:---:|:---:|:---:|
+:arrow_right: | MetroSetForm |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:
+:arrow_right: | MetroSetMessageBox |:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:
+
+## 
+
 ## Controls Available
 
 
@@ -71,6 +81,8 @@ Dependency
 :arrow_right: | MetroSetTrackBar |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetScrollBar |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetListBox |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
+
+
 ## 
 
 ## Using MetroSetForm
@@ -80,7 +92,7 @@ Dependency
 
 ```cs
 
-using MetroSet_UI.Controls;
+using MetroSet_UI.Dialogs;
 
 public partial class Form1 : MetroSetForm
     {
@@ -95,7 +107,7 @@ public partial class Form1 : MetroSetForm
 ## VB.NET
 
 ```vb
-Imports MetroSet_UI.Controls
+Imports MetroSet_UI.Dialogs
 
 public class Form1 : Inherits MetroSetForm
     
@@ -105,6 +117,50 @@ public class Form1 : Inherits MetroSetForm
     
 End Class
 ```
+
+## MetroSetMessageBox Example
+
+
+## C#
+
+```cs
+
+using System;
+using MetroSet_UI.Dialogs;
+using System.Windows.Forms;
+namespace MetroSet_UI_Example
+{
+    public partial class MetroSetForm1 : MetroSetForm 
+    {
+        public MetroSetForm1()
+        {
+            InitializeComponent();
+        }
+
+        private void MetroSetButton1_Click(object sender, EventArgs e)
+        {
+            MetroSetMessageBox.Show(this, "Content", "Caption", MessageBoxButtons.OK, MessageBoxIcon.Question);
+        }
+
+    }
+}
+
+```
+
+## VB.NET
+
+```vb
+Imports MetroSet_UI.Dialogs
+
+public class Form1 : Inherits MetroSetForm
+    
+    Private Sub MetroSetButton1_Click(sender As Object, e As EventArgs)
+			MetroSetMessageBox.Show(Me, "Content", "Caption", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+	End Sub
+    
+End Class
+```
+
 ## Credits
 
 >  MCF.Goodwin : [Form Fading](https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func)
