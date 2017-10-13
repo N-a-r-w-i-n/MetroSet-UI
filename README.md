@@ -24,9 +24,13 @@
   </a>
 </p >
 
+## 
+
 <h3 align="center">Install via NuGet</h3>
 
     Install-Package MetroSet_UI
+
+## 
 
 <h3 align="center">Direct to NuGet</h3>
 
@@ -35,7 +39,7 @@
 ## 
 
 <h3 align="center">Supported platforms</h3>
--------------------
+
 :arrow_right: Windows XP SP1/SP2/SP3
 
 :arrow_right: Windows Vista
@@ -48,8 +52,8 @@
 
 ## 
 
-Dependency
-------------
+<h3 align="center">Dependency</h3>
+
 :arrow_right_hook: .NET Framework 2.0 or higher.
 
 ## 
@@ -61,7 +65,7 @@ Dependency
 :arrow_right: | StyleManager |:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:
 :arrow_right: | MetroSetToolTip |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:
 
-## 
+
 
 <h2 align="center">Forms Available</h2>
 
@@ -71,7 +75,7 @@ Dependency
 :arrow_right: | MetroSetForm |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:
 :arrow_right: | MetroSetMessageBox |:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:
 
-## 
+
 
 <h2 align="center">Controls Available</h2>
 
@@ -101,10 +105,6 @@ Dependency
 :arrow_right: | MetroSetTile |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_check_mark:|:heavy_check_mark:
 :arrow_right: | MetroSetTrackBar |:heavy_check_mark:|:heavy_check_mark:|:heavy_multiplication_x:|:heavy_multiplication_x:|:heavy_check_mark:
 
-
-
-
-## 
 
 <h2 align="center">Using MetroSetForm</h2>
 
