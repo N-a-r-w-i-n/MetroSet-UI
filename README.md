@@ -1,20 +1,40 @@
-MetroSet UI Framework
-=====================
-### Windows Forms Metro Skin Style, Make The .NET Applications With Metro Styles.
+<p  align="center">
+  <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI">
+    <img alt="MetroSet-UI" width="200" heigth="200" src="https://raw.githubusercontent.com/N-a-r-w-i-n/MetroSet-UI/master/MetroSet.png">
+  </a>
+</p >	
+	
+<h1  align="center">MetroSet UI Framework</h1>
 
-## 
+<h3  align="center">Windows Forms Metro Skin Style, Make The .NET Applications With Metro Styles.</h3>
 
-## Install via NuGet
+<p  align="center">
+  <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/issues">
+    <img src="https://img.shields.io/github/issues/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square">
+  </a>
+  <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/network">
+    <img src="https://img.shields.io/github/forks/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square">
+  </a>
+  <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/stargazers">
+    <img src="https://img.shields.io/github/stars/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square">
+  </a>
+ </a>
+  <a href="https://raw.githubusercontent.com/N-a-r-w-i-n/MetroSet-UI/master/LICENSE.md">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square">
+  </a>
+</p >
+
+<h3 align="center">Install via NuGet</h3>
 
     Install-Package MetroSet_UI
 
-## Direct to NuGet
+<h3 align="center">Direct to NuGet</h3>
 
 > [Link](https://www.nuget.org/packages/MetroSet_UI/)
 
 ## 
 
-Supported platforms
+<h3 align="center">Supported platforms</h3>
 -------------------
 :arrow_right: Windows XP SP1/SP2/SP3
 
@@ -34,7 +54,7 @@ Dependency
 
 ## 
 
-## Components Available
+<h2 align="center">Components Available</h2>
 
 :arrow_down: | Components | Skin Support | Custom Theme Support | Smart Tag
 :---:|:---|:---:|:---:|:---:|
@@ -43,7 +63,7 @@ Dependency
 
 ## 
 
-## Forms Available
+<h2 align="center">Forms Available</h2>
 
 
 :arrow_down: | Forms | Skin Support | Custom Theme Support | Animation | Disabling | Custom Smart Tags
@@ -53,7 +73,7 @@ Dependency
 
 ## 
 
-## Controls Available
+<h2 align="center">Controls Available</h2>
 
 
 :arrow_down: | Controls | Skin Support | Custom Theme Support | Animation | Disabling | Custom Smart Tags
@@ -86,10 +106,10 @@ Dependency
 
 ## 
 
-## Using MetroSetForm
+<h2 align="center">Using MetroSetForm</h2>
 
 
-## C#
+<h2 align="center">C#.NET</h2>
 
 ```cs
 
@@ -105,7 +125,7 @@ public partial class Form1 : MetroSetForm
 
 ```
 
-## VB.NET
+<h2 align="center">VB.NET</h2>
 
 ```vb
 Imports MetroSet_UI.Dialogs
@@ -119,10 +139,10 @@ public class Form1 : Inherits MetroSetForm
 End Class
 ```
 
-## MetroSetMessageBox Example
+<h2 align="center">MetroSetMessageBox Example</h2>
 
 
-## C#
+<h2 align="center">C#.NET</h2>
 
 ```cs
 
@@ -148,7 +168,7 @@ namespace MetroSet_UI_Example
 
 ```
 
-## VB.NET
+<h2 align="center">VB.NET</h2>
 
 ```vb
 Imports MetroSet_UI.Dialogs
@@ -162,7 +182,7 @@ public class Form1 : Inherits MetroSetForm
 End Class
 ```
 
-## Credits
+<h2 align="center">Credits</h2>
 
 >  MCF.Goodwin : [Form Fading](https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func)
 
@@ -170,7 +190,7 @@ End Class
 
 >  Mavamaarten : [TabControl Transition Method](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/29e65d1d2e4d12105f9b9639e9def96af0b93da2/MetroSet%20UI/Controls/MetroSetTabControl.cs#L363-L463)
 
-## License
+<h2 align="center">License</h2>
 
 >  [MIT License](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/LICENSE.md)
 
