@@ -512,7 +512,6 @@ namespace MetroSet_UI.Controls
         #endregion
 
     }
-
-    
+       
 
 }

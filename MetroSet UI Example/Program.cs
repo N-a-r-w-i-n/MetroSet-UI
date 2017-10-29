@@ -14,7 +14,7 @@ namespace MetroSet_UI_Example
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MetroSetForm1());
+            Application.Run(new Form2());
         }
     }
 }

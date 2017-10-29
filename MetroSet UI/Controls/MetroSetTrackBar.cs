@@ -144,7 +144,6 @@ namespace MetroSet_UI.Controls
             prop = new TrackBarProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
             ApplyTheme();
 
         } 
