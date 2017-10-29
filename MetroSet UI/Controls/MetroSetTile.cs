@@ -143,7 +143,6 @@ namespace MetroSet_UI.Controls
             Font = MetroSetFonts.Light(10);
             utl = new Utilites();
             mth = new Methods();
-            style = Style.Light;
             ApplyTheme();
         }
 

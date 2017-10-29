@@ -134,7 +134,6 @@ namespace MetroSet_UI.Controls
             prop = new LinkLabelProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Dark;
             ApplyTheme();
             LinkBehavior = LinkBehavior.HoverUnderline;
         }

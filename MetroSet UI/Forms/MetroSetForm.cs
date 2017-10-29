@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static MetroSet_UI.Native.User32;
 
-namespace MetroSet_UI.Dialogs
+namespace MetroSet_UI.Forms
 {
     [ToolboxItem(false)]
     [ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
@@ -160,13 +160,13 @@ namespace MetroSet_UI.Dialogs
                         if (C.GetType() == typeof(MetroSetControlBox))
                         {
                             C.BringToFront();
-                            C.Location = new Point(643, 3);
+                            C.Location = new Point(Width - 12, 11);
                         }
                     }
                 }
                 else
                 {
-                    Padding = new Padding(12, 70, 12, 12);
+                    Padding = new Padding(12, 90, 12, 12);
                     ShowTitle = false;
                 }
                 Invalidate();
@@ -230,6 +230,13 @@ namespace MetroSet_UI.Dialogs
                 Invalidate();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the header height.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the header height.")]
+        public int HeaderHeight { get; set; } = 30;
+
         #endregion Properties
 
         #region Constructor
@@ -241,6 +248,7 @@ namespace MetroSet_UI.Dialogs
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
+                ControlStyles.ContainerControl |
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
@@ -255,7 +263,6 @@ namespace MetroSet_UI.Dialogs
             textAlign = TextAlign.Left;
             showLeftRect = true;
             showHeader = false;
-            style = Style.Light;
             ApplyTheme();
 
         }
@@ -266,6 +273,7 @@ namespace MetroSet_UI.Dialogs
 
         protected override void OnPaint(PaintEventArgs e)
         {
+
             e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             e.Graphics.InterpolationMode = InterpolationMode.High;
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
@@ -286,7 +294,6 @@ namespace MetroSet_UI.Dialogs
                 }
             }
             
-
             if (ShowLeftRect)
             {
                 using (LinearGradientBrush B = new LinearGradientBrush(new Rectangle(0, 25, SmallRectThickness, 35), prop.SmallLineColor1, prop.SmallLineColor2, 90))
@@ -300,16 +307,14 @@ namespace MetroSet_UI.Dialogs
             }
             else
             {
-                int height = prop.HeaderHeight;
                 if (ShowHeader)
                 {
                     using (SolidBrush B = new SolidBrush(prop.HeaderColor))
                     {
-                       
-                        e.Graphics.FillRectangle(B, new Rectangle(1, 1, Width - 1, height));
+                        e.Graphics.FillRectangle(B, new Rectangle(1, 1, Width - 1, HeaderHeight));
                     }
                 }
-
+            
                 SolidBrush textBrush = new SolidBrush(prop.TextColor);
                 if (ShowTitle)
                 {
@@ -318,21 +323,21 @@ namespace MetroSet_UI.Dialogs
                         case TextAlign.Left:
                             using (StringFormat stringFormat = new StringFormat() {LineAlignment = StringAlignment.Center})
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 20, Width, height), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width, HeaderHeight), stringFormat);
                             }
                             break;
 
                         case TextAlign.Center:
                             using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center})
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 21, height), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 21, HeaderHeight), stringFormat);
                             }
                             break;
 
                         case TextAlign.Right:
                             using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center })
                             {
-                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 26, height), stringFormat);
+                                e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 26, HeaderHeight), stringFormat);
                             }
                             break;
                     }
@@ -487,7 +492,7 @@ namespace MetroSet_UI.Dialogs
                     prop.BorderColor = Color.FromArgb(65, 177, 225);
                     prop.SmallLineColor1 = Color.FromArgb(65, 177, 225);
                     prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
-                    prop.HeaderColor = Color.FromArgb(126, 56, 120);
+                    prop.HeaderColor = Color.FromArgb(65, 177, 225);
                     prop.HeaderHeight = 35;
                     if (ShowHeader)
                     {
@@ -595,7 +600,8 @@ namespace MetroSet_UI.Dialogs
                 ShowLeftRect = prop.DrawLeftRect;
                 TextAlign = prop.TextAlign;
                 ForeColor = prop.ForeColor;
-                Refresh();
+                HeaderHeight = prop.HeaderHeight;
+                Invalidate();
             }
             catch (Exception ex) { throw new Exception(ex.StackTrace); }
         }
