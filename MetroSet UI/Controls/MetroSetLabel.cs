@@ -133,6 +133,7 @@ namespace MetroSet_UI.Controls
             prop = new LabelProperties();
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Light;
             ApplyTheme();
         }
 

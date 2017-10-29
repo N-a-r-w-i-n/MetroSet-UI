@@ -137,6 +137,7 @@ namespace MetroSet_UI.Controls
             prop = new NumericProperties();
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Light;
             ApplyTheme();
             point = new Point(0, 0);
         }
