@@ -1,6 +1,6 @@
 <p  align="center">
   <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI">
-    <img alt="MetroSet-UI" width="200" heigth="200" src="https://raw.githubusercontent.com/N-a-r-w-i-n/MetroSet-UI/master/MetroSet.png">
+    <img alt="MetroSet-UI" width="384" heigth="384" src="https://raw.githubusercontent.com/N-a-r-w-i-n/MetroSet-UI/master/MetroSet.png">
   </a>
 </p >	
 	
@@ -111,7 +111,7 @@
 
 ```cs
 
-using MetroSet_UI.Dialogs;
+using MetroSet_UI.Forms;
 
 public partial class Form1 : MetroSetForm
     {
@@ -126,7 +126,7 @@ public partial class Form1 : MetroSetForm
 <h2 align="center">VB.NET</h2>
 
 ```vb
-Imports MetroSet_UI.Dialogs
+Imports MetroSet_UI.Forms
 
 public class Form1 : Inherits MetroSetForm
     
@@ -145,7 +145,7 @@ End Class
 ```cs
 
 using System;
-using MetroSet_UI.Dialogs;
+using MetroSet_UI.Forms;
 using System.Windows.Forms;
 namespace MetroSet_UI_Example
 {
@@ -169,7 +169,7 @@ namespace MetroSet_UI_Example
 <h2 align="center">VB.NET</h2>
 
 ```vb
-Imports MetroSet_UI.Dialogs
+Imports MetroSet_UI.Forms
 
 public class Form1 : Inherits MetroSetForm
     
