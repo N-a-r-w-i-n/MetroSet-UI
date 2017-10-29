@@ -31,10 +31,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MetroSet_UI.Dialogs
+namespace MetroSet_UI.Forms
 {
     public class MetroSetMessageBox : MetroSetForm
-    {        
+    {
 
         #region Internal vars
 
@@ -424,90 +424,90 @@ namespace MetroSet_UI.Dialogs
         /// </summary>
         /// <returns>The MessageBox with provided buttons.</returns>
         protected new DialogResult ShowDialog()
+{
+
+    int buttonHeight = Height - 45;
+    int firstButton = (Width - buttonSize.Width) - 10;
+    int secondButoon = (Width - (buttonSize.Width * 2)) - 20;
+    switch (Buttons)
+    {
+        case MessageBoxButtons.OK:
+            okButton.Location = new Point(firstButton, buttonHeight);
+            okButton.Visible = true;
+            break;
+
+        case MessageBoxButtons.OKCancel:
+            okButton.Location = new Point(secondButoon, buttonHeight);
+            okButton.Visible = true;
+            cancelButton.Location = new Point(firstButton, buttonHeight);
+            cancelButton.Visible = true;
+            break;
+
+        case MessageBoxButtons.YesNo:
+            yesButton.Location = new Point(secondButoon, buttonHeight);
+            yesButton.Visible = true;
+            noButton.Location = new Point(firstButton, buttonHeight);
+            noButton.Visible = true;
+            break;
+
+        case MessageBoxButtons.YesNoCancel:
+            yesButton.Location = new Point((Width - (buttonSize.Width * 3)) - 30, buttonHeight);
+            yesButton.Visible = true;
+            noButton.Location = new Point(secondButoon, buttonHeight);
+            noButton.Visible = true;
+            cancelButton.Location = new Point(firstButton, buttonHeight);
+            cancelButton.Visible = true;
+            break;
+
+        case MessageBoxButtons.RetryCancel:
+            retryButton.Location = new Point(secondButoon, buttonHeight);
+            retryButton.Visible = true;
+            cancelButton.Location = new Point(firstButton, buttonHeight);
+            cancelButton.Visible = true;
+            break;
+
+        case MessageBoxButtons.AbortRetryIgnore:
+            abortButton.Location = new Point((Width - (buttonSize.Width * 3)) - 30, buttonHeight);
+            abortButton.Visible = true;
+            retryButton.Location = new Point(secondButoon, buttonHeight);
+            retryButton.Visible = true;
+            ignoreButton.Location = new Point(firstButton, buttonHeight);
+            ignoreButton.Visible = true;
+            break;
+
+        default:
+            okButton.Location = new Point(firstButton, buttonHeight);
+            okButton.Visible = true;
+            break;
+    }
+    return base.ShowDialog();
+}
+
+#endregion
+
+#region Draw Dialog
+
+protected override void OnPaint(PaintEventArgs e)
+{
+    Graphics G = e.Graphics;
+    G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+
+    Rectangle rect = new Rectangle(0, ((OwnerForm.Height - (OwnerForm.Height / 2)) / 250), OwnerForm.Width - 3, (OwnerForm.Height / 3) - 2);
+
+    using (SolidBrush BG = new SolidBrush(BackgroundColor))
+    {
+        using (SolidBrush CTNT = new SolidBrush(ForegroundColor))
         {
-
-            int buttonHeight = Height - 45;
-            int firstButton = (Width - buttonSize.Width) - 10;
-            int secondButoon = (Width - (buttonSize.Width * 2)) - 20;
-            switch (Buttons)
+            using (Pen P = new Pen(BorderColor))
             {
-                case MessageBoxButtons.OK:
-                    okButton.Location = new Point(firstButton, buttonHeight);
-                    okButton.Visible = true;
-                    break;
-
-                case MessageBoxButtons.OKCancel:
-                    okButton.Location = new Point(secondButoon, buttonHeight);
-                    okButton.Visible = true;
-                    cancelButton.Location = new Point(firstButton, buttonHeight);
-                    cancelButton.Visible = true;
-                    break;
-
-                case MessageBoxButtons.YesNo:
-                    yesButton.Location = new Point(secondButoon, buttonHeight);
-                    yesButton.Visible = true;
-                    noButton.Location = new Point(firstButton, buttonHeight);
-                    noButton.Visible = true;
-                    break;
-
-                case MessageBoxButtons.YesNoCancel:
-                    yesButton.Location = new Point((Width - (buttonSize.Width * 3)) - 30, buttonHeight);
-                    yesButton.Visible = true;
-                    noButton.Location = new Point(secondButoon, buttonHeight);
-                    noButton.Visible = true;
-                    cancelButton.Location = new Point(firstButton, buttonHeight);
-                    cancelButton.Visible = true;
-                    break;
-
-                case MessageBoxButtons.RetryCancel:
-                    retryButton.Location = new Point(secondButoon, buttonHeight);
-                    retryButton.Visible = true;
-                    cancelButton.Location = new Point(firstButton, buttonHeight);
-                    cancelButton.Visible = true;
-                    break;
-
-                case MessageBoxButtons.AbortRetryIgnore:
-                    abortButton.Location = new Point((Width - (buttonSize.Width * 3)) - 30, buttonHeight);
-                    abortButton.Visible = true;
-                    retryButton.Location = new Point(secondButoon, buttonHeight);
-                    retryButton.Visible = true;
-                    ignoreButton.Location = new Point(firstButton, buttonHeight);
-                    ignoreButton.Visible = true;
-                    break;
-
-                default:
-                    okButton.Location = new Point(firstButton, buttonHeight);
-                    okButton.Visible = true;
-                    break;
-            }
-            return base.ShowDialog();
-        }
-
-        #endregion
-
-        #region Draw Dialog
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            Graphics G = e.Graphics;
-            G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-
-            Rectangle rect = new Rectangle(0, ((OwnerForm.Height - (OwnerForm.Height / 2)) / 250), OwnerForm.Width - 3, (OwnerForm.Height / 3) - 2);
-
-            using (SolidBrush BG = new SolidBrush(BackgroundColor))
-            {
-                using (SolidBrush CTNT = new SolidBrush(ForegroundColor))
-                {
-                    using (Pen P = new Pen(BorderColor))
-                    {
-                        G.FillRectangle(BG, rect);
-                        G.DrawString(Caption, Font, CTNT, new PointF(rect.X + 10, rect.Y + 10));
-                        G.DrawString(Content, Font, CTNT, new PointF(rect.X + 10, rect.Y + 40));
-                        G.DrawRectangle(P, rect);
-                    }
-                }
+                G.FillRectangle(BG, rect);
+                G.DrawString(Caption, Font, CTNT, new PointF(rect.X + 10, rect.Y + 10));
+                G.DrawString(Content, Font, CTNT, new PointF(rect.X + 10, rect.Y + 40));
+                G.DrawRectangle(P, rect);
             }
         }
+    }
+}
 
         #endregion
 

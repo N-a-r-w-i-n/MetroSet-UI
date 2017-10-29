@@ -128,7 +128,7 @@ namespace MetroSet_UI.Child
             Font = MetroSetFonts.Light(10);
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
+
             ApplyTheme();
         }
 

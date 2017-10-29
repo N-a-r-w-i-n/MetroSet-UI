@@ -141,7 +141,6 @@ namespace MetroSet_UI.Controls
             prop = new TabControlProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
             ApplyTheme();
         }
 
@@ -173,7 +172,7 @@ namespace MetroSet_UI.Controls
                     prop.UnselectedTextColor = Color.Gray;
                     prop.SelectedTextColor = Color.White;
                     ThemeAuthor = "Narwin";
-                    ThemeName = "MetroDark"; 
+                    ThemeName = "MetroDark";
                     SetProperties();
                     break;
 
@@ -256,68 +255,70 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the speed of transition.
         /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the speed of transition.")] 
+        [Category("MetroSet Framework"), Description("Gets or sets the speed of transition.")]
         public int Speed { get; set; } = 20;
 
         [Category("MetroSet Framework")]
-        public override DockStyle Dock { get => base.Dock; set => base.Dock = value; }
-
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        public new TabSizeMode SizeMode { get; set; } = TabSizeMode.Fixed;
-
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        public new TabDrawMode DrawMode { get; set; } = TabDrawMode.Normal;
-
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        private Color BaseColor { get; set; }
-
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        private Color ForeroundColor { get; set; }
-
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        private Color UnselectedTextColor { get; set; }
-
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        private Color SelectedTextColor { get; set; }
-        
-        /// <summary>
-        /// Gets or sets the tancontrol apperance style
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
-        public TabStyle TabStyle
+        public override DockStyle Dock
         {
-            get { return tabStyle; }
-            set
+            get => base.Dock; set => base.Dock = value; }
+
+            [Category("MetroSet Framework")]
+            [Browsable(false)]
+            public new TabSizeMode SizeMode { get; set; } = TabSizeMode.Fixed;
+
+            [Category("MetroSet Framework")]
+            [Browsable(false)]
+            public new TabDrawMode DrawMode { get; set; } = TabDrawMode.Normal;
+
+            [Category("MetroSet Framework")]
+            [Browsable(false)]
+            private Color BaseColor { get; set; }
+
+            [Category("MetroSet Framework")]
+            [Browsable(false)]
+            private Color ForeroundColor { get; set; }
+
+            [Category("MetroSet Framework")]
+            [Browsable(false)]
+            private Color UnselectedTextColor { get; set; }
+
+            [Category("MetroSet Framework")]
+            [Browsable(false)]
+            private Color SelectedTextColor { get; set; }
+
+            /// <summary>
+            /// Gets or sets the tancontrol apperance style
+            /// </summary>
+            [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
+            public TabStyle TabStyle
             {
-                tabStyle = value;
-                Invalidate();
+                get { return tabStyle; }
+                set
+                {
+                    tabStyle = value;
+                    Invalidate();
+                }
             }
-        }
 
-        #endregion Properties
+            #endregion Properties
 
-        #region Draw Control
+            #region Draw Control
 
-        protected override void OnPaint(PaintEventArgs e)
+            protected override void OnPaint(PaintEventArgs e)
         {
             var G = e.Graphics;
 
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            G.Clear(BaseColor);                      
+            G.Clear(BaseColor);
 
             var h = ItemSize.Height + 2;
 
             switch (TabStyle)
             {
                 case TabStyle.Style1:
-                    
+
                     using (Pen SB = new Pen(ForeroundColor, 2))
                     {
                         G.DrawLine(SB, 2, h, Width - 3, h);
@@ -353,7 +354,7 @@ namespace MetroSet_UI.Controls
                                 G.DrawLine(SB, r.X, r.Height, r.X + r.Width, r.Height);
                             }
                         }
-                        using (SolidBrush TB = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
+                        using (SolidBrush TB = new SolidBrush(UnselectedTextColor))
                         {
                             G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
                         }
@@ -372,7 +373,6 @@ namespace MetroSet_UI.Controls
         // Credits : Mavamaarten
 
         private int OldIndex;
-                
 
         public void DoAnimationScrollLeft(Control Control1, Control Control2)
         {
@@ -473,7 +473,7 @@ namespace MetroSet_UI.Controls
         #endregion Animation
 
         #endregion Events
-        
+
         #region Methods
 
         private void InvalidateTabPage(Color C)
@@ -486,7 +486,7 @@ namespace MetroSet_UI.Controls
             }
         }
 
-#endregion
+        #endregion
 
     }
 }

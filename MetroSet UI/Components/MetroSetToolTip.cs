@@ -128,7 +128,7 @@ namespace MetroSet_UI.Components
             Popup += ToolTip_Popup;
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
+
             ApplyTheme();
         }
 

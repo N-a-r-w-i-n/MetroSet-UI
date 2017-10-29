@@ -148,7 +148,7 @@ namespace MetroSet_UI.Controls
             prop = new ComboBoxProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
+
             ApplyTheme();
         }
 

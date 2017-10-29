@@ -158,7 +158,7 @@ namespace MetroSet_UI.Controls
             prop = new ListBoxProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
+
             ApplyTheme();
             SetDefaults();
         }
