@@ -31,7 +31,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MetroSet_UI.Forms
+namespace MetroSet_UI.Dialogs
 {
     public class MetroSetMessageBox : MetroSetForm
     {        

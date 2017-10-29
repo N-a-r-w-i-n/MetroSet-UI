@@ -141,6 +141,7 @@ namespace MetroSet_UI.Controls
             prop = new TabControlProperties();
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Light;
             ApplyTheme();
         }
 
@@ -352,7 +353,7 @@ namespace MetroSet_UI.Controls
                                 G.DrawLine(SB, r.X, r.Height, r.X + r.Width, r.Height);
                             }
                         }
-                        using (SolidBrush TB = new SolidBrush(UnselectedTextColor))
+                        using (SolidBrush TB = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
                         {
                             G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
                         }
@@ -370,7 +371,8 @@ namespace MetroSet_UI.Controls
 
         // Credits : Mavamaarten
 
-        private int OldIndex;                
+        private int OldIndex;
+                
 
         public void DoAnimationScrollLeft(Control Control1, Control Control2)
         {

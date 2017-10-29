@@ -135,6 +135,7 @@ namespace MetroSet_UI.Controls
             mth = new Methods();
             utl = new Utilites();
             Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            style = Style.Light;
             ApplyTheme();
         }
 

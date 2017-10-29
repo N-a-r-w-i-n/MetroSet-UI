@@ -176,6 +176,7 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             Font = MetroSetFonts.Regular(10);
             EvaluateVars();
+            style = Style.Light;
             ApplyTheme();
             T_Defaults();
         }

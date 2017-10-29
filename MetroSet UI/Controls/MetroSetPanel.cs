@@ -116,7 +116,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Internal Vars
 
-        #region Constructors 
+        #region Constructors
 
         public MetroSetPanel()
         {
@@ -131,6 +131,7 @@ namespace MetroSet_UI.Controls
             prop = new PanelProperties();
             mth = new Methods();
             utl = new Utilites();
+            style = Style.Light;
             ApplyTheme();
         }
 
@@ -226,7 +227,7 @@ namespace MetroSet_UI.Controls
 
         #endregion
 
-        #region Properties
+        #region Draw Control
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor { get => base.BackColor; set => base.BackColor = value; }
@@ -234,18 +235,8 @@ namespace MetroSet_UI.Controls
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color ForeColor { get => base.ForeColor; set => base.ForeColor = value; }
 
-        private BorderStyle borderStyle = BorderStyle.None;
-
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public BorderStyle GetBorderStyle()
-        {
-            return borderStyle;
-        }
-
-        public void SetBorderStyle(BorderStyle value)
-        {
-            borderStyle = value;
-        }
+        public new BorderStyle BorderStyle { get; set; } = BorderStyle.None;
 
         /// <summary>
         /// Gets or sets the border thickness the control.
