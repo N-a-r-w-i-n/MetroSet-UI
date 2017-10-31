@@ -295,7 +295,7 @@ namespace MetroSet_UI.Controls
             {
                 using (Font F = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(MaximizeBox ? MaximizeHovered ? prop.MaximizeHoverBackColor : prop.MaximizeNormalForeColor : prop.DisabledForeColor))
+                    using (SolidBrush TB = new SolidBrush(MaximizeBox ? MaximizeHovered ? prop.MaximizeHoverForeColor : prop.MaximizeNormalForeColor : prop.DisabledForeColor))
                     {
                         using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
                         {
@@ -311,12 +311,12 @@ namespace MetroSet_UI.Controls
             {
                 using (Font F = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(MinimizeBox ? MinimizeHovered ? prop.MinimizeHoverBackColor : prop.MinimizeNormalForeColor : prop.DisabledForeColor))
+                    using (SolidBrush TB = new SolidBrush(MinimizeBox ? MinimizeHovered ? prop.MinimizeHoverForeColor : prop.MinimizeNormalForeColor : prop.DisabledForeColor))
                     {
                         using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
                         {
                             G.FillRectangle(MinimizeBoxState, new Rectangle(5, 5, 27, Height));
-                            G.DrawString("0", F, Brushes.Gray, new Point(20, 7), SF);
+                            G.DrawString("0", F, TB, new Point(20, 7), SF);
                         }
                     }
                 }
