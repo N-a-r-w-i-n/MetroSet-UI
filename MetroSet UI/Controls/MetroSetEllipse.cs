@@ -212,7 +212,7 @@ namespace MetroSet_UI.Controls
 
                     break;
             }
-
+             
             if (Image != null)
             {
                 Rectangle imgRect = new Rectangle(new Point((Width - ImageSize.Width) / 2, (Height - ImageSize.Height) / 2), ImageSize);
