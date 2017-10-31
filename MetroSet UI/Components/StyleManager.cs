@@ -581,16 +581,24 @@ namespace MetroSet_UI
         /// <returns>The Dictionary of childnodes names and values of a specific node.</returns>
         private Dictionary<string, object> GetValues(string path, string nodename)
         {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-            if (doc.DocumentElement == null) { return null; }
-            XmlNode xnl = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
-            foreach (XmlNode node in xnl.ChildNodes)
+            try
             {
-                dict.Add(node.Name, node.InnerText);
+                Dictionary<string, object> dict = new Dictionary<string, object>();
+                XmlDocument doc = new XmlDocument();                
+                if(File.Exists(path))
+                doc.Load(path);
+                if (doc.DocumentElement == null) { return null; }
+                XmlNode xnl = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
+                foreach (XmlNode node in xnl.ChildNodes)
+                {
+                    dict.Add(node.Name, node.InnerText);
+                }
+                return dict;
             }
-            return dict;
+            catch
+            {
+                return null;
+            }
         }
 
 

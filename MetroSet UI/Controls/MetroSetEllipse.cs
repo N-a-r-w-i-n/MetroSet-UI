@@ -203,7 +203,7 @@ namespace MetroSet_UI.Controls
                 case MouseMode.Disabled:
                     using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
                     using (Pen P = new Pen(prop.DisabledBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
+                    using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor)) 
                     {
                         G.FillEllipse(BG, r);
                         G.DrawEllipse(P, r);
@@ -211,6 +211,13 @@ namespace MetroSet_UI.Controls
                     }
 
                     break;
+            }
+
+            if (Image != null)
+            {
+                Rectangle imgRect = new Rectangle(new Point((Width - ImageSize.Width) / 2, (Height - ImageSize.Height) / 2), ImageSize);
+
+                G.DrawImage(Image, imgRect);
             }
         }
 
@@ -351,6 +358,18 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the image associated with the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the image associated with the control.")]
+        public Image Image { get; set; }
+
+        /// <summary>
+        /// Gets or sets the image size associated with the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the image size associated with the control.")]
+        public Size ImageSize { get; set; } = new Size(64, 64);
 
         #endregion
 

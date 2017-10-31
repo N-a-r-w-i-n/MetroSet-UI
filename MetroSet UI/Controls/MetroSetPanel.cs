@@ -127,11 +127,11 @@ namespace MetroSet_UI.Controls
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
+            BorderStyle = BorderStyle.None;
             UpdateStyles();
             prop = new PanelProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
             ApplyTheme();
         }
 
@@ -216,7 +216,7 @@ namespace MetroSet_UI.Controls
 
             using (SolidBrush BG = new SolidBrush(prop.BackColor))
             {
-                using (Pen P = new Pen(prop.BorderColor))
+                using (Pen P = new Pen(prop.BorderColor , BorderThickness))
                 {
                     G.FillRectangle(BG, r);
                     G.DrawRectangle(P, r);
@@ -230,10 +230,13 @@ namespace MetroSet_UI.Controls
         #region Draw Control
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor { get => base.BackColor; set => base.BackColor = value; }
+        public override Color BackColor
+        {
+            get { return Color.Transparent; }
+        }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color ForeColor { get => base.ForeColor; set => base.ForeColor = value; }
+        public override Color ForeColor { get { return Color.Transparent; } }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new BorderStyle BorderStyle { get; set; } = BorderStyle.None;

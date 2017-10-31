@@ -48,7 +48,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Metro-Folders-OS-Windows-8-Metro.ico</ApplicationIcon>
+    <ApplicationIcon>MetroSetUI.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -241,6 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Metro-Folders-OS-Windows-8-Metro.ico" />
+    <Content Include="MetroSetUI.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\MetroSetForm.resx">

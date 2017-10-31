@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static MetroSet_UI.Native.User32;
 
-namespace MetroSet_UI.Dialogs
+namespace MetroSet_UI.Forms
 {
     [ToolboxItem(false)]
     [ToolboxBitmap(typeof(MetroSetForm), "Bitmaps.Form.bmp")]
