@@ -151,7 +151,7 @@ namespace MetroSet_UI.Controls
                 Enabled = false
             };
             timer.Tick += SetCheckedChanged;
-            style = Style.Light;
+
             ApplyTheme();
         }
 

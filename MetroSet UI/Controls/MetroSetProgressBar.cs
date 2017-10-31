@@ -134,7 +134,7 @@ namespace MetroSet_UI.Controls
             prop = new ProgressBarProperties();
             mth = new Methods();
             utl = new Utilites();
-            style = Style.Light;
+
             ApplyTheme();
         }
 
