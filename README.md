@@ -109,14 +109,14 @@
 <h2  align="center">Light</h2>
 <p  align="center">
   <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI">
-    <img alt="MetroSet-UI" width="800" heigth="650" src="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20Light.gif">
+    <img alt="MetroSet-UI" width="880" heigth="650" src="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20Light.gif">
   </a>
 </p >	
 
 <h2  align="center">Dark</h2>
 <p  align="center">
   <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI">
-    <img alt="MetroSet-UI" width="800" heigth="650" src="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20Dark.gif">
+    <img alt="MetroSet-UI" width="880" heigth="650" src="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20Dark.gif">
   </a>
 </p >	
 
