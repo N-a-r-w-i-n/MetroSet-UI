@@ -26,6 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
@@ -137,6 +138,7 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.SemiBold(10);
+            Cursor = Cursors.Hand;
             BackColor = Color.Transparent;
             prop = new CheckProperties();
             mth = new Methods();
@@ -147,7 +149,7 @@ namespace MetroSet_UI.Controls
                 Enabled = false
             };
             timer.Tick += SetCheckedChanged;
-
+            SignStyle = SignStyle.Sign;
             ApplyTheme();
         }
 
@@ -170,10 +172,9 @@ namespace MetroSet_UI.Controls
                     prop.BorderColor = Color.FromArgb(155, 155, 155);
                     prop.DisabledBorderColor = Color.FromArgb(205, 205, 205);
                     prop.CheckSignColor = Color.FromArgb(65, 177, 225);
-                    prop.CheckedStyle = SignStyle.Sign;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -183,10 +184,9 @@ namespace MetroSet_UI.Controls
                     prop.BorderColor = Color.FromArgb(155, 155, 155);
                     prop.DisabledBorderColor = Color.FromArgb(85, 85, 85);
                     prop.CheckSignColor = Color.FromArgb(65, 177, 225);
-                    prop.CheckedStyle = SignStyle.Sign;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -236,18 +236,17 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
                 Enabled = prop.Enabled;
                 ForeColor = prop.ForeColor;
-                SignStyle = prop.CheckedStyle;
                 Invalidate();
             }
             catch (Exception ex)
@@ -345,8 +344,7 @@ namespace MetroSet_UI.Controls
         public event CheckedChangedEventHandler CheckedChanged;
 
         public delegate void CheckedChangedEventHandler(object sender);
-
-
+        
         /// <summary>
         /// The Method that increases and decreases the alpha of check symbol which it make the control animate.
         /// </summary>
@@ -398,6 +396,22 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Here we set the mouse hand smooth.
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == User32.WM_SETCURSOR)
+            {
+                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            base.WndProc(ref m);
+        }
+
         #endregion Events
 
         #region Properties
@@ -427,12 +441,21 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
-
+        private SignStyle signStyle;
         /// <summary>
         /// Gets or sets the the sign style of check.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the the sign style of check.")]
-        public SignStyle SignStyle { get; set; }
+        public SignStyle SignStyle
+        {
+            get { return signStyle; }
+            set
+            {
+                signStyle = value;
+                prop.CheckedStyle = value;
+                Invalidate();
+            }
+        }
 
         /// <summary>
         /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
@@ -442,7 +465,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Properties
 
-        #region Methods
+        #region Disposing
 
         /// <summary>
         /// Disposing Methods.

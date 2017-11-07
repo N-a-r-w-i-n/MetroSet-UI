@@ -165,6 +165,9 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the badge text associated with the control.")]
         public string BadgeText { get; set; } = "3";
 
+        /// <summary>
+        /// Handling Control Enable state to detect the disability state.
+        /// </summary>
         [Category("MetroSet Framework")]
         public new bool Enabled
         {
@@ -442,6 +445,10 @@ namespace MetroSet_UI.Controls
 
         #region Events
 
+        /// <summary>
+        /// Handling mouse up event of the cotnrol.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -449,6 +456,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse down event of the cotnrol.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -456,6 +467,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse entering event of the control.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
@@ -463,6 +478,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse leave event of the cotnrol.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseEnter(e);

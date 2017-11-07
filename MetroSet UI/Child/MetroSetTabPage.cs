@@ -36,6 +36,7 @@ namespace MetroSet_UI.Child
     [Designer(typeof(MetroSetTabPageDesigner))]
     public class MetroSetTabPage : TabPage, iControl
     {
+
         #region Interfaces
 
         /// <summary>
@@ -148,19 +149,22 @@ namespace MetroSet_UI.Child
                     BaseColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
                     BaseColor = Color.FromArgb(32, 32, 32);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        /// <summary>
+        /// Updating properties after changing in style.
+        /// </summary>
+        public void UpdateProperties()
         {
             try
             {
@@ -180,7 +184,7 @@ namespace MetroSet_UI.Child
         public new Color BackColor { get; set; } = Color.Transparent;
 
         // I dont' want to recreate the following properties for specific reason but for helping
-        // user to find usage properties easily
+        // user to find usage properties easily under MetroSet Framework category in propertygrid.
 
         [Category("MetroSet Framework")]
         public override string Text { get; set; }

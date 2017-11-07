@@ -153,7 +153,7 @@ namespace MetroSet_UI.Controls
                     prop.BackColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -162,7 +162,7 @@ namespace MetroSet_UI.Controls
                     prop.BackColor = Color.FromArgb(30, 30, 30);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -187,12 +187,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -229,28 +229,27 @@ namespace MetroSet_UI.Controls
 
         #region Properties
 
+        /// <summary>
+        /// Gets the background color.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor
         {
             get { return Color.Transparent; }
         }
 
+        /// <summary>
+        /// Gets the foreground color.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color ForeColor { get { return Color.Transparent; } }
 
-        private BorderStyle borderStyle = BorderStyle.None;
-
+        /// <summary>
+        /// Gets or sets the border style.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public BorderStyle GetBorderStyle()
-        {
-            return borderStyle;
-        }
-
-        public void SetBorderStyle(BorderStyle value)
-        {
-            borderStyle = value;
-        }
-
+        public new BorderStyle BorderStyle = BorderStyle.None;
+               
         /// <summary>
         /// Gets or sets the border thickness the control.
         /// </summary>

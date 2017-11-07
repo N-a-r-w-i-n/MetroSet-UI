@@ -27,6 +27,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
@@ -163,7 +164,7 @@ namespace MetroSet_UI.Controls
                     prop.SelectedTextColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -173,7 +174,7 @@ namespace MetroSet_UI.Controls
                     prop.SelectedTextColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -202,12 +203,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -228,6 +229,9 @@ namespace MetroSet_UI.Controls
 
         #region Properties
 
+        /// <summary>
+        /// Gets the collection of tab pages in this tab control.
+        /// </summary>
         [Category("MetroSet Framework")]
         [Editor(typeof(MetroSetTabPageCollectionEditor), typeof(UITypeEditor))]
         public new TabPageCollection TabPages
@@ -241,7 +245,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets wether the tabcontrol use animation or not.")]
         public bool UseAnimation { get; set; } = true;
 
-        [Category("MetroSet Framework")]
+        /// <summary>
+        /// Gets or sets the size of the control's tabs.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the size of the control's tabs.")]
         public new Size ItemSize
         {
             get { return base.ItemSize; }
@@ -253,59 +260,90 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
+        /// Gets or sets the area of the control (for example, along the top) where the tabs are aligned.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the area of the control (for example, along the top) where the tabs are aligned.")]
+        public new TabAlignment Alignment
+        {
+            get { return TabAlignment.Top; }
+        }
+
+        /// <summary>
         /// Gets or sets the speed of transition.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the speed of transition.")]
         public int Speed { get; set; } = 20;
 
+        /// <summary>
+        /// Gets or sets which control borders are docked to its parent control and determines how a control is resized with its parent.
+        /// </summary>
         [Category("MetroSet Framework")]
         public override DockStyle Dock
         {
-            get => base.Dock; set => base.Dock = value; }
+            get => base.Dock; set => base.Dock = value;
+        }
 
-            [Category("MetroSet Framework")]
-            [Browsable(false)]
-            public new TabSizeMode SizeMode { get; set; } = TabSizeMode.Fixed;
+        /// <summary>
+        /// Gets or sets the way that the control's tabs are sized.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Browsable(false)]
+        public new TabSizeMode SizeMode { get; set; } = TabSizeMode.Fixed;
 
-            [Category("MetroSet Framework")]
-            [Browsable(false)]
-            public new TabDrawMode DrawMode { get; set; } = TabDrawMode.Normal;
+        /// <summary>
+        /// Gets or sets the way that the control's tabs are drawn.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Browsable(false)]
+        public new TabDrawMode DrawMode { get; set; } = TabDrawMode.Normal;
 
-            [Category("MetroSet Framework")]
-            [Browsable(false)]
-            private Color BaseColor { get; set; }
+        /// <summary>
+        /// Gets or sets the backgorund color.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Browsable(false)]
+        private Color BaseColor { get; set; }
 
-            [Category("MetroSet Framework")]
-            [Browsable(false)]
-            private Color ForeroundColor { get; set; }
+        /// <summary>
+        /// Gets or sets the foregorund color.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Browsable(false)]
+        private Color ForeroundColor { get; set; }
 
-            [Category("MetroSet Framework")]
-            [Browsable(false)]
-            private Color UnselectedTextColor { get; set; }
+        /// <summary>
+        /// Gets or sets the tabpage text while un-selected.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Browsable(false)]
+        private Color UnselectedTextColor { get; set; }
 
-            [Category("MetroSet Framework")]
-            [Browsable(false)]
-            private Color SelectedTextColor { get; set; }
+        /// <summary>
+        /// Gets or sets the tabpage text while selected.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Browsable(false)]
+        private Color SelectedTextColor { get; set; }
 
-            /// <summary>
-            /// Gets or sets the tancontrol apperance style
-            /// </summary>
-            [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
-            public TabStyle TabStyle
+        /// <summary>
+        /// Gets or sets the tancontrol apperance style
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
+        public TabStyle TabStyle
+        {
+            get { return tabStyle; }
+            set
             {
-                get { return tabStyle; }
-                set
-                {
-                    tabStyle = value;
-                    Invalidate();
-                }
+                tabStyle = value;
+                Invalidate();
             }
+        }
 
-            #endregion Properties
+        #endregion Properties
 
-            #region Draw Control
+        #region Draw Control
 
-            protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
             var G = e.Graphics;
 
@@ -367,6 +405,51 @@ namespace MetroSet_UI.Controls
         #endregion Draw Control
 
         #region Events
+
+        /// <summary>
+        /// Handling mouse move event of the cotnrol, chnaging the cursor to hande whenever mouse located in a tab page.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            for (int i = 0; i <= TabCount - 1; i++)
+            {
+                var r = GetTabRect(i);
+                if (r.Contains(e.Location))
+                {
+                    Cursor = Cursors.Hand;
+                    Invalidate();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Handling mouse leave event and releasing hand cursor.
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            Cursor = Cursors.Default;
+            Invalidate();
+        }
+
+        /// <summary>
+        /// Here we set the smooth mouse hand.
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == User32.WM_SETCURSOR)
+            {
+                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            base.WndProc(ref m);
+        }
 
         #region Animation
 
@@ -476,6 +559,10 @@ namespace MetroSet_UI.Controls
 
         #region Methods
 
+        /// <summary>
+        /// The Method that provide the specific color for every single tab page in the tab control.
+        /// </summary>
+        /// <param name="C"></param>
         private void InvalidateTabPage(Color C)
         {
             foreach (MetroSetTabPage T in TabPages)

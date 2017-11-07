@@ -25,6 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
@@ -129,6 +130,7 @@ namespace MetroSet_UI.Controls
                 );
             DoubleBuffered = true;
             UpdateStyles();
+            Cursor = Cursors.Hand;
             BackColor = Color.Transparent;
             Font = MetroSetFonts.Light(10);
             prop = new LinkLabelProperties();
@@ -160,7 +162,7 @@ namespace MetroSet_UI.Controls
                     prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -172,7 +174,7 @@ namespace MetroSet_UI.Controls
                     prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -228,12 +230,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -253,5 +255,26 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion ApplyTheme
+
+        #region Events
+
+        /// <summary>
+        /// Here we set the smooth mouse hand.
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == User32.WM_SETCURSOR)
+            {
+                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            base.WndProc(ref m);
+        }
+
+#endregion
+
     }
 }

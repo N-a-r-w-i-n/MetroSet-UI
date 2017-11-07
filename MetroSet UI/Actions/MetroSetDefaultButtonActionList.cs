@@ -30,63 +30,47 @@ using System.Drawing;
 
 namespace MetroSet_UI.Tasks
 {
-    public class MetroSetEllipseActionList : DesignerActionList
+    public class MetroSetDefaultButtonActionList : DesignerActionList
     {
-        private readonly MetroSetEllipse metroSetEllipse;
+        private readonly MetroDefaultSetButton metroSetButton;
 
-        public MetroSetEllipseActionList(IComponent component) : base(component)
+        public MetroSetDefaultButtonActionList(IComponent component) : base(component)
         {
-            metroSetEllipse = (MetroSetEllipse)component;
+            metroSetButton = (MetroDefaultSetButton)component;
         }
 
         public Style Style
         {
-            get { return metroSetEllipse.Style; }
-            set { metroSetEllipse.Style = value; }
+            get { return metroSetButton.Style; }
+            set { metroSetButton.Style = value; }
         }
 
         public string ThemeAuthor
         {
-            get { return metroSetEllipse.ThemeAuthor; }
+            get { return metroSetButton.ThemeAuthor; }
         }
 
         public string ThemeName
         {
-            get { return metroSetEllipse.ThemeName; }
+            get { return metroSetButton.ThemeName; }
         }
 
         public StyleManager StyleManager
         {
-            get { return metroSetEllipse.StyleManager; }
-            set { metroSetEllipse.StyleManager = value; }
+            get { return metroSetButton.StyleManager; }
+            set { metroSetButton.StyleManager = value; }
         }
 
         public string Text
         {
-            get { return metroSetEllipse.Text; }
-            set { metroSetEllipse.Text = value; }
+            get { return metroSetButton.Text; }
+            set { metroSetButton.Text = value; }
         }
 
         public Font Font
         {
-            get { return metroSetEllipse.Font; }
-            set { metroSetEllipse.Font = value; }
-        }
-
-        public int BorderThickness
-        {
-            get { return metroSetEllipse.BorderThickness; }
-            set { metroSetEllipse.BorderThickness = value; }
-        }
-        public Size ImageSize
-        {
-            get { return metroSetEllipse.ImageSize; }
-            set { metroSetEllipse.ImageSize = value; }
-        }
-        public Image Image
-        {
-            get { return metroSetEllipse.Image; }
-            set { metroSetEllipse.Image = value; }
+            get { return metroSetButton.Font; }
+            set { metroSetButton.Font = value; }
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()
@@ -103,11 +87,8 @@ namespace MetroSet_UI.Tasks
 
             new DesignerActionHeaderItem("Appearance"),
             new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
-            new DesignerActionPropertyItem("BorderThickness", "BorderThickness", "Appearance", "Gets or sets the border thickness associated with the control."),
-            new DesignerActionPropertyItem("Image", "Image", "Appearance", "Gets or sets the image associated with the control."),
-            new DesignerActionPropertyItem("ImageSize", "ImageSize", "Appearance", "Gets or sets the image size associated with the control."),
-            };
+            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control.")
+        };
 
             return items;
         }

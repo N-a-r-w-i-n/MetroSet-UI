@@ -184,6 +184,7 @@ namespace MetroSet_UI.Controls
             };
             SVS.Scroll += HandleScroll;
             SVS.MouseDown += VS_MouseDown;
+            SVS.BackColor = Color.Transparent;
             if (!Controls.Contains(SVS))
             {
                 Controls.Add(SVS);
@@ -215,7 +216,7 @@ namespace MetroSet_UI.Controls
                     prop.BorderColor = Color.LightGray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -231,7 +232,7 @@ namespace MetroSet_UI.Controls
                     prop.BorderColor = Color.FromArgb(64, 64, 64);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -284,12 +285,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {

@@ -171,7 +171,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledHandlerColor = Color.FromArgb(196, 196, 196);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -184,7 +184,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledHandlerColor = Color.FromArgb(90, 90, 90);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -225,12 +225,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -272,6 +272,9 @@ namespace MetroSet_UI.Controls
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the upper limit of the range this TrackBar is working with.
+        /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the upper limit of the range this TrackBar is working with.")]
         public int Maximum
         {
@@ -285,6 +288,9 @@ namespace MetroSet_UI.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the lower limit of the range this TrackBar is working with.
+        /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the lower limit of the range this TrackBar is working with.")]
         public int Minimum
         {
@@ -301,6 +307,9 @@ namespace MetroSet_UI.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets a numeric value that represents the current position of the scroll box on the track bar.
+        /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a numeric value that represents the current position of the scroll box on the track bar.")]
         public int Value
         {
@@ -325,6 +334,10 @@ namespace MetroSet_UI.Controls
         public event ScrollEventHandler Scroll;
         public delegate void ScrollEventHandler(object sender);
 
+        /// <summary>
+        /// Handling mouse move event so that we can handle the thumb value.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (Variable && e.X > -1 && e.X < Width + 1)
@@ -334,6 +347,10 @@ namespace MetroSet_UI.Controls
             base.OnMouseMove(e);
         }
 
+        /// <summary>
+        /// Handling mouse down event so that we can put the thumb in clicked state.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && Height > 0)
@@ -345,12 +362,20 @@ namespace MetroSet_UI.Controls
             base.OnMouseDown(e);
         }
 
+        /// <summary>
+        /// Handling mouse up event.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             Variable = false;
             base.OnMouseUp(e);
         }
 
+        /// <summary>
+        /// Handling key press event so that we can change the track value by keys.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Subtract || e.KeyCode == Keys.Down || e.KeyCode == Keys.Left)
@@ -372,6 +397,10 @@ namespace MetroSet_UI.Controls
             base.OnKeyDown(e);
         }
 
+        /// <summary>
+        /// Handling the height and value of the track while resizing the control.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnResize(EventArgs e)
         {
             RenewCurrentValue();
@@ -381,11 +410,17 @@ namespace MetroSet_UI.Controls
             base.OnResize(e);
         }
 
+        /// <summary>
+        /// The Method to provide the track value.
+        /// </summary>
         private void MoveTrack()
         {
             Track = new Rectangle(CurrentValue, 0, 6, 16);
         }
 
+        /// <summary>
+        /// The Method to renew the value of the track.
+        /// </summary>
         public void RenewCurrentValue()
         {
             CurrentValue = Convert.ToInt32(Math.Round((double)(Value - Minimum) / (Maximum - Minimum) * (Width - 6)));

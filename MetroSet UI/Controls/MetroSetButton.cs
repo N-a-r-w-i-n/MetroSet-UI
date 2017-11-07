@@ -166,7 +166,7 @@ namespace MetroSet_UI.Controls
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
                     }
 
                     break;
@@ -180,7 +180,7 @@ namespace MetroSet_UI.Controls
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
                     }
 
                     break;
@@ -193,19 +193,20 @@ namespace MetroSet_UI.Controls
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
                     }
 
                     break;
 
                 case MouseMode.Disabled:
+
                     using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
                     using (Pen P = new Pen(prop.DisabledBorderColor))
                     using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
                     }
                     break;
             }
@@ -225,35 +226,35 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.NormalColor = Color.FromArgb(238, 238, 238);
-                    prop.NormalBorderColor = Color.FromArgb(204, 204, 204);
-                    prop.NormalTextColor = Color.Black;
-                    prop.HoverColor = Color.FromArgb(102, 102, 102);
-                    prop.HoverBorderColor = Color.FromArgb(102, 102, 102);
+                    prop.NormalColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalBorderColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalTextColor = Color.White;
+                    prop.HoverColor = Color.FromArgb(95, 207, 255);
+                    prop.HoverBorderColor = Color.FromArgb(95, 207, 255);
                     prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(51, 51, 51);
-                    prop.PressBorderColor = Color.FromArgb(51, 51, 51);
+                    prop.PressColor = Color.FromArgb(35, 147, 195);
+                    prop.PressBorderColor = Color.FromArgb(35, 147, 195);
                     prop.PressTextColor = Color.White;
-                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
-                    prop.DisabledBorderColor = Color.FromArgb(155, 155, 155);
-                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
+                    prop.DisabledBackColor = Color.FromArgb(120, 65, 177, 225);
+                    prop.DisabledBorderColor = Color.FromArgb(120, 65, 177, 225);
+                    prop.DisabledForeColor = Color.Gray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     break;
 
                 case Style.Dark:
-                    prop.NormalColor = Color.FromArgb(32, 32, 32);
-                    prop.NormalBorderColor = Color.FromArgb(64, 64, 64);
-                    prop.NormalTextColor = Color.FromArgb(204, 204, 204);
-                    prop.HoverColor = Color.FromArgb(170, 170, 170);
-                    prop.HoverBorderColor = Color.FromArgb(170, 170, 170);
+                    prop.NormalColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalBorderColor = Color.FromArgb(65, 177, 225);
+                    prop.NormalTextColor = Color.White;
+                    prop.HoverColor = Color.FromArgb(95, 207, 255);
+                    prop.HoverBorderColor = Color.FromArgb(95, 207, 255);
                     prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(240, 240, 240);
-                    prop.PressBorderColor = Color.FromArgb(240, 240, 240);
+                    prop.PressColor = Color.FromArgb(35, 147, 195);
+                    prop.PressBorderColor = Color.FromArgb(35, 147, 195);
                     prop.PressTextColor = Color.White;
-                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
-                    prop.DisabledBorderColor = Color.FromArgb(109, 109, 109);
-                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
+                    prop.DisabledBackColor = Color.FromArgb(120, 65, 177, 225);
+                    prop.DisabledBorderColor = Color.FromArgb(120, 65, 177, 225);
+                    prop.DisabledForeColor = Color.Gray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;
@@ -325,12 +326,18 @@ namespace MetroSet_UI.Controls
 
         #region Properties
 
+        /// <summary>
+        /// I make backcolor inaccessible cause we have not use of it. 
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor
         {
             get { return Color.Transparent; }
         }
 
+        /// <summary>
+        /// Handling Control Enable state to detect the disability state.
+        /// </summary>
         [Category("MetroSet Framework")]
         public new bool Enabled
         {
@@ -350,6 +357,10 @@ namespace MetroSet_UI.Controls
 
         #region Events
 
+        /// <summary>
+        /// Handling mouse up event of the cotnrol.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -357,6 +368,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse down event of the cotnrol.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -364,6 +379,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse entering event of the control.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
@@ -371,6 +390,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse leave event of the cotnrol.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseEnter(e);

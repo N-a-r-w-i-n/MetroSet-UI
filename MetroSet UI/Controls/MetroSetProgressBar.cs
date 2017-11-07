@@ -23,6 +23,7 @@
  */
 
 using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Property;
@@ -160,7 +161,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledBackColor = Color.FromArgb(238, 238, 238);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -173,7 +174,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledBorderColor = Color.FromArgb(38, 38, 38);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -214,12 +215,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -251,7 +252,16 @@ namespace MetroSet_UI.Controls
                             G.FillRectangle(BG, Rect);
                             if (CurrentValue != 0)
                             {
-                                G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                                switch (Orientation)
+                                {
+                                    case ProgressOrientation.Horizontal:
+                                        G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                                        break;
+                                    case ProgressOrientation.Vertical:
+                                        G.FillRectangle(PS, new Rectangle(0, Height - CurrentValue, Width - 1, CurrentValue - 1));
+                                        break;
+                                }
+                                
                             }
                             G.DrawRectangle(P, Rect);
                         }
@@ -269,7 +279,15 @@ namespace MetroSet_UI.Controls
                             G.FillRectangle(BG, Rect);
                             if (CurrentValue != 0)
                             {
-                                G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                                switch (Orientation)
+                                {
+                                    case ProgressOrientation.Horizontal:
+                                        G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
+                                        break;
+                                    case ProgressOrientation.Vertical:
+                                        G.FillRectangle(PS, new Rectangle(0, Height - CurrentValue, Width - 1, CurrentValue - 1));
+                                        break;
+                                }
                             }
                             G.DrawRectangle(P, Rect);
                         }
@@ -281,7 +299,7 @@ namespace MetroSet_UI.Controls
         #endregion
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the current position of the progressbar.
         /// </summary>
@@ -311,13 +329,13 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
-        
+
         /// <summary>
         /// Gets or sets the maximum value of the progressbar.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the maximum value of the progressbar.")]
         public int Maximum { get; set; } = 100;
-        
+
         /// <summary>
         /// Gets or sets the minimum value of the progressbar.
         /// </summary>
@@ -330,15 +348,35 @@ namespace MetroSet_UI.Controls
             get { return Color.Transparent; }
         }
 
+        /// <summary>
+        /// Gets or sets the minimum value of the progressbar.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the minimum value of the progressbar.")]
+        public ProgressOrientation Orientation { get; set; } = ProgressOrientation.Horizontal;
+
         #endregion
 
         #region Events
 
         public event ValueChangedEventHandler ValueChanged;
         public delegate void ValueChangedEventHandler(object sender);
+
+        /// <summary>
+        /// Here we handle the current value.
+        /// </summary>
         public void RenewCurrentValue()
         {
-            CurrentValue = (int)Math.Round((double)(Value - Minimum) / (double)(Maximum - Minimum) * (double)(Width - 1));
+            switch (Orientation)
+            {
+                case ProgressOrientation.Horizontal:
+                    CurrentValue = (int)Math.Round((double)(Value - Minimum) / (double)(Maximum - Minimum) * (double)(Width - 1));
+                    break;
+
+                case ProgressOrientation.Vertical:
+                    CurrentValue = Convert.ToInt32((double)((((double)Value) / ((double)Maximum)) * Height - 1));
+                    break;
+            }
+            
         }
 
         #endregion

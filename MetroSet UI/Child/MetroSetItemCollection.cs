@@ -31,9 +31,17 @@ namespace MetroSet_UI.Child
 {
     public class MetroSetItemCollection : Collection<object>
     {
+
+        /// <summary>
+        /// An event for to determine whether and item or items added or removed.
+        /// </summary>
         public event EventHandler ItemUpdated;
         public delegate void EventHandler(object sender, EventArgs e);
 
+        /// <summary>
+        /// Adds an array of items to the list of items for a MetroSetListBox.
+        /// </summary>
+        /// <param name="items">An IEnumerable of objects to add to the list.</param>
         public void AddRange(IEnumerable<object> items)
         {
             foreach (object item in items)
@@ -42,30 +50,49 @@ namespace MetroSet_UI.Child
             }
         }
 
+        /// <summary>
+        /// Adds an item to the list of items for a MetroSetListBox.
+        /// </summary>
+        /// <param name="item">An object representing the item to add to the collection.</param>
         protected new void Add(object item)
         {
             base.Add(item);
             ItemUpdated(this, null);
         }
 
+        /// <summary>
+        /// Inserts an item into the list box at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index location where the item is inserted.</param>
+        /// <param name="item">An object representing the item to insert.</param>
         protected override void InsertItem(int index, object item)
         {
             base.InsertItem(index, item);
             ItemUpdated(this, null);
         }
 
-        protected override void RemoveItem(int index)
+        /// <summary>
+        /// Removes the specified object from the collection.
+        /// </summary>
+        /// <param name="value">An object representing the item to remove from the collection.</param>
+        protected override void RemoveItem(int value)
         {
-            base.RemoveItem(index);
+            base.RemoveItem(value);
             ItemUpdated(this, null);
         }
 
+        /// <summary>
+        /// Removes all items from the collection.
+        /// </summary>
         protected new void Clear()
         {
             base.Clear();
             ItemUpdated(this, null);
         }
 
+        /// <summary>
+        /// Removes all items from the collection.
+        /// </summary>
         protected override void ClearItems()
         {
             base.ClearItems();

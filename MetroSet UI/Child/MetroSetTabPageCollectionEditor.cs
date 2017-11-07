@@ -29,6 +29,11 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Child
 {
+
+    /// <summary>
+    /// I provided this class to make the MetroSetTabControl add or remove MetroSetTabPage instead of normal TabPage provided by Microsoft.
+    /// </summary>
+
     internal class MetroSetTabPageCollectionEditor : CollectionEditor
     {
         public MetroSetTabPageCollectionEditor(Type type)

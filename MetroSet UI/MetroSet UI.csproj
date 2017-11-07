@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\MetroSetButtonActionList.cs" />
     <Compile Include="Actions\MetroSetListBoxActionList.cs" />
     <Compile Include="Actions\MetroSetTrackBarActionList.cs" />
     <Compile Include="Actions\MetroSetControlBoxActionList.cs" />
@@ -87,6 +88,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetBadge.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroSetButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroSetControlBox.cs">
@@ -147,7 +151,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
+    <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetListBoxDesigner.cs" />
+    <Compile Include="Enums\ProgressOrientation.cs" />
     <Compile Include="Forms\MetroSetMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,7 +163,7 @@
     <Compile Include="Design\MetroSetProgressBarDesigner.cs" />
     <Compile Include="Design\MetroSetTabPageDesigner.cs" />
     <Compile Include="Design\MetroSetTileDesigner.cs" />
-    <Compile Include="Design\MetroSetButtonDesigner.cs" />
+    <Compile Include="Design\MetroSetDefaultButtonDesigner.cs" />
     <Compile Include="Design\MetroSetEllipseDesigner.cs" />
     <Compile Include="Design\MetroSetNumericDesigner.cs" />
     <Compile Include="Design\MetroSetRichTextBoxDesigner.cs" />
@@ -179,6 +185,7 @@
     <Compile Include="Enums\TileAlign.cs" />
     <Compile Include="Native\User32.cs" />
     <Compile Include="Property\BadgeProperties.cs" />
+    <Compile Include="Property\DefaultButtonProperties.cs" />
     <Compile Include="Property\ContextMenuProperties.cs" />
     <Compile Include="Property\ScrollBarProperties.cs" />
     <Compile Include="Property\ListBoxProperties.cs" />
@@ -201,7 +208,7 @@
     <Compile Include="Property\FormProperties.cs" />
     <Compile Include="Property\DividerProperties.cs" />
     <Compile Include="Property\LabelProperties.cs" />
-    <Compile Include="Controls\MetroSetButton.cs">
+    <Compile Include="Controls\MetroDefaultSetButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\MetroSetForm.cs">
@@ -234,13 +241,12 @@
     </Compile>
     <Compile Include="Property\LinkLabelProperties.cs" />
     <Compile Include="Actions\MetroSetBadgeActionList.cs" />
-    <Compile Include="Actions\MetroSetButtonActionList.cs" />
+    <Compile Include="Actions\MetroSetDefaultButtonActionList.cs" />
     <Compile Include="Actions\MetroSetLabelActionList.cs" />
     <Compile Include="Actions\MetroSetLinkActionList.cs" />
     <Compile Include="Actions\StyleManagerActionList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Metro-Folders-OS-Windows-8-Metro.ico" />
     <Content Include="MetroSetUI.ico" />
   </ItemGroup>
   <ItemGroup>

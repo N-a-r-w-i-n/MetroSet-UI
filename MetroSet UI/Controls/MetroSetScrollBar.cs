@@ -179,7 +179,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -190,7 +190,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -223,12 +223,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -372,11 +372,15 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the scroll bar orientation.")]
         public ScrollOrientate Orientation { get; set; } = ScrollOrientate.Horizontal;
 
-
+        /// <summary>
+        /// Gets or sets the background color.
+        /// </summary>
         [Browsable(false)]
         public override Color ForeColor { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the foreground color.
+        /// </summary>
         [Browsable(false)]
         public override Color BackColor { get; set; }
 
@@ -389,6 +393,9 @@ namespace MetroSet_UI.Controls
             InvalidateLayout();
         }
 
+        /// <summary>
+        /// Updating the thumb rectangle.
+        /// </summary>
         private void InvalidateLayout()
         {
             bar = new Rectangle(0, 0, Width, Height);
@@ -412,6 +419,9 @@ namespace MetroSet_UI.Controls
         public event ScrollEventHandler Scroll;
         public delegate void ScrollEventHandler(object sender);
 
+        /// <summary>
+        /// Updating the thumb location.
+        /// </summary>
         public void InvalidatePosition()
         {
             switch (Orientation)
@@ -427,7 +437,10 @@ namespace MetroSet_UI.Controls
             Invalidate(); 
         }
 
-
+        /// <summary>
+        /// Handling mouse down event so that we set the state of the thumb to pressed and ready to move.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -455,7 +468,10 @@ namespace MetroSet_UI.Controls
             }
         }
 
-
+        /// <summary>
+        /// Handling the mouse move event so that we can set the value of the thumb.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (_ThumbState == MouseMode.Pushed | !showThumb)
@@ -483,6 +499,10 @@ namespace MetroSet_UI.Controls
 
         }
 
+        /// <summary>
+        /// Handling the mouse up event and determine the state of the thumb.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             _ThumbState = thumb.Contains(e.Location) ? MouseMode.Hovered : MouseMode.Normal;
@@ -498,12 +518,20 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }              
 
+        /// <summary>
+        /// Handling the mouse leave event and releasing the thumb state.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
             _ThumbState = MouseMode.Normal;
             Invalidate();
         }
 
+        /// <summary>
+        /// The Method for finding out the current value of the scrollbar.
+        /// </summary>
+        /// <returns>the Current value of the scrollbar.</returns>
         private double CurrentValue()
         {
             return ((double)(Value - Minimum)) / (Maximum - Minimum);

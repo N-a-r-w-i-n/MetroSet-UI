@@ -147,7 +147,6 @@ namespace MetroSet_UI.Controls
                 if (_T != null)
                 {
                     _T.MouseHover -= T_MouseHover;
-                    _T.MouseUp -= T_MouseUp;
                     _T.MouseLeave -= T_Leave;
                     _T.MouseEnter -= T_Enter;
                     _T.KeyDown -= T_KeyDown;
@@ -157,7 +156,6 @@ namespace MetroSet_UI.Controls
                 if (_T != null)
                 {
                     _T.MouseHover += T_MouseHover;
-                    _T.MouseUp += T_MouseUp;
                     _T.Leave += T_Leave;
                     _T.Enter += T_Enter;
                     _T.KeyDown += T_KeyDown;
@@ -185,6 +183,7 @@ namespace MetroSet_UI.Controls
 
             ApplyTheme();
             T_Defaults();
+            if(!Multiline)
             Size = new Size(135, 30);
         }
 
@@ -236,7 +235,7 @@ namespace MetroSet_UI.Controls
 
         #region Draw Control
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e) 
         {
             Graphics G = e.Graphics;
             Rectangle Rect = new Rectangle(0, 0, Width - 1, Height - 1);
@@ -260,8 +259,6 @@ namespace MetroSet_UI.Controls
                                     G.DrawRectangle(PH, Rect);
                                     break;
                             }
-                            T.ForeColor = ForeColor;
-                            T.ForeColor = ForeColor;
                         }
                     }
                 }
@@ -275,7 +272,7 @@ namespace MetroSet_UI.Controls
                         G.FillRectangle(BG, Rect);
                         G.DrawRectangle(P, Rect);
                         T.BackColor = prop.DisabledBackColor;
-                        T.ForeColor = prop.DisabledForeColor;
+                        T.ForeColor = prop.DisabledForeColor;                        
                     }
                 }
             }
@@ -315,13 +312,12 @@ namespace MetroSet_UI.Controls
                     prop.WatermarkText = "";
                     prop.ReadOnly = false;
                     prop.UseSystemPasswordChar = false;
-                    prop.Multiline = false;
                     prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
                     prop.DisabledBorderColor = Color.FromArgb(155, 155, 155);
                     prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -333,14 +329,12 @@ namespace MetroSet_UI.Controls
                     prop.WatermarkText = "";
                     prop.ReadOnly = false;
                     prop.UseSystemPasswordChar = false;
-                    prop.Multiline = false;
                     prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
                     prop.DisabledBorderColor = Color.FromArgb(109, 109, 109);
                     prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
-
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -401,12 +395,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -436,7 +430,7 @@ namespace MetroSet_UI.Controls
 
 
         /// <summary>
-        /// Raises the Control.Leave event.
+        /// Handling textbox leave event and raising the same event here.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">EventArgs</param>
@@ -446,6 +440,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse leave event of the cotnrol.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
@@ -453,6 +451,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse up event of the cotnrol.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -460,12 +462,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
-        public void T_MouseUp(object sender, MouseEventArgs e)
-        {
-            base.OnMouseUp(e);
-            Invalidate();
-        }
-
+        /// <summary>
+        /// Handling mouse entering event of the control.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
@@ -473,6 +473,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling mouse hover event of the control.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseHover(EventArgs e)
         {
             base.OnMouseHover(e);
@@ -480,7 +484,11 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
-
+        /// <summary>
+        /// Handling the mouse hover event on textbox control.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         public void T_MouseHover(object sender, EventArgs e)
         {
             base.OnMouseHover(e);
@@ -494,7 +502,10 @@ namespace MetroSet_UI.Controls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            T.Size = new Size(Width - 10, Height - 10);
+            //if (!Multiline)
+            //{
+                T.Size = new Size(Width - 10, Height - 10);
+            //}
         }
 
 
@@ -511,7 +522,7 @@ namespace MetroSet_UI.Controls
 
 
         /// <summary>
-        /// 
+        /// Handling Keydown event of thextbox cotnrol.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">KeyEventArgs</param>
@@ -707,6 +718,9 @@ namespace MetroSet_UI.Controls
 
         #region Properties
 
+        /// <summary>
+        /// Gets the border style.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BorderStyle BorderStyle
         {
@@ -763,7 +777,6 @@ namespace MetroSet_UI.Controls
             get { return _BackColor; }
             set
             {
-                base.BackColor = value;
                 _BackColor = value;
                 T.BackColor = value;
                 Invalidate();
@@ -816,7 +829,6 @@ namespace MetroSet_UI.Controls
             get { return _ForeColor; }
             set
             {
-                base.ForeColor = value;
                 _ForeColor = value;
                 T.ForeColor = value;
                 Invalidate();
@@ -873,6 +885,7 @@ namespace MetroSet_UI.Controls
                 if (T == null)
                 { return; }
                 T.Multiline = value;
+                prop.Multiline = value;
                 if (value)
                 {
                     T.Height = Height - 10;

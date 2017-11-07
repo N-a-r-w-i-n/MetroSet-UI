@@ -170,7 +170,7 @@ namespace MetroSet_UI.Controls
                                     using (StringFormat SF = new StringFormat { LineAlignment = StringAlignment.Center })
                                     {
                                         G.FillRectangle(BG, rect);
-                                        G.DrawString(plus.ToString(), F2, S, new Rectangle(Width - 45, -1, 25, Height - 1), SF);
+                                        G.DrawString(plus.ToString(), F2, S, new Rectangle(Width - 45, 1, 25, Height - 1), SF);
                                         G.DrawString(minus.ToString(), F2, S, new Rectangle(Width - 25, -1, 20, Height - 1), SF);
                                         G.DrawString(Value.ToString(), Font, TB, new Rectangle(0, 0, Width - 50, Height - 1), mth.SetPosition(StringAlignment.Far));
                                         G.DrawRectangle(P, rect);
@@ -191,12 +191,12 @@ namespace MetroSet_UI.Controls
                         {
                             using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
                             {
-                                using (Font F2 = MetroSetFonts.SemiBold((float)7.5))
+                                using (Font F2 = MetroSetFonts.SemiBold(18))
                                 {
                                     using (StringFormat SF = new StringFormat { LineAlignment = StringAlignment.Center })
                                     {
                                         G.FillRectangle(BG, rect);
-                                        G.DrawString(plus.ToString(), F2, S, new Rectangle(Width - 45, -1, 25, Height - 1), SF);
+                                        G.DrawString(plus.ToString(), F2, S, new Rectangle(Width - 45, 1, 25, Height - 1), SF);
                                         G.DrawString(minus.ToString(), F2, S, new Rectangle(Width - 25, -1, 20, Height - 1), SF);
                                         G.DrawString(Value.ToString(), Font, TB, new Rectangle(0, 0, Width - 50, Height - 1), mth.SetPosition(StringAlignment.Far));
                                         G.DrawRectangle(P, rect);
@@ -233,7 +233,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -247,7 +247,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -292,12 +292,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -346,7 +346,10 @@ namespace MetroSet_UI.Controls
 
         #region Events
 
-
+        /// <summary>
+        /// Handling the mouse moving event so that we can detect if the cursor located in the postion of our need.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -358,6 +361,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Handling on click event so that we can increase or decrease the value.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
@@ -376,6 +383,10 @@ namespace MetroSet_UI.Controls
             }
         }
 
+        /// <summary>
+        /// Here we set the smooth mouse hand.
+        /// </summary>
+        /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == User32.WM_SETCURSOR)
@@ -388,11 +399,17 @@ namespace MetroSet_UI.Controls
             base.WndProc(ref m);
         }
 
+        /// <summary>
+        /// Here we handle the height of the control while resizing, we provide the fixed height.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             Height = 26;
         }
+
+
 
         #endregion
 

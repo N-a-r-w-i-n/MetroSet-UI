@@ -28,6 +28,7 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Child
 {
+
     public sealed class MetroSetToolStripMenuItem : ToolStripMenuItem
     {
         #region Constructors

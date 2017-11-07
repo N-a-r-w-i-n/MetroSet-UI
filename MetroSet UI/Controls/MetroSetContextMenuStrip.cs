@@ -154,7 +154,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.Silver;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -167,7 +167,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.Silver;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -208,12 +208,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -234,6 +234,10 @@ namespace MetroSet_UI.Controls
         public event ClickedEventHandler Clicked;
         public delegate void ClickedEventHandler(object sender);
 
+        /// <summary>
+        /// Here we handle whenever and item clicked.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnItemClicked(ToolStripItemClickedEventArgs e)
         {
             if ((e.ClickedItem != null) && !(e.ClickedItem is ToolStripSeparator))
@@ -247,6 +251,10 @@ namespace MetroSet_UI.Controls
             }
         }
 
+        /// <summary>
+        /// Here we handle mouse hover event.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseHover(EventArgs e)
         {
             base.OnMouseHover(e);
@@ -254,6 +262,10 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Here we handle mouse up event
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -270,6 +282,10 @@ namespace MetroSet_UI.Controls
         
             #region Drawing Text
 
+            /// <summary>
+            /// Here we draw item text.
+            /// </summary>
+            /// <param name="e"></param>
             protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
             {
                 e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
@@ -284,12 +300,20 @@ namespace MetroSet_UI.Controls
 
             #region Drawing Backgrounds
 
+            /// <summary>
+            /// Here we draw toolstrip background.
+            /// </summary>
+            /// <param name="e"></param>
             protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
             {
                 base.OnRenderToolStripBackground(e);
                 e.Graphics.Clear(prop.BackColor);
             }
 
+            /// <summary>
+            /// Here we draw toolstrip menu item background.
+            /// </summary>
+            /// <param name="e"></param>
             protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
             {
                 e.Graphics.InterpolationMode = InterpolationMode.High;
@@ -315,6 +339,10 @@ namespace MetroSet_UI.Controls
 
             #region Drawing Seperators & Borders
 
+            /// <summary>
+            /// Here we draw toolstrip separators.
+            /// </summary>
+            /// <param name="e"></param>
             protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
             {
                 using (Pen P = new Pen(prop.SeparatorColor))
@@ -327,6 +355,10 @@ namespace MetroSet_UI.Controls
 
             #region Drawing DropDown Arrows
 
+            /// <summary>
+            /// Here we draw the toolstrip arrows.
+            /// </summary>
+            /// <param name="e">ToolStripArrowRenderEventArgs</param>
             protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
             {
                 int ArrowX, ArrowY;

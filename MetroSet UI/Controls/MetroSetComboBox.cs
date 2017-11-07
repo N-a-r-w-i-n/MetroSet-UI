@@ -30,6 +30,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -183,6 +184,10 @@ namespace MetroSet_UI.Controls
 
         #region Draw Control
 
+        /// <summary>
+        /// Here we draw the items.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             Graphics G = e.Graphics;
@@ -207,12 +212,16 @@ namespace MetroSet_UI.Controls
             }
         }
 
+        /// <summary>
+        /// Here we draw the container.
+        /// </summary>
+        /// <param name="e">PaintEventArgs</param>
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics G = e.Graphics;
             Rectangle rect = new Rectangle(0, 0, Width - 1, Height - 1);
             char downArrow = '▼';
-            G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             if (Enabled)
             {
@@ -220,19 +229,18 @@ namespace MetroSet_UI.Controls
                 {
                     using (Pen P = new Pen(prop.BorderColor))
                     {
-                        using (SolidBrush S = new SolidBrush(prop.ArrowColor))
+                        using (SolidBrush S = new SolidBrush(prop.ArrowColor)) 
                         {
                             using (SolidBrush TB = new SolidBrush(prop.ForeColor))
                             {
-                                using (Font F = new Font(Font.Name, 9))
+                                using (Font F = MetroSetFonts.SemiBold(8))
                                 {
-                                    using (Font F2 = MetroSetFonts.SemiBold((float)7.5))
-                                    {
-                                        G.FillRectangle(BG, rect);
-                                        G.DrawString(downArrow.ToString(), F2, S, new Point(Width - 22, 7));
-                                        G.DrawString(Text, F, TB, new Rectangle(7, 0, Width - 1, Height - 1), mth.SetPosition(StringAlignment.Near));
-                                        G.DrawRectangle(P, rect);
-                                    }
+                                    G.FillRectangle(BG, rect);
+                                    G.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                    G.DrawString(downArrow.ToString(), F, S, new Point(Width - 22, 8));
+                                    G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                                    G.DrawString(Text, F, TB, new Rectangle(7, 0, Width - 1, Height - 1), mth.SetPosition(StringAlignment.Near));
+                                    G.DrawRectangle(P, rect);
                                 }
                             }
                         }
@@ -249,12 +257,12 @@ namespace MetroSet_UI.Controls
                         {
                             using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
                             {
-                                using (Font F = MetroSetFonts.SemiBold((float)7.5))
+                                using (Font F = MetroSetFonts.SemiBold(8))
                                 {
                                     G.FillRectangle(BG, rect);
-                                    G.SmoothingMode = SmoothingMode.AntiAlias;
-                                    G.DrawString(downArrow.ToString(), F, S, new Point(Width - 22, 6));
-                                    G.SmoothingMode = SmoothingMode.None;
+                                    G.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                    G.DrawString(downArrow.ToString(), F, S, new Point(Width - 22, 8));
+                                    G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                                     G.DrawString(Text, Font, TB, new Rectangle(7, 1, Width - 1, Height - 1), mth.SetPosition(StringAlignment.Near));
                                     G.DrawRectangle(P, rect);
                                 }
@@ -290,7 +298,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -306,7 +314,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -359,12 +367,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -378,7 +386,6 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Theme Changing
-
 
     }
 }

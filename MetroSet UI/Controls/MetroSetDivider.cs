@@ -154,7 +154,7 @@ namespace MetroSet_UI.Controls
                     prop.BackColor = Color.Transparent;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -163,7 +163,7 @@ namespace MetroSet_UI.Controls
                     prop.BackColor = Color.Transparent;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -199,12 +199,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -276,6 +276,10 @@ namespace MetroSet_UI.Controls
 
         #region Events
 
+        /// <summary>
+        /// Here we handle the width and height while resizing.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);

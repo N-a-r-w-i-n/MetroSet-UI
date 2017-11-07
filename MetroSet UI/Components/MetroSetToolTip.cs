@@ -175,7 +175,7 @@ namespace MetroSet_UI.Components
                     prop.BorderColor = Color.FromArgb(204, 204, 204);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -184,7 +184,7 @@ namespace MetroSet_UI.Components
                     prop.BorderColor = Color.FromArgb(64, 64, 64);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -211,12 +211,12 @@ namespace MetroSet_UI.Components
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {

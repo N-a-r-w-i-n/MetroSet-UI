@@ -25,6 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
@@ -134,6 +135,7 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
+            Cursor = Cursors.Hand;
             BackColor = Color.Transparent;
             prop = new SwitchProperties();
             mth = new Methods();
@@ -152,7 +154,7 @@ namespace MetroSet_UI.Controls
 
         #region ApplyTheme
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -186,7 +188,7 @@ namespace MetroSet_UI.Controls
                     prop.DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -199,10 +201,10 @@ namespace MetroSet_UI.Controls
                     prop.UnCheckColor = Color.FromArgb(155, 155, 155);
                     prop.CheckColor = Color.FromArgb(65, 177, 225);
                     prop.DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
-                    prop.DisabledCheckColor = Color.FromArgb(100, 126, 56, 120);
+                    prop.DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -252,7 +254,7 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
@@ -382,6 +384,22 @@ namespace MetroSet_UI.Controls
             Invalidate();
         }
 
+        /// <summary>
+        /// Here we set the smooth mouse hand.
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == User32.WM_SETCURSOR)
+            {
+                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            base.WndProc(ref m);
+        }
+
         #endregion Events
 
         #region Properties
@@ -421,7 +439,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Properties
 
-        #region Methods
+        #region Disposing
 
         /// <summary>
         /// Disposing Methods.

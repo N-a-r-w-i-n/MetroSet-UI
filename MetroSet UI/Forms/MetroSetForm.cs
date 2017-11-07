@@ -300,8 +300,8 @@ namespace MetroSet_UI.Forms
                 {
                     using (SolidBrush textBrush = new SolidBrush(prop.TextColor))
                     {
-                        e.Graphics.FillRectangle(B, new Rectangle(0, 25, 10, 35));
-                        e.Graphics.DrawString(Text, Font, textBrush, new Point(20, 32));
+                        e.Graphics.FillRectangle(B, new Rectangle(0, 40, 10, 35));
+                        e.Graphics.DrawString(Text, Font, textBrush, new Point(20, 46));
                     }
                 }
             }
@@ -482,7 +482,7 @@ namespace MetroSet_UI.Forms
                     prop.HeaderHeight = 35;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -505,7 +505,7 @@ namespace MetroSet_UI.Forms
                     prop.DrawLeftRect = true;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -586,12 +586,12 @@ namespace MetroSet_UI.Forms
                                 prop.HeaderHeight = int.Parse(varkey.Value.ToString());
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {

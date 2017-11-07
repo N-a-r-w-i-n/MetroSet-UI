@@ -22,8 +22,6 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Child;
-using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
 using MetroSet_UI.Interfaces;
 using System;
@@ -120,12 +118,16 @@ namespace MetroSet_UI
                 }
                 if (ctrl.Controls != null)
                 {
-                    foreach (iControl child in ctrl.Controls)
+                    foreach (Control child in ctrl.Controls)
                     {
-                        child.Style = Style;
-                        child.StyleManager = this;
-                        child.ThemeAuthor = ThemeAuthor;
-                        child.ThemeName = ThemeName;                        
+                        if (child is iControl)
+                        {
+                            ((iControl)child).Style = Style;
+                            ((iControl)child).StyleManager = this;
+                            ((iControl)child).ThemeAuthor = ThemeAuthor;
+                            ((iControl)child).ThemeName = ThemeName;
+                        }
+                                               
                     }
                 }
             }
@@ -300,6 +302,11 @@ namespace MetroSet_UI
         public Dictionary<string, object> ButtonDictionary;
 
         /// <summary>
+        /// The DefaultButton properties from custom theme will be stored into this dictionary.
+        /// </summary>
+        public Dictionary<string, object> DefaultButtonDictionary;
+
+        /// <summary>
         /// The Label properties from custom theme will be stored into this dictionary.
         /// </summary>
         public Dictionary<string, object> LabelDictionary;
@@ -422,6 +429,7 @@ namespace MetroSet_UI
         private void Clear()
         {
             ButtonDictionary.Clear();
+            DefaultButtonDictionary.Clear();
             FormDictionary.Clear();
             LabelDictionary.Clear();
             TextBoxDictionary.Clear();
@@ -455,6 +463,7 @@ namespace MetroSet_UI
         private void EvaluateDicts()
         {
             ButtonDictionary = new Dictionary<string, object>();
+            DefaultButtonDictionary = new Dictionary<string, object>();
             LabelDictionary = new Dictionary<string, object>();
             LinkLabelDictionary = new Dictionary<string, object>();
             TextBoxDictionary = new Dictionary<string, object>();
@@ -501,6 +510,8 @@ namespace MetroSet_UI
             FormDictionary = GetValues(path, "Form");
 
             ButtonDictionary = GetValues(path, "Button");
+
+            DefaultButtonDictionary = GetValues(path, "DefaultButton");
 
             LabelDictionary = GetValues(path, "Label");
 

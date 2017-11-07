@@ -26,6 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
@@ -144,7 +145,7 @@ namespace MetroSet_UI.Controls
             mth = new Methods();
             utl = new Utilites();
             Alpha = 0;
-
+            Cursor = Cursors.Hand;
             timer = new Timer()
             {
                 Interval = 10,
@@ -177,7 +178,7 @@ namespace MetroSet_UI.Controls
                     prop.CheckedStyle = SignStyle.Sign;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Dark:
@@ -190,7 +191,7 @@ namespace MetroSet_UI.Controls
                     prop.CheckedStyle = SignStyle.Sign;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    SetProperties();
+                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -227,12 +228,12 @@ namespace MetroSet_UI.Controls
                                     return;
                             }
                         }
-                    SetProperties();
+                    UpdateProperties();
                     break;
             }
         }
 
-        public void SetProperties()
+        public void UpdateProperties()
         {
             try
             {
@@ -282,7 +283,7 @@ namespace MetroSet_UI.Controls
                 {
                     using (Pen CheckMarkPen = new Pen(prop.DisabledBorderColor))
                     {
-                        using (SolidBrush CheckMarkBrush = new SolidBrush(prop.DisabledBorderColor))
+                        using (SolidBrush CheckMarkBrush = new SolidBrush(Checked ? Color.FromArgb(Alpha, prop.DisabledBorderColor) : Color.FromArgb(238, 238, 238)))
                         {
                             G.FillEllipse(BackBrush, rect);
                             G.FillEllipse(CheckMarkBrush, new Rectangle(3, 3, 11, 10));
@@ -377,6 +378,21 @@ namespace MetroSet_UI.Controls
             CheckedChanged?.Invoke(this);
         }
 
+        /// <summary>
+        /// Here we set the mouse hand smooth.
+        /// </summary>
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == User32.WM_SETCURSOR)
+            {
+                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            base.WndProc(ref m);
+        }
 
         #endregion Events
 
@@ -422,7 +438,7 @@ namespace MetroSet_UI.Controls
 
         #endregion Properties
 
-        #region Methods
+        #region Disposing
 
         /// <summary>
         /// Disposing Methods.

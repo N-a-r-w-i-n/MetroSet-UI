@@ -328,11 +328,20 @@ namespace MetroSet_UI.Controls
 
         #region Events
 
+        /// <summary>
+        /// Here we provide the fixed size while resizing.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             Size = new Size(100, 25);
         }
+
+        /// <summary>
+        /// Handling mouse up event of the cotnrol so that we detect if cursor located in our need area.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -369,6 +378,11 @@ namespace MetroSet_UI.Controls
             }
             Invalidate();
         }
+
+        /// <summary>
+        /// Handling mouse up event of the cotnrol so that we can perform action commands.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -397,15 +411,25 @@ namespace MetroSet_UI.Controls
                 }
             }
         }
+
+        /// <summary>
+        /// Handling mouse leave event of the cotnrol.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            Cursor = Cursors.Arrow;
+            Cursor = Cursors.Default;
             MinimizeHovered = false;
             MaximizeHovered = false;
             CloseHovered = false;
             Invalidate();
         }
+
+        /// <summary>
+        /// Handling mouse down event of the cotnrol.
+        /// </summary>
+        /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
