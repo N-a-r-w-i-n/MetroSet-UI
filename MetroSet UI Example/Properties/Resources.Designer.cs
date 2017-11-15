@@ -139,5 +139,25 @@ namespace MetroSet_UI_Example.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap monochrome_square_pattern {
+            get {
+                object obj = ResourceManager.GetObject("monochrome_square_pattern", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap monochrome_square_pattern_background_1164_1345 {
+            get {
+                object obj = ResourceManager.GetObject("monochrome-square-pattern-background_1164-1345", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

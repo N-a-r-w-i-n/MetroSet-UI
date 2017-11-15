@@ -26,7 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -107,7 +107,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static ProgressBarProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -132,7 +131,6 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            prop = new ProgressBarProperties();
             mth = new Methods();
             utl = new Utilites();
 
@@ -152,26 +150,24 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ProgressColor = Color.FromArgb(65, 177, 225);
-                    prop.BorderColor = Color.FromArgb(238, 238, 238);
-                    prop.BackColor = Color.FromArgb(238, 238, 238);
-                    prop.DisabledProgressColor = Color.FromArgb(120, 65, 177, 225);
-                    prop.DisabledBorderColor = Color.FromArgb(238, 238, 238);
-                    prop.DisabledBackColor = Color.FromArgb(238, 238, 238);
+                    ProgressColor = Color.FromArgb(65, 177, 225);
+                    BorderColor = Color.FromArgb(238, 238, 238);
+                    BackgroundColor = Color.FromArgb(238, 238, 238);
+                    DisabledProgressColor = Color.FromArgb(120, 65, 177, 225);
+                    DisabledBorderColor = Color.FromArgb(238, 238, 238);
+                    DisabledBackColor = Color.FromArgb(238, 238, 238);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ProgressColor = Color.FromArgb(65, 177, 225);
-                    prop.BackColor = Color.FromArgb(38, 38, 38);
-                    prop.BorderColor = Color.FromArgb(38, 38, 38);
-                    prop.DisabledProgressColor = Color.FromArgb(120, 65, 177, 225);
-                    prop.DisabledBackColor = Color.FromArgb(38, 38, 38);
-                    prop.DisabledBorderColor = Color.FromArgb(38, 38, 38);
+                    ProgressColor = Color.FromArgb(65, 177, 225);
+                    BackgroundColor = Color.FromArgb(38, 38, 38);
+                    BorderColor = Color.FromArgb(38, 38, 38);
+                    DisabledProgressColor = Color.FromArgb(120, 65, 177, 225);
+                    DisabledBackColor = Color.FromArgb(38, 38, 38);
+                    DisabledBorderColor = Color.FromArgb(38, 38, 38);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -183,32 +179,28 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
-
                                 case "ProgressColor":
-                                    prop.ProgressColor = utl.HexColor((string)varkey.Value);
+                                    ProgressColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledProgressColor":
-                                    prop.DisabledProgressColor = utl.HexColor((string)varkey.Value);
+                                    DisabledProgressColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -222,15 +214,7 @@ namespace MetroSet_UI.Controls
 
         public void UpdateProperties()
         {
-            try
-            {
-                Enabled = prop.Enabled;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing
@@ -243,11 +227,11 @@ namespace MetroSet_UI.Controls
             Rectangle Rect = new Rectangle(0, 0, Width - 1, Height - 1);
             if (Enabled)
             {
-                using (SolidBrush BG = new SolidBrush(prop.BackColor))
+                using (SolidBrush BG = new SolidBrush(BackgroundColor))
                 {
-                    using (Pen P = new Pen(prop.BorderColor))
+                    using (Pen P = new Pen(BorderColor))
                     {
-                        using (SolidBrush PS = new SolidBrush(prop.ProgressColor))
+                        using (SolidBrush PS = new SolidBrush(ProgressColor))
                         {
                             G.FillRectangle(BG, Rect);
                             if (CurrentValue != 0)
@@ -270,11 +254,11 @@ namespace MetroSet_UI.Controls
             }
             else
             {
-                using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
+                using (SolidBrush BG = new SolidBrush(DisabledBackColor))
                 {
-                    using (Pen P = new Pen(prop.DisabledBorderColor))
+                    using (Pen P = new Pen(DisabledBorderColor))
                     {
-                        using (SolidBrush PS = new SolidBrush(prop.DisabledProgressColor))
+                        using (SolidBrush PS = new SolidBrush(DisabledProgressColor))
                         {
                             G.FillRectangle(BG, Rect);
                             if (CurrentValue != 0)
@@ -353,6 +337,43 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the minimum value of the progressbar.")]
         public ProgressOrientation Orientation { get; set; } = ProgressOrientation.Horizontal;
+
+        /// <summary>
+        /// Gets or sets the control backcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
+        [DisplayName("BackColor")]
+        public Color BackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the border color.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
+        public Color BorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the progress color of the cotnrol.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the progress color of the cotnrol.")]
+        public Color ProgressColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the progresscolor of the control whenever while disabled
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the progresscolor of the control whenever while disabled.")]
+        public Color DisabledProgressColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+        public Color DisabledBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the border color while the control disabled.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+        public Color DisabledBorderColor { get; set; }
 
         #endregion
 

@@ -26,7 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -106,7 +106,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private LinkLabelProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -131,9 +130,7 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             Cursor = Cursors.Hand;
-            BackColor = Color.Transparent;
             Font = MetroSetFonts.Light(10);
-            prop = new LinkLabelProperties();
             mth = new Methods();
             utl = new Utilites();
             style = Style.Dark;
@@ -154,24 +151,22 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.Transparent;
-                    prop.ActiveLinkColor = utl.HexColor("#55c5f5");
-                    prop.LinkColor = utl.HexColor("#41b1e1");
-                    prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
+                    ForeColor = Color.Black;
+                    BackColor = Color.Transparent;
+                    ActiveLinkColor = Color.FromArgb(85, 197, 245);
+                    LinkColor = Color.FromArgb(65, 177, 225);
+                    VisitedLinkColor = Color.FromArgb(45, 157, 205);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.Transparent;
-                    prop.ActiveLinkColor = utl.HexColor("#55c5f5");
-                    prop.LinkColor = utl.HexColor("#41b1e1");
-                    prop.VisitedLinkColor = utl.HexColor("#2d9dcd");
+                    ForeColor = Color.FromArgb(170, 170, 170);
+                    BackColor = Color.Transparent;
+                    ActiveLinkColor = Color.FromArgb(85, 197, 245);
+                    LinkColor = Color.FromArgb(65, 177, 225);
+                    VisitedLinkColor = Color.FromArgb(45, 157, 205);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -183,46 +178,42 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = bool.Parse((string)varkey.Value);
-                                    break;
-
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "LinkColor":
-                                    prop.LinkColor = utl.HexColor((string)varkey.Value);
+                                    LinkColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ActiveLinkColor":
-                                    prop.ActiveLinkColor = utl.HexColor((string)varkey.Value);
+                                    ActiveLinkColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "VisitedLinkColor":
-                                    prop.VisitedLinkColor = utl.HexColor((string)varkey.Value);
+                                    VisitedLinkColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "LinkBehavior":
                                     if ((string)varkey.Value == "HoverUnderline")
                                     {
-                                        prop.LinkBehavior = LinkBehavior.HoverUnderline;
+                                        LinkBehavior = LinkBehavior.HoverUnderline;
                                     }
                                     else if ((string)varkey.Value == "AlwaysUnderline")
                                     {
-                                        prop.LinkBehavior = LinkBehavior.AlwaysUnderline;
+                                        LinkBehavior = LinkBehavior.AlwaysUnderline;
                                     }
                                     else if ((string)varkey.Value == "NeverUnderline")
                                     {
-                                        prop.LinkBehavior = LinkBehavior.NeverUnderline;
+                                        LinkBehavior = LinkBehavior.NeverUnderline;
                                     }
                                     else if ((string)varkey.Value == "SystemDefault")
                                     {
-                                        prop.LinkBehavior = LinkBehavior.SystemDefault;
+                                        LinkBehavior = LinkBehavior.SystemDefault;
                                     }
                                     break;
 
@@ -239,14 +230,7 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                Enabled = prop.Enabled;
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
-                LinkColor = prop.LinkColor;
-                ActiveLinkColor = prop.ActiveLinkColor;
-                VisitedLinkColor = prop.VisitedLinkColor;
-                LinkBehavior = prop.LinkBehavior;
-                Refresh();
+                Invalidate();
             }
             catch (Exception ex)
             {
@@ -274,7 +258,53 @@ namespace MetroSet_UI.Controls
             base.WndProc(ref m);
         }
 
-#endregion
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+        public override Color ForeColor { get; set; } = Color.Black;
+
+        // <summary>
+        /// Gets or sets the form backcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
+        public override Color BackColor { get; set; } = Color.Transparent;
+
+        /// <summary>
+        /// Gets or sets LinkColor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets LinkColor used by the control.")]
+        public new Color LinkColor { get; set; } = Color.FromArgb(65, 177, 225);
+
+        /// <summary>
+        /// Gets or sets ActiveLinkColor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets ActiveLinkColor used by the control.")]
+        public new Color ActiveLinkColor { get; set; } = Color.FromArgb(85, 197, 245);
+
+        /// <summary>
+        /// Gets or sets VisitedLinkColor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets VisitedLinkColor used by the control.")]
+        public new Color VisitedLinkColor { get; set; } = Color.FromArgb(45, 157, 205);
+
+        /// <summary>
+        /// Gets or sets LinkBehavior used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets LinkBehavior used by the control.")]
+        public new LinkBehavior LinkBehavior { get; set; }
+
+        /// <summary>
+        /// Gets or sets DisabledLinkColor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets DisabledLinkColor used by the control.")]
+        public new Color DisabledLinkColor { get; set; } = Color.FromArgb(133, 133, 133);
+
+        #endregion Properties
 
     }
 }

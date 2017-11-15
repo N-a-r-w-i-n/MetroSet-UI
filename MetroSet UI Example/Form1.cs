@@ -16,19 +16,9 @@ namespace MetroSet_UI_Example
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MetroSetLabel8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MetroSetSwitch2_SwitchedChanged(object sender)
         {
-            if(styleManager1.Style == MetroSet_UI.Design.Style.Light)
+            if (styleManager1.Style == MetroSet_UI.Design.Style.Light)
             {
                 styleManager1.Style = MetroSet_UI.Design.Style.Dark;
             }
@@ -63,5 +53,9 @@ namespace MetroSet_UI_Example
             MetroSetMessageBox.Show(this, "A new update available, do you want to update it now ?", "Available Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
+        private void MetroSetDefaultButton1_Click(object sender, EventArgs e)
+        {
+            styleManager1.OpenTheme();
+        }
     }
 }

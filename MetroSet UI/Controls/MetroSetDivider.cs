@@ -26,7 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -106,7 +106,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static DividerProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -128,11 +127,8 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            BackColor = Color.Transparent;
-            prop = new DividerProperties();
             mth = new Methods();
             utl = new Utilites();
-            prop.Orientation = DividerStyle.Horizontal;
             ApplyTheme();
         }
 
@@ -149,18 +145,16 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Thickness = 1;
-                    prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.Transparent;
+                    Thickness = 1;
+                    ForeColor = Color.Black;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Thickness = 1;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.Transparent;
+                    Thickness = 1;
+                    ForeColor = Color.FromArgb(170, 170, 170);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -175,24 +169,20 @@ namespace MetroSet_UI.Controls
                                 case "Orientation":
                                     if ((string)varkey.Value == "Horizontal")
                                     {
-                                        prop.Orientation = DividerStyle.Horizontal;
+                                        Orientation = DividerStyle.Horizontal;
                                     }
                                     else if ((string)varkey.Value == "Vertical")
                                     {
-                                        prop.Orientation = DividerStyle.Vertical;
+                                        Orientation = DividerStyle.Vertical;
                                     }
                                     break;
 
                                 case "Thickness":
-                                    prop.Thickness = ((int)varkey.Value);
+                                    Thickness = ((int)varkey.Value);
                                     break;
 
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
-                                    break;
-
-                                case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -208,8 +198,8 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
+                BackColor = BackColor;
+                ForeColor = ForeColor;
                 Invalidate();
             }
             catch (Exception ex)
@@ -225,16 +215,16 @@ namespace MetroSet_UI.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics G = e.Graphics;
-            using (Pen P = new Pen(ForeColor, prop.Thickness))
+            using (Pen P = new Pen(ForeColor, Thickness))
             {
-                switch (prop.Orientation)
+                switch (Orientation)
                 {
                     case DividerStyle.Horizontal:
-                        G.DrawLine(P, 0, prop.Thickness, Width, prop.Thickness);
+                        G.DrawLine(P, 0, Thickness, Width, Thickness);
                         break;
 
                     case DividerStyle.Vertical:
-                        G.DrawLine(P, prop.Thickness, 0, prop.Thickness, Height);
+                        G.DrawLine(P, Thickness, 0, Thickness, Height);
                         break;
                 }
             }
@@ -248,29 +238,28 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style associated with the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets Orientation of the control.")]
-        public DividerStyle Orientation
-        {
-            get { return prop.Orientation; }
-            set
-            {
-                prop.Orientation = value;
-                Invalidate();
-            }
-        }
+        public DividerStyle Orientation { get; set; } = DividerStyle.Horizontal;
 
         /// <summary>
         /// Gets or sets the divider thickness.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the divider thickness.")]
-        public int Thickness
+        public int Thickness { get; set; }
+
+        /// <summary>
+        /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Color BackColor
         {
-            get { return prop.Thickness; }
-            set
-            {
-                prop.Thickness = value;
-                Invalidate();
-            }
+            get { return Color.Transparent; }
         }
+
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+        public override Color ForeColor { get; set; }
 
         #endregion Properties
 
@@ -283,13 +272,13 @@ namespace MetroSet_UI.Controls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if (prop.Orientation == DividerStyle.Horizontal)
+            if (Orientation == DividerStyle.Horizontal)
             {
-                Height = prop.Thickness + 3;
+                Height = Thickness + 3;
             }
             else
             {
-                Width = prop.Thickness + 3;
+                Width = Thickness + 3;
             }
         }
 

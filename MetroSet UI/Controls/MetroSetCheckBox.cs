@@ -27,7 +27,7 @@ using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -111,7 +111,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static CheckProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -140,7 +139,6 @@ namespace MetroSet_UI.Controls
             Font = MetroSetFonts.SemiBold(10);
             Cursor = Cursors.Hand;
             BackColor = Color.Transparent;
-            prop = new CheckProperties();
             mth = new Methods();
             utl = new Utilites();
             timer = new Timer()
@@ -149,7 +147,6 @@ namespace MetroSet_UI.Controls
                 Enabled = false
             };
             timer.Tick += SetCheckedChanged;
-            SignStyle = SignStyle.Sign;
             ApplyTheme();
         }
 
@@ -166,24 +163,22 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.White;
-                    prop.BorderColor = Color.FromArgb(155, 155, 155);
-                    prop.DisabledBorderColor = Color.FromArgb(205, 205, 205);
-                    prop.CheckSignColor = Color.FromArgb(65, 177, 225);
+                    ForeColor = Color.Black;
+                    BackgroundColor = Color.White;
+                    BorderColor = Color.FromArgb(155, 155, 155);
+                    DisabledBorderColor = Color.FromArgb(205, 205, 205);
+                    CheckSignColor = Color.FromArgb(65, 177, 225);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.FromArgb(30, 30, 30);
-                    prop.BorderColor = Color.FromArgb(155, 155, 155);
-                    prop.DisabledBorderColor = Color.FromArgb(85, 85, 85);
-                    prop.CheckSignColor = Color.FromArgb(65, 177, 225);
+                    ForeColor = Color.FromArgb(170, 170, 170);
+                    BackgroundColor = Color.FromArgb(30, 30, 30);
+                    BorderColor = Color.FromArgb(155, 155, 155);
+                    DisabledBorderColor = Color.FromArgb(85, 85, 85);
+                    CheckSignColor = Color.FromArgb(65, 177, 225);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -195,39 +190,36 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
 
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CheckColor":
-                                    prop.CheckSignColor = utl.HexColor((string)varkey.Value);
+                                    CheckSignColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CheckedStyle":
                                     switch ((string)varkey.Value)
                                     {
                                         case "Sign":
-                                            prop.CheckedStyle = SignStyle.Sign;
+                                            SignStyle = SignStyle.Sign;
                                             break;
 
                                         case "Shape":
-                                            prop.CheckedStyle = SignStyle.Shape;
+                                            SignStyle = SignStyle.Shape;
                                             break;
                                     }
                                     break;
@@ -245,8 +237,7 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                Enabled = prop.Enabled;
-                ForeColor = prop.ForeColor;
+                ForeColor = ForeColor;
                 Invalidate();
             }
             catch (Exception ex)
@@ -268,13 +259,13 @@ namespace MetroSet_UI.Controls
 
             if (Enabled)
             {
-                using (SolidBrush BackBrush = new SolidBrush(prop.BackColor))
+                using (SolidBrush BackBrush = new SolidBrush(BackgroundColor))
                 {
-                    using (Pen CheckMarkPen = new Pen(Checked ? Color.FromArgb(Alpha, prop.CheckSignColor) : prop.BackColor, 2))
+                    using (Pen CheckMarkPen = new Pen(Checked ? Color.FromArgb(Alpha, CheckSignColor) : BackgroundColor, 2))
                     {
-                        using (SolidBrush CheckMarkBrush = new SolidBrush(Checked ? Color.FromArgb(Alpha, prop.CheckSignColor) : prop.BackColor))
+                        using (SolidBrush CheckMarkBrush = new SolidBrush(Checked ? Color.FromArgb(Alpha, CheckSignColor) : BackgroundColor))
                         {
-                            using (Pen P = new Pen(prop.BorderColor))
+                            using (Pen P = new Pen(BorderColor))
                             {
                                 using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
                                 {
@@ -296,9 +287,9 @@ namespace MetroSet_UI.Controls
             {
                 using (Brush BackBrush = new SolidBrush(Color.FromArgb(238, 238, 238)))
                 {
-                    using (Pen CheckMarkPen = new Pen(Color.FromArgb(Alpha, prop.DisabledBorderColor)))
+                    using (Pen CheckMarkPen = new Pen(Color.FromArgb(Alpha, DisabledBorderColor)))
                     {
-                        using (SolidBrush CheckMarkBrush = new SolidBrush(prop.DisabledBorderColor))
+                        using (SolidBrush CheckMarkBrush = new SolidBrush(DisabledBorderColor))
                         {
                             using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
                             {
@@ -441,27 +432,59 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
-        private SignStyle signStyle;
+
         /// <summary>
         /// Gets or sets the the sign style of check.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the the sign style of check.")]
-        public SignStyle SignStyle
-        {
-            get { return signStyle; }
-            set
-            {
-                signStyle = value;
-                prop.CheckedStyle = value;
-                Invalidate();
-            }
-        }
+        public SignStyle SignStyle { get; set; } = SignStyle.Sign;
 
         /// <summary>
         /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
         /// </summary>
         [Browsable(false)]
         public Enums.CheckState CheckState { get; set; }
+        
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+        public override Color ForeColor { get; set; }
+
+        /// <summary>
+        /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Color BackColor
+        {
+            get { return Color.Transparent; }
+        }
+
+        /// <summary>
+        /// Gets or sets the form backcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
+        [DisplayName("BackColor")]
+        public Color BackgroundColor { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the border color.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
+        public Color BorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the border color while the control disabled.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+        public Color DisabledBorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color of the check symbol.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the color of the check symbol.")]
+        public Color CheckSignColor { get; set; }
 
         #endregion Properties
 

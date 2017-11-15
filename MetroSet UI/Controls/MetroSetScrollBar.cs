@@ -26,7 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -108,7 +108,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static ScrollBarProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -144,7 +143,6 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             SetDefaults();
-            prop = new ScrollBarProperties();
             mth = new Methods();
             utl = new Utilites();
             ApplyTheme();
@@ -172,22 +170,20 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(65, 177, 225);
-                    prop.BackColor = Color.White;
-                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
-                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
+                    ForeColor = Color.FromArgb(65, 177, 225);
+                    BackColor = Color.White;
+                    DisabledBackColor = Color.FromArgb(204, 204, 204);
+                    DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(65, 177, 225);
-                    prop.BackColor = Color.FromArgb(30, 30, 30);
-                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
-                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
+                    ForeColor = Color.FromArgb(65, 177, 225);
+                    BackColor = Color.FromArgb(30, 30, 30);
+                    DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -199,24 +195,21 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
 
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -230,15 +223,7 @@ namespace MetroSet_UI.Controls
 
         public void UpdateProperties()
         {
-            try
-            {
-                Enabled = prop.Enabled;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing
@@ -251,9 +236,9 @@ namespace MetroSet_UI.Controls
 
             Rectangle r = new Rectangle(0, 0, Width, Height);
 
-            using (SolidBrush BG = new SolidBrush(Enabled ? prop.BackColor : prop.DisabledBackColor))
+            using (SolidBrush BG = new SolidBrush(Enabled ? BackColor : DisabledBackColor))
             {
-                using (SolidBrush ThumbBrush = new SolidBrush(Enabled ? prop.ForeColor : prop.DisabledForeColor))
+                using (SolidBrush ThumbBrush = new SolidBrush(Enabled ? ForeColor : DisabledForeColor))
                 {
                     G.FillRectangle(BG, r);
                     G.FillRectangle(ThumbBrush, thumb);
@@ -275,9 +260,9 @@ namespace MetroSet_UI.Controls
             set
             {
                 minimum = value;
-                if (value > this._value)
+                if (value > _value)
                 {
-                    this._value = value;
+                    _value = value;
                 }
                 else if (value > maximum)
                 {
@@ -364,8 +349,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the distance to move a scroll bar in response to a large scroll command.")]
         public int LargeChange { get; set; } = 10;
-
-
+        
         /// <summary>
         /// Gets or sets the scroll bar orientation.
         /// </summary>
@@ -373,16 +357,28 @@ namespace MetroSet_UI.Controls
         public ScrollOrientate Orientation { get; set; } = ScrollOrientate.Horizontal;
 
         /// <summary>
-        /// Gets or sets the background color.
+        /// Gets or sets forecolor used by the control
         /// </summary>
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets the scroll bar orientation.")]
         public override Color ForeColor { get; set; }
 
         /// <summary>
-        /// Gets or sets the foreground color.
+        /// Gets or sets backcolor used by the control
         /// </summary>
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
         public override Color BackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
+        public Color DisabledForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+        public Color DisabledBackColor { get; set; }
 
         #endregion
 

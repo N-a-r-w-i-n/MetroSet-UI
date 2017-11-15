@@ -184,30 +184,6 @@
     <Compile Include="Enums\TabStyle.cs" />
     <Compile Include="Enums\TileAlign.cs" />
     <Compile Include="Native\User32.cs" />
-    <Compile Include="Property\BadgeProperties.cs" />
-    <Compile Include="Property\DefaultButtonProperties.cs" />
-    <Compile Include="Property\ContextMenuProperties.cs" />
-    <Compile Include="Property\ScrollBarProperties.cs" />
-    <Compile Include="Property\ListBoxProperties.cs" />
-    <Compile Include="Property\TrackBarProperties.cs" />
-    <Compile Include="Property\ControlBoxProperties.cs" />
-    <Compile Include="Property\PanelProperties.cs" />
-    <Compile Include="Property\TabControlProperties.cs" />
-    <Compile Include="Property\ProgressBarProperties.cs" />
-    <Compile Include="Property\TileProperties.cs" />
-    <Compile Include="Property\EllipseProperties.cs" />
-    <Compile Include="Property\ButtonProperties.cs" />
-    <Compile Include="Property\NumericProperties.cs" />
-    <Compile Include="Property\ComboBoxProperties.cs" />
-    <Compile Include="Property\RichTextBoxProperties.cs" />
-    <Compile Include="Property\TextBoxProperties.cs" />
-    <Compile Include="Property\ToolTipProperties.cs" />
-    <Compile Include="Property\SwitchProperties.cs" />
-    <Compile Include="Property\RadioProperties.cs" />
-    <Compile Include="Property\CheckProperties.cs" />
-    <Compile Include="Property\FormProperties.cs" />
-    <Compile Include="Property\DividerProperties.cs" />
-    <Compile Include="Property\LabelProperties.cs" />
     <Compile Include="Controls\MetroDefaultSetButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -239,7 +215,6 @@
     <Compile Include="Components\StyleManager.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Property\LinkLabelProperties.cs" />
     <Compile Include="Actions\MetroSetBadgeActionList.cs" />
     <Compile Include="Actions\MetroSetDefaultButtonActionList.cs" />
     <Compile Include="Actions\MetroSetLabelActionList.cs" />
@@ -307,6 +282,7 @@
     <EmbeddedResource Include="Bitmaps\TextBox.bmp" />
     <EmbeddedResource Include="Bitmaps\ToolTip.bmp" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -25,7 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -107,7 +107,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static ControlBoxProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -130,8 +129,6 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            BackColor = Color.Transparent;
-            prop = new ControlBoxProperties();
             mth = new Methods();
             utl = new Utilites();
             Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -151,31 +148,31 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.CloseHoverBackColor = Color.FromArgb(183, 40, 40);
-                    prop.CloseHoverForeColor = Color.White;
-                    prop.CloseNormalForeColor = Color.Gray;
-                    prop.MaximizeHoverBackColor = Color.FromArgb(238, 238, 238);
-                    prop.MaximizeHoverForeColor = Color.Gray;
-                    prop.MaximizeNormalForeColor = Color.Gray;
-                    prop.MinimizeHoverBackColor = Color.FromArgb(238, 238, 238);
-                    prop.MinimizeHoverForeColor = Color.Gray;
-                    prop.MinimizeNormalForeColor = Color.Gray;
-                    prop.DisabledForeColor = Color.DimGray;
+                    CloseHoverBackColor = Color.FromArgb(183, 40, 40);
+                    CloseHoverForeColor = Color.White;
+                    CloseNormalForeColor = Color.Gray;
+                    MaximizeHoverBackColor = Color.FromArgb(238, 238, 238);
+                    MaximizeHoverForeColor = Color.Gray;
+                    MaximizeNormalForeColor = Color.Gray;
+                    MinimizeHoverBackColor = Color.FromArgb(238, 238, 238);
+                    MinimizeHoverForeColor = Color.Gray;
+                    MinimizeNormalForeColor = Color.Gray;
+                    DisabledForeColor = Color.DimGray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     break;
 
                 case Style.Dark:
-                    prop.CloseHoverBackColor = Color.FromArgb(183, 40, 40);
-                    prop.CloseHoverForeColor = Color.White;
-                    prop.CloseNormalForeColor = Color.Gray;
-                    prop.MaximizeHoverBackColor = Color.FromArgb(238, 238, 238);
-                    prop.MaximizeHoverForeColor = Color.Gray;
-                    prop.MaximizeNormalForeColor = Color.Gray;
-                    prop.MinimizeHoverBackColor = Color.FromArgb(238, 238, 238);
-                    prop.MinimizeHoverForeColor = Color.Gray;
-                    prop.MinimizeNormalForeColor = Color.Gray;
-                    prop.DisabledForeColor = Color.Silver;
+                    CloseHoverBackColor = Color.FromArgb(183, 40, 40);
+                    CloseHoverForeColor = Color.White;
+                    CloseNormalForeColor = Color.Gray;
+                    MaximizeHoverBackColor = Color.FromArgb(238, 238, 238);
+                    MaximizeHoverForeColor = Color.Gray;
+                    MaximizeNormalForeColor = Color.Gray;
+                    MinimizeHoverBackColor = Color.FromArgb(238, 238, 238);
+                    MinimizeHoverForeColor = Color.Gray;
+                    MinimizeNormalForeColor = Color.Gray;
+                    DisabledForeColor = Color.Silver;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;
@@ -187,43 +184,43 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "CloseHoverBackColor":
-                                    prop.CloseHoverBackColor = utl.HexColor((string)varkey.Value);
+                                    CloseHoverBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CloseHoverForeColor":
-                                    prop.CloseHoverForeColor = utl.HexColor((string)varkey.Value);
+                                    CloseHoverForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CloseNormalForeColor":
-                                    prop.CloseNormalForeColor = utl.HexColor((string)varkey.Value);
+                                    CloseNormalForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MaximizeHoverBackColor":
-                                    prop.MaximizeHoverBackColor = utl.HexColor((string)varkey.Value);
+                                    MaximizeHoverBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MaximizeHoverForeColor":
-                                    prop.MaximizeHoverForeColor = utl.HexColor((string)varkey.Value);
+                                    MaximizeHoverForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MaximizeNormalForeColor":
-                                    prop.MaximizeNormalForeColor = utl.HexColor((string)varkey.Value);
+                                    MaximizeNormalForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MinimizeHoverBackColor":
-                                    prop.MinimizeHoverBackColor = utl.HexColor((string)varkey.Value);
+                                    MinimizeHoverBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MinimizeHoverForeColor":
-                                    prop.MinimizeHoverForeColor = utl.HexColor((string)varkey.Value);
+                                    MinimizeHoverForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MinimizeNormalForeColor":
-                                    prop.MinimizeNormalForeColor = utl.HexColor((string)varkey.Value);
+                                    MinimizeNormalForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -248,13 +245,81 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the Maximize button is Enabled in the caption bar of the form.")]
         public bool MaximizeBox { get; set; } = true;
-
-
+        
         /// <summary>
         /// Gets or sets a value indicating whether the Minimize button is Enabled in the caption bar of the form.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the Minimize button is Enabled in the caption bar of the form.")]
         public bool MinimizeBox { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets Close forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Close forecolor used by the control.")]
+        public Color CloseNormalForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Close forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Close forecolor used by the control.")]
+        public Color CloseHoverForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Close backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Close backcolor used by the control.")]
+        public Color CloseHoverBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Maximize forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Maximize forecolor used by the control.")]
+        public Color MaximizeHoverForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Maximize backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Maximize backcolor used by the control.")]
+        public Color MaximizeHoverBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Maximize forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Maximize forecolor used by the control.")]
+        public Color MaximizeNormalForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Minimize forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Minimize forecolor used by the control.")]
+        public Color MinimizeHoverForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Minimize backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Minimize backcolor used by the control.")]
+        public Color MinimizeHoverBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets Minimize forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets Minimize forecolor used by the control.")]
+        public Color MinimizeNormalForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
+        public Color DisabledForeColor { get; set; }
+        
+        /// <summary>
+        /// I make backcolor inaccessible cause we have not use of it. 
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public override Color BackColor
+        {
+            get { return Color.Transparent; }
+        }
 
         #endregion
 
@@ -277,11 +342,11 @@ namespace MetroSet_UI.Controls
             Graphics G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            using (SolidBrush CloseBoxState = new SolidBrush(CloseHovered ? prop.CloseHoverBackColor : Color.Transparent))
+            using (SolidBrush CloseBoxState = new SolidBrush(CloseHovered ? CloseHoverBackColor : Color.Transparent))
             {
                 using (Font F = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(CloseHovered ? prop.CloseHoverForeColor : prop.CloseNormalForeColor))
+                    using (SolidBrush TB = new SolidBrush(CloseHovered ? CloseHoverForeColor : CloseNormalForeColor))
                     {
                         using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
                         {
@@ -291,11 +356,11 @@ namespace MetroSet_UI.Controls
                     }
                 }
             }
-            using (SolidBrush MaximizeBoxState = new SolidBrush(MaximizeBox ? MaximizeHovered ? prop.MaximizeHoverBackColor : Color.Transparent : Color.Transparent))
+            using (SolidBrush MaximizeBoxState = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverBackColor : Color.Transparent : Color.Transparent))
             {
                 using (Font F = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(MaximizeBox ? MaximizeHovered ? prop.MaximizeHoverForeColor : prop.MaximizeNormalForeColor : prop.DisabledForeColor))
+                    using (SolidBrush TB = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverForeColor : MaximizeNormalForeColor : DisabledForeColor))
                     {
                         using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
                         {
@@ -307,11 +372,11 @@ namespace MetroSet_UI.Controls
                     }
                 }
             }
-            using (SolidBrush MinimizeBoxState = new SolidBrush(MinimizeBox ? MinimizeHovered ? prop.MinimizeHoverBackColor : Color.Transparent : Color.Transparent))
+            using (SolidBrush MinimizeBoxState = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverBackColor : Color.Transparent : Color.Transparent))
             {
                 using (Font F = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(MinimizeBox ? MinimizeHovered ? prop.MinimizeHoverForeColor : prop.MinimizeNormalForeColor : prop.DisabledForeColor))
+                    using (SolidBrush TB = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverForeColor : MinimizeNormalForeColor : DisabledForeColor))
                     {
                         using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
                         {

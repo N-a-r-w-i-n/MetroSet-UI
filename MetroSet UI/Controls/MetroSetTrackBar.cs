@@ -25,7 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -107,7 +107,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static TrackBarProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -140,13 +139,9 @@ namespace MetroSet_UI.Controls
             _Value = 0;
             CurrentValue = Convert.ToInt32(Value / (double)(Maximum) - (2 * Width));
             UpdateStyles();
-            BackColor = Color.Transparent;
-            prop = new TrackBarProperties();
             mth = new Methods();
             utl = new Utilites();
-
             ApplyTheme();
-
         } 
 
         #endregion Constructors
@@ -162,26 +157,24 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.HandlerColor = Color.FromArgb(180, 180, 180);
-                    prop.BackColor = Color.FromArgb(205, 205, 205);
-                    prop.ValueColor = Color.FromArgb(65, 177, 225);
-                    prop.DisabledBackColor = Color.FromArgb(235, 235, 235);
-                    prop.DisabledValueColor = Color.FromArgb(205, 205, 205);
-                    prop.DisabledHandlerColor = Color.FromArgb(196, 196, 196);
+                    HandlerColor = Color.FromArgb(180, 180, 180);
+                    BackgroundColor = Color.FromArgb(205, 205, 205);
+                    ValueColor = Color.FromArgb(65, 177, 225);
+                    DisabledBackColor = Color.FromArgb(235, 235, 235);
+                    DisabledValueColor = Color.FromArgb(205, 205, 205);
+                    DisabledHandlerColor = Color.FromArgb(196, 196, 196);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.HandlerColor = Color.FromArgb(143, 143, 143);
-                    prop.BackColor = Color.FromArgb(90, 90, 90);
-                    prop.ValueColor = Color.FromArgb(65, 177, 225);
-                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
-                    prop.DisabledValueColor = Color.FromArgb(109, 109, 109);
-                    prop.DisabledHandlerColor = Color.FromArgb(90, 90, 90);
+                    HandlerColor = Color.FromArgb(143, 143, 143);
+                    BackgroundColor = Color.FromArgb(90, 90, 90);
+                    ValueColor = Color.FromArgb(65, 177, 225);
+                    DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    DisabledValueColor = Color.FromArgb(109, 109, 109);
+                    DisabledHandlerColor = Color.FromArgb(90, 90, 90);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -193,32 +186,29 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
 
                                 case "HandlerColor":
-                                    prop.HandlerColor = utl.HexColor((string)varkey.Value);
+                                    HandlerColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ValueColor":
-                                    prop.ValueColor = utl.HexColor((string)varkey.Value);
+                                    ValueColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledValueColor":
-                                    prop.DisabledValueColor = utl.HexColor((string)varkey.Value);
+                                    DisabledValueColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledHandlerColor":
-                                    prop.DisabledHandlerColor = utl.HexColor((string)varkey.Value);
+                                    DisabledHandlerColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -232,15 +222,7 @@ namespace MetroSet_UI.Controls
 
         public void UpdateProperties()
         {
-            try
-            {
-                Enabled = prop.Enabled;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing
@@ -253,11 +235,11 @@ namespace MetroSet_UI.Controls
 
             Cursor = Cursors.Hand;
 
-            using (SolidBrush BG = new SolidBrush(Enabled ? prop.BackColor : prop.DisabledBackColor))
+            using (SolidBrush BG = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
             {
-                using (SolidBrush V = new SolidBrush(Enabled ? prop.ValueColor : prop.DisabledValueColor))
+                using (SolidBrush V = new SolidBrush(Enabled ? ValueColor : DisabledValueColor))
                 {
-                    using (SolidBrush VC = new SolidBrush(Enabled ? prop.HandlerColor : prop.DisabledHandlerColor))
+                    using (SolidBrush VC = new SolidBrush(Enabled ? HandlerColor : DisabledHandlerColor))
                     {
                         G.FillRectangle(BG, new Rectangle(0, 6, Width, 4));
                         if (CurrentValue != 0)
@@ -326,6 +308,55 @@ namespace MetroSet_UI.Controls
                 }
             }
         }
+
+        [Browsable(false)]
+        public override Color BackColor
+        {
+            get { return Color.Transparent; }
+        }
+
+        /// <summary>
+        /// Gets or sets the value color in normal mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework"), Description(" Gets or sets the value color in normal mouse sate.")]
+        public Color ValueColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler color.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the handler color.")]
+        public Color HandlerColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the control backcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
+        [DisplayName("BackColor")]
+        public Color BackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the control whenever while disabled
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the value of the control whenever while disabled.")]
+        public Color DisabledValueColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+        public Color DisabledBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the border color while the control disabled.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+        public Color DisabledBorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler color while the control disabled.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the handler color while the control disabled.")]
+        public Color DisabledHandlerColor { get; set; }
 
         #endregion
 

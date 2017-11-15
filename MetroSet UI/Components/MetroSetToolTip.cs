@@ -25,7 +25,6 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -112,7 +111,6 @@ namespace MetroSet_UI.Components
 
         #region Internal Vars
 
-        private ToolTipProperties prop;
         private StyleManager _StyleManager;
         private Style style;
 
@@ -123,12 +121,10 @@ namespace MetroSet_UI.Components
         public MetroSetToolTip()
         {
             OwnerDraw = true;
-            prop = new ToolTipProperties();
             Draw += OnDraw;
             Popup += ToolTip_Popup;
             mth = new Methods();
             utl = new Utilites();
-
             ApplyTheme();
         }
 
@@ -170,21 +166,19 @@ namespace MetroSet_UI.Components
             switch (style)
             {
                 case Style.Light:
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.White;
-                    prop.BorderColor = Color.FromArgb(204, 204, 204);
+                    ForeColor = Color.FromArgb(170, 170, 170);
+                    BackColor = Color.White;
+                    BorderColor = Color.FromArgb(204, 204, 204);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
-                    UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.ForeColor = Color.FromArgb(204, 204, 204);
-                    prop.BackColor = Color.FromArgb(32, 32, 32);
-                    prop.BorderColor = Color.FromArgb(64, 64, 64);
+                    ForeColor = Color.FromArgb(204, 204, 204);
+                    BackColor = Color.FromArgb(32, 32, 32);
+                    BorderColor = Color.FromArgb(64, 64, 64);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
-                    UpdateProperties();
                     break;
 
                 case Style.Custom:
@@ -196,37 +190,22 @@ namespace MetroSet_UI.Components
                             {
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
                                     return;
                             }
                         }
-                    UpdateProperties();
                     break;
-            }
-        }
-
-        public void UpdateProperties()
-        {
-            try
-            {
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
-                BorderColor = prop.BorderColor;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
             }
         }
 
@@ -269,14 +248,14 @@ namespace MetroSet_UI.Components
         /// <summary>
         /// Gets or sets the foreground color for the ToolTip.
         /// </summary>
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets the foreground color for the ToolTip.")]
         public new Color ForeColor { get; set; }
 
 
         /// <summary>
         /// Gets or sets a title for the ToolTip window.
         /// </summary>
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets a title for the ToolTip window.")]
         public new string ToolTipTitle { get; } = string.Empty;
 
 
@@ -290,7 +269,7 @@ namespace MetroSet_UI.Components
         /// <summary>
         /// Gets or sets the border color for the ToolTip.
         /// </summary>
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets the border color for the ToolTip.")]
         public Color BorderColor { get; set; }
 
         #endregion

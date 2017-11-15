@@ -26,7 +26,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -108,7 +108,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static TextBoxProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -180,7 +179,6 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             Font = MetroSetFonts.Regular(10);
             EvaluateVars();
-
             ApplyTheme();
             T_Defaults();
             if(!Multiline)
@@ -189,19 +187,12 @@ namespace MetroSet_UI.Controls
 
         public void EvaluateVars()
         {
-            prop = new TextBoxProperties();
             mth = new Methods();
             utl = new Utilites();
         }
 
         void T_Defaults()
         {
-
-            _BackColor = prop.BackColor;
-            _ForeColor = prop.ForeColor;
-            _BorderColor = prop.BorderColor;
-            _HoverColor = prop.HoverColor;
-
             _WatermarkText = string.Empty;
             _UseSystemPasswordChar = false;
             _ReadOnly = false;
@@ -215,7 +206,6 @@ namespace MetroSet_UI.Controls
             T.Multiline = _Multiline;
             T.Cursor = Cursors.IBeam;
             T.BackColor = BackColor;
-
             T.ForeColor = ForeColor;
             T.BorderStyle = BorderStyle.None;
             T.Location = new Point(7, 8);
@@ -265,14 +255,14 @@ namespace MetroSet_UI.Controls
             }
             else
             {
-                using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
+                using (SolidBrush BG = new SolidBrush(DisabledBackColor))
                 {
-                    using (Pen P = new Pen(prop.DisabledBorderColor))
+                    using (Pen P = new Pen(DisabledBorderColor))
                     {
                         G.FillRectangle(BG, Rect);
                         G.DrawRectangle(P, Rect);
-                        T.BackColor = prop.DisabledBackColor;
-                        T.ForeColor = prop.DisabledForeColor;                        
+                        T.BackColor = DisabledBackColor;
+                        T.ForeColor = DisabledForeColor;                        
                     }
                 }
             }
@@ -304,34 +294,28 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(20, 20, 20);
-                    prop.BackColor = Color.FromArgb(238, 238, 238);
-                    prop.HoverColor = Color.FromArgb(102, 102, 102);
-                    prop.BorderColor = Color.FromArgb(155, 155, 155);
-                    prop.WatermarkText = "";
-                    prop.ReadOnly = false;
-                    prop.UseSystemPasswordChar = false;
-                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
-                    prop.DisabledBorderColor = Color.FromArgb(155, 155, 155);
-                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
+                    ForeColor = Color.FromArgb(20, 20, 20);
+                    BackColor = Color.FromArgb(238, 238, 238);
+                    HoverColor = Color.FromArgb(102, 102, 102);
+                    BorderColor = Color.FromArgb(155, 155, 155);
+                    WatermarkText = "";
+                    DisabledBackColor = Color.FromArgb(204, 204, 204);
+                    DisabledBorderColor = Color.FromArgb(155, 155, 155);
+                    DisabledForeColor = Color.FromArgb(136, 136, 136);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(204, 204, 204);
-                    prop.BackColor = Color.FromArgb(34, 34, 34);
-                    prop.HoverColor = Color.FromArgb(65, 177, 225);
-                    prop.BorderColor = Color.FromArgb(110, 110, 110);
-                    prop.WatermarkText = "";
-                    prop.ReadOnly = false;
-                    prop.UseSystemPasswordChar = false;
-                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
-                    prop.DisabledBorderColor = Color.FromArgb(109, 109, 109);
-                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
+                    ForeColor = Color.FromArgb(204, 204, 204);
+                    BackColor = Color.FromArgb(34, 34, 34);
+                    HoverColor = Color.FromArgb(65, 177, 225);
+                    BorderColor = Color.FromArgb(110, 110, 110);
+                    WatermarkText = "";
+                    DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    DisabledBorderColor = Color.FromArgb(109, 109, 109);
+                    DisabledForeColor = Color.FromArgb(109, 109, 109);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -343,52 +327,37 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
 
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "HoverColor":
-                                    prop.HoverColor = utl.HexColor((string)varkey.Value);
+                                    HoverColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "WatermarkText":
-                                    prop.WatermarkText = (string)varkey.Value;
+                                    WatermarkText = (string)varkey.Value;
                                     break;
-
-                                case "ReadOnly":
-                                    prop.ReadOnly = Convert.ToBoolean(varkey.Value);
-                                    break;
-
-                                case "UseSystemPasswordChar":
-                                    prop.UseSystemPasswordChar = Convert.ToBoolean(varkey.Value);
-                                    break;
-
-                                case "Multiline":
-                                    prop.Multiline = Convert.ToBoolean(varkey.Value);
-                                    break;
-
+                           
                                 case "DisabledBackColor":
-                                    prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -402,23 +371,7 @@ namespace MetroSet_UI.Controls
 
         public void UpdateProperties()
         {
-            try
-            {
-                Enabled = prop.Enabled;
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
-                BorderColor = prop.BorderColor;
-                HoverColor = prop.HoverColor;
-                WatermarkText = prop.WatermarkText;
-                ReadOnly = prop.ReadOnly;
-                UseSystemPasswordChar = prop.UseSystemPasswordChar;
-                Multiline = prop.Multiline;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing
@@ -771,7 +724,6 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework")]
         [Description("Gets or sets the background color of the control.")]
-        [Browsable(false)]
         public override Color BackColor
         {
             get { return _BackColor; }
@@ -789,7 +741,6 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework")]
         [Description("Gets or sets the color of the control whenever hovered.")]
-        [Browsable(false)]
         public Color HoverColor
         {
             get { return _HoverColor; }
@@ -806,7 +757,6 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework")]
         [Description("Gets or sets the border color of the control.")]
-        [Browsable(false)]
         public Color BorderColor
         {
             get { return _BorderColor; }
@@ -885,7 +835,6 @@ namespace MetroSet_UI.Controls
                 if (T == null)
                 { return; }
                 T.Multiline = value;
-                prop.Multiline = value;
                 if (value)
                 {
                     T.Height = Height - 10;
@@ -1067,6 +1016,23 @@ namespace MetroSet_UI.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the forecolor of the control whenever while disabled
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the forecolor of the control whenever while disabled.")]
+        public Color DisabledForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+        public Color DisabledBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the border color while the control disabled.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+        public Color DisabledBorderColor { get; set; }
 
         #endregion
 

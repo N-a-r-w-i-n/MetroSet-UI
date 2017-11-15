@@ -25,7 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -105,7 +105,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static LabelProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -129,11 +128,8 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.SemiBold(10);
-            BackColor = Color.Transparent;
-            prop = new LabelProperties();
             mth = new Methods();
             utl = new Utilites();
-
             ApplyTheme();
         }
 
@@ -150,18 +146,16 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.Transparent;
+                    ForeColor = Color.Black;
+                    BackColor = Color.Transparent;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.Transparent;
+                    ForeColor = Color.FromArgb(170, 170, 170);
+                    BackColor = Color.Transparent;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -173,16 +167,12 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
-
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -198,9 +188,6 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                Enabled = prop.Enabled;
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
                 Invalidate();
             }
             catch (Exception ex)
@@ -210,5 +197,22 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion Theme Changing
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+        public override Color ForeColor { get; set; }
+
+        // <summary>
+        /// Gets or sets the form backcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
+        public override Color BackColor { get; set; }
+
+        #endregion Properties
+
     }
 }

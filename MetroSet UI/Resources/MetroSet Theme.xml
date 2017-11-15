@@ -5,24 +5,16 @@
     <Author>Narwin</Author>
   </Theme>
   <Form>
-    <Enabled>true</Enabled>
     <ForeColor>#293955</ForeColor>
-    <BackColor>#1e1e1e</BackColor>
-    <BorderColor>#b72828</BorderColor>
-    <SmallLineColor1>#F11199</SmallLineColor1>
-    <SmallLineColor2>#EA5216</SmallLineColor2>
-    <TextColor>#ffffff</TextColor>
-    <DrawLeftRect>true</DrawLeftRect>
-    <DisplayHeader>true</DisplayHeader>
-    <TextAlign>left</TextAlign>
-    <SmallRectThickness>2</SmallRectThickness>
-    <ShowHeader>false</ShowHeader>
-    <HeaderColor>#b72828</HeaderColor>
-    <HeaderHeight>35</HeaderHeight>
+    <BackColor>#FFFFFF</BackColor>
+    <BorderColor>#ffc40d</BorderColor>
+    <SmallLineColor1>#ffc40d</SmallLineColor1>
+    <SmallLineColor2>#ffc40d</SmallLineColor2>
+    <TextColor>#293955</TextColor>
+    <HeaderColor>#ffc40d</HeaderColor>
   </Form>
   <DefaultButton>
-    <Enabled>true</Enabled>
-    <NormalColor>#b72828</NormalColor>
+    <NormalColor>#ffc40d</NormalColor>
     <NormalBorderColor>#000000</NormalBorderColor>
     <NormalTextColor>#FFFFFF</NormalTextColor>
     <HoverColor>#293A56</HoverColor>
@@ -31,14 +23,13 @@
     <PressColor>#D6DBE9</PressColor>
     <PressBorderColor>#2B2B2B</PressBorderColor>
     <PressTextColor>#FFFFFF</PressTextColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#505050</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </DefaultButton>
   <Button>
-    <Enabled>true</Enabled>
-    <NormalColor>#41B1E1</NormalColor>
-    <NormalBorderColor>#41B1E1</NormalBorderColor>
+    <NormalColor>#ffc40d</NormalColor>
+    <NormalBorderColor>#ffc40d</NormalBorderColor>
     <NormalTextColor>#FFFFFF</NormalTextColor>
     <HoverColor>#5FCFFF</HoverColor>
     <HoverBorderColor>#5FCFFF</HoverBorderColor>
@@ -46,14 +37,13 @@
     <PressColor>#2393C3</PressColor>
     <PressBorderColor>#2393C3</PressBorderColor>
     <PressTextColor>#FFFFFF</PressTextColor>
-    <DisabledBackColor>#7841B1</DisabledBackColor>
-    <DisabledBorderColor>#7841B1</DisabledBorderColor>
+    <DisabledBackColor>#FFE235</DisabledBackColor>
+    <DisabledBorderColor>#FFE235</DisabledBorderColor>
     <DisabledForeColor>#808080</DisabledForeColor>
   </Button>
   <Tile>
-    <Enabled>true</Enabled>
-    <NormalColor>#b72828</NormalColor>
-    <NormalBorderColor>#000000</NormalBorderColor>
+    <NormalColor>#ffc40d</NormalColor>
+    <NormalBorderColor>#ffc40d</NormalBorderColor>
     <NormalTextColor>#FFFFFF</NormalTextColor>
     <HoverColor>#293A56</HoverColor>
     <HoverBorderColor>#2B2B2B</HoverBorderColor>
@@ -61,14 +51,13 @@
     <PressColor>#D6DBE9</PressColor>
     <PressBorderColor>#2B2B2B</PressBorderColor>
     <PressTextColor>#FFFFFF</PressTextColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#505050</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </Tile>
   <Ellipse>
-    <Enabled>true</Enabled>
-    <NormalColor>#b72828</NormalColor>
-    <NormalBorderColor>#000000</NormalBorderColor>
+    <NormalColor>#ffc40d</NormalColor>
+    <NormalBorderColor>#FFBA03</NormalBorderColor>
     <NormalTextColor>#FFFFFF</NormalTextColor>
     <HoverColor>#293A56</HoverColor>
     <HoverBorderColor>#2B2B2B</HoverBorderColor>
@@ -76,13 +65,12 @@
     <PressColor>#D6DBE9</PressColor>
     <PressBorderColor>#2B2B2B</PressBorderColor>
     <PressTextColor>#FFFFFF</PressTextColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#FFE235</DisabledBackColor>
+    <DisabledBorderColor>#FFE235</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </Ellipse>
   <Badge>
-    <Enabled>true</Enabled>
-    <NormalColor>#b72828</NormalColor>
+    <NormalColor>#ffc40d</NormalColor>
     <NormalBorderColor>#000000</NormalBorderColor>
     <NormalTextColor>#FFFFFF</NormalTextColor>
     <HoverColor>#293A56</HoverColor>
@@ -91,107 +79,93 @@
     <PressColor>#D6DBE9</PressColor>
     <PressBorderColor>#2B2B2B</PressBorderColor>
     <PressTextColor>#FFFFFF</PressTextColor>
-    <NormalBadgeColor>#b72828</NormalBadgeColor>
+    <NormalBadgeColor>#ffc40d</NormalBadgeColor>
     <NormalBadgeTextColor>#FFFFFF</NormalBadgeTextColor>
     <HoverBadgeColor>#cb2828</HoverBadgeColor>
     <HoverBadgeTextColor>#FFFFFF</HoverBadgeTextColor>
     <PressBadgeColor>#a31414</PressBadgeColor>
     <PressBadgeTextColor>#FFFFFF</PressBadgeTextColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#FFE235</DisabledBackColor>
+    <DisabledBorderColor>#FFE235</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </Badge>
   <Label>
-    <Enabled>true</Enabled>
-    <ForeColor>#b72828</ForeColor>
+    <ForeColor>#ffc40d</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
   </Label>
   <ComboBox>
-    <Enabled>true</Enabled>
     <ForeColor>#CCCCCC</ForeColor>
-    <BackColor>#222222</BackColor>
+    <BackColor>#FFFFFF</BackColor>
     <BorderColor>#6E6E6E</BorderColor>
     <ArrowColor>#6E6E6E</ArrowColor>
-    <SelectedItemBackColor>#b72828</SelectedItemBackColor>
+    <SelectedItemBackColor>#ffc40d</SelectedItemBackColor>
     <SelectedItemForeColor>#FFFFFF</SelectedItemForeColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#505050</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </ComboBox>
   <TextBox>
-    <Enabled>true</Enabled>
     <ForeColor>#CCCCCC</ForeColor>
-    <BackColor>#222222</BackColor>
-    <HoverColor>#b72828</HoverColor>
+    <BackColor>#FFFFFF</BackColor>
+    <HoverColor>#ffc40d</HoverColor>
     <BorderColor>#6E6E6E</BorderColor>
     <WatermarkText>n</WatermarkText>
-    <ReadOnly>false</ReadOnly>
-    <UseSystemPasswordChar>false</UseSystemPasswordChar>
-    <Multiline>false</Multiline>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#505050</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </TextBox>
   <RichTextBox>
-    <Enabled>true</Enabled>
     <ForeColor>#CCCCCC</ForeColor>
-    <BackColor>#222222</BackColor>
-    <HoverColor>#b72828</HoverColor>
+    <BackColor>#FFFFFF</BackColor>
+    <HoverColor>#ffc40d</HoverColor>
     <BorderColor>#6E6E6E</BorderColor>
-    <ReadOnly>false</ReadOnly>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#505050</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </RichTextBox>
   <Numeric>
-    <Enabled>true</Enabled>
     <ForeColor>#CCCCCC</ForeColor>
-    <BackColor>#222222</BackColor>
+    <BackColor>#FFFFFF</BackColor>
     <BorderColor>#6E6E6E</BorderColor>
-    <SymbolsColor>#b72828</SymbolsColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledBorderColor>#6D6D6D</DisabledBorderColor>
+    <SymbolsColor>#ffc40d</SymbolsColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#505050</DisabledBorderColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </Numeric>
   <CheckBox>
-    <Enabled>true</Enabled>
-    <ForeColor>#b72828</ForeColor>
-    <CheckColor>#b72828</CheckColor>
+    <ForeColor>#ffc40d</ForeColor>
+    <CheckColor>#ffc40d</CheckColor>
     <BackColor>#00FFFFFF</BackColor>
-    <BordeColor>#b72828</BordeColor>
+    <BordeColor>#ffc40d</BordeColor>
     <DisabledBorderColor>#999999</DisabledBorderColor>
     <CheckedStyle>Shape</CheckedStyle>
     <!--Sign, Shape-->
   </CheckBox>
   <SwitchBox>
-    <Enabled>true</Enabled>
     <SymbolColor>#5C5C5C</SymbolColor>
-    <BackColor>#1E1E1E</BackColor>
+    <BackColor>#FFFFFF</BackColor>
     <BorderColor>#9B9B9B</BorderColor>
     <DisabledBorderColor>#555555</DisabledBorderColor>
     <UnCheckColor>#9B9B9B</UnCheckColor>
-    <CheckColor>#b72828</CheckColor>
+    <CheckColor>#ffc40d</CheckColor>
     <DisabledUnCheckColor>#CDCDCD</DisabledUnCheckColor>
-    <DisabledCheckColor>#DF5050</DisabledCheckColor>
+    <DisabledCheckColor>#FFE235</DisabledCheckColor>
   </SwitchBox>
   <RadioButton>
-    <Enabled>true</Enabled>
-    <ForeColor>#b72828</ForeColor>
-    <CheckColor>#b72828</CheckColor>
+    <ForeColor>#ffc40d</ForeColor>
+    <CheckColor>#ffc40d</CheckColor>
     <BackColor>#00FFFFFF</BackColor>
-    <BordeColor>#b72828</BordeColor>
+    <BordeColor>#ffc40d</BordeColor>
     <DisabledBorderColor>#999999</DisabledBorderColor>
   </RadioButton>
   <Divider>
     <Orientation>Horizontal</Orientation>
     <!--Horizontal, Vertical-->
     <Thickness>1</Thickness>
-    <ForeColor>#b72828</ForeColor>
-    <BackColor>#00FFFFFF</BackColor>
+    <ForeColor>#ffc40d</ForeColor>
   </Divider>
   <LinkLabel>
-    <Enabled>true</Enabled>
-    <ForeColor>#b72828</ForeColor>
+    <ForeColor>#ffc40d</ForeColor>
     <BackColor>#00FFFFFF</BackColor>
     <LinkColor>#41b1e1</LinkColor>
     <ActiveLinkColor>#55c5f5</ActiveLinkColor>
@@ -200,69 +174,64 @@
     <!--HoverUnderline, AlwaysUnderline, NeverUnderline, SystemDefault-->
   </LinkLabel>
   <ToolTip>
-    <ForeColor>#ffffff</ForeColor>
-    <BackColor>#1e1e1e</BackColor>
-    <BorderColor>#b72828</BorderColor>
+    <ForeColor>#FFFFFF</ForeColor>
+    <BackColor>#FFFFFF</BackColor>
+    <BorderColor>#ffc40d</BorderColor>
   </ToolTip>
   <Progress>
-    <Enabled>true</Enabled>
-    <BackColor>#262626</BackColor>
-    <BorderColor>#262626</BorderColor>
-    <ProgressColor>#b72828</ProgressColor>
-    <DisabledBackColor>#69D9FF</DisabledBackColor>
-    <DisabledBorderColor>#69D9FF</DisabledBorderColor>
-    <DisabledProgressColor>#69D9FF</DisabledProgressColor>
+    <BackColor>#EEEEEE</BackColor>
+    <BorderColor>#EEEEEE</BorderColor>
+    <ProgressColor>#ffc40d</ProgressColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledBorderColor>#EEEEEE</DisabledBorderColor>
+    <DisabledProgressColor>#FFE235</DisabledProgressColor>
   </Progress>
   <TrackBar>
-    <Enabled>true</Enabled>
-    <BackColor>#5A5A5A</BackColor>
+    <BackColor>#EEEEEE</BackColor>
     <HandlerColor>#8F8F8F</HandlerColor>
-    <ValueColor>#b72828</ValueColor>
-    <DisabledBackColor>#505050</DisabledBackColor>
-    <DisabledValueColor>#6D6D6D</DisabledValueColor>
-    <DisabledHandlerColor>#5A5A5A</DisabledHandlerColor>
+    <ValueColor>#ffc40d</ValueColor>
+    <DisabledBackColor>#EEEEEE</DisabledBackColor>
+    <DisabledValueColor>#8F8F8F</DisabledValueColor>
+    <DisabledHandlerColor>#FFE235</DisabledHandlerColor>
   </TrackBar>
   <ContextMenu>
-    <BackColor>#1E1E1E</BackColor>
+    <BackColor>#FFFFFF</BackColor>
     <ForeColor>#AAAAAA</ForeColor>
     <ArrowColor>#808080</ArrowColor>
     <SeparatorColor>#808080</SeparatorColor>
     <SelectedItemColor>#FFFFFF</SelectedItemColor>
-    <SelectedItemBackColor>#b72828</SelectedItemBackColor>
+    <SelectedItemBackColor>#ffc40d</SelectedItemBackColor>
     <DisabledForeColor>#C0C0C0</DisabledForeColor>
   </ContextMenu>
   <TabControl>
-    <BackColor>#1e1e1e</BackColor>
-    <ForeColor>#B72828</ForeColor>
+    <BackColor>#FFFFFF</BackColor>
+    <ForeColor>#ffc40d</ForeColor>
     <UnselectedTextColor>#808080</UnselectedTextColor>
     <SelectedTextColor>#FFFFFF</SelectedTextColor>
   </TabControl>
   <ScrollBar>
-    <Enabled>true</Enabled>
-    <BackColor>#1e1e1e</BackColor>
-    <ForeColor>#B72828</ForeColor>
+    <BackColor>#FFFFFF</BackColor>
+    <ForeColor>#ffc40d</ForeColor>
     <DisabledBackColor>#505050</DisabledBackColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </ScrollBar>
   <ListBox>
-    <Enabled>true</Enabled>
-    <BackColor>#1e1e1e</BackColor>
+    <BackColor>#FFFFFF</BackColor>
     <ForeColor>#808080</ForeColor>
     <BorderColor>#404040</BorderColor>
     <SelectedItemColor>#FFFFFF</SelectedItemColor>
-    <SelectedItemBackColor>#B72828</SelectedItemBackColor>
+    <SelectedItemBackColor>#ffc40d</SelectedItemBackColor>
     <HoveredItemColor>#000000</HoveredItemColor>
-    <HoveredItemBackColor>#808080</HoveredItemBackColor>
+    <HoveredItemBackColor>#FFE235</HoveredItemBackColor>
     <DisabledBackColor>#505050</DisabledBackColor>
     <DisabledForeColor>#6D6D6D</DisabledForeColor>
   </ListBox>
   <Panel>
-    <Enabled>true</Enabled>
-    <BackColor>#1e1e1e</BackColor>
+    <BackColor>#FFFFFF</BackColor>
     <BorderColor>#6E6E6E</BorderColor>
   </Panel>
   <ControlBox>
-    <CloseHoverBackColor>#B72828</CloseHoverBackColor>
+    <CloseHoverBackColor>#ffc40d</CloseHoverBackColor>
     <CloseHoverForeColor>#FFFFFF</CloseHoverForeColor>
     <CloseNormalForeColor>#808080</CloseNormalForeColor>
     <MaximizeHoverBackColor>#EEEEEE</MaximizeHoverBackColor>

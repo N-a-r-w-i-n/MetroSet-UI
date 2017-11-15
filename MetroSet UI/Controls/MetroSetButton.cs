@@ -25,7 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -123,7 +123,6 @@ namespace MetroSet_UI.Controls
         private MouseMode State;
         private Style style;
         private StyleManager _StyleManager;
-        private static ButtonProperties prop;
         
         #endregion Internal Vars
 
@@ -138,7 +137,6 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            prop = new ButtonProperties();
             Font = MetroSetFonts.Light(10);
             utl = new Utilites();
             mth = new Methods();
@@ -160,9 +158,9 @@ namespace MetroSet_UI.Controls
             {
                 case MouseMode.Normal:
 
-                    using (SolidBrush BG = new SolidBrush(prop.NormalColor))
-                    using (Pen P = new Pen(prop.NormalBorderColor))
-                    using (SolidBrush TB = new SolidBrush(prop.NormalTextColor))
+                    using (SolidBrush BG = new SolidBrush(NormalColor))
+                    using (Pen P = new Pen(NormalBorderColor))
+                    using (SolidBrush TB = new SolidBrush(NormalTextColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
@@ -174,9 +172,9 @@ namespace MetroSet_UI.Controls
                 case MouseMode.Hovered:
 
                     Cursor = Cursors.Hand;
-                    using (SolidBrush BG = new SolidBrush(prop.HoverColor))
-                    using (Pen P = new Pen(prop.HoverBorderColor))
-                    using (SolidBrush TB = new SolidBrush(prop.HoverTextColor))
+                    using (SolidBrush BG = new SolidBrush(HoverColor))
+                    using (Pen P = new Pen(HoverBorderColor))
+                    using (SolidBrush TB = new SolidBrush(HoverTextColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
@@ -187,9 +185,9 @@ namespace MetroSet_UI.Controls
 
                 case MouseMode.Pushed:
 
-                    using (SolidBrush BG = new SolidBrush(prop.PressColor))
-                    using (Pen P = new Pen(prop.PressBorderColor))
-                    using (SolidBrush TB = new SolidBrush(prop.PressTextColor))
+                    using (SolidBrush BG = new SolidBrush(PressColor))
+                    using (Pen P = new Pen(PressBorderColor))
+                    using (SolidBrush TB = new SolidBrush(PressTextColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
@@ -200,9 +198,9 @@ namespace MetroSet_UI.Controls
 
                 case MouseMode.Disabled:
 
-                    using (SolidBrush BG = new SolidBrush(prop.DisabledBackColor))
-                    using (Pen P = new Pen(prop.DisabledBorderColor))
-                    using (SolidBrush TB = new SolidBrush(prop.DisabledForeColor))
+                    using (SolidBrush BG = new SolidBrush(DisabledBackColor))
+                    using (Pen P = new Pen(DisabledBorderColor))
+                    using (SolidBrush TB = new SolidBrush(DisabledForeColor))
                     {
                         G.FillRectangle(BG, r);
                         G.DrawRectangle(P, r);
@@ -226,35 +224,35 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.NormalColor = Color.FromArgb(65, 177, 225);
-                    prop.NormalBorderColor = Color.FromArgb(65, 177, 225);
-                    prop.NormalTextColor = Color.White;
-                    prop.HoverColor = Color.FromArgb(95, 207, 255);
-                    prop.HoverBorderColor = Color.FromArgb(95, 207, 255);
-                    prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(35, 147, 195);
-                    prop.PressBorderColor = Color.FromArgb(35, 147, 195);
-                    prop.PressTextColor = Color.White;
-                    prop.DisabledBackColor = Color.FromArgb(120, 65, 177, 225);
-                    prop.DisabledBorderColor = Color.FromArgb(120, 65, 177, 225);
-                    prop.DisabledForeColor = Color.Gray;
+                    NormalColor = Color.FromArgb(65, 177, 225);
+                    NormalBorderColor = Color.FromArgb(65, 177, 225);
+                    NormalTextColor = Color.White;
+                    HoverColor = Color.FromArgb(95, 207, 255);
+                    HoverBorderColor = Color.FromArgb(95, 207, 255);
+                    HoverTextColor = Color.White;
+                    PressColor = Color.FromArgb(35, 147, 195);
+                    PressBorderColor = Color.FromArgb(35, 147, 195);
+                    PressTextColor = Color.White;
+                    DisabledBackColor = Color.FromArgb(120, 65, 177, 225);
+                    DisabledBorderColor = Color.FromArgb(120, 65, 177, 225);
+                    DisabledForeColor = Color.Gray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     break;
 
                 case Style.Dark:
-                    prop.NormalColor = Color.FromArgb(65, 177, 225);
-                    prop.NormalBorderColor = Color.FromArgb(65, 177, 225);
-                    prop.NormalTextColor = Color.White;
-                    prop.HoverColor = Color.FromArgb(95, 207, 255);
-                    prop.HoverBorderColor = Color.FromArgb(95, 207, 255);
-                    prop.HoverTextColor = Color.White;
-                    prop.PressColor = Color.FromArgb(35, 147, 195);
-                    prop.PressBorderColor = Color.FromArgb(35, 147, 195);
-                    prop.PressTextColor = Color.White;
-                    prop.DisabledBackColor = Color.FromArgb(120, 65, 177, 225);
-                    prop.DisabledBorderColor = Color.FromArgb(120, 65, 177, 225);
-                    prop.DisabledForeColor = Color.Gray;
+                    NormalColor = Color.FromArgb(65, 177, 225);
+                    NormalBorderColor = Color.FromArgb(65, 177, 225);
+                    NormalTextColor = Color.White;
+                    HoverColor = Color.FromArgb(95, 207, 255);
+                    HoverBorderColor = Color.FromArgb(95, 207, 255);
+                    HoverTextColor = Color.White;
+                    PressColor = Color.FromArgb(35, 147, 195);
+                    PressBorderColor = Color.FromArgb(35, 147, 195);
+                    PressTextColor = Color.White;
+                    DisabledBackColor = Color.FromArgb(120, 65, 177, 225);
+                    DisabledBorderColor = Color.FromArgb(120, 65, 177, 225);
+                    DisabledForeColor = Color.Gray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     break;
@@ -270,51 +268,51 @@ namespace MetroSet_UI.Controls
 
                             if (varkey.Key == "NormalColor")
                             {
-                                prop.NormalColor = utl.HexColor((string)varkey.Value);
+                                NormalColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "NormalBorderColor")
                             {
-                                prop.NormalBorderColor = utl.HexColor((string)varkey.Value);
+                                NormalBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "NormalTextColor")
                             {
-                                prop.NormalTextColor = utl.HexColor((string)varkey.Value);
+                                NormalTextColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverColor")
                             {
-                                prop.HoverColor = utl.HexColor((string)varkey.Value);
+                                HoverColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverBorderColor")
                             {
-                                prop.HoverBorderColor = utl.HexColor((string)varkey.Value);
+                                HoverBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverTextColor")
                             {
-                                prop.HoverTextColor = utl.HexColor((string)varkey.Value);
+                                HoverTextColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressColor")
                             {
-                                prop.PressColor = utl.HexColor((string)varkey.Value);
+                                PressColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressBorderColor")
                             {
-                                prop.PressBorderColor = utl.HexColor((string)varkey.Value);
+                                PressBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressTextColor")
                             {
-                                prop.PressTextColor = utl.HexColor((string)varkey.Value);
+                                PressTextColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "DisabledBackColor")
                             {
-                                prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                DisabledBackColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "DisabledBorderColor")
                             {
-                                prop.DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                DisabledBorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "DisabledForeColor")
                             {
-                                prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                DisabledForeColor = utl.HexColor((string)varkey.Value);
                             }
                         }
                     Refresh();
@@ -352,6 +350,90 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the button background color in normal mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button background color in normal mouse sate.")]
+        public Color NormalColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button border color in normal mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button border color in normal mouse sate.")]
+        public Color NormalBorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button Text color in normal mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button Text color in normal mouse sate.")]
+        public Color NormalTextColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button background color in hover mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button background color in hover mouse sate.")]
+        public Color HoverColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button border color in hover mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button border color in hover mouse sate.")]
+        public Color HoverBorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button Text color in hover mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button Text color in hover mouse sate.")]
+        public Color HoverTextColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button background color in pushed mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button background color in pushed mouse sate.")]
+        public Color PressColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button border color in pushed mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button border color in pushed mouse sate.")]
+        public Color PressBorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the button Text color in pushed mouse sate.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the button Text color in pushed mouse sate.")]
+        public Color PressTextColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets backcolor used by the control while disabled.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets backcolor used by the control while disabled.")]
+        public Color DisabledBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the forecolor of the control whenever while disabled.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the forecolor of the control whenever while disabled.")]
+        public Color DisabledForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the border color of the control while disabled.
+        /// </summary>
+        [Category("MetroSet Framework")]
+        [Description("Gets or sets the border color of the control while disabled.")]
+        public Color DisabledBorderColor { get; set; }
 
         #endregion
 

@@ -25,7 +25,7 @@
 using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -81,14 +81,14 @@ namespace MetroSet_UI.Forms
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private static Color BackgroundColor { get; set; }
+        private new static Color BackgroundColor { get; set; }
 
         /// <summary>
         /// Gets or sets the BorderColor
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private static Color BorderColor { get; set; }
+        private new static Color BorderColor { get; set; }
 
         /// <summary>
         /// Gets or sets the ForegroundColor

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroSet UI", "MetroSet UI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroSet UI Example", "MetroSet UI Example\MetroSet UI Example.csproj", "{0686644C-B939-4E46-B942-D01D81B4C6A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroSet Theme Maker", "MetroSet Theme Maker\MetroSet Theme Maker.csproj", "{56A05775-E36A-4360-A821-5BD03D46B0DC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{0686644C-B939-4E46-B942-D01D81B4C6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0686644C-B939-4E46-B942-D01D81B4C6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0686644C-B939-4E46-B942-D01D81B4C6A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56A05775-E36A-4360-A821-5BD03D46B0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56A05775-E36A-4360-A821-5BD03D46B0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56A05775-E36A-4360-A821-5BD03D46B0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56A05775-E36A-4360-A821-5BD03D46B0DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

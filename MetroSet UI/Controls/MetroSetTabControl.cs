@@ -28,7 +28,7 @@ using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -108,7 +108,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static TabControlProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -118,7 +117,6 @@ namespace MetroSet_UI.Controls
 
         private Style style;
         private StyleManager _StyleManager;
-        private TabStyle tabStyle;
 
         #endregion Internal Vars
 
@@ -134,12 +132,8 @@ namespace MetroSet_UI.Controls
                 ControlStyles.SupportsTransparentBackColor, true);
             DoubleBuffered = true;
             UpdateStyles();
-            tabStyle = TabStyle.Style1;
             ItemSize = new Size(100, 38);
-            DrawMode = TabDrawMode.Normal;
-            SizeMode = TabSizeMode.Fixed;
             Font = MetroSetFonts.UIRegular(8);
-            prop = new TabControlProperties();
             mth = new Methods();
             utl = new Utilites();
             ApplyTheme();
@@ -158,20 +152,20 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.ForeColor = Color.FromArgb(65, 177, 225);
-                    prop.BackColor = Color.White;
-                    prop.UnselectedTextColor = Color.Gray;
-                    prop.SelectedTextColor = Color.White;
+                    ForeroundColor = Color.FromArgb(65, 177, 225);
+                    BackgroungColor = Color.White;
+                    UnselectedTextColor = Color.Gray;
+                    SelectedTextColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.ForeColor = Color.FromArgb(65, 177, 225);
-                    prop.BackColor = Color.FromArgb(30, 30, 30);
-                    prop.UnselectedTextColor = Color.Gray;
-                    prop.SelectedTextColor = Color.White;
+                    ForeroundColor = Color.FromArgb(65, 177, 225);
+                    BackgroungColor = Color.FromArgb(30, 30, 30);
+                    UnselectedTextColor = Color.Gray;
+                    SelectedTextColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -184,19 +178,19 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackgroungColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "UnselectedTextColor":
-                                    prop.UnselectedTextColor = utl.HexColor((string)varkey.Value);
+                                    UnselectedTextColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedTextColor":
-                                    prop.SelectedTextColor = utl.HexColor((string)varkey.Value);
+                                    SelectedTextColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -212,11 +206,7 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                BaseColor = prop.BackColor;
-                ForeroundColor = prop.ForeColor;
-                UnselectedTextColor = prop.UnselectedTextColor;
-                SelectedTextColor = prop.SelectedTextColor;
-                InvalidateTabPage(BaseColor);
+                InvalidateTabPage(BackgroungColor);
                 Invalidate();
             }
             catch (Exception ex)
@@ -300,44 +290,32 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets the backgorund color.
         /// </summary>
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
-        private Color BaseColor { get; set; }
+        [Category("MetroSet Framework"), Description("Gets or sets the backgorund color.")]
+        private Color BackgroungColor { get; set; }
 
         /// <summary>
         /// Gets or sets the foregorund color.
         /// </summary>
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets the foregorund color.")]
         private Color ForeroundColor { get; set; }
 
         /// <summary>
         /// Gets or sets the tabpage text while un-selected.
         /// </summary>
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets the tabpage text while un-selected.")]
         private Color UnselectedTextColor { get; set; }
 
         /// <summary>
         /// Gets or sets the tabpage text while selected.
         /// </summary>
-        [Category("MetroSet Framework")]
-        [Browsable(false)]
+        [Category("MetroSet Framework"), Description("Gets or sets the tabpage text while selected.")]
         private Color SelectedTextColor { get; set; }
 
         /// <summary>
         /// Gets or sets the tancontrol apperance style
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the tancontrol apperance style.")]
-        public TabStyle TabStyle
-        {
-            get { return tabStyle; }
-            set
-            {
-                tabStyle = value;
-                Invalidate();
-            }
-        }
+        public TabStyle TabStyle { get; set; } = TabStyle.Style1;
 
         #endregion Properties
 
@@ -349,7 +327,7 @@ namespace MetroSet_UI.Controls
 
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            G.Clear(BaseColor);
+            G.Clear(BackgroungColor);
 
             var h = ItemSize.Height + 2;
 
@@ -568,7 +546,7 @@ namespace MetroSet_UI.Controls
             foreach (MetroSetTabPage T in TabPages)
             {
                 T.Style = Style;
-                T.BaseColor = BaseColor;
+                T.BaseColor = BackgroungColor;
                 T.Invalidate();
             }
         }

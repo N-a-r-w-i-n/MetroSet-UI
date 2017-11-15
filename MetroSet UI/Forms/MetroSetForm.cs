@@ -27,7 +27,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -51,6 +51,54 @@ namespace MetroSet_UI.Forms
     {
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the form backcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
+        public Color BackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form forecolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+        public override Color ForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form bordercolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form bordercolor.")]
+        public Color BorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form textcolor.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form textcolor.")] 
+        public Color TextColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form small line color 1.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form small line color 1.")]
+        public Color SmallLineColor1 { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form small line color 2.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form small line color 2.")]
+        public Color SmallLineColor2 { get; set; }
+
+        /// <summary>
+        /// Gets or sets the header color.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the header color.")]
+        public Color HeaderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether display the header.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether display the header.")]
+        public bool DisplayHeader { get; set; } = false;
 
         /// <summary>
         /// Gets or sets the width of the small rectangle on top left of the window.
@@ -131,11 +179,7 @@ namespace MetroSet_UI.Forms
         /// Gets or sets the title alignment.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the title alignment.")]
-        public TextAlign TextAlign
-        {
-            get { return textAlign; }
-            set { textAlign = value; Refresh(); }
-        }
+        public TextAlign TextAlign { get; set; } = Design.TextAlign.Left;
 
 
         /// <summary>
@@ -151,9 +195,9 @@ namespace MetroSet_UI.Forms
                 if (value)
                 {
                     ShowLeftRect = false;
-                    Padding = new Padding(2, prop.HeaderHeight + 30, 2, 2);
+                    Padding = new Padding(2, HeaderHeight + 30, 2, 2);
                     Text = Text.ToUpper();
-                    prop.TextColor = Color.White;
+                    TextColor = Color.White;
                     ShowTitle = true;
                     foreach (Control C in Controls)
                     {
@@ -237,6 +281,12 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets the header height.")]
         public int HeaderHeight { get; set; } = 30;
 
+        /// <summary>
+        /// Gets or sets the background image displayed in the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the background image displayed in the control.")]
+        public override Image BackgroundImage { get => base.BackgroundImage; set => base.BackgroundImage = value; }
+
         #endregion Properties
 
         #region Constructor
@@ -256,11 +306,9 @@ namespace MetroSet_UI.Forms
             FormBorderStyle = FormBorderStyle.None;
             backgorundImageTrasparency = 0.90f;
             Font = MetroSetFonts.SemiLight(13);
-            prop = new FormProperties();
             mth = new Methods();
             utl = new Utilites();
             user32 = new User32();
-            textAlign = TextAlign.Left;
             showLeftRect = true;
             showHeader = false;
             ApplyTheme();
@@ -278,7 +326,7 @@ namespace MetroSet_UI.Forms
             e.Graphics.InterpolationMode = InterpolationMode.High;
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
 
-            using (SolidBrush B = new SolidBrush(prop.BackgroundColor))
+            using (SolidBrush B = new SolidBrush(BackgroundColor))
             {
                 e.Graphics.FillRectangle(B, new Rectangle(0, 0, Width, Height));
                 if (BackgroundImage != null)
@@ -288,7 +336,7 @@ namespace MetroSet_UI.Forms
             }
             if (ShowBorder)
             {
-                using (Pen P = new Pen(prop.BorderColor, BorderThickness))
+                using (Pen P = new Pen(BorderColor, BorderThickness))
                 {
                     e.Graphics.DrawRectangle(P, new Rectangle(0, 0, Width - 1, Height - 1));
                 }
@@ -296,9 +344,9 @@ namespace MetroSet_UI.Forms
 
             if (ShowLeftRect)
             {
-                using (LinearGradientBrush B = new LinearGradientBrush(new Rectangle(0, 25, SmallRectThickness, 35), prop.SmallLineColor1, prop.SmallLineColor2, 90))
+                using (LinearGradientBrush B = new LinearGradientBrush(new Rectangle(0, 25, SmallRectThickness, 35), SmallLineColor1, SmallLineColor2, 90))
                 {
-                    using (SolidBrush textBrush = new SolidBrush(prop.TextColor))
+                    using (SolidBrush textBrush = new SolidBrush(TextColor))
                     {
                         e.Graphics.FillRectangle(B, new Rectangle(0, 40, 10, 35));
                         e.Graphics.DrawString(Text, Font, textBrush, new Point(20, 46));
@@ -309,13 +357,13 @@ namespace MetroSet_UI.Forms
             {
                 if (ShowHeader)
                 {
-                    using (SolidBrush B = new SolidBrush(prop.HeaderColor))
+                    using (SolidBrush B = new SolidBrush(HeaderColor))
                     {
                         e.Graphics.FillRectangle(B, new Rectangle(1, 1, Width - 1, HeaderHeight));
                     }
                 }
 
-                SolidBrush textBrush = new SolidBrush(prop.TextColor);
+                SolidBrush textBrush = new SolidBrush(TextColor);
                 if (ShowTitle)
                 {
                     switch (TextAlign)
@@ -442,8 +490,6 @@ namespace MetroSet_UI.Forms
         #region Internal Vars
 
         private Style style;
-        private FormProperties prop;
-        private TextAlign textAlign;
         private StyleManager _StyleManager;
         private bool showLeftRect;
         private bool showHeader;
@@ -463,46 +509,40 @@ namespace MetroSet_UI.Forms
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.Gray;
-                    prop.BackgroundColor = Color.White;
-                    prop.BorderColor = Color.FromArgb(65, 177, 225);
+                    ForeColor = Color.Gray;
+                    BackgroundColor = Color.White;
+                    BorderColor = Color.FromArgb(65, 177, 225);
                     if (ShowHeader)
                     {
-                        prop.TextColor = Color.White;
+                        TextColor = Color.White;
                     }
                     else
                     {
-                        prop.TextColor = Color.Gray;
+                        TextColor = Color.Gray;
                     }
-                    prop.DrawLeftRect = true;
-                    prop.SmallLineColor1 = Color.FromArgb(65, 177, 225);
-                    prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
-                    prop.HeaderColor = Color.FromArgb(65, 177, 225);
-                    prop.HeaderHeight = 35;
+                    SmallLineColor1 = Color.FromArgb(65, 177, 225);
+                    SmallLineColor2 = Color.FromArgb(65, 177, 225);
+                    HeaderColor = Color.FromArgb(65, 177, 225);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.White;
-                    prop.BackgroundColor = Color.FromArgb(30, 30, 30);
-                    prop.BorderColor = Color.FromArgb(65, 177, 225);
-                    prop.SmallLineColor1 = Color.FromArgb(65, 177, 225);
-                    prop.SmallLineColor2 = Color.FromArgb(65, 177, 225);
-                    prop.HeaderColor = Color.FromArgb(65, 177, 225);
-                    prop.HeaderHeight = 35;
+                    ForeColor = Color.White;
+                    BackgroundColor = Color.FromArgb(30, 30, 30);
+                    BorderColor = Color.FromArgb(65, 177, 225);
+                    SmallLineColor1 = Color.FromArgb(65, 177, 225);
+                    SmallLineColor2 = Color.FromArgb(65, 177, 225);
+                    HeaderColor = Color.FromArgb(65, 177, 225);
                     if (ShowHeader)
                     {
-                        prop.TextColor = Color.Gray;
+                        TextColor = Color.Gray;
                     }
                     else
                     {
-                        prop.TextColor = Color.White;
+                        TextColor = Color.White;
                     }
-                    prop.DrawLeftRect = true;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -516,74 +556,37 @@ namespace MetroSet_UI.Forms
                             {
                                 throw new Exception("FormDictionary is empty");
                             }
-                            if (varkey.Key == "Enabled")
+                            if (varkey.Key == "ForeColor")
                             {
-                                prop.Enabled = Convert.ToBoolean(varkey.Value);
-                            }
-                            else if (varkey.Key == "ForeColor")
-                            {
-                                prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                ForeColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "BackColor")
                             {
-                                prop.BackgroundColor = utl.HexColor((string)varkey.Value);
+                                BackgroundColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "BorderColor")
                             {
-                                prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                BorderColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "TextColor")
                             {
-                                prop.TextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "DrawLeftRect")
-                            {
-                                prop.DrawLeftRect = Convert.ToBoolean(varkey.Value);
-                            }
-                            else if (varkey.Key == "ShowTitle")
-                            {
-                                prop.DisplayHeader = Convert.ToBoolean(varkey.Value);
-                            }
-                            else if (varkey.Key == "TextAlign")
-                            {
-                                switch (varkey.Value.ToString().ToLower())
-                                {
-                                    case "left":
-                                        prop.TextAlign = TextAlign.Left;
-                                        break;
-
-                                    case "right":
-                                        prop.TextAlign = TextAlign.Right;
-                                        break;
-
-                                    case "center":
-                                        prop.TextAlign = TextAlign.Center;
-                                        break;
-                                }
+                                TextColor = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "SmallLineColor1")
                             {
-                                prop.SmallLineColor1 = utl.HexColor((string)varkey.Value);
+                                SmallLineColor1 = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "SmallLineColor2")
                             {
-                                prop.SmallLineColor2 = utl.HexColor((string)varkey.Value);
+                                SmallLineColor2 = utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "SmallRectThickness")
                             {
                                 SmallRectThickness = int.Parse(varkey.Value.ToString());
                             }
-                            else if (varkey.Key == "ShowHeader")
-                            {
-                                ShowHeader = Convert.ToBoolean(varkey.Value);
-                            }
                             else if (varkey.Key == "HeaderColor")
                             {
-                                prop.HeaderColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "HeaderHeight")
-                            {
-                                prop.HeaderHeight = int.Parse(varkey.Value.ToString());
+                                HeaderColor = utl.HexColor((string)varkey.Value);
                             }
                         }
                     UpdateProperties();
@@ -595,13 +598,7 @@ namespace MetroSet_UI.Forms
         {
             try
             {
-                Enabled = prop.Enabled;
-                ShowTitle = prop.DisplayHeader;
-                ShowLeftRect = prop.DrawLeftRect;
-                TextAlign = prop.TextAlign;
-                ForeColor = prop.ForeColor;
-                HeaderHeight = prop.HeaderHeight;
-                Invalidate();
+                 Invalidate();
             }
             catch (Exception ex) { throw new Exception(ex.StackTrace); }
         }

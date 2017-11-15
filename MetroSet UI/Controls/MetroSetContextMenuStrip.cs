@@ -25,7 +25,7 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -106,7 +106,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static ContextMenuProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -124,8 +123,6 @@ namespace MetroSet_UI.Controls
 
         public MetroSetContextMenuStrip()
         {
-            Font = MetroSetFonts.UIRegular(10);
-            prop = new ContextMenuProperties();
             mth = new Methods();
             utl = new Utilites();
             ApplyTheme();
@@ -145,26 +142,26 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.White;
-                    prop.ArrowColor = Color.Gray;
-                    prop.SelectedItemBackColor = Color.FromArgb(65, 177, 225);
-                    prop.SelectedItemColor = Color.White;
-                    prop.SeparatorColor = Color.LightGray;
-                    prop.DisabledForeColor = Color.Silver;
+                    ForegroundColor = Color.FromArgb(170, 170, 170);
+                    BackgroundColor = Color.White;
+                    ArrowColor = Color.Gray;
+                    SelectedItemBackColor = Color.FromArgb(65, 177, 225);
+                    SelectedItemColor = Color.White;
+                    SeparatorColor = Color.LightGray;
+                    DisabledForeColor = Color.Silver;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.FromArgb(30, 30, 30);
-                    prop.ArrowColor = Color.Gray;
-                    prop.SelectedItemBackColor = Color.FromArgb(65, 177, 225);
-                    prop.SelectedItemColor = Color.White;
-                    prop.SeparatorColor = Color.Gray;
-                    prop.DisabledForeColor = Color.Silver;
+                    ForegroundColor = Color.FromArgb(170, 170, 170);
+                    BackgroundColor = Color.FromArgb(30, 30, 30);
+                    ArrowColor = Color.Gray;
+                    SelectedItemBackColor = Color.FromArgb(65, 177, 225);
+                    SelectedItemColor = Color.White;
+                    SeparatorColor = Color.Gray;
+                    DisabledForeColor = Color.Silver;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -177,31 +174,31 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForegroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ArrowColor":
-                                    prop.ArrowColor = utl.HexColor((string)varkey.Value);
+                                    ArrowColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SeparatorColor":
-                                    prop.SeparatorColor = utl.HexColor((string)varkey.Value);
+                                    SeparatorColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemColor":
-                                    prop.SelectedItemColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemBackColor":
-                                    prop.SelectedItemBackColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -215,19 +212,60 @@ namespace MetroSet_UI.Controls
 
         public void UpdateProperties()
         {
-            try
-            {
-                BackColor = prop.BackColor;
-                ForeColor = prop.ForeColor;
-                Refresh();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
+        [DisplayName("ForeColor")]
+        public static Color ForegroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
+        [DisplayName("BackColor")]
+        public static Color BackgroundColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets separator color used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets separator color used by the control.")]
+        public static Color SeparatorColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets arrowcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets arrowcolor used by the control.")]
+        public static Color ArrowColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets selecteditem color used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets selecteditem color used by the control.")]
+        public static Color SelectedItemColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets selecteditem backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets selecteditem backcolor used by the control.")]
+        public static Color SelectedItemBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
+        public static Color DisabledForeColor { get; set; }
+
+        public static new Font Font { get { return MetroSetFonts.UIRegular(10); } }
+
+        #endregion
 
         #region Events
 
@@ -290,9 +328,9 @@ namespace MetroSet_UI.Controls
             {
                 e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
                 Rectangle textRect = new Rectangle(25, e.Item.ContentRectangle.Y, e.Item.ContentRectangle.Width - (24 + 16), e.Item.ContentRectangle.Height - 4);
-                using (SolidBrush B = new SolidBrush(e.Item.Enabled ? e.Item.Selected ? prop.SelectedItemColor : prop.ForeColor : prop.DisabledForeColor))
+                using (SolidBrush B = new SolidBrush(e.Item.Enabled ? e.Item.Selected ? SelectedItemColor : ForegroundColor : DisabledForeColor))
                 {
-                    e.Graphics.DrawString(e.Text, prop.Font, B, textRect);
+                    e.Graphics.DrawString(e.Text, Font, B, textRect);
                 }
             }
 
@@ -307,7 +345,7 @@ namespace MetroSet_UI.Controls
             protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
             {
                 base.OnRenderToolStripBackground(e);
-                e.Graphics.Clear(prop.BackColor);
+                e.Graphics.Clear(BackgroundColor);
             }
 
             /// <summary>
@@ -317,9 +355,9 @@ namespace MetroSet_UI.Controls
             protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
             {
                 e.Graphics.InterpolationMode = InterpolationMode.High;
-                e.Graphics.Clear(prop.BackColor);
+                e.Graphics.Clear(BackgroundColor);
                 Rectangle R = new Rectangle(0, e.Item.ContentRectangle.Y - 2, e.Item.ContentRectangle.Width + 4, e.Item.ContentRectangle.Height + 3);
-                using (SolidBrush B = new SolidBrush(e.Item.Selected && e.Item.Enabled ? prop.SelectedItemBackColor : prop.BackColor))
+                using (SolidBrush B = new SolidBrush(e.Item.Selected && e.Item.Enabled ? SelectedItemBackColor : BackgroundColor))
                 {
                     e.Graphics.FillRectangle(B, R);
                 }
@@ -345,7 +383,7 @@ namespace MetroSet_UI.Controls
             /// <param name="e"></param>
             protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
             {
-                using (Pen P = new Pen(prop.SeparatorColor))
+                using (Pen P = new Pen(SeparatorColor))
                 {
                     e.Graphics.DrawLine(P, new Point(e.Item.Bounds.Left, e.Item.Bounds.Height / 2), new Point(e.Item.Bounds.Right - 5, e.Item.Bounds.Height / 2));
                 }
@@ -371,7 +409,7 @@ namespace MetroSet_UI.Controls
                 new Point(ArrowX - 5, ArrowY + 5)
                 };
 
-                using (SolidBrush ArrowBrush = new SolidBrush(e.Item.Enabled ? prop.ArrowColor : prop.DisabledForeColor))
+                using (SolidBrush ArrowBrush = new SolidBrush(e.Item.Enabled ? ArrowColor : DisabledForeColor))
                 {
                     e.Graphics.FillPolygon(ArrowBrush, ArrowPoints);
                 }

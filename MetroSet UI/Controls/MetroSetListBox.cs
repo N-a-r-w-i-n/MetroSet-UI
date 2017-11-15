@@ -27,7 +27,7 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-using MetroSet_UI.Property;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -115,7 +115,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static ListBoxProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -155,10 +154,8 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             BackColor = Color.Transparent;
             Font = MetroSetFonts.SemiBold(10);
-            prop = new ListBoxProperties();
             mth = new Methods();
             utl = new Utilites();
-
             ApplyTheme();
             SetDefaults();
         }
@@ -204,32 +201,30 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.Black;
-                    prop.BackColor = Color.White;
-                    prop.SelectedItemBackColor = Color.FromArgb(65, 177, 225);
-                    prop.SelectedItemColor = Color.White;
-                    prop.HoveredItemColor = Color.DimGray;
-                    prop.HoveredItemBackColor = Color.LightGray;
-                    prop.DisabledBackColor = Color.FromArgb(204, 204, 204);
-                    prop.DisabledForeColor = Color.FromArgb(136, 136, 136);
-                    prop.BorderColor = Color.LightGray;
+                    ForeColor = Color.Black;
+                    BackColor = Color.White;
+                    SelectedItemBackColor = Color.FromArgb(65, 177, 225);
+                    SelectedItemColor = Color.White;
+                    HoveredItemColor = Color.DimGray;
+                    HoveredItemBackColor = Color.LightGray;
+                    DisabledBackColor = Color.FromArgb(204, 204, 204);
+                    DisabledForeColor = Color.FromArgb(136, 136, 136);
+                    BorderColor = Color.LightGray;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.ForeColor = Color.FromArgb(170, 170, 170);
-                    prop.BackColor = Color.FromArgb(30, 30, 30);
-                    prop.SelectedItemBackColor = Color.FromArgb(65, 177, 225);
-                    prop.SelectedItemColor = Color.White;
-                    prop.HoveredItemColor = Color.DimGray;
-                    prop.HoveredItemBackColor = Color.LightGray;
-                    prop.DisabledBackColor = Color.FromArgb(80, 80, 80);
-                    prop.DisabledForeColor = Color.FromArgb(109, 109, 109);
-                    prop.BorderColor = Color.FromArgb(64, 64, 64);
+                    ForeColor = Color.FromArgb(170, 170, 170);
+                    BackColor = Color.FromArgb(30, 30, 30);
+                    SelectedItemBackColor = Color.FromArgb(65, 177, 225);
+                    SelectedItemColor = Color.White;
+                    HoveredItemColor = Color.DimGray;
+                    HoveredItemBackColor = Color.LightGray;
+                    DisabledBackColor = Color.FromArgb(80, 80, 80);
+                    DisabledForeColor = Color.FromArgb(109, 109, 109);
+                    BorderColor = Color.FromArgb(64, 64, 64);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -241,44 +236,41 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
 
                                 case "ForeColor":
-                                    prop.ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    prop.DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    prop.DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "HoveredItemBackColor":
-                                    prop.HoveredItemBackColor = utl.HexColor((string)varkey.Value);
+                                    HoveredItemBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "HoveredItemColor":
-                                    prop.HoveredItemColor = utl.HexColor((string)varkey.Value);
+                                    HoveredItemColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemBackColor":
-                                    prop.SelectedItemBackColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemBackColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemColor":
-                                    prop.SelectedItemColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -292,15 +284,7 @@ namespace MetroSet_UI.Controls
 
         public void UpdateProperties()
         {
-            try
-            {
-                Enabled = prop.Enabled;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion ApplyTheme
@@ -313,17 +297,17 @@ namespace MetroSet_UI.Controls
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             Rectangle mainRect = new Rectangle(0, 0, Width - (ShowBorder ? 1 : 0), Height - (ShowBorder ? 1 : 0));
 
-            using (SolidBrush BG = new SolidBrush(Enabled ? prop.BackColor : prop.DisabledBackColor))
+            using (SolidBrush BG = new SolidBrush(Enabled ? BackColor : DisabledBackColor))
             {
-                using (SolidBrush USIC = new SolidBrush(Enabled ? prop.ForeColor : prop.DisabledForeColor))
+                using (SolidBrush USIC = new SolidBrush(Enabled ? ForeColor : DisabledForeColor))
                 {
-                    using (SolidBrush SIC = new SolidBrush(prop.SelectedItemColor))
+                    using (SolidBrush SIC = new SolidBrush(SelectedItemColor))
                     {
-                        using (SolidBrush SIBC = new SolidBrush(prop.SelectedItemBackColor))
+                        using (SolidBrush SIBC = new SolidBrush(SelectedItemBackColor))
                         {
-                            using (SolidBrush HIC = new SolidBrush(prop.HoveredItemColor))
+                            using (SolidBrush HIC = new SolidBrush(HoveredItemColor))
                             {
-                                using (SolidBrush HIBC = new SolidBrush(prop.HoveredItemBackColor))
+                                using (SolidBrush HIBC = new SolidBrush(HoveredItemBackColor))
                                 {
                                     using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
                                     {
@@ -485,17 +469,63 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the border shown or not.")]
         public bool ShowBorder { get; set; } = false;
 
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor { get => base.BackColor; set => base.BackColor = value; }
+        /// <summary>
+        /// Gets or sets backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
+        public override Color BackColor { get; set; }
 
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color ForeColor { get => base.ForeColor; set => base.ForeColor = value; }
+        /// <summary>
+        /// Gets or sets forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
+        public override Color ForeColor { get; set; }
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override string Text { get => base.Text; set => base.Text = value; }
+
+        /// <summary>
+        /// Gets or sets selected item used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets selected item used by the control.")]
+        public Color SelectedItemColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets selected item backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets selected item backcolor used by the control.")]
+        public Color SelectedItemBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets hovered item used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets hovered item used by the control.")]
+        public Color HoveredItemColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets hovered item backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets hovered item backcolor used by the control.")]
+        public Color HoveredItemBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled forecolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
+        public Color DisabledForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets disabled backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+        public Color DisabledBackColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets border color used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets border color used by the control.")]
+        public Color BorderColor { get; set; }
 
         #endregion Properties
 

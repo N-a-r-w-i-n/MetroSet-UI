@@ -25,7 +25,6 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Property;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -103,7 +102,6 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private static PanelProperties prop;
         private Methods mth;
         private Utilites utl;
 
@@ -129,7 +127,6 @@ namespace MetroSet_UI.Controls
             DoubleBuffered = true;
             BorderStyle = BorderStyle.None;
             UpdateStyles();
-            prop = new PanelProperties();
             mth = new Methods();
             utl = new Utilites();
             ApplyTheme();
@@ -148,18 +145,16 @@ namespace MetroSet_UI.Controls
             switch (style)
             {
                 case Style.Light:
-                    prop.Enabled = Enabled;
-                    prop.BorderColor = Color.FromArgb(150, 150, 150);
-                    prop.BackColor = Color.White;
+                    BorderColor = Color.FromArgb(150, 150, 150);
+                    BackgroundColor = Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroLite";
                     UpdateProperties();
                     break;
 
                 case Style.Dark:
-                    prop.Enabled = Enabled;
-                    prop.BorderColor = Color.FromArgb(110, 110, 110);
-                    prop.BackColor = Color.FromArgb(30, 30, 30);
+                    BorderColor = Color.FromArgb(110, 110, 110);
+                    BackgroundColor = Color.FromArgb(30, 30, 30);
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
@@ -171,16 +166,12 @@ namespace MetroSet_UI.Controls
                         {
                             switch (varkey.Key)
                             {
-                                case "Enabled":
-                                    prop.Enabled = Convert.ToBoolean(varkey.Value);
-                                    break;
-
                                 case "BorderColor":
-                                    prop.BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    prop.BackColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -196,7 +187,7 @@ namespace MetroSet_UI.Controls
         {
             try
             {
-                Enabled = prop.Enabled;
+                Enabled = Enabled;
                 Invalidate();
             }
             catch (Exception ex)
@@ -214,9 +205,9 @@ namespace MetroSet_UI.Controls
             Graphics G = e.Graphics;
             Rectangle r = new Rectangle(BorderThickness, BorderThickness, Width - ((BorderThickness * 2) + 1), Height - ((BorderThickness * 2) + 1));
 
-            using (SolidBrush BG = new SolidBrush(prop.BackColor))
+            using (SolidBrush BG = new SolidBrush(BackgroundColor))
             {
-                using (Pen P = new Pen(prop.BorderColor , BorderThickness))
+                using (Pen P = new Pen(BorderColor , BorderThickness))
                 {
                     G.FillRectangle(BG, r);
                     G.DrawRectangle(P, r);
@@ -255,6 +246,19 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the border thickness the control.")]
         public int BorderThickness { get; set; } = 1;
+
+        /// <summary>
+        /// Gets or sets bordercolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets bordercolor used by the control.")]
+        public Color BorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets backcolor used by the control
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
+        [DisplayName("BackColor")]
+        public Color BackgroundColor { get; set; }
 
         #endregion
     }
