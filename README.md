@@ -213,5 +213,5 @@ End Class
 
 <h2 align="center">License</h2>
 
->  [MIT License](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/LICENSE.md)
+>  [MIT License](https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/LICENSE)
 
