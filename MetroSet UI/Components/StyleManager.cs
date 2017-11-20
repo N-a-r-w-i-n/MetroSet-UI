@@ -53,7 +53,7 @@ namespace MetroSet_UI
         public StyleManager()
         {
             style = Style.Light;
-            if (_CustomTheme == null)
+            if (_CustomTheme == null && style== Style.Custom)
             {
                 var themeFile = Properties.Settings.Default.ThemeFile;
                 _CustomTheme = File.Exists(themeFile) ? themeFile : ThemeFilePath(themeFile);
@@ -225,6 +225,8 @@ namespace MetroSet_UI
         /// Gets or sets the custom theme file controls.
         /// </summary>
         [Editor(typeof(FileNamesEditor), typeof(UITypeEditor)), Category("MetroSet Framework"), Description("Gets or sets the custom theme file.")]
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CustomTheme
         {
             get { return _CustomTheme; }
@@ -232,13 +234,6 @@ namespace MetroSet_UI
             {
                 if (Style == Style.Custom)
                 {
-                    Properties.Settings.Default.ThemeFile = value;
-                    Properties.Settings.Default.Save();
-                    ControlProperties(value);
-                }
-                else
-                {
-                    Style = Style.Custom;
                     Properties.Settings.Default.ThemeFile = value;
                     Properties.Settings.Default.Save();
                     ControlProperties(value);
@@ -592,9 +587,10 @@ namespace MetroSet_UI
         /// <returns>The Dictionary of childnodes names and values of a specific node.</returns>
         private Dictionary<string, object> GetValues(string path, string nodename)
         {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
             try
             {
-                Dictionary<string, object> dict = new Dictionary<string, object>();
+          
                 XmlDocument doc = new XmlDocument();                
                 if(File.Exists(path))
                 doc.Load(path);
@@ -604,12 +600,13 @@ namespace MetroSet_UI
                 {
                     dict.Add(node.Name, node.InnerText);
                 }
-                return dict;
+                
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                Console.WriteLine(ex.Message);
             }
+            return dict;
         }
 
 
