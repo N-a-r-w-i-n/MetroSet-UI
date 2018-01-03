@@ -73,7 +73,7 @@ namespace MetroSet_UI.Forms
         /// <summary>
         /// Gets or sets the form textcolor.
         /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form textcolor.")] 
+        [Category("MetroSet Framework"), Description("Gets or sets the form textcolor.")]
         public Color TextColor { get; set; }
 
         /// <summary>
@@ -93,12 +93,6 @@ namespace MetroSet_UI.Forms
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the header color.")]
         public Color HeaderColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets whether display the header.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether display the header.")]
-        public bool DisplayHeader { get; set; } = false;
 
         /// <summary>
         /// Gets or sets the width of the small rectangle on top left of the window.
@@ -121,16 +115,9 @@ namespace MetroSet_UI.Forms
         /// <summary>Gets or sets the border style of the form.</summary>
         [DefaultValue(FormBorderStyle.None)]
         [Browsable(false)]
-        public new FormBorderStyle FormBorderStyle
+        private new FormBorderStyle FormBorderStyle
         {
-            get
-            {
-                return FormBorderStyle.None;
-            }
-            set
-            {
-                base.FormBorderStyle = FormBorderStyle.None;
-            }
+            set => base.FormBorderStyle = FormBorderStyle.None;
         }
 
         /// <summary>Gets or sets a value indicating whether the Maximize button is displayed in the caption bar of the form.</summary>
@@ -139,17 +126,7 @@ namespace MetroSet_UI.Forms
         [Browsable(false)]
         [DefaultValue(false)]
         [Description("FormMaximizeBox")]
-        public new bool MaximizeBox
-        {
-            get
-            {
-                return false;
-            }
-            set
-            {
-                value = false;
-            }
-        }
+        public new bool MaximizeBox => false;
 
         /// <summary>Gets or sets a value indicating whether the Minimize button is displayed in the caption bar of the form.</summary>
         /// <returns>true to display a Minimize button for the form; otherwise, false. The default is true.</returns>
@@ -159,14 +136,8 @@ namespace MetroSet_UI.Forms
         [Description("FormMinimizeBox")]
         public new bool MinimizeBox
         {
-            get
-            {
-                return false;
-            }
-            set
-            {
-                value = false;
-            }
+            get => false;
+            set => value = false;
         }
 
         /// <summary>
@@ -179,7 +150,7 @@ namespace MetroSet_UI.Forms
         /// Gets or sets the title alignment.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the title alignment.")]
-        public TextAlign TextAlign { get; set; } = Design.TextAlign.Left;
+        public TextAlign TextAlign { get; set; } = TextAlign.Left;
 
 
         /// <summary>
@@ -188,10 +159,10 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets whether show the header.")]
         public bool ShowHeader
         {
-            get { return showHeader; }
+            get => _showHeader;
             set
             {
-                showHeader = value;
+                _showHeader = value;
                 if (value)
                 {
                     ShowLeftRect = false;
@@ -199,13 +170,11 @@ namespace MetroSet_UI.Forms
                     Text = Text.ToUpper();
                     TextColor = Color.White;
                     ShowTitle = true;
-                    foreach (Control C in Controls)
+                    foreach (Control c in Controls)
                     {
-                        if (C.GetType() == typeof(MetroSetControlBox))
-                        {
-                            C.BringToFront();
-                            C.Location = new Point(Width - 12, 11);
-                        }
+                        if (c.GetType() != typeof(MetroSetControlBox)) continue;
+                        c.BringToFront();
+                        c.Location = new Point(Width - 12, 11);
                     }
                 }
                 else
@@ -224,10 +193,10 @@ namespace MetroSet_UI.Forms
          Description("Gets or sets whether the small rectangle on top left of the window be shown.")]
         public bool ShowLeftRect
         {
-            get { return showLeftRect; }
+            get => _showLeftRect;
             set
             {
-                showLeftRect = value;
+                _showLeftRect = value;
                 if (value)
                 {
                     ShowHeader = false;
@@ -251,8 +220,8 @@ namespace MetroSet_UI.Forms
         [Browsable(false)]
         public new Padding Padding
         {
-            get { return base.Padding; }
-            set { base.Padding = value; }
+            get => base.Padding;
+            set => base.Padding = value;
         }
 
         /// <summary>
@@ -261,16 +230,13 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets the backgroundimage transparency.")]
         public float BackgroundImageTransparency
         {
-            get
-            {
-                return backgorundImageTrasparency;
-            }
+            get => _backgorundImageTrasparency;
             set
             {
                 if (value > 1)
                     throw new Exception("The Value must be between 0-1.");
 
-                backgorundImageTrasparency = value;
+                _backgorundImageTrasparency = value;
                 Invalidate();
             }
         }
@@ -287,11 +253,23 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets the background image displayed in the control.")]
         public override Image BackgroundImage { get => base.BackgroundImage; set => base.BackgroundImage = value; }
 
+        /// <summary>
+        /// Gets or sets whether the drop shadow effect apply on form.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether the drop shadow effect apply on form.")]
+        public bool DropShadowEffect { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the user be able to resize the form or not.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether the user be able to resize the form or not.")]
+        public bool AllowResize { get; set; }
+
         #endregion Properties
 
         #region Constructor
 
-        public MetroSetForm()
+        protected MetroSetForm()
         {
             SetStyle(
                 ControlStyles.UserPaint |
@@ -300,17 +278,18 @@ namespace MetroSet_UI.Forms
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.ContainerControl |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
+            _mth = new Methods();
+            _utl = new Utilites();
+            _user32 = new User32();
             Padding = new Padding(12, 70, 12, 12);
             FormBorderStyle = FormBorderStyle.None;
-            backgorundImageTrasparency = 0.90f;
+            _backgorundImageTrasparency = 0.90f;
             Font = MetroSetFonts.SemiLight(13);
-            mth = new Methods();
-            utl = new Utilites();
-            user32 = new User32();
-            showLeftRect = true;
-            showHeader = false;
+            DropShadowEffect = true;
+            _showLeftRect = true;
+            _showHeader = false;
+            AllowResize = true;
             ApplyTheme();
 
         }
@@ -326,29 +305,29 @@ namespace MetroSet_UI.Forms
             e.Graphics.InterpolationMode = InterpolationMode.High;
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
 
-            using (SolidBrush B = new SolidBrush(BackgroundColor))
+            using (var b = new SolidBrush(BackgroundColor))
             {
-                e.Graphics.FillRectangle(B, new Rectangle(0, 0, Width, Height));
+                e.Graphics.FillRectangle(b, new Rectangle(0, 0, Width, Height));
                 if (BackgroundImage != null)
                 {
-                    mth.DrawImageWithTransparency(e.Graphics, BackgroundImageTransparency, BackgroundImage, ClientRectangle);
+                    _mth.DrawImageWithTransparency(e.Graphics, BackgroundImageTransparency, BackgroundImage, ClientRectangle);
                 }
             }
             if (ShowBorder)
             {
-                using (Pen P = new Pen(BorderColor, BorderThickness))
+                using (var p = new Pen(BorderColor, BorderThickness))
                 {
-                    e.Graphics.DrawRectangle(P, new Rectangle(0, 0, Width - 1, Height - 1));
+                    e.Graphics.DrawRectangle(p, new Rectangle(0, 0, Width - 1, Height - 1));
                 }
             }
 
             if (ShowLeftRect)
             {
-                using (LinearGradientBrush B = new LinearGradientBrush(new Rectangle(0, 25, SmallRectThickness, 35), SmallLineColor1, SmallLineColor2, 90))
+                using (var b = new LinearGradientBrush(new Rectangle(0, 25, SmallRectThickness, 35), SmallLineColor1, SmallLineColor2, 90))
                 {
-                    using (SolidBrush textBrush = new SolidBrush(TextColor))
+                    using (var textBrush = new SolidBrush(TextColor))
                     {
-                        e.Graphics.FillRectangle(B, new Rectangle(0, 40, 10, 35));
+                        e.Graphics.FillRectangle(b, new Rectangle(0, 40, 10, 35));
                         e.Graphics.DrawString(Text, Font, textBrush, new Point(20, 46));
                     }
                 }
@@ -357,37 +336,39 @@ namespace MetroSet_UI.Forms
             {
                 if (ShowHeader)
                 {
-                    using (SolidBrush B = new SolidBrush(HeaderColor))
+                    using (var b = new SolidBrush(HeaderColor))
                     {
-                        e.Graphics.FillRectangle(B, new Rectangle(1, 1, Width - 1, HeaderHeight));
+                        e.Graphics.FillRectangle(b, new Rectangle(1, 1, Width - 1, HeaderHeight));
                     }
                 }
 
-                SolidBrush textBrush = new SolidBrush(TextColor);
+                var textBrush = new SolidBrush(TextColor);
                 if (ShowTitle)
                 {
                     switch (TextAlign)
                     {
                         case TextAlign.Left:
-                            using (StringFormat stringFormat = new StringFormat() { LineAlignment = StringAlignment.Center })
+                            using (var stringFormat = new StringFormat() { LineAlignment = StringAlignment.Center })
                             {
                                 e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width, HeaderHeight), stringFormat);
                             }
                             break;
 
                         case TextAlign.Center:
-                            using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+                            using (var stringFormat = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
                             {
                                 e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 21, HeaderHeight), stringFormat);
                             }
                             break;
 
                         case TextAlign.Right:
-                            using (StringFormat stringFormat = new StringFormat() { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center })
+                            using (var stringFormat = new StringFormat() { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center })
                             {
                                 e.Graphics.DrawString(Text, Font, textBrush, new Rectangle(20, 0, Width - 26, HeaderHeight), stringFormat);
                             }
                             break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
                 textBrush.Dispose();
@@ -398,18 +379,77 @@ namespace MetroSet_UI.Forms
 
         #region Methods
 
-        protected override void WndProc(ref Message m)
+        /// <summary>
+        /// Allows the user to resize the form at runtime.
+        /// Credits : dizzy.stackoverflow
+        /// </summary>
+        /// <param name="message">Windows Message.</param>
+        private void ResizeForm(ref Message message)
         {
-            base.WndProc(ref m);
+            if (!AllowResize) return;
+            var x = (int)(message.LParam.ToInt64() & 65535);
+            var y = (int)((message.LParam.ToInt64() & -65536) >> 0x10);
+            var point = PointToClient(new Point(x, y));
 
-            if (m.Msg == _WM_NCHITTEST)
+            #region  From Corners  
+
+            if (point.Y >= Height - 0x10)
             {
-                if (Moveable)
+                if (point.X >= Width - 0x10)
                 {
-                    if ((int)m.Result == _HTCLIENT)
-                        m.Result = new IntPtr(_HTCAPTION);
+                    message.Result = (IntPtr)(IsMirrored ? 0x10 : 0x11);
+                    return;
+                }
+
+                if (point.X <= 0x10)
+                {
+                    message.Result = (IntPtr)(IsMirrored ? 0x11 : 0x10);
+                    return;
                 }
             }
+            else if (point.Y <= 0x10)
+            {
+                if (point.X <= 0x10)
+                {
+                    message.Result = (IntPtr)(IsMirrored ? 0xe : 0xd);
+                    return;
+                }
+
+                if (point.X >= Width - 0x10)
+                {
+                    message.Result = (IntPtr)(IsMirrored ? 0xd : 0xe);
+                    return;
+                }
+            }
+
+            #endregion
+
+            #region From Sides
+
+            if (point.Y <= 0x10)
+            {
+                message.Result = (IntPtr)0xc;
+                return;
+            }
+
+            if (point.Y >= Height - 0x10)
+            {
+                message.Result = (IntPtr)0xf;
+                return;
+            }
+
+            if (point.X <= 0x10)
+            {
+                message.Result = (IntPtr)0xa;
+                return;
+            }
+
+            if (point.X >= Width - 0x10)
+            {
+                message.Result = (IntPtr)0xb;
+            }
+
+            #endregion
         }
 
         #endregion Methods
@@ -422,13 +462,10 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control."), DefaultValue(Style.Light)]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -442,6 +479,8 @@ namespace MetroSet_UI.Forms
                     case Style.Custom:
                         ApplyTheme(Style.Custom);
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
                 }
                 Invalidate();
             }
@@ -453,10 +492,10 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
+            get => _styleManager;
             set
             {
-                _StyleManager = value;
+                _styleManager = value;
                 Invalidate();
             }
         }
@@ -473,27 +512,26 @@ namespace MetroSet_UI.Forms
         [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
         public string ThemeName { get; set; }
 
-        internal User32 User32 => User321;
+        private User32 User32 => _user32;
 
-        internal User32 User321 => user32;
+        private User32 _user32 { get; }
 
         #endregion Interfaces
 
         #region Global Vars
 
-        private readonly Utilites utl;
-        private readonly User32 user32;
-        private readonly Methods mth;
+        private readonly Utilites _utl;
+        private readonly Methods _mth;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-        private bool showLeftRect;
-        private bool showHeader;
-        private float backgorundImageTrasparency;
+        private Style _style;
+        private StyleManager _styleManager;
+        private bool _showLeftRect;
+        private bool _showHeader;
+        private float _backgorundImageTrasparency;
 
         #endregion Internal Vars
 
@@ -503,7 +541,6 @@ namespace MetroSet_UI.Forms
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        /// <param name="path">The path of the custom theme.</param>
         internal void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
@@ -512,14 +549,7 @@ namespace MetroSet_UI.Forms
                     ForeColor = Color.Gray;
                     BackgroundColor = Color.White;
                     BorderColor = Color.FromArgb(65, 177, 225);
-                    if (ShowHeader)
-                    {
-                        TextColor = Color.White;
-                    }
-                    else
-                    {
-                        TextColor = Color.Gray;
-                    }
+                    TextColor = ShowHeader ? Color.White : Color.Gray;
                     SmallLineColor1 = Color.FromArgb(65, 177, 225);
                     SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     HeaderColor = Color.FromArgb(65, 177, 225);
@@ -535,58 +565,54 @@ namespace MetroSet_UI.Forms
                     SmallLineColor1 = Color.FromArgb(65, 177, 225);
                     SmallLineColor2 = Color.FromArgb(65, 177, 225);
                     HeaderColor = Color.FromArgb(65, 177, 225);
-                    if (ShowHeader)
-                    {
-                        TextColor = Color.Gray;
-                    }
-                    else
-                    {
-                        TextColor = Color.White;
-                    }
+                    TextColor = ShowHeader ? Color.Gray : Color.White;
                     ThemeAuthor = "Narwin";
                     ThemeName = "MetroDark";
                     UpdateProperties();
                     break;
 
                 case Style.Custom:
-                    if ((StyleManager != null))
+                    if (StyleManager != null)
                         foreach (var varkey in StyleManager.FormDictionary)
                         {
-                            if ((String.Equals(varkey.Key, null, StringComparison.Ordinal)) || varkey.Key == null)
+                            if (!string.Equals(varkey.Key, null, StringComparison.Ordinal) && varkey.Key != null)
+                            {
+                                if (varkey.Key == "ForeColor")
+                                {
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
+                                }
+                                else if (varkey.Key == "BackColor")
+                                {
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
+                                }
+                                else if (varkey.Key == "BorderColor")
+                                {
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
+                                }
+                                else if (varkey.Key == "TextColor")
+                                {
+                                    TextColor = _utl.HexColor((string)varkey.Value);
+                                }
+                                else if (varkey.Key == "SmallLineColor1")
+                                {
+                                    SmallLineColor1 = _utl.HexColor((string)varkey.Value);
+                                }
+                                else if (varkey.Key == "SmallLineColor2")
+                                {
+                                    SmallLineColor2 = _utl.HexColor((string)varkey.Value);
+                                }
+                                else if (varkey.Key == "SmallRectThickness")
+                                {
+                                    SmallRectThickness = int.Parse(varkey.Value.ToString());
+                                }
+                                else if (varkey.Key == "HeaderColor")
+                                {
+                                    HeaderColor = _utl.HexColor((string)varkey.Value);
+                                }
+                            }
+                            else
                             {
                                 throw new Exception("FormDictionary is empty");
-                            }
-                            if (varkey.Key == "ForeColor")
-                            {
-                                ForeColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "BackColor")
-                            {
-                                BackgroundColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "BorderColor")
-                            {
-                                BorderColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "TextColor")
-                            {
-                                TextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "SmallLineColor1")
-                            {
-                                SmallLineColor1 = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "SmallLineColor2")
-                            {
-                                SmallLineColor2 = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "SmallRectThickness")
-                            {
-                                SmallRectThickness = int.Parse(varkey.Value.ToString());
-                            }
-                            else if (varkey.Key == "HeaderColor")
-                            {
-                                HeaderColor = utl.HexColor((string)varkey.Value);
                             }
                         }
                     UpdateProperties();
@@ -594,18 +620,34 @@ namespace MetroSet_UI.Forms
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
-            try
-            {
-                 Invalidate();
-            }
-            catch (Exception ex) { throw new Exception(ex.StackTrace); }
+            Invalidate();
         }
 
         #endregion Theme Changing
 
         #region Events
+
+        /// <summary>
+        /// Handling windows messages.
+        /// </summary>
+        /// <param name="message">Windows Messages</param>
+        protected override void WndProc(ref Message message)
+        {
+            base.WndProc(ref message);
+
+            if ((message.Msg != _WM_NCHITTEST) | !Moveable) return;
+
+            // Allow users to move the form.
+            if ((int)message.Result == _HTCLIENT)
+                message.Result = new IntPtr(_HTCAPTION);
+
+            // Allow users to resize the form.
+            ResizeForm(ref message);
+
+        }
+
 
         protected override void OnHandleCreated(EventArgs e)
         {
@@ -613,6 +655,24 @@ namespace MetroSet_UI.Forms
             base.OnHandleCreated(e);
         }
 
+        /// <summary>
+        /// Make the drop shadow effect on form in case drop shadow property set to 'true'.
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                if (!DropShadowEffect) return base.CreateParams;
+                var cp = base.CreateParams;
+                cp.ClassStyle |= _CS_DROPSHADOW;
+                return cp;
+            }
+        }
+
+        /// <summary>
+        /// Fade in effect on form while loading.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -621,6 +681,10 @@ namespace MetroSet_UI.Forms
                   AnimateWindowFlags.AW_HOR_POSITIVE | AnimateWindowFlags.AW_SLIDE : AnimateWindowFlags.AW_BLEND));
         }
 
+        /// <summary>
+        /// Fade out effect on form while loading.
+        /// </summary>
+        /// <param name="e">EventArgs</param>
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);

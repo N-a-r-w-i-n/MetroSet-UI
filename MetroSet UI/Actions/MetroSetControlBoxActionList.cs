@@ -32,48 +32,42 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetControlBoxActionList : DesignerActionList
     {
-        private readonly MetroSetControlBox metroSetControBox;
+        private readonly MetroSetControlBox _metroSetControBox;
 
         public MetroSetControlBoxActionList(IComponent component) : base(component)
         {
-            metroSetControBox = (MetroSetControlBox)component;
+            _metroSetControBox = (MetroSetControlBox)component;
         }
 
         public Style Style
         {
-            get { return metroSetControBox.Style; }
-            set { metroSetControBox.Style = value; }
+            get => _metroSetControBox.Style;
+            set => _metroSetControBox.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetControBox.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetControBox.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetControBox.ThemeName; }
-        }
+        public string ThemeName => _metroSetControBox.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetControBox.StyleManager; }
-            set { metroSetControBox.StyleManager = value; }
+            get => _metroSetControBox.StyleManager;
+            set => _metroSetControBox.StyleManager = value;
         }
 
         public bool MaximizeBox
         {
-            get { return metroSetControBox.MaximizeBox; }
-            set { metroSetControBox.MaximizeBox = value; }
+            get => _metroSetControBox.MaximizeBox;
+            set => _metroSetControBox.MaximizeBox = value;
         }
 
         public bool MinimizeBox
         {
-            get { return metroSetControBox.MinimizeBox; }
-            set { metroSetControBox.MinimizeBox = value; }
+            get => _metroSetControBox.MinimizeBox;
+            set => _metroSetControBox.MinimizeBox = value;
         }
 
-        public override DesignerActionItemCollection GetSortedActionItems() 
+        public override DesignerActionItemCollection GetSortedActionItems()
         {
             DesignerActionItemCollection items = new DesignerActionItemCollection
         {

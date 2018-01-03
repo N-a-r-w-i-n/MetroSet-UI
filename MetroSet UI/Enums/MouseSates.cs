@@ -22,7 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace MetroSet_UI.Extensions
+namespace MetroSet_UI.Enums
 {
     /// <summary>
     /// The helper enumerator to get mouse states.

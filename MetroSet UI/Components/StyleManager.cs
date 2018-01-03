@@ -52,11 +52,11 @@ namespace MetroSet_UI
 
         public StyleManager()
         {
-            style = Style.Light;
-            if (_CustomTheme == null)
+            _style = Style.Light;
+            if (_customTheme == null)
             {
                 var themeFile = Properties.Settings.Default.ThemeFile;
-                _CustomTheme = File.Exists(themeFile) ? themeFile : ThemeFilePath(themeFile);
+                _customTheme = File.Exists(themeFile) ? themeFile : ThemeFilePath(themeFile);
             }
             EvaluateDicts();
         }
@@ -68,17 +68,18 @@ namespace MetroSet_UI
         /// <summary>
         /// The Method to update the form with the style manager style and it's controls.
         /// </summary>
-        public void UpdateForm()
+        private void UpdateForm()
         {
-            if (MetroForm == null)
-                return;
-
-            if (MetroForm is iForm form && CustomTheme != null)
+            switch (MetroForm)
             {
-                form.Style = Style;
-                form.ThemeAuthor = ThemeAuthor;
-                form.ThemeName = ThemeName;
-                form.StyleManager = this;
+                case null:
+                    return;
+                case iForm form when CustomTheme != null:
+                    form.Style = Style;
+                    form.ThemeAuthor = ThemeAuthor;
+                    form.ThemeName = ThemeName;
+                    form.StyleManager = this;
+                    break;
             }
 
             if (MetroForm.Controls.Count > 0)
@@ -92,6 +93,7 @@ namespace MetroSet_UI
         /// </summary>
         private void UpdateControls(Control.ControlCollection controls)
         {
+            if (controls == null) throw new ArgumentNullException(nameof(controls));
             foreach (Control ctrl in controls)
             {
                 var control = ctrl as iControl;
@@ -101,37 +103,32 @@ namespace MetroSet_UI
                     control.ThemeAuthor = ThemeAuthor;
                     control.ThemeName = ThemeName;
                     control.StyleManager = this;
-                }  
-                if (control is TabControl)
+                }
+                if (control is TabControl tabControl)
                 {
-                    foreach (TabPage C in ((TabControl)control).TabPages)
+                    foreach (TabPage c in tabControl.TabPages)
                     {
-                        if (C is iControl)
+                        if (c is iControl)
                         {
                             control.Style = Style;
                             control.StyleManager = this;
                             control.ThemeAuthor = ThemeAuthor;
                             control.ThemeName = ThemeName;
                         }
-                            UpdateControls(C.Controls);
+                        UpdateControls(c.Controls);
                     }
                 }
-                if (ctrl.Controls != null)
+
+                foreach (Control child in ctrl.Controls)
                 {
-                    foreach (Control child in ctrl.Controls)
-                    {
-                        if (child is iControl)
-                        {
-                            ((iControl)child).Style = Style;
-                            ((iControl)child).StyleManager = this;
-                            ((iControl)child).ThemeAuthor = ThemeAuthor;
-                            ((iControl)child).ThemeName = ThemeName;
-                        }
-                                               
-                    }
+                    if (!(child is iControl)) continue;
+                    ((iControl)child).Style = Style;
+                    ((iControl)child).StyleManager = this;
+                    ((iControl)child).ThemeAuthor = ThemeAuthor;
+                    ((iControl)child).ThemeName = ThemeName;
+
                 }
             }
-            
         }
 
         /// <summary>
@@ -152,13 +149,13 @@ namespace MetroSet_UI
             }
         }
 
-#endregion
+        #endregion
 
         #region Internal Vars
 
-        private Style style;
-        private Form _MetroForm;
-        private string _CustomTheme;
+        private Style _style;
+        private Form _metroForm;
+        private string _customTheme;
 
         #endregion Internal Vars
 
@@ -183,28 +180,26 @@ namespace MetroSet_UI
         [Category("MetroSet Framework"), Description("Gets or sets the form (MetroForm) to Apply themes for.")]
         public Form MetroForm
         {
-            get { return _MetroForm; }
+            get => _metroForm;
             set
             {
-                if (_MetroForm == null)
-                {
-                    _MetroForm = value;
-                    _MetroForm.ControlAdded += ControlAdded;
-                    UpdateForm();
-                }
+                if (_metroForm != null) return;
+                _metroForm = value;
+                _metroForm.ControlAdded += ControlAdded;
+                UpdateForm();
             }
         }
-        
+
         /// <summary>
         /// Gets or sets the style for the button.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the style.")]
         public Style Style
         {
-            get { return style; }
+            get => _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -216,6 +211,7 @@ namespace MetroSet_UI
                         ThemeName = "MetroDark";
                         break;
                 }
+
                 UpdateForm();
             }
         }
@@ -227,7 +223,7 @@ namespace MetroSet_UI
         [Editor(typeof(FileNamesEditor), typeof(UITypeEditor)), Category("MetroSet Framework"), Description("Gets or sets the custom theme file.")]
         public string CustomTheme
         {
-            get { return _CustomTheme; }
+            get => _customTheme;
             set
             {
                 if (Style == Style.Custom)
@@ -243,7 +239,7 @@ namespace MetroSet_UI
                     Properties.Settings.Default.Save();
                     ControlProperties(value);
                 }
-                _CustomTheme = value;
+                _customTheme = value;
             }
         }
 
@@ -257,7 +253,7 @@ namespace MetroSet_UI
         public void OpenTheme()
         {
             Style = Style.Custom;
-            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Xml File (*.xml)|*.xml" })
+            using (var ofd = new OpenFileDialog { Filter = "Xml File (*.xml)|*.xml" })
             {
                 if (ofd.ShowDialog() != DialogResult.OK)
                 {
@@ -282,18 +278,17 @@ namespace MetroSet_UI
         /// </summary>
         /// <param name="str">the theme content</param>
         /// <returns>The Sorted theme path in templates folder.</returns>
-        public string ThemeFilePath(string str)
+        private string ThemeFilePath(string str)
         {
-            string content = str;
-            string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Templates) + @"\ThemeFile.xml"}";
-            File.WriteAllText(path, content);
+            var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Templates) + @"\ThemeFile.xml"}";
+            File.WriteAllText(path, str);
             return path;
         }
 
         #endregion Open Theme
 
         #region Dictionaries
-        
+
         #region Declartions
 
         /// <summary>
@@ -489,7 +484,7 @@ namespace MetroSet_UI
             ListBoxDictionary = new Dictionary<string, object>();
         }
 
-#endregion
+        #endregion
 
         #endregion
 
@@ -499,7 +494,7 @@ namespace MetroSet_UI
         /// Reads the theme file and put elements properties to dictionaries.
         /// </summary>
         /// <param name="path">The File path.</param>
-        public void ControlProperties(string path)
+        private void ControlProperties(string path)
         {
             // We clear every dictionary for avoid the "the key is already exist in dictionary" exception.
 
@@ -523,7 +518,7 @@ namespace MetroSet_UI
 
             CheckBoxDictionary = GetValues(path, "CheckBox");
 
-            RadioButtonDictionary = GetValues(path, "RadioButton"); 
+            RadioButtonDictionary = GetValues(path, "RadioButton");
 
             SwitchBoxDictionary = GetValues(path, "SwitchBox");
 
@@ -570,13 +565,11 @@ namespace MetroSet_UI
         /// <param name="path">The Path of the custom theme file.</param>
         private void ThemeDetailsReader(string path)
         {
-            foreach(var item in GetValues(path, "Theme"))
+            foreach (var item in GetValues(path, "Theme"))
             {
                 if (item.Key == "Name")
-                {
                     ThemeName = item.Value.ToString();
-                }
-                else if(item.Key == "Author")
+                else if (item.Key == "Author")
                 {
                     ThemeAuthor = item.Value.ToString();
                 }
@@ -594,16 +587,16 @@ namespace MetroSet_UI
         {
             try
             {
-                Dictionary<string, object> dict = new Dictionary<string, object>();
-                XmlDocument doc = new XmlDocument();                
-                if(File.Exists(path))
-                doc.Load(path);
+                var dict = new Dictionary<string, object>();
+                var doc = new XmlDocument();
+                if (File.Exists(path))
+                    doc.Load(path);
                 if (doc.DocumentElement == null) { return null; }
-                XmlNode xnl = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
-                foreach (XmlNode node in xnl.ChildNodes)
-                {
+                var xmlNode = doc.SelectSingleNode($"/MetroSetTheme/{nodename}");
+                if (xmlNode == null) return dict;
+                foreach (XmlNode node in xmlNode.ChildNodes)
                     dict.Add(node.Name, node.InnerText);
-                }
+
                 return dict;
             }
             catch
@@ -622,7 +615,7 @@ namespace MetroSet_UI
         /// </summary>
         public class FileNamesEditor : UITypeEditor
         {
-            private OpenFileDialog ofd;
+            private OpenFileDialog _ofd;
 
             public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
             {
@@ -631,27 +624,20 @@ namespace MetroSet_UI
 
             public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
             {
-                if ((context == null) || (provider == null)) return base.EditValue(context, provider, value);
-                IWindowsFormsEditorService editorService =
+                if (context == null || provider == null) return base.EditValue(context, provider, value);
+                var editorService =
                     (IWindowsFormsEditorService)
                     provider.GetService(typeof(IWindowsFormsEditorService));
-                if (editorService != null)
+                if (editorService == null) return base.EditValue(context, provider, value);
+                _ofd = new OpenFileDialog
                 {
-                    ofd = new OpenFileDialog
-                    {
-                        Filter = "Xml File (*.xml)|*.xml",
-                        FileName = ""
-                    };
-                    if (ofd.ShowDialog() == DialogResult.OK)
-                    {
-                        return ofd.FileName;
-                    }
-                }
-                return base.EditValue(context, provider, value);
+                    Filter = "Xml File (*.xml)|*.xml",
+                };
+                return _ofd.ShowDialog() == DialogResult.OK ? _ofd.FileName : base.EditValue(context, provider, value);
             }
         }
 
-#endregion
+        #endregion
 
     }
 }

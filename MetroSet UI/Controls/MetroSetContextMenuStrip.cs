@@ -51,13 +51,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -86,8 +83,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -106,16 +103,15 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-        private ToolStripItemClickedEventArgs ClickedEventArgs;
+        private Style _style;
+        private StyleManager _styleManager;
+        private ToolStripItemClickedEventArgs _clickedEventArgs;
 
         #endregion Internal Vars
 
@@ -123,8 +119,7 @@ namespace MetroSet_UI.Controls
 
         public MetroSetContextMenuStrip()
         {
-            mth = new Methods();
-            utl = new Utilites();
+            _utl = new Utilites();
             ApplyTheme();
             Renderer = new MetroSetToolStripRender();
         }
@@ -137,7 +132,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -174,31 +169,31 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    ForegroundColor = utl.HexColor((string)varkey.Value);
+                                    ForegroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroundColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ArrowColor":
-                                    ArrowColor = utl.HexColor((string)varkey.Value);
+                                    ArrowColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SeparatorColor":
-                                    SeparatorColor = utl.HexColor((string)varkey.Value);
+                                    SeparatorColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemColor":
-                                    SelectedItemColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemBackColor":
-                                    SelectedItemBackColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -207,10 +202,12 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             Invalidate();
         }
@@ -263,7 +260,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
         public static Color DisabledForeColor { get; set; }
 
-        public static new Font Font { get { return MetroSetFonts.UIRegular(10); } }
+        public static new Font Font => MetroSetFonts.UIRegular(10);
 
         #endregion
 
@@ -278,14 +275,12 @@ namespace MetroSet_UI.Controls
         /// <param name="e"></param>
         protected override void OnItemClicked(ToolStripItemClickedEventArgs e)
         {
-            if ((e.ClickedItem != null) && !(e.ClickedItem is ToolStripSeparator))
+            if ((e.ClickedItem == null) || e.ClickedItem is ToolStripSeparator) return;
+            if (ReferenceEquals(e, _clickedEventArgs))
+                OnItemClicked(e);
+            else
             {
-                if (ReferenceEquals(e, ClickedEventArgs))
-                    OnItemClicked(e);
-                else
-                {
-                    ClickedEventArgs = e; Clicked?.Invoke(this);
-                }
+                _clickedEventArgs = e; Clicked?.Invoke(this);
             }
         }
 
@@ -312,12 +307,12 @@ namespace MetroSet_UI.Controls
         }
 
         #endregion
-        
+
         #region Child
 
-        public sealed class MetroSetToolStripRender : ToolStripProfessionalRenderer
+        private sealed class MetroSetToolStripRender : ToolStripProfessionalRenderer
         {
-        
+
             #region Drawing Text
 
             /// <summary>
@@ -327,10 +322,10 @@ namespace MetroSet_UI.Controls
             protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
             {
                 e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-                Rectangle textRect = new Rectangle(25, e.Item.ContentRectangle.Y, e.Item.ContentRectangle.Width - (24 + 16), e.Item.ContentRectangle.Height - 4);
-                using (SolidBrush B = new SolidBrush(e.Item.Enabled ? e.Item.Selected ? SelectedItemColor : ForegroundColor : DisabledForeColor))
+                var textRect = new Rectangle(25, e.Item.ContentRectangle.Y, e.Item.ContentRectangle.Width - (24 + 16), e.Item.ContentRectangle.Height - 4);
+                using (var b = new SolidBrush(e.Item.Enabled ? e.Item.Selected ? SelectedItemColor : ForegroundColor : DisabledForeColor))
                 {
-                    e.Graphics.DrawString(e.Text, Font, B, textRect);
+                    e.Graphics.DrawString(e.Text, Font, b, textRect);
                 }
             }
 
@@ -356,10 +351,10 @@ namespace MetroSet_UI.Controls
             {
                 e.Graphics.InterpolationMode = InterpolationMode.High;
                 e.Graphics.Clear(BackgroundColor);
-                Rectangle R = new Rectangle(0, e.Item.ContentRectangle.Y - 2, e.Item.ContentRectangle.Width + 4, e.Item.ContentRectangle.Height + 3);
-                using (SolidBrush B = new SolidBrush(e.Item.Selected && e.Item.Enabled ? SelectedItemBackColor : BackgroundColor))
+                var r = new Rectangle(0, e.Item.ContentRectangle.Y - 2, e.Item.ContentRectangle.Width + 4, e.Item.ContentRectangle.Height + 3);
+                using (var b = new SolidBrush(e.Item.Selected && e.Item.Enabled ? SelectedItemBackColor : BackgroundColor))
                 {
-                    e.Graphics.FillRectangle(B, R);
+                    e.Graphics.FillRectangle(b, r);
                 }
             }
 
@@ -383,9 +378,9 @@ namespace MetroSet_UI.Controls
             /// <param name="e"></param>
             protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
             {
-                using (Pen P = new Pen(SeparatorColor))
+                using (var p = new Pen(SeparatorColor))
                 {
-                    e.Graphics.DrawLine(P, new Point(e.Item.Bounds.Left, e.Item.Bounds.Height / 2), new Point(e.Item.Bounds.Right - 5, e.Item.Bounds.Height / 2));
+                    e.Graphics.DrawLine(p, new Point(e.Item.Bounds.Left, e.Item.Bounds.Height / 2), new Point(e.Item.Bounds.Right - 5, e.Item.Bounds.Height / 2));
                 }
             }
 
@@ -399,26 +394,25 @@ namespace MetroSet_UI.Controls
             /// <param name="e">ToolStripArrowRenderEventArgs</param>
             protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
             {
-                int ArrowX, ArrowY;
-                ArrowX = e.ArrowRectangle.X + e.ArrowRectangle.Width / 2;
-                ArrowY = e.ArrowRectangle.Y + e.ArrowRectangle.Height / 2;
-                Point[] ArrowPoints = new Point[]
+                var arrowX = e.ArrowRectangle.X + e.ArrowRectangle.Width / 2;
+                var arrowY = e.ArrowRectangle.Y + e.ArrowRectangle.Height / 2;
+                var arrowPoints = new[]
                 {
-                new Point(ArrowX - 5, ArrowY - 5),
-                new Point(ArrowX, ArrowY),
-                new Point(ArrowX - 5, ArrowY + 5)
+                new Point(arrowX - 5, arrowY - 5),
+                new Point(arrowX, arrowY),
+                new Point(arrowX - 5, arrowY + 5)
                 };
 
-                using (SolidBrush ArrowBrush = new SolidBrush(e.Item.Enabled ? ArrowColor : DisabledForeColor))
+                using (var arrowBrush = new SolidBrush(e.Item.Enabled ? ArrowColor : DisabledForeColor))
                 {
-                    e.Graphics.FillPolygon(ArrowBrush, ArrowPoints);
+                    e.Graphics.FillPolygon(arrowBrush, arrowPoints);
                 }
             }
 
             #endregion Drawing DropDown Arrows
         }
 
-#endregion
+        #endregion
 
     }
 }

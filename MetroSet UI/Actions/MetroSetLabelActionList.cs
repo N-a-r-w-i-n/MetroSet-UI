@@ -1,4 +1,6 @@
-﻿/**
+﻿using MetroSet_UI.Controls;
+using MetroSet_UI.Design;
+/**
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)
@@ -22,58 +24,47 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Text;
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 
 namespace MetroSet_UI.Tasks
 {
     class MetroSetLabelActionList : DesignerActionList
     {
-        private readonly MetroSetLabel metroSetLabel;
+        private readonly MetroSetLabel _metroSetLabel;
 
         public MetroSetLabelActionList(IComponent component) : base(component)
         {
-            metroSetLabel = (MetroSetLabel)component;
+            _metroSetLabel = (MetroSetLabel)component;
         }
 
         public Style Style
         {
-            get { return metroSetLabel.Style; }
-            set { metroSetLabel.Style = value; }
+            get => _metroSetLabel.Style;
+            set => _metroSetLabel.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetLabel.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetLabel.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetLabel.ThemeName; }
-        }
+        public string ThemeName => _metroSetLabel.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetLabel.StyleManager; }
-            set { metroSetLabel.StyleManager = value; }
+            get => _metroSetLabel.StyleManager;
+            set => _metroSetLabel.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetLabel.Text; }
-            set { metroSetLabel.Text = value; }
+            get => _metroSetLabel.Text;
+            set => _metroSetLabel.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetLabel.Font; }
-            set { metroSetLabel.Font = value; }
+            get => _metroSetLabel.Font;
+            set => _metroSetLabel.Font = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

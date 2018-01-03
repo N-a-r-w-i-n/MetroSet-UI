@@ -26,7 +26,6 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -46,13 +45,10 @@ namespace MetroSet_UI.Child
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -82,8 +78,8 @@ namespace MetroSet_UI.Child
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -100,17 +96,10 @@ namespace MetroSet_UI.Child
 
         #endregion Interfaces
 
-        #region Global Vars
-
-        private Methods mth;
-        private Utilites utl;
-
-        #endregion Global Vars
-
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -124,12 +113,8 @@ namespace MetroSet_UI.Child
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.Light(10);
-            mth = new Methods();
-            utl = new Utilites();
-
             ApplyTheme();
         }
 
@@ -141,7 +126,7 @@ namespace MetroSet_UI.Child
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -166,14 +151,7 @@ namespace MetroSet_UI.Child
         /// </summary>
         public void UpdateProperties()
         {
-            try
-            {
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion ApplyTheme
@@ -213,13 +191,13 @@ namespace MetroSet_UI.Child
         {
             Graphics G = e.Graphics;
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            using (SolidBrush BG = new SolidBrush(BaseColor))
+            using (var bg = new SolidBrush(BaseColor))
             {
-                G.FillRectangle(BG, ClientRectangle);
+                G.FillRectangle(bg, ClientRectangle);
             }
         }
 
-#endregion        
+        #endregion
 
     }
 }

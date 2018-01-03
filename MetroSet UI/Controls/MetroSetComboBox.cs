@@ -29,7 +29,6 @@ using MetroSet_UI.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -53,13 +52,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -88,8 +84,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -108,17 +104,16 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Methods _mth;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-
-        private int _StartIndex;
+        private Style _style;
+        private StyleManager _styleManager;
+        private int _startIndex;
 
         #endregion Internal Vars
 
@@ -134,19 +129,17 @@ namespace MetroSet_UI.Controls
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor,
                 true);
-            DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.Regular(11);
             BackColor = Color.Transparent;
             DrawMode = DrawMode.OwnerDrawFixed;
             ItemHeight = 20;
-            DoubleBuffered = true;
-            _StartIndex = 0;
+            _startIndex = 0;
             CausesValidation = false;
             AllowDrop = true;
             DropDownStyle = ComboBoxStyle.DropDownList;
-            mth = new Methods();
-            utl = new Utilites();
+            _mth = new Methods();
+            _utl = new Utilites();
 
             ApplyTheme();
         }
@@ -162,16 +155,17 @@ namespace MetroSet_UI.Controls
         [Description("Gets or sets the index specifying the currently selected item.")]
         private int StartIndex
         {
-            get { return _StartIndex; }
+            get => _startIndex;
             set
             {
-                _StartIndex = value;
+                _startIndex = value;
                 try
                 {
-                    base.SelectedIndex = value;
+                    SelectedIndex = value;
                 }
                 catch
                 {
+                    //
                 }
                 Invalidate();
             }
@@ -187,10 +181,7 @@ namespace MetroSet_UI.Controls
         /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the form backcolor.
@@ -244,25 +235,26 @@ namespace MetroSet_UI.Controls
         /// <param name="e"></param>
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             try
             {
                 var itemState = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
-                using (SolidBrush BG = new SolidBrush(itemState ? SelectedItemBackColor : BackgroundColor))
-                using (SolidBrush TC = new SolidBrush(itemState ? SelectedItemForeColor : ForeColor))
+                using (var bg = new SolidBrush(itemState ? SelectedItemBackColor : BackgroundColor))
+                using (var tc = new SolidBrush(itemState ? SelectedItemForeColor : ForeColor))
                 {
-                    using (Font F = new Font(Font.Name, 9))
+                    using (var f = new Font(Font.Name, 9))
                     {
-                        G.FillRectangle(BG, e.Bounds);
-                        G.DrawString(GetItemText(Items[e.Index]), F, TC, e.Bounds, mth.SetPosition(StringAlignment.Near));
+                        G.FillRectangle(bg, e.Bounds);
+                        G.DrawString(GetItemText(Items[e.Index]), f, tc, e.Bounds, _mth.SetPosition(StringAlignment.Near));
                     }
                 }
 
             }
             catch
             {
+                // 
             }
         }
 
@@ -272,54 +264,27 @@ namespace MetroSet_UI.Controls
         /// <param name="e">PaintEventArgs</param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            Rectangle rect = new Rectangle(0, 0, Width - 1, Height - 1);
-            char downArrow = '▼';
+            var G = e.Graphics;
+            var rect = new Rectangle(0, 0, Width - 1, Height - 1);
+            var downArrow = '▼';
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            if (Enabled)
+            using (var bg = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
             {
-                using (SolidBrush BG = new SolidBrush(BackgroundColor))
+                using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor))
                 {
-                    using (Pen P = new Pen(BorderColor))
+                    using (var s = new SolidBrush(Enabled ? ArrowColor : DisabledForeColor))
                     {
-                        using (SolidBrush S = new SolidBrush(ArrowColor)) 
+                        using (var tb = new SolidBrush(Enabled ? ForeColor : DisabledForeColor))
                         {
-                            using (SolidBrush TB = new SolidBrush(ForeColor))
+                            using (var f = MetroSetFonts.SemiBold(8))
                             {
-                                using (Font F = MetroSetFonts.SemiBold(8))
-                                {
-                                    G.FillRectangle(BG, rect);
-                                    G.TextRenderingHint = TextRenderingHint.AntiAlias;
-                                    G.DrawString(downArrow.ToString(), F, S, new Point(Width - 22, 8));
-                                    G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                                    G.DrawString(Text, F, TB, new Rectangle(7, 0, Width - 1, Height - 1), mth.SetPosition(StringAlignment.Near));
-                                    G.DrawRectangle(P, rect);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                using (SolidBrush BG = new SolidBrush(DisabledBackColor))
-                {
-                    using (Pen P = new Pen(DisabledBorderColor))
-                    {
-                        using (SolidBrush S = new SolidBrush(DisabledForeColor))
-                        {
-                            using (SolidBrush TB = new SolidBrush(DisabledForeColor))
-                            {
-                                using (Font F = MetroSetFonts.SemiBold(8))
-                                {
-                                    G.FillRectangle(BG, rect);
-                                    G.TextRenderingHint = TextRenderingHint.AntiAlias;
-                                    G.DrawString(downArrow.ToString(), F, S, new Point(Width - 22, 8));
-                                    G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                                    G.DrawString(Text, Font, TB, new Rectangle(7, 1, Width - 1, Height - 1), mth.SetPosition(StringAlignment.Near));
-                                    G.DrawRectangle(P, rect);
-                                }
+                                G.FillRectangle(bg, rect);
+                                G.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                G.DrawString(downArrow.ToString(), f, s, new Point(Width - 22, 8));
+                                G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                                G.DrawString(Text, f, tb, new Rectangle(7, 0, Width - 1, Height - 1), _mth.SetPosition(StringAlignment.Near));
+                                G.DrawRectangle(p, rect);
                             }
                         }
                     }
@@ -335,7 +300,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -377,39 +342,39 @@ namespace MetroSet_UI.Controls
                             {
 
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroundColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ArrowColor":
-                                    ArrowColor = utl.HexColor((string)varkey.Value);
+                                    ArrowColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemBackColor":
-                                    SelectedItemBackColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemForeColor":
-                                    SelectedItemForeColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -418,19 +383,14 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
-            try
-            {
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing

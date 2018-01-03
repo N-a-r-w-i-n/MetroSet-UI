@@ -1,4 +1,7 @@
-﻿/**
+﻿using MetroSet_UI.Controls;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+/**
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)
@@ -22,86 +25,73 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Drawing;
-using System.Text;
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Tasks
 {
     class MetroSetScrollBarActionList : DesignerActionList
     {
-        private readonly MetroSetScrollBar metroSetScrollBar;
+        private readonly MetroSetScrollBar _metroSetScrollBar;
 
         public MetroSetScrollBarActionList(IComponent component) : base(component)
         {
-            metroSetScrollBar = (MetroSetScrollBar)component;
+            _metroSetScrollBar = (MetroSetScrollBar)component;
         }
 
         public Style Style
         {
-            get { return metroSetScrollBar.Style; }
-            set { metroSetScrollBar.Style = value; }
+            get => _metroSetScrollBar.Style;
+            set => _metroSetScrollBar.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetScrollBar.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetScrollBar.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetScrollBar.ThemeName; }
-        }
+        public string ThemeName => _metroSetScrollBar.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetScrollBar.StyleManager; }
-            set { metroSetScrollBar.StyleManager = value; }
+            get => _metroSetScrollBar.StyleManager;
+            set => _metroSetScrollBar.StyleManager = value;
         }
 
         public int Maximum
         {
-            get { return metroSetScrollBar.Maximum; }
-            set { metroSetScrollBar.Maximum = value; }
+            get => _metroSetScrollBar.Maximum;
+            set => _metroSetScrollBar.Maximum = value;
         }
 
         public int Minimum
         {
-            get { return metroSetScrollBar.Minimum; }
-            set { metroSetScrollBar.Minimum = value; }
+            get => _metroSetScrollBar.Minimum;
+            set => _metroSetScrollBar.Minimum = value;
         }
 
 
         public int Value
         {
-            get { return metroSetScrollBar.Value; }
-            set { metroSetScrollBar.Value = value; }
+            get => _metroSetScrollBar.Value;
+            set => _metroSetScrollBar.Value = value;
         }
 
 
         public int SmallChange
         {
-            get { return metroSetScrollBar.SmallChange; }
-            set { metroSetScrollBar.SmallChange = value; }
+            get => _metroSetScrollBar.SmallChange;
+            set => _metroSetScrollBar.SmallChange = value;
         }
 
 
         public int LargeChange
         {
-            get { return metroSetScrollBar.LargeChange; }
-            set { metroSetScrollBar.LargeChange = value; }
+            get => _metroSetScrollBar.LargeChange;
+            set => _metroSetScrollBar.LargeChange = value;
         }
 
         public ScrollOrientate Orientation
         {
-            get { return metroSetScrollBar.Orientation; }
-            set { metroSetScrollBar.Orientation = value; }
+            get => _metroSetScrollBar.Orientation;
+            set => _metroSetScrollBar.Orientation = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

@@ -33,65 +33,56 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetListBoxActionList : DesignerActionList
     {
-        private readonly MetroSetListBox metroSetListBox;
+        private readonly MetroSetListBox _metroSetListBox;
 
         public MetroSetListBoxActionList(IComponent component) : base(component)
         {
-            metroSetListBox = (MetroSetListBox)component;
+            _metroSetListBox = (MetroSetListBox)component;
         }
 
         public Style Style
         {
-            get { return metroSetListBox.Style; }
-            set { metroSetListBox.Style = value; }
+            get => _metroSetListBox.Style;
+            set => _metroSetListBox.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetListBox.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetListBox.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetListBox.ThemeName; }
-        }
+        public string ThemeName => _metroSetListBox.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetListBox.StyleManager; }
-            set { metroSetListBox.StyleManager = value; }
+            get => _metroSetListBox.StyleManager;
+            set => _metroSetListBox.StyleManager = value;
         }
 
         [TypeConverter(typeof(CollectionConverter))]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design", "System.Drawing.Design.UITypeEditor, System.Drawing")]
-        public MetroSetItemCollection Items
-        {
-            get { return metroSetListBox.Items; }
-        }
+        public MetroSetItemCollection Items => _metroSetListBox.Items;
 
         public int ItemHeight
         {
-            get { return metroSetListBox.ItemHeight; }
-            set { metroSetListBox.ItemHeight = value; }
+            get => _metroSetListBox.ItemHeight;
+            set => _metroSetListBox.ItemHeight = value;
         }
 
         public bool MultiSelect
         {
-            get { return metroSetListBox.MultiSelect; }
-            set { metroSetListBox.MultiSelect = value; }
+            get => _metroSetListBox.MultiSelect;
+            set => _metroSetListBox.MultiSelect = value;
         }
 
         public bool ShowScrollBar
         {
-            get { return metroSetListBox.ShowScrollBar; }
-            set { metroSetListBox.ShowScrollBar = value; }
+            get => _metroSetListBox.ShowScrollBar;
+            set => _metroSetListBox.ShowScrollBar = value;
         }
 
         public bool ShowBorder
         {
-            get { return metroSetListBox.ShowBorder; }
-            set { metroSetListBox.ShowBorder = value; }
+            get => _metroSetListBox.ShowBorder;
+            set => _metroSetListBox.ShowBorder = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

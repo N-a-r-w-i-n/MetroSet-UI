@@ -45,16 +45,12 @@ namespace MetroSet_UI.Design
         #region Instance Members
 
         private DesignerVerbCollection _verbs;
-
         private IDesignerHost _designerHost;
         private IComponentChangeService _changeService;
 
         #endregion Instance Members
 
         #region Constructor
-
-        public MetroSetTabControlDesigner()
-            : base() { }
 
         #endregion Constructor
 
@@ -66,28 +62,25 @@ namespace MetroSet_UI.Design
             {
                 if (_verbs == null)
                 {
-                    DesignerVerb[] addVerbs = new DesignerVerb[]
+                    var addVerbs = new[]
                     {
-                        new DesignerVerb("Add Tab", new EventHandler(OnAddTab)),
-                        new DesignerVerb("Remove Tab", new EventHandler(OnRemoveTab))
+                        new DesignerVerb("Add Tab", OnAddTab),
+                        new DesignerVerb("Remove Tab", OnRemoveTab)
                     };
 
                     _verbs = new DesignerVerbCollection();
                     _verbs.AddRange(addVerbs);
 
-                    MetroSetTabControl parentControl = Control as MetroSetTabControl;
-                    if (parentControl != null)
+                    if (!(Control is MetroSetTabControl parentControl)) return _verbs;
+                    switch (parentControl.TabPages.Count)
                     {
-                        switch (parentControl.TabPages.Count)
-                        {
-                            case 0:
-                                _verbs[1].Enabled = false;
-                                break;
+                        case 0:
+                            _verbs[1].Enabled = false;
+                            break;
 
-                            default:
-                                _verbs[1].Enabled = true;
-                                break;
-                        }
+                        default:
+                            _verbs[1].Enabled = true;
+                            break;
                     }
                 }
 
@@ -108,7 +101,7 @@ namespace MetroSet_UI.Design
 
             // Update your designer verb whenever ComponentChanged event occurs.
             if (_changeService != null)
-                _changeService.ComponentChanged += new ComponentChangedEventHandler(OnComponentChanged);
+                _changeService.ComponentChanged += OnComponentChanged;
         }
 
         /// <summary>
@@ -142,30 +135,29 @@ namespace MetroSet_UI.Design
 
         protected override bool GetHitTest(Point point)
         {
-            ISelectionService _selectionService = (ISelectionService)GetService(typeof(ISelectionService));
-            if (_selectionService != null)
+            var selectionService = (ISelectionService)GetService(typeof(ISelectionService));
+            var selectedObject = selectionService?.PrimarySelection;
+            if (selectedObject != null && selectedObject.Equals(Control))
             {
-                object selectedObject = _selectionService.PrimarySelection;
-                if (selectedObject != null && selectedObject.Equals(Control))
+                var p = Control.PointToClient(point);
+
+                var hti = new User32.TCHITTESTINFO(p, User32.TabControlHitTest.TCHT_ONITEM);
+
+                var m = new Message
                 {
-                    Point p = Control.PointToClient(point);
+                    HWnd = Control.Handle,
+                    Msg = User32._TCM_HITTEST
+                };
 
-                    User32.TCHITTESTINFO hti = new User32.TCHITTESTINFO(p, User32.TabControlHitTest.TCHT_ONITEM);
+                var lParam = Marshal.AllocHGlobal(Marshal.SizeOf(hti));
+                Marshal.StructureToPtr(hti, lParam, false);
+                m.LParam = lParam;
 
-                    Message m = new Message();
-                    m.HWnd = Control.Handle;
-                    m.Msg = User32._TCM_HITTEST;
+                base.WndProc(ref m);
+                Marshal.FreeHGlobal(lParam);
 
-                    IntPtr lParam = Marshal.AllocHGlobal(Marshal.SizeOf(hti));
-                    Marshal.StructureToPtr(hti, lParam, false);
-                    m.LParam = lParam;
-
-                    base.WndProc(ref m);
-                    Marshal.FreeHGlobal(lParam);
-
-                    if (m.Result.ToInt32() != -1)
-                        return hti.flags != User32.TabControlHitTest.TCHT_NOWHERE;
-                }
+                if (m.Result.ToInt32() != -1)
+                    return hti.flags != User32.TabControlHitTest.TCHT_NOWHERE;
             }
 
             return false;
@@ -190,13 +182,13 @@ namespace MetroSet_UI.Design
 
         private void OnAddTab(Object sender, EventArgs e)
         {
-            MetroSetTabControl parentControl = Control as MetroSetTabControl;
+            var parentControl = Control as MetroSetTabControl;
 
-            TabControl.TabPageCollection oldTabs = parentControl.TabPages;
+            var oldTabs = parentControl.TabPages;
 
             // Notify the IDE that the TabPages collection property of the current tab control has changed.
             RaiseComponentChanging(TypeDescriptor.GetProperties(parentControl)["TabPages"]);
-            MetroSetTabPage newTab = (MetroSetTabPage)_designerHost.CreateComponent(typeof(MetroSetTabPage));
+            var newTab = (MetroSetTabPage)_designerHost.CreateComponent(typeof(MetroSetTabPage));
             newTab.Text = newTab.Name;
             parentControl.TabPages.Add(newTab);
             parentControl.SelectedTab = newTab;
@@ -205,12 +197,12 @@ namespace MetroSet_UI.Design
 
         private void OnRemoveTab(Object sender, EventArgs e)
         {
-            MetroSetTabControl parentControl = Control as MetroSetTabControl;
+            var parentControl = Control as MetroSetTabControl;
 
-            if (parentControl.SelectedIndex < 0)
+            if (parentControl != null && parentControl.SelectedIndex < 0)
                 return;
 
-            TabControl.TabPageCollection oldTabs = parentControl.TabPages;
+            var oldTabs = parentControl.TabPages;
 
             // Notify the IDE that the TabPages collection property of the current tab control has changed.
             RaiseComponentChanging(TypeDescriptor.GetProperties(parentControl)["TabPages"]);
@@ -220,28 +212,22 @@ namespace MetroSet_UI.Design
 
         private void OnComponentChanged(object sender, ComponentChangedEventArgs e)
         {
-            MetroSetTabControl parentControl = e.Component as MetroSetTabControl;
-
-            if (parentControl != null && e.Member.Name == "TabPages")
+            if (!(e.Component is MetroSetTabControl parentControl) || e.Member.Name != "TabPages") return;
+            foreach (DesignerVerb verb in Verbs)
             {
-                foreach (DesignerVerb verb in Verbs)
+                if (verb.Text != "Remove Tab") continue;
+                switch (parentControl.TabPages.Count)
                 {
-                    if (verb.Text == "Remove Tab")
-                    {
-                        switch (parentControl.TabPages.Count)
-                        {
-                            case 0:
-                                verb.Enabled = false;
-                                break;
-
-                            default:
-                                verb.Enabled = true;
-                                break;
-                        }
-
+                    case 0:
+                        verb.Enabled = false;
                         break;
-                    }
+
+                    default:
+                        verb.Enabled = true;
+                        break;
                 }
+
+                break;
             }
         }
 

@@ -25,7 +25,6 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -52,13 +51,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -87,8 +83,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -107,15 +103,14 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -127,10 +122,8 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
-            mth = new Methods();
-            utl = new Utilites();
+            _utl = new Utilites();
             Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ApplyTheme();
         }
@@ -143,7 +136,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -184,43 +177,43 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "CloseHoverBackColor":
-                                    CloseHoverBackColor = utl.HexColor((string)varkey.Value);
+                                    CloseHoverBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CloseHoverForeColor":
-                                    CloseHoverForeColor = utl.HexColor((string)varkey.Value);
+                                    CloseHoverForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CloseNormalForeColor":
-                                    CloseNormalForeColor = utl.HexColor((string)varkey.Value);
+                                    CloseNormalForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MaximizeHoverBackColor":
-                                    MaximizeHoverBackColor = utl.HexColor((string)varkey.Value);
+                                    MaximizeHoverBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MaximizeHoverForeColor":
-                                    MaximizeHoverForeColor = utl.HexColor((string)varkey.Value);
+                                    MaximizeHoverForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MaximizeNormalForeColor":
-                                    MaximizeNormalForeColor = utl.HexColor((string)varkey.Value);
+                                    MaximizeNormalForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MinimizeHoverBackColor":
-                                    MinimizeHoverBackColor = utl.HexColor((string)varkey.Value);
+                                    MinimizeHoverBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MinimizeHoverForeColor":
-                                    MinimizeHoverForeColor = utl.HexColor((string)varkey.Value);
+                                    MinimizeHoverForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "MinimizeNormalForeColor":
-                                    MinimizeNormalForeColor = utl.HexColor((string)varkey.Value);
+                                    MinimizeNormalForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -230,6 +223,8 @@ namespace MetroSet_UI.Controls
                     ;
                     break;
 
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
             Invalidate();
         }
@@ -245,7 +240,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the Maximize button is Enabled in the caption bar of the form.")]
         public bool MaximizeBox { get; set; } = true;
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether the Minimize button is Enabled in the caption bar of the form.
         /// </summary>
@@ -311,25 +306,22 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
         public Color DisabledForeColor { get; set; }
-        
+
         /// <summary>
         /// I make backcolor inaccessible cause we have not use of it. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         #endregion
 
         #region Private 
 
-        private bool MinimizeHovered { get; set; } = false;
+        private bool MinimizeHovered { get; set; }
 
-        private bool MaximizeHovered { get; set; } = false;
+        private bool MaximizeHovered { get; set; }
 
-        private bool CloseHovered { get; set; } = false;
+        private bool CloseHovered { get; set; }
 
         #endregion
 
@@ -339,49 +331,48 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            using (SolidBrush CloseBoxState = new SolidBrush(CloseHovered ? CloseHoverBackColor : Color.Transparent))
+            using (var closeBoxState = new SolidBrush(CloseHovered ? CloseHoverBackColor : Color.Transparent))
             {
-                using (Font F = new Font("Marlett", 12))
+                using (var f = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(CloseHovered ? CloseHoverForeColor : CloseNormalForeColor))
+                    using (var tb = new SolidBrush(CloseHovered ? CloseHoverForeColor : CloseNormalForeColor))
                     {
-                        using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
+                        using (var sf = new StringFormat { Alignment = StringAlignment.Center })
                         {
-                            G.FillRectangle(CloseBoxState, new Rectangle(70, 5, 27, Height));
-                            G.DrawString("r", F, CloseHovered ? TB : Brushes.Gray, new Point(Width - 16, 8), SF);
+                            G.FillRectangle(closeBoxState, new Rectangle(70, 5, 27, Height));
+                            G.DrawString("r", f, CloseHovered ? tb : Brushes.Gray, new Point(Width - 16, 8), sf);
                         }
                     }
                 }
             }
-            using (SolidBrush MaximizeBoxState = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverBackColor : Color.Transparent : Color.Transparent))
+            using (var maximizeBoxState = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverBackColor : Color.Transparent : Color.Transparent))
             {
-                using (Font F = new Font("Marlett", 12))
+                using (var f = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverForeColor : MaximizeNormalForeColor : DisabledForeColor))
+                    using (var tb = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverForeColor : MaximizeNormalForeColor : DisabledForeColor))
                     {
-                        using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
+                        var maxSymbol = Parent.FindForm().WindowState == FormWindowState.Maximized ? "2" : "1";
+                        using (var sf = new StringFormat { Alignment = StringAlignment.Center })
                         {
-                            string maxSymbol = Parent.FindForm().WindowState == FormWindowState.Maximized ? "2" : "1";
-
-                            G.FillRectangle(MaximizeBoxState, new Rectangle(38, 5, 24, Height));
-                            G.DrawString(maxSymbol, F, TB, new Point(51, 7), SF);
+                            G.FillRectangle(maximizeBoxState, new Rectangle(38, 5, 24, Height));
+                            G.DrawString(maxSymbol, f, tb, new Point(51, 7), sf);
                         }
                     }
                 }
             }
-            using (SolidBrush MinimizeBoxState = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverBackColor : Color.Transparent : Color.Transparent))
+            using (var minimizeBoxState = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverBackColor : Color.Transparent : Color.Transparent))
             {
-                using (Font F = new Font("Marlett", 12))
+                using (var f = new Font("Marlett", 12))
                 {
-                    using (SolidBrush TB = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverForeColor : MinimizeNormalForeColor : DisabledForeColor))
+                    using (var tb = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverForeColor : MinimizeNormalForeColor : DisabledForeColor))
                     {
-                        using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Center })
+                        using (var sf = new StringFormat { Alignment = StringAlignment.Center })
                         {
-                            G.FillRectangle(MinimizeBoxState, new Rectangle(5, 5, 27, Height));
-                            G.DrawString("0", F, TB, new Point(20, 7), SF);
+                            G.FillRectangle(minimizeBoxState, new Rectangle(5, 5, 27, Height));
+                            G.DrawString("0", f, tb, new Point(20, 7), sf);
                         }
                     }
                 }
@@ -465,14 +456,7 @@ namespace MetroSet_UI.Controls
             {
                 if (MaximizeBox)
                 {
-                    if (Parent.FindForm().WindowState == FormWindowState.Normal)
-                    {
-                        Parent.FindForm().WindowState = FormWindowState.Maximized;
-                    }
-                    else
-                    {
-                        Parent.FindForm().WindowState = FormWindowState.Normal;
-                    }
+                    Parent.FindForm().WindowState = Parent.FindForm().WindowState == FormWindowState.Normal ? FormWindowState.Maximized : FormWindowState.Normal;
                 }
             }
         }

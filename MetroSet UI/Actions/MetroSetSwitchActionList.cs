@@ -31,45 +31,39 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetSwitchActionList : DesignerActionList
     {
-        private readonly MetroSetSwitch metroSetSwitch;
+        private readonly MetroSetSwitch _metroSetSwitch;
 
         public MetroSetSwitchActionList(IComponent component) : base(component)
         {
-            metroSetSwitch = (MetroSetSwitch)component;
+            _metroSetSwitch = (MetroSetSwitch)component;
         }
 
         public Style Style
         {
-            get { return metroSetSwitch.Style; }
-            set { metroSetSwitch.Style = value; }
+            get => _metroSetSwitch.Style;
+            set => _metroSetSwitch.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetSwitch.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetSwitch.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetSwitch.ThemeName; }
-        }
+        public string ThemeName => _metroSetSwitch.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetSwitch.StyleManager; }
-            set { metroSetSwitch.StyleManager = value; }
+            get => _metroSetSwitch.StyleManager;
+            set => _metroSetSwitch.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetSwitch.Text; }
-            set { metroSetSwitch.Text = value; }
+            get => _metroSetSwitch.Text;
+            set => _metroSetSwitch.Text = value;
         }
 
         public bool Switched
         {
-            get { return metroSetSwitch.Switched; }
-            set { metroSetSwitch.Switched = value; }
+            get => _metroSetSwitch.Switched;
+            set => _metroSetSwitch.Switched = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

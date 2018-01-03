@@ -25,7 +25,6 @@
 using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -52,13 +51,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -87,8 +83,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -107,21 +103,20 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-        protected bool Variable;
-        private Rectangle Track;
-        protected int _Maximum;
-        private int _Minimum;
-        private int _Value;
-        private int CurrentValue;
+        private Style _style;
+        private StyleManager _styleManager;
+        private bool _variable;
+        private Rectangle _track;
+        private int _maximum;
+        private int _minimum;
+        private int _value;
+        private int _currentValue;
 
         #endregion Internal Vars
 
@@ -133,16 +128,14 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
-            _Maximum = 100;
-            _Minimum = 0;
-            _Value = 0;
-            CurrentValue = Convert.ToInt32(Value / (double)(Maximum) - (2 * Width));
+            _maximum = 100;
+            _minimum = 0;
+            _value = 0;
+            _currentValue = Convert.ToInt32(Value / (double)(Maximum) - (2 * Width));
             UpdateStyles();
-            mth = new Methods();
-            utl = new Utilites();
+            _utl = new Utilites();
             ApplyTheme();
-        } 
+        }
 
         #endregion Constructors
 
@@ -152,7 +145,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -188,27 +181,27 @@ namespace MetroSet_UI.Controls
                             {
 
                                 case "HandlerColor":
-                                    HandlerColor = utl.HexColor((string)varkey.Value);
+                                    HandlerColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroundColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ValueColor":
-                                    ValueColor = utl.HexColor((string)varkey.Value);
+                                    ValueColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledValueColor":
-                                    DisabledValueColor = utl.HexColor((string)varkey.Value);
+                                    DisabledValueColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledHandlerColor":
-                                    DisabledHandlerColor = utl.HexColor((string)varkey.Value);
+                                    DisabledHandlerColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -217,10 +210,12 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             Invalidate();
         }
@@ -231,20 +226,20 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
 
             Cursor = Cursors.Hand;
 
-            using (SolidBrush BG = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
+            using (var bg = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
             {
-                using (SolidBrush V = new SolidBrush(Enabled ? ValueColor : DisabledValueColor))
+                using (var v = new SolidBrush(Enabled ? ValueColor : DisabledValueColor))
                 {
-                    using (SolidBrush VC = new SolidBrush(Enabled ? HandlerColor : DisabledHandlerColor))
+                    using (var vc = new SolidBrush(Enabled ? HandlerColor : DisabledHandlerColor))
                     {
-                        G.FillRectangle(BG, new Rectangle(0, 6, Width, 4));
-                        if (CurrentValue != 0)
-                            G.FillRectangle(V, new Rectangle(0, 6, CurrentValue, 4));
-                        G.FillRectangle(VC, Track);
+                        G.FillRectangle(bg, new Rectangle(0, 6, Width, 4));
+                        if (_currentValue != 0)
+                            G.FillRectangle(v, new Rectangle(0, 6, _currentValue, 4));
+                        G.FillRectangle(vc, _track);
                     }
                 }
             }
@@ -260,10 +255,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the upper limit of the range this TrackBar is working with.")]
         public int Maximum
         {
-            get { return _Maximum; }
+            get => _maximum;
             set
             {
-                _Maximum = value;
+                _maximum = value;
                 RenewCurrentValue();
                 MoveTrack();
                 Invalidate();
@@ -276,12 +271,12 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the lower limit of the range this TrackBar is working with.")]
         public int Minimum
         {
-            get { return _Minimum; }
+            get => _minimum;
             set
             {
                 if (!(value < 0))
                 {
-                    _Minimum = value;
+                    _minimum = value;
                     RenewCurrentValue();
                     MoveTrack();
                     Invalidate();
@@ -295,12 +290,12 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a numeric value that represents the current position of the scroll box on the track bar.")]
         public int Value
         {
-            get { return _Value; }
+            get => _value;
             set
             {
-                if (value != _Value)
+                if (value != _value)
                 {
-                    _Value = value;
+                    _value = value;
                     RenewCurrentValue();
                     MoveTrack();
                     Invalidate();
@@ -310,10 +305,7 @@ namespace MetroSet_UI.Controls
         }
 
         [Browsable(false)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the value color in normal mouse sate.
@@ -371,7 +363,7 @@ namespace MetroSet_UI.Controls
         /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            if (Variable && e.X > -1 && e.X < Width + 1)
+            if (_variable && e.X > -1 && e.X < Width + 1)
             {
                 Value = Minimum + (int)Math.Round((double)(Maximum - Minimum) * e.X / Width);
             }
@@ -387,8 +379,8 @@ namespace MetroSet_UI.Controls
             if (e.Button == MouseButtons.Left && Height > 0)
             {
                 RenewCurrentValue();
-                Track = new Rectangle(CurrentValue, 0, 6, 16);
-                Variable = new Rectangle(CurrentValue, 0, 6, 16).Contains(e.Location);
+                _track = new Rectangle(_currentValue, 0, 6, 16);
+                _variable = new Rectangle(_currentValue, 0, 6, 16).Contains(e.Location);
             }
             base.OnMouseDown(e);
         }
@@ -399,7 +391,7 @@ namespace MetroSet_UI.Controls
         /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            Variable = false;
+            _variable = false;
             base.OnMouseUp(e);
         }
 
@@ -446,7 +438,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         private void MoveTrack()
         {
-            Track = new Rectangle(CurrentValue, 0, 6, 16);
+            _track = new Rectangle(_currentValue, 0, 6, 16);
         }
 
         /// <summary>
@@ -454,7 +446,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void RenewCurrentValue()
         {
-            CurrentValue = Convert.ToInt32(Math.Round((double)(Value - Minimum) / (Maximum - Minimum) * (Width - 6)));
+            _currentValue = Convert.ToInt32(Math.Round((double)(Value - Minimum) / (Maximum - Minimum) * (Width - 6)));
             Invalidate();
         }
 

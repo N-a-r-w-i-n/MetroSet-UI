@@ -23,9 +23,9 @@
 */
 
 using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -51,13 +51,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -86,8 +83,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -106,26 +103,24 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-
-        private int _MaxLength;
-        private bool _ReadOnly;
-        private MouseMode State;
-        private bool _WordWrap;
-        private bool _AutoWordSelection;
-        private string[] _Lines;
-        private Color _ForeColor;
-        private Color _BackColor;
-        private Color _BorderColor;
-        private Color _HoverColor;
+        private Style _style;
+        private StyleManager _styleManager;
+        private int _maxLength;
+        private bool _readOnly;
+        private MouseMode _state;
+        private bool _wordWrap;
+        private bool _autoWordSelection;
+        private string[] _lines;
+        private Color _foreColor;
+        private Color _backColor;
+        private Color _borderColor;
+        private Color _hoverColor;
 
         #region Base RichTextBox
 
@@ -133,7 +128,7 @@ namespace MetroSet_UI.Controls
 
         private RichTextBox _T
         {
-            get { return _T; }
+            get => _T;
             set
             {
                 if (_T != null)
@@ -146,15 +141,13 @@ namespace MetroSet_UI.Controls
                     _T.TextChanged -= T_TextChanged;
                 }
                 _T = value;
-                if (_T != null)
-                {
-                    _T.MouseHover += T_MouseHover;
-                    _T.MouseUp += T_MouseUp;
-                    _T.Leave += T_Leave;
-                    _T.Enter += T_Enter;
-                    _T.KeyDown += T_KeyDown;
-                    _T.TextChanged += T_TextChanged;
-                }
+                if (_T == null) return;
+                _T.MouseHover += T_MouseHover;
+                _T.MouseUp += T_MouseUp;
+                _T.Leave += T_Leave;
+                _T.Enter += T_Enter;
+                _T.KeyDown += T_KeyDown;
+                _T.TextChanged += T_TextChanged;
             }
         }
 
@@ -171,7 +164,6 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.Regular(10);
             EvaluateVars();
@@ -179,32 +171,31 @@ namespace MetroSet_UI.Controls
             T_Defaults();
         }
 
-        public void EvaluateVars()
+        private void EvaluateVars()
         {
-            mth = new Methods();
-            utl = new Utilites();
+            _utl = new Utilites();
         }
 
         private void T_Defaults()
         {
-            _WordWrap = true;
-            _AutoWordSelection = false;
-            _ForeColor = Color.FromArgb(20, 20, 20); ;
-            _BorderColor = Color.FromArgb(155, 155, 155);
-            _HoverColor = Color.FromArgb(102, 102, 102);
-            _BackColor = Color.FromArgb(238, 238, 238);
+            _wordWrap = true;
+            _autoWordSelection = false;
+            _foreColor = Color.FromArgb(20, 20, 20); ;
+            _borderColor = Color.FromArgb(155, 155, 155);
+            _hoverColor = Color.FromArgb(102, 102, 102);
+            _backColor = Color.FromArgb(238, 238, 238);
             T.BackColor = BackColor;
             T.ForeColor = ForeColor;
-            _ReadOnly = false;
-            _MaxLength = 32767;
-            State = MouseMode.Normal;
-            _Lines = null;
+            _readOnly = false;
+            _maxLength = 32767;
+            _state = MouseMode.Normal;
+            _lines = null;
             T.Cursor = Cursors.IBeam;
             T.BorderStyle = BorderStyle.None;
             T.Location = new Point(7, 8);
             T.Font = Font;
             T.Size = new Size(Width, Height);
-            
+
         }
 
         #endregion Constructors
@@ -213,28 +204,29 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            Rectangle Rect = new Rectangle(0, 0, Width - 1, Height - 1);
+            var G = e.Graphics;
+            var rect = new Rectangle(0, 0, Width - 1, Height - 1);
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             if (Enabled)
             {
-                using (SolidBrush BG = new SolidBrush(BackColor))
+                using (var bg = new SolidBrush(BackColor))
                 {
-                    using (Pen P = new Pen(BorderColor))
+                    using (var p = new Pen(BorderColor))
                     {
-                        using (Pen PH = new Pen(HoverColor))
+                        using (var ph = new Pen(HoverColor))
                         {
-                            G.FillRectangle(BG, Rect);
-                            switch (State)
+                            G.FillRectangle(bg, rect);
+                            switch (_state)
                             {
                                 case MouseMode.Normal:
-                                    G.DrawRectangle(P, Rect);
+                                    G.DrawRectangle(p, rect);
                                     break;
                                 case MouseMode.Hovered:
-                                    G.DrawRectangle(PH, Rect);
+                                    G.DrawRectangle(ph, rect);
                                     break;
                             }
+
                             T.BackColor = BackColor;
                             T.ForeColor = ForeColor;
                         }
@@ -243,12 +235,12 @@ namespace MetroSet_UI.Controls
             }
             else
             {
-                using (SolidBrush BG = new SolidBrush(DisabledBackColor))
+                using (var bg = new SolidBrush(DisabledBackColor))
                 {
-                    using (Pen P = new Pen(DisabledBorderColor))
+                    using (var p = new Pen(DisabledBorderColor))
                     {
-                        G.FillRectangle(BG, Rect);
-                        G.DrawRectangle(P, Rect);
+                        G.FillRectangle(bg, rect);
+                        G.DrawRectangle(p, rect);
                         T.BackColor = DisabledBackColor;
                         T.ForeColor = DisabledForeColor;
                     }
@@ -257,7 +249,7 @@ namespace MetroSet_UI.Controls
 
             T.Location = new Point(7, 4);
             T.Width = Width - 10;
-            
+
         }
 
         #endregion Draw Control
@@ -268,7 +260,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -305,59 +297,51 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "HoverColor":
-                                    HoverColor = utl.HexColor((string)varkey.Value);
+                                    HoverColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
-                                    return; 
+                                    return;
                             }
-                        }                   
+                        }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
         /// <summary>
         /// Updating properties after changing in style.
         /// </summary>
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             Invalidate();
             T.Invalidate();
-            //if (!Enabled)
-            //{
-            //    T.BackColor = DisabledBackColor;
-            //    T.ForeColor = DisabledForeColor;
-            //}
-            ////else
-            ////{
-            ////    T.BackColor = _BackColor;
-            ////    T.ForeColor = _ForeColor;
-            ////}
         }
 
         #endregion ApplyTheme
@@ -429,7 +413,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            State = MouseMode.Normal;
+            _state = MouseMode.Normal;
             Invalidate();
         }
 
@@ -440,7 +424,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -467,7 +451,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -478,7 +462,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseHover(EventArgs e)
         {
             base.OnMouseHover(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -782,7 +766,7 @@ namespace MetroSet_UI.Controls
                 return 0;
             return T.Find(characterSet);
         }
-        
+
         /// <summary>
         /// Searches the text of the control, at a specific starting point, for the first instance of a character from a list of characters.
         /// </summary>
@@ -869,10 +853,7 @@ namespace MetroSet_UI.Controls
         #region Properties
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public BorderStyle BorderStyle
-        {
-            get { return BorderStyle.None; }
-        }
+        public BorderStyle BorderStyle => BorderStyle.None;
 
         /// <summary>
         /// Gets or sets how text is aligned in a TextBox control.
@@ -880,10 +861,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets how text is aligned in a RichTextBox control.")]
         public int MaxLength
         {
-            get { return _MaxLength; }
+            get => _maxLength;
             set
             {
-                _MaxLength = value;
+                _maxLength = value;
                 if (T != null)
                 {
                     T.MaxLength = value;
@@ -901,10 +882,10 @@ namespace MetroSet_UI.Controls
         [Description("Gets or sets the background color of the control.")]
         public override Color BackColor
         {
-            get { return _BackColor; }
+            get => _backColor;
             set
             {
-                _BackColor = value;
+                _backColor = value;
                 T.BackColor = value;
                 Invalidate();
             }
@@ -917,10 +898,10 @@ namespace MetroSet_UI.Controls
         [Description("Gets or sets the color of the control whenever hovered.")]
         public Color HoverColor
         {
-            get { return _HoverColor; }
+            get => _hoverColor;
             set
             {
-                _HoverColor = value;
+                _hoverColor = value;
                 Invalidate();
             }
         }
@@ -933,10 +914,10 @@ namespace MetroSet_UI.Controls
         [Description("Gets or sets the border color of the control.")]
         public Color BorderColor
         {
-            get { return _BorderColor; }
+            get => _borderColor;
             set
             {
-                _BorderColor = value;
+                _borderColor = value;
                 Invalidate();
             }
         }
@@ -949,10 +930,10 @@ namespace MetroSet_UI.Controls
         [Browsable(false)]
         public override Color ForeColor
         {
-            get { return _ForeColor; }
+            get => _foreColor;
             set
             {
-                _ForeColor = value;
+                _foreColor = value;
                 T.ForeColor = value;
                 Invalidate();
             }
@@ -964,10 +945,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether text in the RichTextBox is read-only.")]
         public bool ReadOnly
         {
-            get { return _ReadOnly; }
+            get => _readOnly;
             set
             {
-                _ReadOnly = value;
+                _readOnly = value;
                 if (T != null)
                 {
                     T.ReadOnly = value;
@@ -979,10 +960,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the background image.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override Image BackgroundImage
-        {
-            get { return null; }
-        }
+        public override Image BackgroundImage => null;
 
         /// <summary>
         /// Gets or sets the current text in the TextBox.
@@ -990,7 +968,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the current text in the RichTextBox.")]
         public override string Text
         {
-            get { return T.Text; }
+            get => T.Text;
             set
             {
                 base.Text = value;
@@ -1007,7 +985,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the font of the text displayed by the control.")]
         public override Font Font
         {
-            get { return base.Font; }
+            get => base.Font;
             set
             {
                 base.Font = value;
@@ -1025,10 +1003,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Indicates whether a multiline text box control automatically wraps words to the beginning of the next line when necessary.")]
         public bool WordWrap
         {
-            get { return _WordWrap; }
+            get => _wordWrap;
             set
             {
-                _WordWrap = value;
+                _wordWrap = value;
                 if (T != null)
                 {
                     T.WordWrap = value;
@@ -1042,10 +1020,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether automatic word selection is enabled.")]
         public bool AutoWordSelection
         {
-            get { return _AutoWordSelection; }
+            get => _autoWordSelection;
             set
             {
-                _AutoWordSelection = value;
+                _autoWordSelection = value;
                 if (T != null)
                 {
                     T.AutoWordSelection = value;
@@ -1059,10 +1037,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the lines of text in the control.")]
         public string[] Lines
         {
-            get { return _Lines; }
+            get => _lines;
             set
             {
-                _Lines = value;
+                _lines = value;
                 if (T != null)
                     T.Lines = value;
                 Invalidate();
@@ -1075,7 +1053,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the ContextMenuStrip associated with this control.")]
         public override ContextMenuStrip ContextMenuStrip
         {
-            get { return base.ContextMenuStrip; }
+            get => base.ContextMenuStrip;
             set
             {
                 base.ContextMenuStrip = value;

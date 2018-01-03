@@ -1,4 +1,5 @@
-﻿/**
+﻿using MetroSet_UI.Tasks;
+/**
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)
@@ -22,32 +23,16 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.Text;
-using MetroSet_UI.Tasks;
 
 namespace MetroSet_UI.Design
 {
-    class StyleManagerDesigner : ComponentDesigner
+    public class StyleManagerDesigner : ComponentDesigner
     {
-        private DesignerActionListCollection actionListCollection;
+        private DesignerActionListCollection _actionListCollection;
 
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionListCollection == null)
-                {
-                    actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new StyleManagerActionList(Component));
-                }
-
-                return actionListCollection;
-            }
-        }
-
+        public override DesignerActionListCollection ActionLists => _actionListCollection ?? (_actionListCollection =
+                                                                        new DesignerActionListCollection { new StyleManagerActionList(Component) });
     }
 
 }

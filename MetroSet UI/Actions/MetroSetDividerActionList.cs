@@ -32,45 +32,39 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetDividerActionList : DesignerActionList
     {
-        private readonly MetroSetDivider metroSetDivider;
+        private readonly MetroSetDivider _metroSetDivider;
 
         public MetroSetDividerActionList(IComponent component) : base(component)
         {
-            metroSetDivider = (MetroSetDivider)component;
+            _metroSetDivider = (MetroSetDivider)component;
         }
 
         public Style Style
         {
-            get { return metroSetDivider.Style; }
-            set { metroSetDivider.Style = value; }
+            get => _metroSetDivider.Style;
+            set => _metroSetDivider.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetDivider.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetDivider.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetDivider.ThemeName; }
-        }
+        public string ThemeName => _metroSetDivider.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetDivider.StyleManager; }
-            set { metroSetDivider.StyleManager = value; }
+            get => _metroSetDivider.StyleManager;
+            set => _metroSetDivider.StyleManager = value;
         }
 
         public DividerStyle Orientation
         {
-            get { return metroSetDivider.Orientation; }
-            set { metroSetDivider.Orientation = value; }
+            get => _metroSetDivider.Orientation;
+            set => _metroSetDivider.Orientation = value;
         }
 
         public int Thickness
         {
-            get { return metroSetDivider.Thickness; }
-            set { metroSetDivider.Thickness = value; }
+            get => _metroSetDivider.Thickness;
+            set => _metroSetDivider.Thickness = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

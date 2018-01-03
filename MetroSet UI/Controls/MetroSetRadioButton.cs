@@ -23,11 +23,9 @@
 */
 
 using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -57,13 +55,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -92,8 +87,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -112,18 +107,17 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-        private bool _Checked;
-        private Timer timer;
-        private int Alpha;
+        private Style _style;
+        private StyleManager _styleManager;
+        private bool _checked;
+        private readonly Timer _timer;
+        private int _alpha;
 
         #endregion Internal Vars
 
@@ -135,22 +129,18 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.SemiBold(10);
-            //BackColor = Color.Transparent;
             Font = new Font("Segoe UI", 10);
-            mth = new Methods();
-            utl = new Utilites();
-            Alpha = 0;
+            _utl = new Utilites();
+            _alpha = 0;
             Cursor = Cursors.Hand;
-            timer = new Timer()
+            _timer = new Timer()
             {
                 Interval = 10,
                 Enabled = false
             };
-            timer.Tick += SetCheckedChanged;
-
+            _timer.Tick += SetCheckedChanged;
             ApplyTheme();
         }
 
@@ -162,7 +152,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -195,23 +185,23 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroundColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "CheckColor":
-                                    CheckSignColor = utl.HexColor((string)varkey.Value);
+                                    CheckSignColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -220,14 +210,15 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             try
             {
-                Enabled = Enabled;
                 ForeColor = ForeColor;
                 Invalidate();
             }
@@ -243,51 +234,39 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             G.SmoothingMode = SmoothingMode.AntiAlias;
 
-            Rectangle rect = new Rectangle(0, 0, 17, 16);
+            var rect = new Rectangle(0, 0, 17, 16);
 
-            if (Enabled)
+            using (var backBrush = new SolidBrush(Enabled ? BackgroundColor : Color.FromArgb(238, 238, 238)))
             {
-                using (SolidBrush BackBrush = new SolidBrush(BackgroundColor))
+                using (var checkMarkBrush = new SolidBrush(Enabled ? Checked ? Color.FromArgb(_alpha, CheckSignColor) : BackgroundColor : Checked ? Color.FromArgb(_alpha, DisabledBorderColor) : Color.FromArgb(238, 238, 238)))
                 {
-                    using (SolidBrush CheckMarkBrush = new SolidBrush(Checked ? Color.FromArgb(Alpha, CheckSignColor) : BackgroundColor))
+                    using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor))
                     {
-                        using (Pen P = new Pen(BorderColor))
+                        G.FillEllipse(backBrush, rect);
+                        if (Enabled)
                         {
-                            using (SolidBrush TB = new SolidBrush(ForeColor))
-                            {
-                                G.FillEllipse(BackBrush, rect);
-                                G.DrawEllipse(P, rect);
-                                G.FillEllipse(CheckMarkBrush, new Rectangle(3, 3, 11, 10));
-                            }
+                            G.DrawEllipse(p, rect);
+                            G.FillEllipse(checkMarkBrush, new Rectangle(3, 3, 11, 10));
+                        }
+                        else
+                        {
+                            G.FillEllipse(checkMarkBrush, new Rectangle(3, 3, 11, 10));
+                            G.DrawEllipse(p, rect);
                         }
                     }
                 }
-            }
-            else
-            {
-                using (Brush BackBrush = new SolidBrush(Color.FromArgb(238, 238, 238)))
-                {
-                    using (Pen CheckMarkPen = new Pen(DisabledBorderColor))
-                    {
-                        using (SolidBrush CheckMarkBrush = new SolidBrush(Checked ? Color.FromArgb(Alpha, DisabledBorderColor) : Color.FromArgb(238, 238, 238)))
-                        {
-                            G.FillEllipse(BackBrush, rect);
-                            G.FillEllipse(CheckMarkBrush, new Rectangle(3, 3, 11, 10));
-                            G.DrawEllipse(CheckMarkPen, rect);
-                        }
-                    }
-                }
+
             }
             G.SmoothingMode = SmoothingMode.Default;
-            using (SolidBrush TB = new SolidBrush(ForeColor))
+            using (var tb = new SolidBrush(ForeColor))
             {
-                using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
+                using (var sf = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
                 {
-                    G.DrawString(Text, Font, TB, new Rectangle(19, 2, Width, Height - 4), SF);
+                    G.DrawString(Text, Font, tb, new Rectangle(19, 2, Width, Height - 4), sf);
                 }
             }
         }
@@ -299,25 +278,22 @@ namespace MetroSet_UI.Controls
         public event CheckedChangedEventHandler CheckedChanged;
         public delegate void CheckedChangedEventHandler(object sender);
 
-
         /// <summary>
         /// The Method that increases and decreases the alpha of radio symbol which it make the control animate.
         /// </summary>
         /// <param name="o">object</param>
         /// <param name="args">EventArgs</param>
-        public void SetCheckedChanged(object o, EventArgs args)
+        private void SetCheckedChanged(object o, EventArgs args)
         {
             if (Checked)
             {
-                if (Alpha < 255)
-                {
-                    Alpha += 1;
-                    Invalidate();
-                }
+                if (_alpha >= 255) return;
+                _alpha += 1;
+                Invalidate();
             }
-            else if (Alpha > 0)
+            else if (_alpha > 0)
             {
-                Alpha -= 1;
+                _alpha -= 1;
                 Invalidate();
             }
         }
@@ -329,14 +305,7 @@ namespace MetroSet_UI.Controls
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            if (Checked)
-            {
-                Checked = false;
-            }
-            else
-            {
-                Checked = true;
-            }
+            Checked = !Checked;
             Invalidate();
         }
 
@@ -358,11 +327,11 @@ namespace MetroSet_UI.Controls
         {
             if (!IsHandleCreated || !Checked)
                 return;
-            foreach (Control C in Parent.Controls)
+            foreach (Control c in Parent.Controls)
             {
-                if (!ReferenceEquals(C, this) && C is MetroSetRadioButton && ((MetroSetRadioButton)C).Group == Group)
+                if (!ReferenceEquals(c, this) && c is MetroSetRadioButton && ((MetroSetRadioButton)c).Group == Group)
                 {
-                    ((MetroSetRadioButton)C).Checked = false;
+                    ((MetroSetRadioButton)c).Checked = false;
                 }
             }
             CheckedChanged?.Invoke(this);
@@ -394,13 +363,13 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the control is checked.")]
         public bool Checked
         {
-            get { return _Checked; }
+            get => _checked;
             set
             {
-                _Checked = value;
+                _checked = value;
                 CheckedChanged?.Invoke(this);
                 SetCheckedChanged(this, null);
-                timer.Enabled = value;
+                _timer.Enabled = value;
                 UpdateState();
                 switch (value)
                 {
@@ -420,7 +389,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Browsable(false)]
         public Enums.CheckState CheckState { get; set; }
-        
+
         [Category("MetroSet Framework")]
         public int Group { get; set; } = 1;
 
@@ -434,10 +403,7 @@ namespace MetroSet_UI.Controls
         /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the control backcolor.
@@ -456,7 +422,6 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the border color while the control disabled.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
-        /// </summary>
         public Color DisabledBorderColor { get; set; }
 
         /// <summary>
@@ -482,7 +447,7 @@ namespace MetroSet_UI.Controls
         {
             if (disposing)
             {
-                timer.Dispose();
+                _timer.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -47,9 +47,9 @@ namespace MetroSet_UI.Child
         {
             if (DesignMode)
             { return base.CreateDefaultDropDown(); }
-            MetroSetContextMenuStrip DP = new MetroSetContextMenuStrip();
-            DP.Items.AddRange(base.CreateDefaultDropDown().Items);
-            return DP;
+            var dp = new MetroSetContextMenuStrip();
+            dp.Items.AddRange(base.CreateDefaultDropDown().Items);
+            return dp;
         }
 
         #endregion Adding DropDowns

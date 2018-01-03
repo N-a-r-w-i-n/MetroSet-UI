@@ -31,51 +31,45 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetProgressBarActionList : DesignerActionList
     {
-        private readonly MetroSetProgressBar metroSetProgressBar;
+        private readonly MetroSetProgressBar _metroSetProgressBar;
 
         public MetroSetProgressBarActionList(IComponent component) : base(component)
         {
-            metroSetProgressBar = (MetroSetProgressBar)component;
+            _metroSetProgressBar = (MetroSetProgressBar)component;
         }
 
         public Style Style
         {
-            get { return metroSetProgressBar.Style; }
-            set { metroSetProgressBar.Style = value; }
+            get => _metroSetProgressBar.Style;
+            set => _metroSetProgressBar.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetProgressBar.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetProgressBar.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetProgressBar.ThemeName; }
-        }
+        public string ThemeName => _metroSetProgressBar.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetProgressBar.StyleManager; }
-            set { metroSetProgressBar.StyleManager = value; }
+            get => _metroSetProgressBar.StyleManager;
+            set => _metroSetProgressBar.StyleManager = value;
         }
 
         public int Value
         {
-            get { return metroSetProgressBar.Value; }
-            set { metroSetProgressBar.Value = value; }
+            get => _metroSetProgressBar.Value;
+            set => _metroSetProgressBar.Value = value;
         }
 
         public int Maximum
         {
-            get { return metroSetProgressBar.Maximum; }
-            set { metroSetProgressBar.Maximum = value; }
+            get => _metroSetProgressBar.Maximum;
+            set => _metroSetProgressBar.Maximum = value;
         }
 
         public int Minimum
         {
-            get { return metroSetProgressBar.Minimum; }
-            set { metroSetProgressBar.Minimum = value; }
+            get => _metroSetProgressBar.Minimum;
+            set => _metroSetProgressBar.Minimum = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

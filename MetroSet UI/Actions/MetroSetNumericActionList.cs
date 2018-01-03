@@ -32,51 +32,45 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetNumericActionList : DesignerActionList
     {
-        private readonly MetroSetNumeric metroSetNumeric;
+        private readonly MetroSetNumeric _metroSetNumeric;
 
         public MetroSetNumericActionList(IComponent component) : base(component)
         {
-            metroSetNumeric = (MetroSetNumeric)component;
+            _metroSetNumeric = (MetroSetNumeric)component;
         }
 
         public Style Style
         {
-            get { return metroSetNumeric.Style; }
-            set { metroSetNumeric.Style = value; }
+            get => _metroSetNumeric.Style;
+            set => _metroSetNumeric.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetNumeric.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetNumeric.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetNumeric.ThemeName; }
-        }
+        public string ThemeName => _metroSetNumeric.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetNumeric.StyleManager; }
-            set { metroSetNumeric.StyleManager = value; }
+            get => _metroSetNumeric.StyleManager;
+            set => _metroSetNumeric.StyleManager = value;
         }
 
         public int Maximum
         {
-            get { return metroSetNumeric.Maximum; }
-            set { metroSetNumeric.Maximum = value; }
+            get => _metroSetNumeric.Maximum;
+            set => _metroSetNumeric.Maximum = value;
         }
 
         public int Minimum
         {
-            get { return metroSetNumeric.Minimum; }
-            set { metroSetNumeric.Minimum = value; }
+            get => _metroSetNumeric.Minimum;
+            set => _metroSetNumeric.Minimum = value;
         }
 
         public int Value
         {
-            get { return metroSetNumeric.Value; }
-            set { metroSetNumeric.Value = value; }
+            get => _metroSetNumeric.Value;
+            set => _metroSetNumeric.Value = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

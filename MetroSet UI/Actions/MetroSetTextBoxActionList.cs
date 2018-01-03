@@ -33,75 +33,69 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetTextBoxActionList : DesignerActionList
     {
-        private readonly MetroSetTextBox metroSetTextBox;
+        private readonly MetroSetTextBox _metroSetTextBox;
 
         public MetroSetTextBoxActionList(IComponent component) : base(component)
         {
-            metroSetTextBox = (MetroSetTextBox)component;
+            _metroSetTextBox = (MetroSetTextBox)component;
         }
 
         public Style Style
         {
-            get { return metroSetTextBox.Style; }
-            set { metroSetTextBox.Style = value; }
+            get => _metroSetTextBox.Style;
+            set => _metroSetTextBox.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetTextBox.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetTextBox.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetTextBox.ThemeName; }
-        }
+        public string ThemeName => _metroSetTextBox.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetTextBox.StyleManager; }
-            set { metroSetTextBox.StyleManager = value; }
+            get => _metroSetTextBox.StyleManager;
+            set => _metroSetTextBox.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetTextBox.Text; }
-            set { metroSetTextBox.Text = value; }
+            get => _metroSetTextBox.Text;
+            set => _metroSetTextBox.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetTextBox.Font; }
-            set { metroSetTextBox.Font = value; }
+            get => _metroSetTextBox.Font;
+            set => _metroSetTextBox.Font = value;
         }
 
         public bool ReadOnly
         {
-            get { return metroSetTextBox.ReadOnly; }
-            set { metroSetTextBox.ReadOnly = value; }
+            get => _metroSetTextBox.ReadOnly;
+            set => _metroSetTextBox.ReadOnly = value;
         }
 
         public bool UseSystemPasswordChar
         {
-            get { return metroSetTextBox.UseSystemPasswordChar; }
-            set { metroSetTextBox.UseSystemPasswordChar = value; }
+            get => _metroSetTextBox.UseSystemPasswordChar;
+            set => _metroSetTextBox.UseSystemPasswordChar = value;
         }
 
         public bool Multiline
         {
-            get { return metroSetTextBox.Multiline; }
-            set { metroSetTextBox.Multiline = value; }
+            get => _metroSetTextBox.Multiline;
+            set => _metroSetTextBox.Multiline = value;
         }
 
         public string WatermarkText
         {
-            get { return metroSetTextBox.WatermarkText; }
-            set { metroSetTextBox.WatermarkText = value; }
+            get => _metroSetTextBox.WatermarkText;
+            set => _metroSetTextBox.WatermarkText = value;
         }
 
         public ContextMenuStrip ContextMenuStrip
         {
-            get { return metroSetTextBox.ContextMenuStrip; }
-            set { metroSetTextBox.ContextMenuStrip = value; }
+            get => _metroSetTextBox.ContextMenuStrip;
+            set => _metroSetTextBox.ContextMenuStrip = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

@@ -29,20 +29,9 @@ namespace MetroSet_UI.Design
 {
     internal class MetroSetToolTipDesigner : ComponentDesigner
     {
-        private DesignerActionListCollection actionListCollection;
+        private DesignerActionListCollection _actionListCollection;
 
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionListCollection == null)
-                {
-                    actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new MetroSetToolTipActionList(Component));
-                }
-
-                return actionListCollection;
-            }
-        }
+        public override DesignerActionListCollection ActionLists => _actionListCollection ?? (_actionListCollection =
+                                                                        new DesignerActionListCollection { new MetroSetToolTipActionList(Component) });
     }
 }

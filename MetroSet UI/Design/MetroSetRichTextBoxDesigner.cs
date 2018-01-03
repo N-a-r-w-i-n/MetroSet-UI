@@ -30,20 +30,9 @@ namespace MetroSet_UI.Design
 {
     internal class MetroSetRichTextBoxDesigner : ControlDesigner
     {
-        private DesignerActionListCollection actionListCollection;
+        private DesignerActionListCollection _actionListCollection;
 
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionListCollection == null)
-                {
-                    actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new MetroSetRichTextBoxActionList(Component));
-                }
-
-                return actionListCollection;
-            }
-        }
+        public override DesignerActionListCollection ActionLists => _actionListCollection ?? (_actionListCollection =
+                                                                        new DesignerActionListCollection { new MetroSetRichTextBoxActionList(Component) });
     }
 }

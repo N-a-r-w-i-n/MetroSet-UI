@@ -33,7 +33,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MetroSet_UI.Controls 
+namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetProgressBar), "Bitmaps.Progress.bmp")]
@@ -52,13 +52,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -87,8 +84,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -107,17 +104,16 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-        private int _Value;
-        private int CurrentValue;
+        private Style _style;
+        private StyleManager _styleManager;
+        private int _value;
+        private int _currentValue;
 
         #endregion Internal Vars
 
@@ -129,11 +125,8 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
-            mth = new Methods();
-            utl = new Utilites();
-
+            _utl = new Utilites();
             ApplyTheme();
         }
 
@@ -145,7 +138,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -180,27 +173,27 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ProgressColor":
-                                    ProgressColor = utl.HexColor((string)varkey.Value);
+                                    ProgressColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroundColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBorderColor":
-                                    DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledProgressColor":
-                                    DisabledProgressColor = utl.HexColor((string)varkey.Value);
+                                    DisabledProgressColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -209,10 +202,12 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             Invalidate();
         }
@@ -223,58 +218,31 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            Rectangle Rect = new Rectangle(0, 0, Width - 1, Height - 1);
-            if (Enabled)
+            var G = e.Graphics;
+            var rect = new Rectangle(0, 0, Width - 1, Height - 1);
+
+            using (var bg = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
             {
-                using (SolidBrush BG = new SolidBrush(BackgroundColor))
+                using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor))
                 {
-                    using (Pen P = new Pen(BorderColor))
+                    using (var ps = new SolidBrush(Enabled ? ProgressColor : DisabledProgressColor))
                     {
-                        using (SolidBrush PS = new SolidBrush(ProgressColor))
+                        G.FillRectangle(bg, rect);
+                        if (_currentValue != 0)
                         {
-                            G.FillRectangle(BG, Rect);
-                            if (CurrentValue != 0)
+                            switch (Orientation)
                             {
-                                switch (Orientation)
-                                {
-                                    case ProgressOrientation.Horizontal:
-                                        G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
-                                        break;
-                                    case ProgressOrientation.Vertical:
-                                        G.FillRectangle(PS, new Rectangle(0, Height - CurrentValue, Width - 1, CurrentValue - 1));
-                                        break;
-                                }
-                                
+                                case ProgressOrientation.Horizontal:
+                                    G.FillRectangle(ps, new Rectangle(0, 0, _currentValue - 1, Height - 1));
+                                    break;
+                                case ProgressOrientation.Vertical:
+                                    G.FillRectangle(ps, new Rectangle(0, Height - _currentValue, Width - 1, _currentValue - 1));
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
                             }
-                            G.DrawRectangle(P, Rect);
                         }
-                    }
-                }
-            }
-            else
-            {
-                using (SolidBrush BG = new SolidBrush(DisabledBackColor))
-                {
-                    using (Pen P = new Pen(DisabledBorderColor))
-                    {
-                        using (SolidBrush PS = new SolidBrush(DisabledProgressColor))
-                        {
-                            G.FillRectangle(BG, Rect);
-                            if (CurrentValue != 0)
-                            {
-                                switch (Orientation)
-                                {
-                                    case ProgressOrientation.Horizontal:
-                                        G.FillRectangle(PS, new Rectangle(0, 0, CurrentValue - 1, Height - 1));
-                                        break;
-                                    case ProgressOrientation.Vertical:
-                                        G.FillRectangle(PS, new Rectangle(0, Height - CurrentValue, Width - 1, CurrentValue - 1));
-                                        break;
-                                }
-                            }
-                            G.DrawRectangle(P, Rect);
-                        }
+                        G.DrawRectangle(p, rect);
                     }
                 }
             }
@@ -290,24 +258,14 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the current position of the progressbar.")]
         public int Value
         {
-            get
-            {
-                if (_Value < 0)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return _Value;
-                }
-            }
+            get => _value < 0 ? 0 : _value;
             set
             {
                 if (value > Maximum)
                 {
                     value = Maximum;
                 }
-                _Value = value;
+                _value = value;
                 RenewCurrentValue();
                 ValueChanged?.Invoke(this);
                 Invalidate();
@@ -327,10 +285,7 @@ namespace MetroSet_UI.Controls
         public int Minimum { get; set; } = 0;
 
         [Browsable(false)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the minimum value of the progressbar.
@@ -385,19 +340,12 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Here we handle the current value.
         /// </summary>
-        public void RenewCurrentValue()
+        private void RenewCurrentValue()
         {
-            switch (Orientation)
-            {
-                case ProgressOrientation.Horizontal:
-                    CurrentValue = (int)Math.Round((double)(Value - Minimum) / (double)(Maximum - Minimum) * (double)(Width - 1));
-                    break;
-
-                case ProgressOrientation.Vertical:
-                    CurrentValue = Convert.ToInt32((double)((((double)Value) / ((double)Maximum)) * Height - 1));
-                    break;
-            }
-            
+            if (Orientation == ProgressOrientation.Horizontal)
+                _currentValue = (int)Math.Round((Value - Minimum) / (double)(Maximum - Minimum) * (Width - 1));
+            else
+                _currentValue = Convert.ToInt32(Value / (double)Maximum * Height - 1);
         }
 
         #endregion

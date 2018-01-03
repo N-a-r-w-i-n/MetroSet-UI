@@ -23,7 +23,6 @@
  */
 
 using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 using MetroSet_UI.Extensions;
 
 using System;
@@ -38,14 +37,14 @@ namespace MetroSet_UI.Forms
 
         #region Internal vars
 
-        private Size buttonSize;
-        private MetroDefaultSetButton okButton;
-        private MetroDefaultSetButton yesButton;
-        private MetroDefaultSetButton noButton;
-        private MetroDefaultSetButton cancelButton;
-        private MetroDefaultSetButton retryButton;
-        private MetroDefaultSetButton abortButton;
-        private MetroDefaultSetButton ignoreButton;
+        private Size _buttonSize;
+        private MetroDefaultSetButton _okButton;
+        private MetroDefaultSetButton _yesButton;
+        private MetroDefaultSetButton _noButton;
+        private MetroDefaultSetButton _cancelButton;
+        private MetroDefaultSetButton _retryButton;
+        private MetroDefaultSetButton _abortButton;
+        private MetroDefaultSetButton _ignoreButton;
 
         #endregion
 
@@ -105,12 +104,12 @@ namespace MetroSet_UI.Forms
         /// <summary>
         /// The Constructor.
         /// </summary>
-        public MetroSetMessageBox() : base()
+        private MetroSetMessageBox() : base()
         {
             Font = MetroSetFonts.Regular(9.5f);
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
-            buttonSize = new Size(95, 32);
+            _buttonSize = new Size(95, 32);
             ApplyTheme();
             EvaluateControls();
             AddControls();
@@ -142,13 +141,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void AddControls()
         {
-            Controls.Add(okButton);
-            Controls.Add(yesButton);
-            Controls.Add(noButton);
-            Controls.Add(cancelButton);
-            Controls.Add(retryButton);
-            Controls.Add(abortButton);
-            Controls.Add(ignoreButton);
+            Controls.Add(_okButton);
+            Controls.Add(_yesButton);
+            Controls.Add(_noButton);
+            Controls.Add(_cancelButton);
+            Controls.Add(_retryButton);
+            Controls.Add(_abortButton);
+            Controls.Add(_ignoreButton);
         }
 
         /// <summary>
@@ -156,13 +155,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateRetryButton()
         {
-            retryButton = new MetroDefaultSetButton
+            _retryButton = new MetroDefaultSetButton
             {
                 Text = "Retry",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
             };
-            retryButton.Click += RetryButton_Click;
+            _retryButton.Click += RetryButton_Click;
         }
 
         /// <summary>
@@ -170,13 +169,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateCancelButton()
         {
-            cancelButton = new MetroDefaultSetButton
+            _cancelButton = new MetroDefaultSetButton
             {
                 Text = "Cancel",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
             };
-            cancelButton.Click += CancelButton_Click;
+            _cancelButton.Click += CancelButton_Click;
         }
 
         /// <summary>
@@ -184,13 +183,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateNoButton()
         {
-            noButton = new MetroDefaultSetButton
+            _noButton = new MetroDefaultSetButton
             {
                 Text = "No",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
             };
-            noButton.Click += NoButton_Click;
+            _noButton.Click += NoButton_Click;
         }
 
         /// <summary>
@@ -198,13 +197,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateYesButton()
         {
-            yesButton = new MetroDefaultSetButton
+            _yesButton = new MetroDefaultSetButton
             {
                 Text = "Yes",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
             };
-            yesButton.Click += YesButton_Click;
+            _yesButton.Click += YesButton_Click;
         }
 
         /// <summary>
@@ -212,13 +211,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateOkeyButton()
         {
-            okButton = new MetroDefaultSetButton
+            _okButton = new MetroDefaultSetButton
             {
                 Text = "Ok",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
             };
-            okButton.Click += OkButton_Click;
+            _okButton.Click += OkButton_Click;
         }
 
         /// <summary>
@@ -226,14 +225,14 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateAbortButton()
         {
-            abortButton = new MetroDefaultSetButton
+            _abortButton = new MetroDefaultSetButton
             {
                 Text = "Abort",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
 
             };
-            abortButton.Click += AbortButton_Click;
+            _abortButton.Click += AbortButton_Click;
         }
 
         /// <summary>
@@ -241,13 +240,13 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateIgnoreButton()
         {
-            ignoreButton = new MetroDefaultSetButton
+            _ignoreButton = new MetroDefaultSetButton
             {
                 Text = "Ignore",
-                Size = buttonSize,
+                Size = _buttonSize,
                 Visible = false
             };
-            ignoreButton.Click += IgnoreButton_Click;
+            _ignoreButton.Click += IgnoreButton_Click;
         }
 
         #endregion
@@ -371,7 +370,7 @@ namespace MetroSet_UI.Forms
         /// <returns>The MessageBox with the content and title and provided button(s) and type.</returns>
         public static DialogResult Show(MetroSetForm form, string content, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
-            MetroSetMessageBox msgBox = new MetroSetMessageBox
+            var msgBox = new MetroSetMessageBox
             {
                 OwnerForm = form ?? throw new ArgumentNullException("MetroSetMessageBox requires a form, use 'this' as the first parameter in the place you use MetroSetMessageBox."),
                 Content = content,
@@ -388,7 +387,7 @@ namespace MetroSet_UI.Forms
                 ForegroundColor = Color.Black;
             }
 
-            else if (icon == MessageBoxIcon.Information) 
+            else if (icon == MessageBoxIcon.Information)
             {
                 BackgroundColor = Color.FromArgb(60, 180, 218);
                 BorderColor = Color.FromArgb(60, 180, 218);
@@ -415,7 +414,7 @@ namespace MetroSet_UI.Forms
                 BorderColor = Color.FromArgb(65, 177, 225);
                 ForegroundColor = Color.Black;
             }
-            
+
             return msgBox.ShowDialog();
         }
 
@@ -426,58 +425,58 @@ namespace MetroSet_UI.Forms
         protected new DialogResult ShowDialog()
         {
 
-            int buttonHeight = Height - 45;
-            int firstButton = (Width - buttonSize.Width) - 10;
-            int secondButoon = (Width - (buttonSize.Width * 2)) - 20;
+            var buttonHeight = Height - 45;
+            var firstButton = (Width - _buttonSize.Width) - 10;
+            var secondButoon = (Width - (_buttonSize.Width * 2)) - 20;
             switch (Buttons)
             {
                 case MessageBoxButtons.OK:
-                    okButton.Location = new Point(firstButton, buttonHeight);
-                    okButton.Visible = true;
+                    _okButton.Location = new Point(firstButton, buttonHeight);
+                    _okButton.Visible = true;
                     break;
 
                 case MessageBoxButtons.OKCancel:
-                    okButton.Location = new Point(secondButoon, buttonHeight);
-                    okButton.Visible = true;
-                    cancelButton.Location = new Point(firstButton, buttonHeight);
-                    cancelButton.Visible = true;
+                    _okButton.Location = new Point(secondButoon, buttonHeight);
+                    _okButton.Visible = true;
+                    _cancelButton.Location = new Point(firstButton, buttonHeight);
+                    _cancelButton.Visible = true;
                     break;
 
                 case MessageBoxButtons.YesNo:
-                    yesButton.Location = new Point(secondButoon, buttonHeight);
-                    yesButton.Visible = true;
-                    noButton.Location = new Point(firstButton, buttonHeight);
-                    noButton.Visible = true;
+                    _yesButton.Location = new Point(secondButoon, buttonHeight);
+                    _yesButton.Visible = true;
+                    _noButton.Location = new Point(firstButton, buttonHeight);
+                    _noButton.Visible = true;
                     break;
 
                 case MessageBoxButtons.YesNoCancel:
-                    yesButton.Location = new Point((Width - (buttonSize.Width * 3)) - 30, buttonHeight);
-                    yesButton.Visible = true;
-                    noButton.Location = new Point(secondButoon, buttonHeight);
-                    noButton.Visible = true;
-                    cancelButton.Location = new Point(firstButton, buttonHeight);
-                    cancelButton.Visible = true;
+                    _yesButton.Location = new Point((Width - (_buttonSize.Width * 3)) - 30, buttonHeight);
+                    _yesButton.Visible = true;
+                    _noButton.Location = new Point(secondButoon, buttonHeight);
+                    _noButton.Visible = true;
+                    _cancelButton.Location = new Point(firstButton, buttonHeight);
+                    _cancelButton.Visible = true;
                     break;
 
                 case MessageBoxButtons.RetryCancel:
-                    retryButton.Location = new Point(secondButoon, buttonHeight);
-                    retryButton.Visible = true;
-                    cancelButton.Location = new Point(firstButton, buttonHeight);
-                    cancelButton.Visible = true;
+                    _retryButton.Location = new Point(secondButoon, buttonHeight);
+                    _retryButton.Visible = true;
+                    _cancelButton.Location = new Point(firstButton, buttonHeight);
+                    _cancelButton.Visible = true;
                     break;
 
                 case MessageBoxButtons.AbortRetryIgnore:
-                    abortButton.Location = new Point((Width - (buttonSize.Width * 3)) - 30, buttonHeight);
-                    abortButton.Visible = true;
-                    retryButton.Location = new Point(secondButoon, buttonHeight);
-                    retryButton.Visible = true;
-                    ignoreButton.Location = new Point(firstButton, buttonHeight);
-                    ignoreButton.Visible = true;
+                    _abortButton.Location = new Point((Width - (_buttonSize.Width * 3)) - 30, buttonHeight);
+                    _abortButton.Visible = true;
+                    _retryButton.Location = new Point(secondButoon, buttonHeight);
+                    _retryButton.Visible = true;
+                    _ignoreButton.Location = new Point(firstButton, buttonHeight);
+                    _ignoreButton.Visible = true;
                     break;
 
                 default:
-                    okButton.Location = new Point(firstButton, buttonHeight);
-                    okButton.Visible = true;
+                    _okButton.Location = new Point(firstButton, buttonHeight);
+                    _okButton.Visible = true;
                     break;
             }
             return base.ShowDialog();
@@ -489,21 +488,21 @@ namespace MetroSet_UI.Forms
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            Rectangle rect = new Rectangle(0, ((OwnerForm.Height - (OwnerForm.Height / 2)) / 250), OwnerForm.Width - 3, (OwnerForm.Height / 3) - 3);
+            var rect = new Rectangle(0, ((OwnerForm.Height - (OwnerForm.Height / 2)) / 250), OwnerForm.Width - 3, (OwnerForm.Height / 3) - 3);
 
-            using (SolidBrush BG = new SolidBrush(BackgroundColor))
+            using (var bg = new SolidBrush(BackgroundColor))
             {
-                using (SolidBrush CTNT = new SolidBrush(ForegroundColor))
+                using (var CTNT = new SolidBrush(ForegroundColor))
                 {
-                    using (Pen P = new Pen(BorderColor))
+                    using (var p = new Pen(BorderColor))
                     {
-                        G.FillRectangle(BG, rect);
+                        G.FillRectangle(bg, rect);
                         G.DrawString(Caption, Font, CTNT, new PointF(rect.X + 10, rect.Y + 10));
                         G.DrawString(Content, Font, CTNT, new PointF(rect.X + 10, rect.Y + 50));
-                        G.DrawRectangle(P, rect);
+                        G.DrawRectangle(p, rect);
                     }
                 }
             }

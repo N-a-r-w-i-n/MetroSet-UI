@@ -26,7 +26,6 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -55,13 +54,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -103,10 +99,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
+            get => _styleManager;
             set
             {
-                _StyleManager = value;
+                _styleManager = value;
                 Invalidate();
             }
         }
@@ -115,16 +111,16 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Methods _mth;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private MouseMode State;
-        private Style style;
-        private StyleManager _StyleManager;
+        private MouseMode _state;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -137,12 +133,11 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw | ControlStyles.UserPaint |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             BackColor = Color.Transparent;
             Font = MetroSetFonts.Light(10);
-            utl = new Utilites();
-            mth = new Methods();
+            _utl = new Utilites();
+            _mth = new Methods();
             ApplyTheme();
         }
 
@@ -174,7 +169,7 @@ namespace MetroSet_UI.Controls
                 base.Enabled = value;
                 if (value == false)
                 {
-                    State = MouseMode.Disabled;
+                    _state = MouseMode.Disabled;
                 }
                 Invalidate();
             }
@@ -312,9 +307,9 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            Rectangle r = default(Rectangle);
-            Rectangle badge = default(Rectangle);
+            var G = e.Graphics;
+            Rectangle r;
+            Rectangle badge;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             switch (BadgeAlignment)
@@ -338,24 +333,26 @@ namespace MetroSet_UI.Controls
                     r = new Rectangle(0, 0, Width - 19, Height - 18);
                     badge = new Rectangle(Width - 35, Height - 35, 29, 29);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
-            switch (State)
+            switch (_state)
             {
                 case MouseMode.Normal:
 
-                    using (SolidBrush BG = new SolidBrush(NormalColor))
-                    using (Pen P = new Pen(NormalBorderColor))
-                    using (SolidBrush TB = new SolidBrush(NormalTextColor))
-                    using (SolidBrush bdgBrush = new SolidBrush(NormalBadgeColor))
-                    using (SolidBrush bdgtxtBrush = new SolidBrush(NormalBadgeTextColor))
+                    using (var bg = new SolidBrush(NormalColor))
+                    using (var p = new Pen(NormalBorderColor))
+                    using (var tb = new SolidBrush(NormalTextColor))
+                    using (var bdgBrush = new SolidBrush(NormalBadgeColor))
+                    using (var bdgtxtBrush = new SolidBrush(NormalBadgeTextColor))
                     {
-                        G.FillRectangle(BG, r);
-                        G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        G.FillRectangle(bg, r);
+                        G.DrawRectangle(p, r);
+                        G.DrawString(Text, Font, tb, r, _mth.SetPosition());
                         SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
-                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, _mth.SetPosition());
                     }
 
                     break;
@@ -363,54 +360,54 @@ namespace MetroSet_UI.Controls
                 case MouseMode.Hovered:
 
                     Cursor = Cursors.Hand;
-                    using (SolidBrush BG = new SolidBrush(HoverColor))
-                    using (Pen P = new Pen(HoverBorderColor))
-                    using (SolidBrush TB = new SolidBrush(HoverTextColor))
-                    using (SolidBrush bdgBrush = new SolidBrush(HoverBadgeColor))
-                    using (SolidBrush bdgtxtBrush = new SolidBrush(HoverBadgeTextColor))
+                    using (var bg = new SolidBrush(HoverColor))
+                    using (var p = new Pen(HoverBorderColor))
+                    using (var tb = new SolidBrush(HoverTextColor))
+                    using (var bdgBrush = new SolidBrush(HoverBadgeColor))
+                    using (var bdgtxtBrush = new SolidBrush(HoverBadgeTextColor))
                     {
-                        G.FillRectangle(BG, r);
-                        G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        G.FillRectangle(bg, r);
+                        G.DrawRectangle(p, r);
+                        G.DrawString(Text, Font, tb, r, _mth.SetPosition());
                         SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
-                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, _mth.SetPosition());
                     }
 
                     break;
 
                 case MouseMode.Pushed:
 
-                    using (SolidBrush BG = new SolidBrush(PressColor))
-                    using (Pen P = new Pen(PressBorderColor))
-                    using (SolidBrush TB = new SolidBrush(PressTextColor))
-                    using (SolidBrush bdgBrush = new SolidBrush(PressBadgeColor))
-                    using (SolidBrush bdgtxtBrush = new SolidBrush(PressBadgeTextColor))
+                    using (var bg = new SolidBrush(PressColor))
+                    using (var p = new Pen(PressBorderColor))
+                    using (var tb = new SolidBrush(PressTextColor))
+                    using (var bdgBrush = new SolidBrush(PressBadgeColor))
+                    using (var bdgtxtBrush = new SolidBrush(PressBadgeTextColor))
                     {
-                        G.FillRectangle(BG, r);
-                        G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        G.FillRectangle(bg, r);
+                        G.DrawRectangle(p, r);
+                        G.DrawString(Text, Font, tb, r, _mth.SetPosition());
                         SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
-                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, _mth.SetPosition());
                     }
 
                     break;
 
                 case MouseMode.Disabled:
 
-                    using (SolidBrush BG = new SolidBrush(DisabledBackColor))
-                    using (Pen P = new Pen(DisabledBorderColor))
-                    using (SolidBrush TB = new SolidBrush(DisabledForeColor))
-                    using (SolidBrush bdgBrush = new SolidBrush(PressBadgeColor))
-                    using (SolidBrush bdgtxtBrush = new SolidBrush(PressBadgeTextColor))
+                    using (var bg = new SolidBrush(DisabledBackColor))
+                    using (var p = new Pen(DisabledBorderColor))
+                    using (var tb = new SolidBrush(DisabledForeColor))
+                    using (var bdgBrush = new SolidBrush(PressBadgeColor))
+                    using (var bdgtxtBrush = new SolidBrush(PressBadgeTextColor))
                     {
-                        G.FillRectangle(BG, r);
-                        G.DrawRectangle(P, r);
-                        G.DrawString(Text, Font, TB, r, mth.SetPosition());
+                        G.FillRectangle(bg, r);
+                        G.DrawRectangle(p, r);
+                        G.DrawString(Text, Font, tb, r, _mth.SetPosition());
                         SmoothingType(G);
                         G.FillEllipse(bdgBrush, badge);
-                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, mth.SetPosition());
+                        G.DrawString(BadgeText, Font, bdgtxtBrush, badge, _mth.SetPosition());
                     }
 
                     break;
@@ -425,8 +422,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        /// <param name="path">The path of the custom theme.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -480,86 +476,73 @@ namespace MetroSet_UI.Controls
                     if (StyleManager != null)
                         foreach (var varkey in StyleManager.BadgeDictionary)
                         {
-                            if ((varkey.Key == null) || varkey.Key == null)
+                            if (varkey.Key == null)
                             {
                                 return;
                             }
 
-                            if (varkey.Key == "NormalColor")
+                            switch (varkey.Key)
                             {
-                                NormalColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "NormalBorderColor")
-                            {
-                                NormalBorderColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "NormalTextColor")
-                            {
-                                NormalTextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "HoverColor")
-                            {
-                                HoverColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "HoverBorderColor")
-                            {
-                                HoverBorderColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "HoverTextColor")
-                            {
-                                HoverTextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "PressColor")
-                            {
-                                PressColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "PressBorderColor")
-                            {
-                                PressBorderColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "PressTextColor")
-                            {
-                                PressTextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "NormalBadgeColor")
-                            {
-                                NormalBadgeColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "NormalBadgeTextColor")
-                            {
-                                NormalBadgeTextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "HoverBadgeColor")
-                            {
-                                HoverBadgeColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "HoverBadgeTextColor")
-                            {
-                                HoverBadgeTextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "PressBadgeColor")
-                            {
-                                PressBadgeColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "PressBadgeTextColor")
-                            {
-                                PressBadgeTextColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "DisabledBackColor")
-                            {
-                                DisabledBackColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "DisabledBorderColor")
-                            {
-                                DisabledBorderColor = utl.HexColor((string)varkey.Value);
-                            }
-                            else if (varkey.Key == "DisabledForeColor")
-                            {
-                                DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                case "NormalColor":
+                                    NormalColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "NormalBorderColor":
+                                    NormalBorderColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "NormalTextColor":
+                                    NormalTextColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "HoverColor":
+                                    HoverColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "HoverBorderColor":
+                                    HoverBorderColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "HoverTextColor":
+                                    HoverTextColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "PressColor":
+                                    PressColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "PressBorderColor":
+                                    PressBorderColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "PressTextColor":
+                                    PressTextColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "NormalBadgeColor":
+                                    NormalBadgeColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "NormalBadgeTextColor":
+                                    NormalBadgeTextColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "HoverBadgeColor":
+                                    HoverBadgeColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "HoverBadgeTextColor":
+                                    HoverBadgeTextColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "PressBadgeColor":
+                                    PressBadgeColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "PressBadgeTextColor":
+                                    PressBadgeTextColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "DisabledBackColor":
+                                    DisabledBackColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "DisabledBorderColor":
+                                    DisabledBorderColor = _utl.HexColor((string)varkey.Value);
+                                    break;
+                                case "DisabledForeColor":
+                                    DisabledForeColor = _utl.HexColor((string)varkey.Value);
+                                    break;
                             }
                         }
                     Invalidate();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
@@ -574,7 +557,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -585,7 +568,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            State = MouseMode.Pushed;
+            _state = MouseMode.Pushed;
             Invalidate();
         }
 
@@ -596,7 +579,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -607,7 +590,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseEnter(e);
-            State = MouseMode.Normal;
+            _state = MouseMode.Normal;
             Invalidate();
         }
 
@@ -620,7 +603,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         /// <param name="e">Graphics to Set the effect.</param>
         /// <param name="state">state of smoothingmode.</param>
-        public void SmoothingType(Graphics e, SmoothingMode state = SmoothingMode.AntiAlias)
+        private void SmoothingType(Graphics e, SmoothingMode state = SmoothingMode.AntiAlias)
         {
             e.SmoothingMode = state;
         }

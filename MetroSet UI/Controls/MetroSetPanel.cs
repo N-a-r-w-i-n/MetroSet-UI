@@ -28,7 +28,7 @@ using MetroSet_UI.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Runtime.InteropServices; 
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
@@ -47,13 +47,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -82,8 +79,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -102,15 +99,14 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -124,11 +120,9 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             BorderStyle = BorderStyle.None;
             UpdateStyles();
-            mth = new Methods();
-            utl = new Utilites();
+            _utl = new Utilites();
             ApplyTheme();
         }
 
@@ -140,7 +134,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -167,11 +161,11 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroundColor = utl.HexColor((string)varkey.Value);
+                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -180,20 +174,14 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
-            try
-            {
-                Enabled = Enabled;
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace);
-            }
+            Invalidate();
         }
 
         #endregion Theme Changing
@@ -202,15 +190,15 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            Rectangle r = new Rectangle(BorderThickness, BorderThickness, Width - ((BorderThickness * 2) + 1), Height - ((BorderThickness * 2) + 1));
+            var G = e.Graphics;
+            var r = new Rectangle(BorderThickness, BorderThickness, Width - (BorderThickness * 2 + 1), Height - ((BorderThickness * 2) + 1));
 
-            using (SolidBrush BG = new SolidBrush(BackgroundColor))
+            using (var bg = new SolidBrush(BackgroundColor))
             {
-                using (Pen P = new Pen(BorderColor , BorderThickness))
+                using (var p = new Pen(BorderColor, BorderThickness))
                 {
-                    G.FillRectangle(BG, r);
-                    G.DrawRectangle(P, r);
+                    G.FillRectangle(bg, r);
+                    G.DrawRectangle(p, r);
                 }
             }
 
@@ -224,23 +212,20 @@ namespace MetroSet_UI.Controls
         /// Gets the background color.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets the foreground color.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color ForeColor { get { return Color.Transparent; } }
+        public override Color ForeColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the border style.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new BorderStyle BorderStyle = BorderStyle.None;
-               
+
         /// <summary>
         /// Gets or sets the border thickness the control.
         /// </summary>

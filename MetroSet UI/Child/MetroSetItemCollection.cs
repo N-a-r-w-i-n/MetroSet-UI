@@ -44,7 +44,7 @@ namespace MetroSet_UI.Child
         /// <param name="items">An IEnumerable of objects to add to the list.</param>
         public void AddRange(IEnumerable<object> items)
         {
-            foreach (object item in items)
+            foreach (var item in items)
             {
                 Add(item);
             }
@@ -57,7 +57,7 @@ namespace MetroSet_UI.Child
         protected new void Add(object item)
         {
             base.Add(item);
-            ItemUpdated(this, null);
+            ItemUpdated?.Invoke(this, null);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace MetroSet_UI.Child
         protected override void InsertItem(int index, object item)
         {
             base.InsertItem(index, item);
-            ItemUpdated(this, null);
+            ItemUpdated?.Invoke(this, null);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace MetroSet_UI.Child
         protected override void RemoveItem(int value)
         {
             base.RemoveItem(value);
-            ItemUpdated(this, null);
+            ItemUpdated?.Invoke(this, null);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace MetroSet_UI.Child
         protected new void Clear()
         {
             base.Clear();
-            ItemUpdated(this, null);
+            ItemUpdated?.Invoke(this, null);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace MetroSet_UI.Child
         protected override void ClearItems()
         {
             base.ClearItems();
-            ItemUpdated(this, null);
+            ItemUpdated?.Invoke(this, null);
         }
     }
 }

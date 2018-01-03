@@ -33,57 +33,51 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetRichTextBoxActionList : DesignerActionList
     {
-        private readonly MetroSetRichTextBox metroSetRichTextBox;
+        private readonly MetroSetRichTextBox _metroSetRichTextBox;
 
         public MetroSetRichTextBoxActionList(IComponent component) : base(component)
         {
-            metroSetRichTextBox = (MetroSetRichTextBox)component;
+            _metroSetRichTextBox = (MetroSetRichTextBox)component;
         }
 
         public Style Style
         {
-            get { return metroSetRichTextBox.Style; }
-            set { metroSetRichTextBox.Style = value; }
+            get => _metroSetRichTextBox.Style;
+            set => _metroSetRichTextBox.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetRichTextBox.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetRichTextBox.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetRichTextBox.ThemeName; }
-        }
+        public string ThemeName => _metroSetRichTextBox.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetRichTextBox.StyleManager; }
-            set { metroSetRichTextBox.StyleManager = value; }
+            get => _metroSetRichTextBox.StyleManager;
+            set => _metroSetRichTextBox.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetRichTextBox.Text; }
-            set { metroSetRichTextBox.Text = value; }
+            get => _metroSetRichTextBox.Text;
+            set => _metroSetRichTextBox.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetRichTextBox.Font; }
-            set { metroSetRichTextBox.Font = value; }
+            get => _metroSetRichTextBox.Font;
+            set => _metroSetRichTextBox.Font = value;
         }
 
         public bool ReadOnly
         {
-            get { return metroSetRichTextBox.ReadOnly; }
-            set { metroSetRichTextBox.ReadOnly = value; }
+            get => _metroSetRichTextBox.ReadOnly;
+            set => _metroSetRichTextBox.ReadOnly = value;
         }
 
         public ContextMenuStrip ContextMenuStrip
         {
-            get { return metroSetRichTextBox.ContextMenuStrip; }
-            set { metroSetRichTextBox.ContextMenuStrip = value; }
+            get => _metroSetRichTextBox.ContextMenuStrip;
+            set => _metroSetRichTextBox.ContextMenuStrip = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

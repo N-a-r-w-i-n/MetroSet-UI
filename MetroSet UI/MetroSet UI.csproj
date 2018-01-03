@@ -197,7 +197,7 @@
     <Compile Include="Enums\TextAlign.cs" />
     <Compile Include="Extensions\MetroSetFonts.cs" />
     <Compile Include="Extensions\Methods.cs" />
-    <Compile Include="Extensions\MouseSates.cs" />
+    <Compile Include="Enums\MouseSates.cs" />
     <Compile Include="Extensions\Utilites.cs" />
     <Compile Include="Interfaces\iControl.cs" />
     <Compile Include="Interfaces\iForm.cs" />

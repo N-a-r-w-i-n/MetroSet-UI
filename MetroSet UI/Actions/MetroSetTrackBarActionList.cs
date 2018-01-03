@@ -26,57 +26,50 @@ using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Drawing;
 
 namespace MetroSet_UI.Tasks
 {
     public class MetroSetTrackBarActionList : DesignerActionList
     {
-        private readonly MetroSetTrackBar metroSetTrackBar;
+        private readonly MetroSetTrackBar _metroSetTrackBar;
 
         public MetroSetTrackBarActionList(IComponent component) : base(component)
         {
-            metroSetTrackBar = (MetroSetTrackBar)component;
+            _metroSetTrackBar = (MetroSetTrackBar)component;
         }
 
         public Style Style
         {
-            get { return metroSetTrackBar.Style; }
-            set { metroSetTrackBar.Style = value; }
+            get => _metroSetTrackBar.Style;
+            set => _metroSetTrackBar.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetTrackBar.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetTrackBar.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetTrackBar.ThemeName; }
-        }
+        public string ThemeName => _metroSetTrackBar.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetTrackBar.StyleManager; }
-            set { metroSetTrackBar.StyleManager = value; }
+            get => _metroSetTrackBar.StyleManager;
+            set => _metroSetTrackBar.StyleManager = value;
         }
 
         public int Maximum
         {
-            get { return metroSetTrackBar.Maximum; }
-            set { metroSetTrackBar.Maximum = value; }
+            get => _metroSetTrackBar.Maximum;
+            set => _metroSetTrackBar.Maximum = value;
         }
 
         public int Minimum
         {
-            get { return metroSetTrackBar.Minimum; }
-            set { metroSetTrackBar.Minimum = value; }
+            get => _metroSetTrackBar.Minimum;
+            set => _metroSetTrackBar.Minimum = value;
         }
 
         public int Value
         {
-            get { return metroSetTrackBar.Value; }
-            set { metroSetTrackBar.Value = value; }
+            get => _metroSetTrackBar.Value;
+            set => _metroSetTrackBar.Value = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

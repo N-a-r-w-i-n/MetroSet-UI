@@ -32,45 +32,39 @@ namespace MetroSet_UI.Tasks
 {
     public class MetroSetDefaultButtonActionList : DesignerActionList
     {
-        private readonly MetroDefaultSetButton metroSetButton;
+        private readonly MetroDefaultSetButton _metroSetButton;
 
         public MetroSetDefaultButtonActionList(IComponent component) : base(component)
         {
-            metroSetButton = (MetroDefaultSetButton)component;
+            _metroSetButton = (MetroDefaultSetButton)component;
         }
 
         public Style Style
         {
-            get { return metroSetButton.Style; }
-            set { metroSetButton.Style = value; }
+            get => _metroSetButton.Style;
+            set => _metroSetButton.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetButton.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetButton.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetButton.ThemeName; }
-        }
+        public string ThemeName => _metroSetButton.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetButton.StyleManager; }
-            set { metroSetButton.StyleManager = value; }
+            get => _metroSetButton.StyleManager;
+            set => _metroSetButton.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetButton.Text; }
-            set { metroSetButton.Text = value; }
+            get => _metroSetButton.Text;
+            set => _metroSetButton.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetButton.Font; }
-            set { metroSetButton.Font = value; }
+            get => _metroSetButton.Font;
+            set => _metroSetButton.Font = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

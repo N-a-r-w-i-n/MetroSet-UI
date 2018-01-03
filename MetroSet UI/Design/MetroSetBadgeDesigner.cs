@@ -30,7 +30,7 @@ namespace MetroSet_UI.Design
 {
     internal class MetroSetBadgeDesigner : ControlDesigner
     {
-        private readonly string[] _PropertiesToRemove =
+        private readonly string[] _propertiesToRemove =
         {
             "BackgroundImage", "BackgroundImageLayout", "ForeColor",
             "RightToLeft","ImeMode"
@@ -38,27 +38,16 @@ namespace MetroSet_UI.Design
 
         protected override void PostFilterProperties(System.Collections.IDictionary properties)
         {
-            foreach (var property in _PropertiesToRemove)
+            foreach (var property in _propertiesToRemove)
             {
                 properties.Remove(property);
             }
             base.PostFilterProperties(properties);
         }
 
-        private DesignerActionListCollection actionListCollection;
+        private DesignerActionListCollection _actionListCollection;
 
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
-                if (actionListCollection == null)
-                {
-                    actionListCollection = new DesignerActionListCollection();
-                    actionListCollection.Add(new MetroSetBadgeActionList(Component));
-                }
-
-                return actionListCollection;
-            }
-        }
+        public override DesignerActionListCollection ActionLists => _actionListCollection ?? (_actionListCollection =
+                                                                        new DesignerActionListCollection { new MetroSetBadgeActionList(Component) });
     }
 }

@@ -32,51 +32,45 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetCheckBoxActionList : DesignerActionList
     {
-        private readonly MetroSetCheckBox metroSetCheckBox;
+        private readonly MetroSetCheckBox _metroSetCheckBox;
 
         public MetroSetCheckBoxActionList(IComponent component) : base(component)
         {
-            metroSetCheckBox = (MetroSetCheckBox)component;
+            _metroSetCheckBox = (MetroSetCheckBox)component;
         }
 
         public Style Style
         {
-            get { return metroSetCheckBox.Style; }
-            set { metroSetCheckBox.Style = value; }
+            get => _metroSetCheckBox.Style;
+            set => _metroSetCheckBox.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetCheckBox.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetCheckBox.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetCheckBox.ThemeName; }
-        }
+        public string ThemeName => _metroSetCheckBox.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetCheckBox.StyleManager; }
-            set { metroSetCheckBox.StyleManager = value; }
+            get => _metroSetCheckBox.StyleManager;
+            set => _metroSetCheckBox.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetCheckBox.Text; }
-            set { metroSetCheckBox.Text = value; }
+            get => _metroSetCheckBox.Text;
+            set => _metroSetCheckBox.Text = value;
         }
 
         public bool Checked
         {
-            get { return metroSetCheckBox.Checked; }
-            set { metroSetCheckBox.Checked = value; }
+            get => _metroSetCheckBox.Checked;
+            set => _metroSetCheckBox.Checked = value;
         }
 
         public SignStyle SignStyle
         {
-            get { return metroSetCheckBox.SignStyle; }
-            set { metroSetCheckBox.SignStyle = value; }
+            get => _metroSetCheckBox.SignStyle;
+            set => _metroSetCheckBox.SignStyle = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

@@ -24,12 +24,9 @@
 
 using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
 
@@ -37,87 +34,72 @@ namespace MetroSet_UI.Tasks
 {
     class MetroSetLinkActionList : DesignerActionList
     {
-        private readonly MetroSetLink metroSetLink;
+        private readonly MetroSetLink _metroSetLink;
 
         public MetroSetLinkActionList(IComponent component) : base(component)
         {
-            metroSetLink = (MetroSetLink)component;
+            _metroSetLink = (MetroSetLink)component;
         }
 
         public Style Style
         {
-            get { return metroSetLink.Style; }
-            set { metroSetLink.Style = value; }
+            get => _metroSetLink.Style;
+            set => _metroSetLink.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetLink.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetLink.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetLink.ThemeName; }
-        }
+        public string ThemeName => _metroSetLink.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetLink.StyleManager; }
-            set { metroSetLink.StyleManager = value; }
+            get => _metroSetLink.StyleManager;
+            set => _metroSetLink.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetLink.Text; }
-            set { metroSetLink.Text = value; }
+            get => _metroSetLink.Text;
+            set => _metroSetLink.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetLink.Font; }
-            set { metroSetLink.Font = value; }
+            get => _metroSetLink.Font;
+            set => _metroSetLink.Font = value;
         }
 
         public LinkBehavior LinkBehaviour
         {
-            get
-            {
-                return metroSetLink.LinkBehavior;
-            }
-            set
-            {
-                metroSetLink.LinkBehavior = value;
-            }
+            get => _metroSetLink.LinkBehavior;
+            set => _metroSetLink.LinkBehavior = value;
         }
-            
+
         public Color LinkColor
         {
-            get { return metroSetLink.LinkColor; }
-            set { metroSetLink.LinkColor = value; }
+            get => _metroSetLink.LinkColor;
+            set => _metroSetLink.LinkColor = value;
         }
 
         public Color ActiveLinkColor
         {
-            get { return metroSetLink.ActiveLinkColor; }
-            set { metroSetLink.ActiveLinkColor = value; }
+            get => _metroSetLink.ActiveLinkColor;
+            set => _metroSetLink.ActiveLinkColor = value;
         }
 
         public Color VisitedLinkColor
         {
-            get { return metroSetLink.VisitedLinkColor; }
-            set { metroSetLink.VisitedLinkColor = value; }
+            get => _metroSetLink.VisitedLinkColor;
+            set => _metroSetLink.VisitedLinkColor = value;
         }
 
         public bool LinkVisited
         {
-            get { return metroSetLink.LinkVisited; }
-            set { metroSetLink.LinkVisited = value; }
+            get => _metroSetLink.LinkVisited;
+            set => _metroSetLink.LinkVisited = value;
         }
 
-        public LinkCollection Links
-        {
-            get { return metroSetLink.Links; }
-        }
+        public LinkCollection Links => _metroSetLink.Links;
 
         public override DesignerActionItemCollection GetSortedActionItems()
         {
@@ -138,7 +120,7 @@ namespace MetroSet_UI.Tasks
             new DesignerActionPropertyItem("LinkColor", "LinkColor", "Appearance", "Gets or sets the color used when displaying a normal link."),
             new DesignerActionPropertyItem("ActiveLinkColor", "ActiveLinkColor", "Appearance", "Gets or sets the color used to display an active link."),
             new DesignerActionPropertyItem("VisitedLinkColor", "VisitedLinkColor", "Appearance", "Gets or sets the color used when displaying a link that that has been previously visited."),
-            
+
             new DesignerActionHeaderItem("Behaviour"),
             new DesignerActionPropertyItem("LinkBehaviour", "LinkBehaviour", "Behaviour", "Gets or sets a value that represents the behavior of a link."),
             new DesignerActionPropertyItem("Links", "Links", "Behaviour", "Gets the collection of links contained within the LinkLabel.")

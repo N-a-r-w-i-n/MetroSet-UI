@@ -37,7 +37,7 @@ using System.Windows.Forms;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true)] 
+    [ToolboxItem(true)]
     [ToolboxBitmap(typeof(MetroSetListBox), "Bitmaps.ListBox.bmp")]
     [Designer(typeof(MetroSetListBoxDesigner))]
     [DefaultProperty("Items")]
@@ -55,13 +55,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;                
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -80,7 +77,7 @@ namespace MetroSet_UI.Controls
                         ApplyTheme();
                         break;
                 }
-                SVS.Style = value;
+                _svs.Style = value;
                 Invalidate();
             }
         }
@@ -91,10 +88,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
+            get => _styleManager;
             set
             {
-                _StyleManager = value;
+                _styleManager = value;
                 Invalidate();
             }
         }
@@ -115,27 +112,24 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
-
-        public MetroSetItemCollection _Items;
-        private List<object> _SelectedItems;
-        private List<object> _Indicates;
-        private bool _MultiSelect;
-        private int _SelectedIndex;
-        private string _SelectedItem;
-        private bool _ShowScrollBar;
-        private bool _MultiKeyDown;
-        private int _HoveredItem;
-
-        public MetroSetScrollBar SVS;
+        private Style _style;
+        private StyleManager _styleManager;
+        private MetroSetItemCollection _items;
+        private List<object> _selectedItems;
+        private List<object> _indicates;
+        private bool _multiSelect;
+        private int _selectedIndex;
+        private string _selectedItem;
+        private bool _showScrollBar;
+        private bool _multiKeyDown;
+        private int _hoveredItem;
+        private MetroSetScrollBar _svs;
 
         #endregion Internal Vars
 
@@ -150,12 +144,10 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             BackColor = Color.Transparent;
             Font = MetroSetFonts.SemiBold(10);
-            mth = new Methods();
-            utl = new Utilites();
+            _utl = new Utilites();
             ApplyTheme();
             SetDefaults();
         }
@@ -163,28 +155,28 @@ namespace MetroSet_UI.Controls
         private void SetDefaults()
         {
             SelectedIndex = -1;
-            _HoveredItem = -1;
-            _ShowScrollBar = false;
-            _Items = new MetroSetItemCollection();
-            _Items.ItemUpdated += InvalidateScroll;
-            _SelectedItems = new List<object>();
-            _Indicates = new List<object>();
+            _hoveredItem = -1;
+            _showScrollBar = false;
+            _items = new MetroSetItemCollection();
+            _items.ItemUpdated += InvalidateScroll;
+            _selectedItems = new List<object>();
+            _indicates = new List<object>();
             ItemHeight = 30;
-            _MultiKeyDown = false;
-            SVS = new MetroSetScrollBar()
+            _multiKeyDown = false;
+            _svs = new MetroSetScrollBar()
             {
                 Orientation = Enums.ScrollOrientate.Vertical,
                 Size = new Size(12, Height),
-                Maximum = _Items.Count * ItemHeight,
+                Maximum = _items.Count * ItemHeight,
                 SmallChange = 1,
                 LargeChange = 5
             };
-            SVS.Scroll += HandleScroll;
-            SVS.MouseDown += VS_MouseDown;
-            SVS.BackColor = Color.Transparent;
-            if (!Controls.Contains(SVS))
+            _svs.Scroll += HandleScroll;
+            _svs.MouseDown += VS_MouseDown;
+            _svs.BackColor = Color.Transparent;
+            if (!Controls.Contains(_svs))
             {
-                Controls.Add(SVS);
+                Controls.Add(_svs);
             }
         }
 
@@ -196,7 +188,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -238,39 +230,39 @@ namespace MetroSet_UI.Controls
                             {
 
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledBackColor":
-                                    DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                    DisabledBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "DisabledForeColor":
-                                    DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                    DisabledForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "HoveredItemBackColor":
-                                    HoveredItemBackColor = utl.HexColor((string)varkey.Value);
+                                    HoveredItemBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "HoveredItemColor":
-                                    HoveredItemColor = utl.HexColor((string)varkey.Value);
+                                    HoveredItemColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemBackColor":
-                                    SelectedItemBackColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemBackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedItemColor":
-                                    SelectedItemColor = utl.HexColor((string)varkey.Value);
+                                    SelectedItemColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -279,10 +271,12 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             Invalidate();
         }
@@ -293,65 +287,65 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            Rectangle mainRect = new Rectangle(0, 0, Width - (ShowBorder ? 1 : 0), Height - (ShowBorder ? 1 : 0));
+            var mainRect = new Rectangle(0, 0, Width - (ShowBorder ? 1 : 0), Height - (ShowBorder ? 1 : 0));
 
-            using (SolidBrush BG = new SolidBrush(Enabled ? BackColor : DisabledBackColor))
+            using (var bg = new SolidBrush(Enabled ? BackColor : DisabledBackColor))
             {
-                using (SolidBrush USIC = new SolidBrush(Enabled ? ForeColor : DisabledForeColor))
+                using (var usic = new SolidBrush(Enabled ? ForeColor : DisabledForeColor))
                 {
-                    using (SolidBrush SIC = new SolidBrush(SelectedItemColor))
+                    using (var sic = new SolidBrush(SelectedItemColor))
                     {
-                        using (SolidBrush SIBC = new SolidBrush(SelectedItemBackColor))
+                        using (var sibc = new SolidBrush(SelectedItemBackColor))
                         {
-                            using (SolidBrush HIC = new SolidBrush(HoveredItemColor))
+                            using (var hic = new SolidBrush(HoveredItemColor))
                             {
-                                using (SolidBrush HIBC = new SolidBrush(HoveredItemBackColor))
+                                using (var hibc = new SolidBrush(HoveredItemBackColor))
                                 {
-                                    using (StringFormat SF = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
+                                    using (var sf = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
                                     {
-                                        int FirstItem = (SVS.Value / ItemHeight) < 0 ? 0 : (SVS.Value / ItemHeight);
-                                        int LastItem = (SVS.Value / ItemHeight) + (Height / ItemHeight) + 1 > Items.Count ? Items.Count : (SVS.Value / ItemHeight) + (Height / ItemHeight) + 1;
+                                        var firstItem = _svs.Value / ItemHeight < 0 ? 0 : _svs.Value / ItemHeight;
+                                        var lastItem = _svs.Value / ItemHeight + Height / ItemHeight + 1 > Items.Count ? Items.Count : _svs.Value / ItemHeight + Height / ItemHeight + 1;
 
-                                        G.FillRectangle(BG, mainRect);
+                                        G.FillRectangle(bg, mainRect);
 
-                                        for (int i = FirstItem; i < LastItem; i++)
+                                        for (var i = firstItem; i < lastItem; i++)
                                         {
-                                            string itemText = (string)Items[i];
+                                            var itemText = (string)Items[i];
 
-                                            Rectangle rect = new Rectangle(5, ((i - FirstItem) * ItemHeight), Width - 1, ItemHeight);
-                                            G.DrawString(itemText, Font, USIC, rect, SF);
-                                            if (MultiSelect && _Indicates.Count != 0)
+                                            var rect = new Rectangle(5, (i - firstItem) * ItemHeight, Width - 1, ItemHeight);
+                                            G.DrawString(itemText, Font, usic, rect, sf);
+                                            if (MultiSelect && _indicates.Count != 0)
                                             {
-                                                if (i == _HoveredItem && !_Indicates.Contains(i))
+                                                if (i == _hoveredItem && !_indicates.Contains(i))
                                                 {
-                                                    G.FillRectangle(HIBC, rect);
-                                                    G.DrawString(itemText, Font, HIC, rect, SF);
+                                                    G.FillRectangle(hibc, rect);
+                                                    G.DrawString(itemText, Font, hic, rect, sf);
                                                 }
-                                                else if (_Indicates.Contains(i))
+                                                else if (_indicates.Contains(i))
                                                 {
-                                                    G.FillRectangle(SIBC, rect);
-                                                    G.DrawString(itemText, Font, SIC, rect, SF);
+                                                    G.FillRectangle(sibc, rect);
+                                                    G.DrawString(itemText, Font, sic, rect, sf);
                                                 }
                                             }
                                             else
                                             {
-                                                if (i == _HoveredItem && i != SelectedIndex)
+                                                if (i == _hoveredItem && i != SelectedIndex)
                                                 {
-                                                    G.FillRectangle(HIBC, rect);
-                                                    G.DrawString(itemText, Font, HIC, rect, SF);
+                                                    G.FillRectangle(hibc, rect);
+                                                    G.DrawString(itemText, Font, hic, rect, sf);
                                                 }
                                                 else if (i == SelectedIndex)
                                                 {
-                                                    G.FillRectangle(SIBC, rect);
-                                                    G.DrawString(itemText, Font, SIC, rect, SF);
+                                                    G.FillRectangle(sibc, rect);
+                                                    G.DrawString(itemText, Font, sic, rect, sf);
                                                 }
                                             }
 
                                         }
-                                        if(ShowBorder)
-                                        G.DrawRectangle(Pens.LightGray, mainRect);
+                                        if (ShowBorder)
+                                            G.DrawRectangle(Pens.LightGray, mainRect);
                                     }
                                 }
                             }
@@ -372,20 +366,14 @@ namespace MetroSet_UI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design", "System.Drawing.Design.UITypeEditor, System.Drawing")]
         [Category("MetroSet Framework"), Description("Gets the items of the ListBox.")]
-        public MetroSetItemCollection Items
-        {
-            get { return _Items; }
-        }
+        public MetroSetItemCollection Items => _items;
 
         /// <summary>
         /// Gets a collection containing the currently selected items in the ListBox.
         /// </summary>
         [Browsable(false)]
         [Category("MetroSet Framework"), Description("Gets a collection containing the currently selected items in the ListBox.")]
-        public List<object> SelectedItems
-        {
-            get { return _SelectedItems; }
-        }
+        public List<object> SelectedItems => _selectedItems;
 
         /// <summary>
         /// Gets or sets the height of an item in the ListBox.
@@ -399,10 +387,10 @@ namespace MetroSet_UI.Controls
         [Browsable(false), Category("MetroSet Framework"), Description("Gets or sets the currently selected item in the ListBox.")]
         public string SelectedItem
         {
-            get { return _SelectedItem; }
+            get => _selectedItem;
             set
             {
-                _SelectedItem = value;
+                _selectedItem = value;
                 Invalidate();
             }
         }
@@ -413,10 +401,10 @@ namespace MetroSet_UI.Controls
         [Browsable(false), Category("MetroSet Framework"), Description("Gets or sets the zero-based index of the currently selected item in a ListBox.")]
         public int SelectedIndex
         {
-            get { return _SelectedIndex; }
+            get => _selectedIndex;
             set
             {
-                _SelectedIndex = value;
+                _selectedIndex = value;
                 Invalidate();
             }
         }
@@ -427,13 +415,13 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the ListBox supports multiple rows.")]
         public bool MultiSelect
         {
-            get { return _MultiSelect; }
+            get => _multiSelect;
             set
             {
-                _MultiSelect = value;
+                _multiSelect = value;
 
-                if (_SelectedItems.Count > 1)
-                    _SelectedItems.RemoveRange(1, _SelectedItems.Count - 1);
+                if (_selectedItems.Count > 1)
+                    _selectedItems.RemoveRange(1, _selectedItems.Count - 1);
 
                 Invalidate();
             }
@@ -443,10 +431,7 @@ namespace MetroSet_UI.Controls
         /// Gets the the number of items stored in items collection.
         /// </summary>
         [Browsable(false)]
-        public int Count
-        {
-            get { return _Items.Count; }
-        }
+        public int Count => _items.Count;
 
         /// <summary>
         /// Gets or sets a value indicating whether the vertical scroll bar is shown or not.
@@ -454,11 +439,11 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the vertical scroll bar be shown or not.")]
         public bool ShowScrollBar
         {
-            get { return _ShowScrollBar; }
+            get => _showScrollBar;
             set
             {
-                _ShowScrollBar = value;
-                SVS.Visible = value ? true : false;
+                _showScrollBar = value;
+                _svs.Visible = value ? true : false;
                 Invalidate();
             }
         }
@@ -537,7 +522,7 @@ namespace MetroSet_UI.Controls
         /// <param name="newItem">The Item to be added into the collection.</param>
         public void AddItem(string newItem)
         {
-            _Items.Add(newItem);
+            _items.Add(newItem);
             InvalidateScroll(this, null);
         }
 
@@ -560,7 +545,7 @@ namespace MetroSet_UI.Controls
         /// <param name="index">The Index as the start point of removing.</param>
         public void RemoveItemAt(int index)
         {
-            _Items.RemoveAt(index);
+            _items.RemoveAt(index);
             InvalidateScroll(this, null);
         }
 
@@ -570,7 +555,7 @@ namespace MetroSet_UI.Controls
         /// <param name="item">The Item to remove in collection.</param>
         public void RemoveItem(string item)
         {
-            _Items.Remove(item);
+            _items.Remove(item);
             InvalidateScroll(this, null);
         }
 
@@ -581,7 +566,7 @@ namespace MetroSet_UI.Controls
         /// <returns>index of the item.</returns>
         public int IndexOf(string value)
         {
-            return _Items.IndexOf(value);
+            return _items.IndexOf(value);
         }
 
         /// <summary>
@@ -591,7 +576,7 @@ namespace MetroSet_UI.Controls
         /// <returns>Whether the collection cotnain a specific item.</returns>
         public bool Contains(object item)
         {
-            return _Items.Contains(item.ToString());
+            return _items.Contains(item.ToString());
         }
 
         /// <summary>
@@ -600,9 +585,9 @@ namespace MetroSet_UI.Controls
         /// <param name="itemsToRemove">Items to be removed in collection.</param>
         public void RemoveItems(string[] itemsToRemove)
         {
-            foreach (string item in itemsToRemove)
+            foreach (var item in itemsToRemove)
             {
-                _Items.Remove(item);
+                _items.Remove(item);
             }
             InvalidateScroll(this, null);
         }
@@ -612,15 +597,15 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Clear()
         {
-            for (int i = _Items.Count - 1; i >= 0; i += -1)
+            for (var i = _items.Count - 1; i >= 0; i += -1)
             {
-                _Items.RemoveAt(i);
+                _items.RemoveAt(i);
             }
             InvalidateScroll(this, null);
         }
 
         #endregion Methods
-                
+
         #region Events
 
         public event SelectedIndexChangedEventHandler SelectedIndexChanged;
@@ -647,19 +632,19 @@ namespace MetroSet_UI.Controls
             Focus();
             if (e.Button == MouseButtons.Left)
             {
-                int index = (SVS.Value / ItemHeight) + (e.Location.Y / ItemHeight);
+                var index = _svs.Value / ItemHeight + e.Location.Y / ItemHeight;
 
-                if (index >= 0 && index < _Items.Count)
+                if (index >= 0 && index < _items.Count)
                 {
-                    if (MultiSelect && _MultiKeyDown)
+                    if (MultiSelect && _multiKeyDown)
                     {
-                        _Indicates.Add(index);
-                        _SelectedItems.Add(Items[index]);
+                        _indicates.Add(index);
+                        _selectedItems.Add(Items[index]);
                     }
                     else
                     {
-                        _Indicates.Clear();
-                        _SelectedItems.Clear();
+                        _indicates.Clear();
+                        _selectedItems.Clear();
                         SelectedIndex = index;
                         SelectedIndexChanged?.Invoke(this);
                     }
@@ -683,9 +668,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">EventArgs</param>
-        public void InvalidateScroll(object sender, EventArgs e)
+        private void InvalidateScroll(object sender, EventArgs e)
         {
-            SVS.Maximum = (_Items.Count * ItemHeight);
+            _svs.Maximum = _items.Count * ItemHeight;
             Invalidate();
         }
 
@@ -704,21 +689,21 @@ namespace MetroSet_UI.Controls
         /// </summary>
         private void InvalidateLayout()
         {
-            SVS.Size = new Size(12, Height - (ShowBorder ? 2 : 0));
-            SVS.Location = new Point(Width - (SVS.Width + (ShowBorder ? 2 : 0)), (ShowBorder ? 1 : 0));
+            _svs.Size = new Size(12, Height - (ShowBorder ? 2 : 0));
+            _svs.Location = new Point(Width - (_svs.Width + (ShowBorder ? 2 : 0)), ShowBorder ? 1 : 0);
             Invalidate();
         }
-        
+
         /// <summary>
         /// Here we handle the mouse wheel.
         /// </summary>
         /// <param name="e"></param>
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            SVS.Value -= (e.Delta / 4);
+            _svs.Value -= e.Delta / 4;
             base.OnMouseWheel(e);
         }
-        
+
         /// <summary>
         /// Gets the Key that has been pressed by the user.
         /// </summary>
@@ -731,9 +716,9 @@ namespace MetroSet_UI.Controls
                 case Keys.Down:
                     try
                     {
-                        _SelectedItems.Remove(_Items[SelectedIndex]);
+                        _selectedItems.Remove(_items[SelectedIndex]);
                         SelectedIndex += 1;
-                        _SelectedItems.Add(_Items[SelectedIndex]);
+                        _selectedItems.Add(_items[SelectedIndex]);
                     }
                     catch { }
                     break;
@@ -741,9 +726,9 @@ namespace MetroSet_UI.Controls
                 case Keys.Up:
                     try
                     {
-                        _SelectedItems.Remove(_Items[SelectedIndex]);
+                        _selectedItems.Remove(_items[SelectedIndex]);
                         SelectedIndex -= 1;
-                        _SelectedItems.Add(_Items[SelectedIndex]);
+                        _selectedItems.Add(_items[SelectedIndex]);
                     }
                     catch { }
                     break;
@@ -760,14 +745,14 @@ namespace MetroSet_UI.Controls
         {
             base.OnMouseMove(e);
             Cursor = Cursors.Hand;
-            int index = (SVS.Value / ItemHeight) + (e.Location.Y / ItemHeight);
+            var index = _svs.Value / ItemHeight + e.Location.Y / ItemHeight;
 
             if (index >= Items.Count)
                 index = -1;
 
             if (index >= 0 && index < Items.Count)
             {
-                _HoveredItem = index;
+                _hoveredItem = index;
             }
             Invalidate();
         }
@@ -778,7 +763,7 @@ namespace MetroSet_UI.Controls
         /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
-            _HoveredItem = -1;
+            _hoveredItem = -1;
             Cursor = Cursors.Default;
             Invalidate();
             base.OnMouseLeave(e);
@@ -791,8 +776,8 @@ namespace MetroSet_UI.Controls
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            SVS.Location = new Point(Width - (SVS.Width + (ShowBorder ? 2 : 0)), (ShowBorder ? 1 : 0));
-            InvalidateScroll(this, e);            
+            _svs.Location = new Point(Width - (_svs.Width + (ShowBorder ? 2 : 0)), ShowBorder ? 1 : 0);
+            InvalidateScroll(this, e);
         }
 
         /// <summary>
@@ -807,7 +792,6 @@ namespace MetroSet_UI.Controls
                 m.Result = IntPtr.Zero;
                 return;
             }
-
             base.WndProc(ref m);
         }
 

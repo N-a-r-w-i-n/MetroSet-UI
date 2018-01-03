@@ -51,13 +51,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -86,8 +83,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -106,15 +103,14 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -127,13 +123,11 @@ namespace MetroSet_UI.Controls
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true
                 );
-            DoubleBuffered = true;
             UpdateStyles();
             Cursor = Cursors.Hand;
             Font = MetroSetFonts.Light(10);
-            mth = new Methods();
-            utl = new Utilites();
-            style = Style.Dark;
+            _utl = new Utilites();
+            _style = Style.Dark;
             ApplyTheme();
             LinkBehavior = LinkBehavior.HoverUnderline;
         }
@@ -146,7 +140,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -179,41 +173,40 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "LinkColor":
-                                    LinkColor = utl.HexColor((string)varkey.Value);
+                                    LinkColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ActiveLinkColor":
-                                    ActiveLinkColor = utl.HexColor((string)varkey.Value);
+                                    ActiveLinkColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "VisitedLinkColor":
-                                    VisitedLinkColor = utl.HexColor((string)varkey.Value);
+                                    VisitedLinkColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "LinkBehavior":
-                                    if ((string)varkey.Value == "HoverUnderline")
+                                    switch ((string)varkey.Value)
                                     {
-                                        LinkBehavior = LinkBehavior.HoverUnderline;
-                                    }
-                                    else if ((string)varkey.Value == "AlwaysUnderline")
-                                    {
-                                        LinkBehavior = LinkBehavior.AlwaysUnderline;
-                                    }
-                                    else if ((string)varkey.Value == "NeverUnderline")
-                                    {
-                                        LinkBehavior = LinkBehavior.NeverUnderline;
-                                    }
-                                    else if ((string)varkey.Value == "SystemDefault")
-                                    {
-                                        LinkBehavior = LinkBehavior.SystemDefault;
+                                        case "HoverUnderline":
+                                            LinkBehavior = LinkBehavior.HoverUnderline;
+                                            break;
+                                        case "AlwaysUnderline":
+                                            LinkBehavior = LinkBehavior.AlwaysUnderline;
+                                            break;
+                                        case "NeverUnderline":
+                                            LinkBehavior = LinkBehavior.NeverUnderline;
+                                            break;
+                                        case "SystemDefault":
+                                            LinkBehavior = LinkBehavior.SystemDefault;
+                                            break;
                                     }
                                     break;
 
@@ -223,19 +216,14 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
-            try
-            {
-                Invalidate();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            Invalidate();
         }
 
         #endregion ApplyTheme

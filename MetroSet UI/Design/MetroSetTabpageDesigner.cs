@@ -29,7 +29,7 @@ namespace MetroSet_UI.Design
 {
     internal class MetroSetTabPageDesigner : ScrollableControlDesigner
     {
-        private readonly string[] _PropertiesToRemove =
+        private readonly string[] _propertiesToRemove =
   {
                   "BackgroundImage", "BackgroundImageLayout", "ForeColor",
                   "RightToLeft","ImeMode","BorderStyle","Margin","Padding","Enabled","UseVisualStyleBackColor"
@@ -37,7 +37,7 @@ namespace MetroSet_UI.Design
 
         protected override void PostFilterProperties(System.Collections.IDictionary properties)
         {
-            foreach (var property in _PropertiesToRemove)
+            foreach (var property in _propertiesToRemove)
             {
                 properties.Remove(property);
             }

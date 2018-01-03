@@ -28,7 +28,6 @@ using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -53,13 +52,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -88,8 +84,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; Invalidate(); }
+            get => _styleManager;
+            set { _styleManager = value; Invalidate(); }
         }
 
         /// <summary>
@@ -108,15 +104,15 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Methods _mth;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private Style style;
-        private StyleManager _StyleManager;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -130,12 +126,11 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             ItemSize = new Size(100, 38);
             Font = MetroSetFonts.UIRegular(8);
-            mth = new Methods();
-            utl = new Utilites();
+            _mth = new Methods();
+            _utl = new Utilites();
             ApplyTheme();
         }
 
@@ -147,7 +142,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -178,19 +173,19 @@ namespace MetroSet_UI.Controls
                             switch (varkey.Key)
                             {
                                 case "ForeColor":
-                                    ForeroundColor = utl.HexColor((string)varkey.Value);
+                                    ForeroundColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BackColor":
-                                    BackgroungColor = utl.HexColor((string)varkey.Value);
+                                    BackgroungColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "UnselectedTextColor":
-                                    UnselectedTextColor = utl.HexColor((string)varkey.Value);
+                                    UnselectedTextColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "SelectedTextColor":
-                                    SelectedTextColor = utl.HexColor((string)varkey.Value);
+                                    SelectedTextColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -199,10 +194,12 @@ namespace MetroSet_UI.Controls
                         }
                     UpdateProperties();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
-        public void UpdateProperties()
+        private void UpdateProperties()
         {
             try
             {
@@ -224,10 +221,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework")]
         [Editor(typeof(MetroSetTabPageCollectionEditor), typeof(UITypeEditor))]
-        public new TabPageCollection TabPages
-        {
-            get { return base.TabPages; }
-        }
+        public new TabPageCollection TabPages => base.TabPages;
 
         /// <summary>
         /// Gets or sets wether the tabcontrol use animation or not.
@@ -241,7 +235,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the size of the control's tabs.")]
         public new Size ItemSize
         {
-            get { return base.ItemSize; }
+            get => base.ItemSize;
             set
             {
                 base.ItemSize = value;
@@ -253,10 +247,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the area of the control (for example, along the top) where the tabs are aligned.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the area of the control (for example, along the top) where the tabs are aligned.")]
-        public new TabAlignment Alignment
-        {
-            get { return TabAlignment.Top; }
-        }
+        public new TabAlignment Alignment => TabAlignment.Top;
 
         /// <summary>
         /// Gets or sets the speed of transition.
@@ -335,47 +326,49 @@ namespace MetroSet_UI.Controls
             {
                 case TabStyle.Style1:
 
-                    using (Pen SB = new Pen(ForeroundColor, 2))
+                    using (var sb = new Pen(ForeroundColor, 2))
                     {
-                        G.DrawLine(SB, 2, h, Width - 3, h);
+                        G.DrawLine(sb, 2, h, Width - 3, h);
                     }
 
-                    for (int i = 0; i <= TabCount - 1; i++)
+                    for (var i = 0; i <= TabCount - 1; i++)
                     {
                         var r = GetTabRect(i);
 
                         if (i == SelectedIndex)
                         {
-                            using (SolidBrush SB = new SolidBrush(ForeroundColor))
+                            using (var sb = new SolidBrush(ForeroundColor))
                             {
-                                G.FillRectangle(SB, r);
+                                G.FillRectangle(sb, r);
                             }
                         }
-                        using (SolidBrush TB = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
+                        using (var tb = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
                         {
-                            G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
+                            G.DrawString(TabPages[i].Text, Font, tb, r, _mth.SetPosition());
                         }
                     }
                     break;
                 case TabStyle.Style2:
 
-                    for (int i = 0; i <= TabCount - 1; i++)
+                    for (var i = 0; i <= TabCount - 1; i++)
                     {
                         var r = GetTabRect(i);
 
                         if (i == SelectedIndex)
                         {
-                            using (Pen SB = new Pen(ForeroundColor, 2))
+                            using (var sb = new Pen(ForeroundColor, 2))
                             {
-                                G.DrawLine(SB, r.X, r.Height, r.X + r.Width, r.Height);
+                                G.DrawLine(sb, r.X, r.Height, r.X + r.Width, r.Height);
                             }
                         }
-                        using (SolidBrush TB = new SolidBrush(UnselectedTextColor))
+                        using (var tb = new SolidBrush(UnselectedTextColor))
                         {
-                            G.DrawString(TabPages[i].Text, Font, TB, r, mth.SetPosition());
+                            G.DrawString(TabPages[i].Text, Font, tb, r, _mth.SetPosition());
                         }
                     }
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
         }
@@ -391,17 +384,15 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            for (int i = 0; i <= TabCount - 1; i++)
+            for (var i = 0; i <= TabCount - 1; i++)
             {
                 var r = GetTabRect(i);
-                if (r.Contains(e.Location))
-                {
-                    Cursor = Cursors.Hand;
-                    Invalidate();
-                }
+                if (!r.Contains(e.Location)) continue;
+                Cursor = Cursors.Hand;
+                Invalidate();
             }
         }
-        
+
         /// <summary>
         /// Handling mouse leave event and releasing hand cursor.
         /// </summary>
@@ -433,41 +424,41 @@ namespace MetroSet_UI.Controls
 
         // Credits : Mavamaarten
 
-        private int OldIndex;
+        private int _oldIndex;
 
-        public void DoAnimationScrollLeft(Control Control1, Control Control2)
+        private void DoAnimationScrollLeft(Control control1, Control control2)
         {
-            Graphics G = Control1.CreateGraphics();
-            Bitmap P1 = new Bitmap(Control1.Width, Control1.Height);
-            Bitmap P2 = new Bitmap(Control2.Width, Control2.Height);
-            Control1.DrawToBitmap(P1, new Rectangle(0, 0, Control1.Width, Control1.Height));
-            Control2.DrawToBitmap(P2, new Rectangle(0, 0, Control2.Width, Control2.Height));
+            var G = control1.CreateGraphics();
+            var p1 = new Bitmap(control1.Width, control1.Height);
+            var p2 = new Bitmap(control2.Width, control2.Height);
+            control1.DrawToBitmap(p1, new Rectangle(0, 0, control1.Width, control1.Height));
+            control2.DrawToBitmap(p2, new Rectangle(0, 0, control2.Width, control2.Height));
 
-            foreach (Control c in Control1.Controls)
+            foreach (Control c in control1.Controls)
             {
                 c.Hide();
             }
 
-            int Slide = Control1.Width - (Control1.Width % Speed);
+            var slide = control1.Width - (control1.Width % Speed);
 
-            int a = 0;
-            for (a = 0; a <= Slide; a += Speed)
+            int a;
+            for (a = 0; a <= slide; a += Speed)
             {
-                G.DrawImage(P1, new Rectangle(a, 0, Control1.Width, Control1.Height));
-                G.DrawImage(P2, new Rectangle(a - Control2.Width, 0, Control2.Width, Control2.Height));
+                G.DrawImage(p1, new Rectangle(a, 0, control1.Width, control1.Height));
+                G.DrawImage(p2, new Rectangle(a - control2.Width, 0, control2.Width, control2.Height));
             }
-            a = Control1.Width;
-            G.DrawImage(P1, new Rectangle(a, 0, Control1.Width, Control1.Height));
-            G.DrawImage(P2, new Rectangle(a - Control2.Width, 0, Control2.Width, Control2.Height));
+            a = control1.Width;
+            G.DrawImage(p1, new Rectangle(a, 0, control1.Width, control1.Height));
+            G.DrawImage(p2, new Rectangle(a - control2.Width, 0, control2.Width, control2.Height));
 
-            SelectedTab = (TabPage)Control2;
+            SelectedTab = (TabPage)control2;
 
-            foreach (Control c in Control2.Controls)
+            foreach (Control c in control2.Controls)
             {
                 c.Show();
             }
 
-            foreach (Control c in Control1.Controls)
+            foreach (Control c in control1.Controls)
             {
                 c.Show();
             }
@@ -475,57 +466,55 @@ namespace MetroSet_UI.Controls
 
         protected override void OnSelecting(TabControlCancelEventArgs e)
         {
-            if (UseAnimation)
+            if (!UseAnimation) return;
+            if (_oldIndex < e.TabPageIndex)
             {
-                if (OldIndex < e.TabPageIndex)
-                {
-                    DoAnimationScrollRight(TabPages[OldIndex], TabPages[e.TabPageIndex]);
-                }
-                else
-                {
-                    DoAnimationScrollLeft(TabPages[OldIndex], TabPages[e.TabPageIndex]);
-                }
+                DoAnimationScrollRight(TabPages[_oldIndex], TabPages[e.TabPageIndex]);
+            }
+            else
+            {
+                DoAnimationScrollLeft(TabPages[_oldIndex], TabPages[e.TabPageIndex]);
             }
         }
 
         protected override void OnDeselecting(TabControlCancelEventArgs e)
         {
-            OldIndex = e.TabPageIndex;
+            _oldIndex = e.TabPageIndex;
         }
 
-        public void DoAnimationScrollRight(Control Control1, Control Control2)
+        private void DoAnimationScrollRight(Control control1, Control control2)
         {
-            Graphics G = Control1.CreateGraphics();
-            Bitmap P1 = new Bitmap(Control1.Width, Control1.Height);
-            Bitmap P2 = new Bitmap(Control2.Width, Control2.Height);
-            Control1.DrawToBitmap(P1, new Rectangle(0, 0, Control1.Width, Control1.Height));
-            Control2.DrawToBitmap(P2, new Rectangle(0, 0, Control2.Width, Control2.Height));
+            var G = control1.CreateGraphics();
+            var p1 = new Bitmap(control1.Width, control1.Height);
+            var p2 = new Bitmap(control2.Width, control2.Height);
+            control1.DrawToBitmap(p1, new Rectangle(0, 0, control1.Width, control1.Height));
+            control2.DrawToBitmap(p2, new Rectangle(0, 0, control2.Width, control2.Height));
 
-            foreach (Control c in Control1.Controls)
+            foreach (Control c in control1.Controls)
             {
                 c.Hide();
             }
 
-            int Slide = Control1.Width - (Control1.Width % Speed);
+            var slide = control1.Width - (control1.Width % Speed);
 
-            int a = 0;
-            for (a = 0; a >= -Slide; a += -Speed)
+            int a;
+            for (a = 0; a >= -slide; a += -Speed)
             {
-                G.DrawImage(P1, new Rectangle(a, 0, Control1.Width, Control1.Height));
-                G.DrawImage(P2, new Rectangle(a + Control2.Width, 0, Control2.Width, Control2.Height));
+                G.DrawImage(p1, new Rectangle(a, 0, control1.Width, control1.Height));
+                G.DrawImage(p2, new Rectangle(a + control2.Width, 0, control2.Width, control2.Height));
             }
-            a = Control1.Width;
-            G.DrawImage(P1, new Rectangle(a, 0, Control1.Width, Control1.Height));
-            G.DrawImage(P2, new Rectangle(a + Control2.Width, 0, Control2.Width, Control2.Height));
+            a = control1.Width;
+            G.DrawImage(p1, new Rectangle(a, 0, control1.Width, control1.Height));
+            G.DrawImage(p2, new Rectangle(a + control2.Width, 0, control2.Width, control2.Height));
 
-            SelectedTab = (TabPage)Control2;
+            SelectedTab = (TabPage)control2;
 
-            foreach (Control c in Control2.Controls)
+            foreach (Control c in control2.Controls)
             {
                 c.Show();
             }
 
-            foreach (Control c in Control1.Controls)
+            foreach (Control c in control1.Controls)
             {
                 c.Show();
             }
@@ -540,13 +529,13 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// The Method that provide the specific color for every single tab page in the tab control.
         /// </summary>
-        /// <param name="C"></param>
-        private void InvalidateTabPage(Color C)
+        /// <param name="c"></param>
+        private void InvalidateTabPage(Color c)
         {
             foreach (MetroSetTabPage T in TabPages)
             {
                 T.Style = Style;
-                T.BaseColor = BackgroungColor;
+                T.BaseColor = c;
                 T.Invalidate();
             }
         }

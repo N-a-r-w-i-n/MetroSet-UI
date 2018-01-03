@@ -24,7 +24,6 @@
 
 using MetroSet_UI.Controls;
 using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 
@@ -32,50 +31,44 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetRadioButtonActionList : DesignerActionList
     {
-        private readonly MetroSetRadioButton metroSetRadioButton;
+        private readonly MetroSetRadioButton _metroSetRadioButton;
 
         public MetroSetRadioButtonActionList(IComponent component) : base(component)
         {
-            metroSetRadioButton = (MetroSetRadioButton)component;
+            _metroSetRadioButton = (MetroSetRadioButton)component;
         }
 
         public Style Style
         {
-            get { return metroSetRadioButton.Style; }
-            set { metroSetRadioButton.Style = value; }
+            get => _metroSetRadioButton.Style;
+            set => _metroSetRadioButton.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetRadioButton.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetRadioButton.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetRadioButton.ThemeName; }
-        }
+        public string ThemeName => _metroSetRadioButton.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetRadioButton.StyleManager; }
-            set { metroSetRadioButton.StyleManager = value; }
+            get => _metroSetRadioButton.StyleManager;
+            set => _metroSetRadioButton.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetRadioButton.Text; }
-            set { metroSetRadioButton.Text = value; }
+            get => _metroSetRadioButton.Text;
+            set => _metroSetRadioButton.Text = value;
         }
 
         public bool Checked
         {
-            get { return metroSetRadioButton.Checked; }
-            set { metroSetRadioButton.Checked = value; }
+            get => _metroSetRadioButton.Checked;
+            set => _metroSetRadioButton.Checked = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()
         {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
+            var items = new DesignerActionItemCollection
         {
             new DesignerActionHeaderItem("MetroSet Framework"),
             new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),

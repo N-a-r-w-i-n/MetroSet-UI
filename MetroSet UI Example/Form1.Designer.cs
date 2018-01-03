@@ -66,6 +66,8 @@
             this.metroSetTextBox2 = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetTextBox4 = new MetroSet_UI.Controls.MetroSetTextBox();
             this.metroSetTextBox1 = new MetroSet_UI.Controls.MetroSetTextBox();
+            this.metroSetContextMenuStrip1 = new MetroSet_UI.Controls.MetroSetContextMenuStrip();
+            this.textBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroSetLabel8 = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetLabel9 = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetLabel6 = new MetroSet_UI.Controls.MetroSetLabel();
@@ -112,18 +114,16 @@
             this.metroSetButton3 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroSetLabel18 = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
-            this.metroSetContextMenuStrip1 = new MetroSet_UI.Controls.MetroSetContextMenuStrip();
             this.metroSetToolTip1 = new MetroSet_UI.Components.MetroSetToolTip();
-            this.textBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroSetTabControl1.SuspendLayout();
             this.metroSetTabPage2.SuspendLayout();
             this.metroSetTabPage1.SuspendLayout();
             this.metroSetTabPage3.SuspendLayout();
+            this.metroSetContextMenuStrip1.SuspendLayout();
             this.metroSetTabPage4.SuspendLayout();
             this.metroSetTabPage5.SuspendLayout();
             this.metroSetTabPage6.SuspendLayout();
             this.metroSetTabPage7.SuspendLayout();
-            this.metroSetContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroSetTabControl1
@@ -135,7 +135,7 @@
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage5);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage6);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage7);
-            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroSetTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl1.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(100, 38);
@@ -148,7 +148,7 @@
             this.metroSetTabControl1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetTabControl1.StyleManager = this.styleManager1;
             this.metroSetTabControl1.TabIndex = 0;
-            this.metroSetTabControl1.TabStyle = MetroSet_UI.Enums.TabStyle.Style2;
+            this.metroSetTabControl1.TabStyle = MetroSet_UI.Enums.TabStyle.Style1;
             this.metroSetTabControl1.ThemeAuthor = "Narwin";
             this.metroSetTabControl1.ThemeName = "MetroLite";
             this.metroSetTabControl1.UseAnimation = true;
@@ -1254,6 +1254,23 @@
             this.metroSetTextBox1.UseSystemPasswordChar = false;
             this.metroSetTextBox1.WatermarkText = "";
             // 
+            // metroSetContextMenuStrip1
+            // 
+            this.metroSetContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.textBoxToolStripMenuItem});
+            this.metroSetContextMenuStrip1.Name = "metroSetContextMenuStrip1";
+            this.metroSetContextMenuStrip1.Size = new System.Drawing.Size(115, 26);
+            this.metroSetContextMenuStrip1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetContextMenuStrip1.StyleManager = null;
+            this.metroSetContextMenuStrip1.ThemeAuthor = "Narwin";
+            this.metroSetContextMenuStrip1.ThemeName = "MetroLite";
+            // 
+            // textBoxToolStripMenuItem
+            // 
+            this.textBoxToolStripMenuItem.Name = "textBoxToolStripMenuItem";
+            this.textBoxToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.textBoxToolStripMenuItem.Text = "TextBox";
+            // 
             // metroSetLabel8
             // 
             this.metroSetLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
@@ -2187,17 +2204,6 @@
             this.metroSetControlBox1.ThemeAuthor = "Narwin";
             this.metroSetControlBox1.ThemeName = "MetroLite";
             // 
-            // metroSetContextMenuStrip1
-            // 
-            this.metroSetContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textBoxToolStripMenuItem});
-            this.metroSetContextMenuStrip1.Name = "metroSetContextMenuStrip1";
-            this.metroSetContextMenuStrip1.Size = new System.Drawing.Size(115, 26);
-            this.metroSetContextMenuStrip1.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetContextMenuStrip1.StyleManager = null;
-            this.metroSetContextMenuStrip1.ThemeAuthor = "Narwin";
-            this.metroSetContextMenuStrip1.ThemeName = "MetroLite";
-            // 
             // metroSetToolTip1
             // 
             this.metroSetToolTip1.BackColor = System.Drawing.Color.White;
@@ -2209,17 +2215,10 @@
             this.metroSetToolTip1.ThemeAuthor = "Narwin";
             this.metroSetToolTip1.ThemeName = "MetroLite";
             // 
-            // textBoxToolStripMenuItem
-            // 
-            this.textBoxToolStripMenuItem.Name = "textBoxToolStripMenuItem";
-            this.textBoxToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.textBoxToolStripMenuItem.Text = "TextBox";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::MetroSet_UI_Example.Properties.Resources.monochrome_square_pattern;
             this.ClientSize = new System.Drawing.Size(1138, 698);
             this.Controls.Add(this.metroSetControlBox1);
             this.Controls.Add(this.metroSetTabControl1);
@@ -2231,11 +2230,11 @@
             this.metroSetTabPage2.ResumeLayout(false);
             this.metroSetTabPage1.ResumeLayout(false);
             this.metroSetTabPage3.ResumeLayout(false);
+            this.metroSetContextMenuStrip1.ResumeLayout(false);
             this.metroSetTabPage4.ResumeLayout(false);
             this.metroSetTabPage5.ResumeLayout(false);
             this.metroSetTabPage6.ResumeLayout(false);
             this.metroSetTabPage7.ResumeLayout(false);
-            this.metroSetContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

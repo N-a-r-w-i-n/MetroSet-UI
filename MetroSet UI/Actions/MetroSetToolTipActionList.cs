@@ -31,75 +31,69 @@ namespace MetroSet_UI.Tasks
 {
     internal class MetroSetToolTipActionList : DesignerActionList
     {
-        private readonly MetroSetToolTip metroSetToolTip;
+        private readonly MetroSetToolTip _metroSetToolTip;
 
         public MetroSetToolTipActionList(IComponent component) : base(component)
         {
-            metroSetToolTip = (MetroSetToolTip)component;
+            _metroSetToolTip = (MetroSetToolTip)component;
         }
 
         public Style Style
         {
-            get { return metroSetToolTip.Style; }
-            set { metroSetToolTip.Style = value; }
+            get => _metroSetToolTip.Style;
+            set => _metroSetToolTip.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetToolTip.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetToolTip.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetToolTip.ThemeName; }
-        }
+        public string ThemeName => _metroSetToolTip.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetToolTip.StyleManager; }
-            set { metroSetToolTip.StyleManager = value; }
+            get => _metroSetToolTip.StyleManager;
+            set => _metroSetToolTip.StyleManager = value;
         }
 
         public bool Active
         {
-            get { return metroSetToolTip.Active; }
-            set { metroSetToolTip.Active = value; }
+            get => _metroSetToolTip.Active;
+            set => _metroSetToolTip.Active = value;
         }
 
         public int AutomaticDelay
         {
-            get { return metroSetToolTip.AutomaticDelay; }
-            set { metroSetToolTip.AutomaticDelay = value; }
+            get => _metroSetToolTip.AutomaticDelay;
+            set => _metroSetToolTip.AutomaticDelay = value;
         }
 
         public int AutoPopDelay
         {
-            get { return metroSetToolTip.AutoPopDelay; }
-            set { metroSetToolTip.AutoPopDelay = value; }
+            get => _metroSetToolTip.AutoPopDelay;
+            set => _metroSetToolTip.AutoPopDelay = value;
         }
 
         public int InitialDelay
         {
-            get { return metroSetToolTip.InitialDelay; }
-            set { metroSetToolTip.InitialDelay = value; }
+            get => _metroSetToolTip.InitialDelay;
+            set => _metroSetToolTip.InitialDelay = value;
         }
 
         public bool StripAmpersands
         {
-            get { return metroSetToolTip.StripAmpersands; }
-            set { metroSetToolTip.StripAmpersands = value; }
+            get => _metroSetToolTip.StripAmpersands;
+            set => _metroSetToolTip.StripAmpersands = value;
         }
 
         public bool UseAnimation
         {
-            get { return metroSetToolTip.UseAnimation; }
-            set { metroSetToolTip.UseAnimation = value; }
+            get => _metroSetToolTip.UseAnimation;
+            set => _metroSetToolTip.UseAnimation = value;
         }
 
         public bool UseFading
         {
-            get { return metroSetToolTip.UseFading; }
-            set { metroSetToolTip.UseFading = value; }
+            get => _metroSetToolTip.UseFading;
+            set => _metroSetToolTip.UseFading = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

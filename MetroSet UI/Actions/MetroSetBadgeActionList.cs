@@ -33,62 +33,56 @@ namespace MetroSet_UI.Tasks
 {
     public class MetroSetBadgeActionList : DesignerActionList
     {
-        private readonly MetroSetBadge metroSetBadge;
+        private readonly MetroSetBadge _metroSetBadge;
 
         public MetroSetBadgeActionList(IComponent component) : base(component)
         {
-            metroSetBadge = (MetroSetBadge)component;
+            _metroSetBadge = (MetroSetBadge)component;
         }
 
         public Style Style
         {
-            get { return metroSetBadge.Style; }
-            set { metroSetBadge.Style = value; }
+            get => _metroSetBadge.Style;
+            set => _metroSetBadge.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetBadge.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetBadge.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetBadge.ThemeName; }
-        }
+        public string ThemeName => _metroSetBadge.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetBadge.StyleManager; }
-            set { metroSetBadge.StyleManager = value; }
+            get => _metroSetBadge.StyleManager;
+            set => _metroSetBadge.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetBadge.Text; }
-            set { metroSetBadge.Text = value; }
+            get => _metroSetBadge.Text;
+            set => _metroSetBadge.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetBadge.Font; }
-            set { metroSetBadge.Font = value; }
+            get => _metroSetBadge.Font;
+            set => _metroSetBadge.Font = value;
         }
 
         public BadgeAlign BadgeAlignment
         {
-            get { return metroSetBadge.BadgeAlignment; }
-            set { metroSetBadge.BadgeAlignment = value; }
+            get => _metroSetBadge.BadgeAlignment;
+            set => _metroSetBadge.BadgeAlignment = value;
         }
 
         public string BadgeText
         {
-            get { return metroSetBadge.BadgeText; }
-            set { metroSetBadge.BadgeText = value; }
+            get => _metroSetBadge.BadgeText;
+            set => _metroSetBadge.BadgeText = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()
         {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
+            var items = new DesignerActionItemCollection
         {
             new DesignerActionHeaderItem("MetroSet Framework"),
             new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),

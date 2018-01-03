@@ -30,22 +30,22 @@ namespace MetroSet_UI.Native
 {
     internal class User32
     {
-        
+
         #region Properties
 
         public AnimateWindowFlags AW_HIDE { get; internal set; }
 
-#endregion
+        #endregion
 
         #region Structure
 
         [StructLayout(LayoutKind.Sequential)]
         public struct TCHITTESTINFO
         {
-            public Point pt;
-            public TabControlHitTest flags;
+            private readonly Point pt;
+            public readonly TabControlHitTest flags;
 
-            public TCHITTESTINFO(TabControlHitTest hitTest)
+            private TCHITTESTINFO(TabControlHitTest hitTest)
                 : this()
             {
                 flags = hitTest;
@@ -64,7 +64,7 @@ namespace MetroSet_UI.Native
             }
         }
 
-#endregion
+        #endregion
 
         #region Flags
 
@@ -108,7 +108,7 @@ namespace MetroSet_UI.Native
             /// </summary>
             TCHT_ONITEM = TCHT_ONITEMICON | TCHT_ONITEMLABEL
         };
-        
+
         #endregion
 
         #region Methods
@@ -152,7 +152,7 @@ namespace MetroSet_UI.Native
         public const int _TCN_SELCHANGING = -552;
 
         #endregion
-        
+
         #region Windows Messages
 
         /// <summary>

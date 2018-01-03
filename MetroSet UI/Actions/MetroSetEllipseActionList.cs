@@ -32,61 +32,55 @@ namespace MetroSet_UI.Tasks
 {
     public class MetroSetEllipseActionList : DesignerActionList
     {
-        private readonly MetroSetEllipse metroSetEllipse;
+        private readonly MetroSetEllipse _metroSetEllipse;
 
         public MetroSetEllipseActionList(IComponent component) : base(component)
         {
-            metroSetEllipse = (MetroSetEllipse)component;
+            _metroSetEllipse = (MetroSetEllipse)component;
         }
 
         public Style Style
         {
-            get { return metroSetEllipse.Style; }
-            set { metroSetEllipse.Style = value; }
+            get => _metroSetEllipse.Style;
+            set => _metroSetEllipse.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetEllipse.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetEllipse.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetEllipse.ThemeName; }
-        }
+        public string ThemeName => _metroSetEllipse.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetEllipse.StyleManager; }
-            set { metroSetEllipse.StyleManager = value; }
+            get => _metroSetEllipse.StyleManager;
+            set => _metroSetEllipse.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetEllipse.Text; }
-            set { metroSetEllipse.Text = value; }
+            get => _metroSetEllipse.Text;
+            set => _metroSetEllipse.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetEllipse.Font; }
-            set { metroSetEllipse.Font = value; }
+            get => _metroSetEllipse.Font;
+            set => _metroSetEllipse.Font = value;
         }
 
         public int BorderThickness
         {
-            get { return metroSetEllipse.BorderThickness; }
-            set { metroSetEllipse.BorderThickness = value; }
+            get => _metroSetEllipse.BorderThickness;
+            set => _metroSetEllipse.BorderThickness = value;
         }
         public Size ImageSize
         {
-            get { return metroSetEllipse.ImageSize; }
-            set { metroSetEllipse.ImageSize = value; }
+            get => _metroSetEllipse.ImageSize;
+            set => _metroSetEllipse.ImageSize = value;
         }
         public Image Image
         {
-            get { return metroSetEllipse.Image; }
-            set { metroSetEllipse.Image = value; }
+            get => _metroSetEllipse.Image;
+            set => _metroSetEllipse.Image = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

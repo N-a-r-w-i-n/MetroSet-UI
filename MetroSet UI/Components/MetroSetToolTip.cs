@@ -39,7 +39,7 @@ namespace MetroSet_UI.Components
     [Designer(typeof(MetroSetToolTipDesigner))]
     [DefaultEvent("Popup")]
     public class MetroSetToolTip : ToolTip, iControl
-    { 
+    {
 
         #region Interfaces
 
@@ -49,13 +49,10 @@ namespace MetroSet_UI.Components
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -83,8 +80,8 @@ namespace MetroSet_UI.Components
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
-            set { _StyleManager = value; }
+            get => _styleManager;
+            set => _styleManager = value;
         }
 
         /// <summary>
@@ -103,16 +100,15 @@ namespace MetroSet_UI.Components
 
         #region Global Vars
 
-        private Methods mth;
-
-        private Utilites utl;
+        private readonly Methods _mth;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private StyleManager _StyleManager;
-        private Style style;
+        private StyleManager _styleManager;
+        private Style _style;
 
         #endregion Internal Vars
 
@@ -123,8 +119,8 @@ namespace MetroSet_UI.Components
             OwnerDraw = true;
             Draw += OnDraw;
             Popup += ToolTip_Popup;
-            mth = new Methods();
-            utl = new Utilites();
+            _mth = new Methods();
+            _utl = new Utilites();
             ApplyTheme();
         }
 
@@ -135,18 +131,18 @@ namespace MetroSet_UI.Components
 
         private void OnDraw(object sender, DrawToolTipEventArgs e)
         {
-            Graphics G = e.Graphics;
+            var G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            Rectangle rect = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
-            using (SolidBrush BG = new SolidBrush(BackColor))
+            var rect = new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
+            using (var bg = new SolidBrush(BackColor))
             {
-                using (Pen Stroke = new Pen(BorderColor))
+                using (var stroke = new Pen(BorderColor))
                 {
-                    using (SolidBrush TB = new SolidBrush(ForeColor))
+                    using (var tb = new SolidBrush(ForeColor))
                     {
-                        G.FillRectangle(BG, rect);
-                        G.DrawString(e.ToolTipText, MetroSetFonts.Light(11), TB, rect, mth.SetPosition());
-                        G.DrawRectangle(Stroke, rect);
+                        G.FillRectangle(bg, rect);
+                        G.DrawString(e.ToolTipText, MetroSetFonts.Light(11), tb, rect, _mth.SetPosition());
+                        G.DrawRectangle(stroke, rect);
                     }
                 }
             }
@@ -161,7 +157,7 @@ namespace MetroSet_UI.Components
         /// Gets or sets the style provided by the user.
         /// </summary>
         /// <param name="style">The Style.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -190,15 +186,15 @@ namespace MetroSet_UI.Components
                             {
 
                                 case "BackColor":
-                                    BackColor = utl.HexColor((string)varkey.Value);
+                                    BackColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "BorderColor":
-                                    BorderColor = utl.HexColor((string)varkey.Value);
+                                    BorderColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -206,13 +202,15 @@ namespace MetroSet_UI.Components
                             }
                         }
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
         #endregion ApplyTheme
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether a ToolTip window is displayed, even when its parent control is not active.
         /// </summary>
@@ -226,8 +224,8 @@ namespace MetroSet_UI.Components
         [Browsable(false)]
         public new bool OwnerDraw
         {
-            get { return base.OwnerDraw; }
-            set { base.OwnerDraw = true; }
+            get => base.OwnerDraw;
+            set => base.OwnerDraw = true;
         }
 
 
@@ -288,7 +286,7 @@ namespace MetroSet_UI.Components
             foreach (Control c in control.Controls)
             {
                 SetToolTip(c, caption);
-            }            
+            }
         }
 
         #endregion
@@ -303,12 +301,12 @@ namespace MetroSet_UI.Components
         private void ToolTip_Popup(object sender, PopupEventArgs e)
         {
             var control = e.AssociatedControl;
-            if (control is iControl)
+            if (control is iControl iControl)
             {
-                Style = ((iControl)control).Style;
-                ThemeAuthor = ((iControl)control).ThemeAuthor;
-                ThemeName = ((iControl)control).ThemeName;
-                StyleManager = ((iControl)control).StyleManager;
+                Style = iControl.Style;
+                ThemeAuthor = iControl.ThemeAuthor;
+                ThemeName = iControl.ThemeName;
+                StyleManager = iControl.StyleManager;
             }
             else if (control is iForm)
             {
@@ -320,7 +318,7 @@ namespace MetroSet_UI.Components
             e.ToolTipSize = new Size(e.ToolTipSize.Width + 30, e.ToolTipSize.Height + 6);
         }
 
-#endregion
+        #endregion
 
     }
 }

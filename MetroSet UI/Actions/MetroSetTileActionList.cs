@@ -32,51 +32,45 @@ namespace MetroSet_UI.Tasks
 {
     public class MetroSetTileActionList : DesignerActionList
     {
-        private readonly MetroSetTile metroSetTile;
+        private readonly MetroSetTile _metroSetTile;
 
         public MetroSetTileActionList(IComponent component) : base(component)
         {
-            metroSetTile = (MetroSetTile)component;
+            _metroSetTile = (MetroSetTile)component;
         }
 
         public Style Style
         {
-            get { return metroSetTile.Style; }
-            set { metroSetTile.Style = value; }
+            get => _metroSetTile.Style;
+            set => _metroSetTile.Style = value;
         }
 
-        public string ThemeAuthor
-        {
-            get { return metroSetTile.ThemeAuthor; }
-        }
+        public string ThemeAuthor => _metroSetTile.ThemeAuthor;
 
-        public string ThemeName
-        {
-            get { return metroSetTile.ThemeName; }
-        }
+        public string ThemeName => _metroSetTile.ThemeName;
 
         public StyleManager StyleManager
         {
-            get { return metroSetTile.StyleManager; }
-            set { metroSetTile.StyleManager = value; }
+            get => _metroSetTile.StyleManager;
+            set => _metroSetTile.StyleManager = value;
         }
 
         public string Text
         {
-            get { return metroSetTile.Text; }
-            set { metroSetTile.Text = value; }
+            get => _metroSetTile.Text;
+            set => _metroSetTile.Text = value;
         }
 
         public Font Font
         {
-            get { return metroSetTile.Font; }
-            set { metroSetTile.Font = value; }
+            get => _metroSetTile.Font;
+            set => _metroSetTile.Font = value;
         }
 
         public Image BackgroundImage
         {
-            get { return metroSetTile.BackgroundImage; }
-            set { metroSetTile.BackgroundImage = value; }
+            get => _metroSetTile.BackgroundImage;
+            set => _metroSetTile.BackgroundImage = value;
         }
 
         public override DesignerActionItemCollection GetSortedActionItems()

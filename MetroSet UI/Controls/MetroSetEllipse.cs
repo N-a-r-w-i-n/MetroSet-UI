@@ -23,9 +23,9 @@
 */
 
 using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -53,13 +53,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
         public Style Style
         {
-            get
-            {
-                return StyleManager?.Style ?? style;
-            }
+            get => StyleManager?.Style ?? _style;
             set
             {
-                style = value;
+                _style = value;
                 switch (value)
                 {
                     case Style.Light:
@@ -101,10 +98,10 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
         public StyleManager StyleManager
         {
-            get { return _StyleManager; }
+            get => _styleManager;
             set
             {
-                _StyleManager = value;
+                _styleManager = value;
                 Invalidate();
             }
         }
@@ -113,16 +110,16 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Methods mth;
-        private Utilites utl;
+        private readonly Methods _mth;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
         #region Internal Vars
 
-        private MouseMode State;
-        private Style style;
-        private StyleManager _StyleManager;
+        private MouseMode _state;
+        private Style _style;
+        private StyleManager _styleManager;
 
         #endregion Internal Vars
 
@@ -135,11 +132,10 @@ namespace MetroSet_UI.Controls
                 ControlStyles.ResizeRedraw | ControlStyles.UserPaint |
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
             UpdateStyles();
             Font = MetroSetFonts.Light(10);
-            utl = new Utilites();
-            mth = new Methods();
+            _utl = new Utilites();
+            _mth = new Methods();
             ApplyTheme();
         }
 
@@ -149,22 +145,22 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            Rectangle r = new Rectangle(BorderThickness, BorderThickness, Width - ((BorderThickness * 2) + 1), Height - ((BorderThickness * 2) + 1));
+            var G = e.Graphics;
+            var r = new Rectangle(BorderThickness, BorderThickness, Width - ((BorderThickness * 2) + 1), Height - ((BorderThickness * 2) + 1));
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             G.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            switch (State)
+            switch (_state)
             {
                 case MouseMode.Normal:
 
-                    using (SolidBrush BG = new SolidBrush(NormalColor))
-                    using (Pen P = new Pen(NormalBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(NormalTextColor))
+                    using (var bg = new SolidBrush(NormalColor))
+                    using (var p = new Pen(NormalBorderColor, BorderThickness))
+                    using (var tb = new SolidBrush(NormalTextColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.FillEllipse(bg, r);
+                        G.DrawEllipse(p, r);
+                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
@@ -172,49 +168,48 @@ namespace MetroSet_UI.Controls
                 case MouseMode.Hovered:
 
                     Cursor = Cursors.Hand;
-                    using (SolidBrush BG = new SolidBrush(HoverColor))
-                    using (Pen P = new Pen(HoverBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(HoverTextColor))
+                    using (var bg = new SolidBrush(HoverColor))
+                    using (var p = new Pen(HoverBorderColor, BorderThickness))
+                    using (var tb = new SolidBrush(HoverTextColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.FillEllipse(bg, r);
+                        G.DrawEllipse(p, r);
+                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
 
                 case MouseMode.Pushed:
 
-                    using (SolidBrush BG = new SolidBrush(PressColor))
-                    using (Pen P = new Pen(PressBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(PressTextColor))
+                    using (var bg = new SolidBrush(PressColor))
+                    using (var p = new Pen(PressBorderColor, BorderThickness))
+                    using (var tb = new SolidBrush(PressTextColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.FillEllipse(bg, r);
+                        G.DrawEllipse(p, r);
+                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
 
                 case MouseMode.Disabled:
-                    using (SolidBrush BG = new SolidBrush(DisabledBackColor))
-                    using (Pen P = new Pen(DisabledBorderColor, BorderThickness))
-                    using (SolidBrush TB = new SolidBrush(DisabledForeColor)) 
+                    using (var bg = new SolidBrush(DisabledBackColor))
+                    using (var p = new Pen(DisabledBorderColor, BorderThickness))
+                    using (var tb = new SolidBrush(DisabledForeColor))
                     {
-                        G.FillEllipse(BG, r);
-                        G.DrawEllipse(P, r);
-                        G.DrawString(Text, Font, TB, new Rectangle(0, 0, Width, Height), mth.SetPosition());
+                        G.FillEllipse(bg, r);
+                        G.DrawEllipse(p, r);
+                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-             
-            if (Image != null)
-            {
-                Rectangle imgRect = new Rectangle(new Point((Width - ImageSize.Width) / 2, (Height - ImageSize.Height) / 2), ImageSize);
 
-                G.DrawImage(Image, imgRect);
-            }
+            if (Image == null) return;
+            var imgRect = new Rectangle(new Point((Width - ImageSize.Width) / 2, (Height - ImageSize.Height) / 2), ImageSize);
+            G.DrawImage(Image, imgRect);
         }
 
         #endregion Draw Control
@@ -226,7 +221,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         /// <param name="style">The Style.</param>
         /// <param name="path">The path of the custom theme.</param>
-        internal void ApplyTheme(Style style = Style.Light)
+        private void ApplyTheme(Style style = Style.Light)
         {
             switch (style)
             {
@@ -275,55 +270,57 @@ namespace MetroSet_UI.Controls
 
                             if (varkey.Key == "NormalColor")
                             {
-                                NormalColor = utl.HexColor((string)varkey.Value);
+                                NormalColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "NormalBorderColor")
                             {
-                                NormalBorderColor = utl.HexColor((string)varkey.Value);
+                                NormalBorderColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "NormalTextColor")
                             {
-                                NormalTextColor = utl.HexColor((string)varkey.Value);
+                                NormalTextColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverColor")
                             {
-                                HoverColor = utl.HexColor((string)varkey.Value);
+                                HoverColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverBorderColor")
                             {
-                                HoverBorderColor = utl.HexColor((string)varkey.Value);
+                                HoverBorderColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "HoverTextColor")
                             {
-                                HoverTextColor = utl.HexColor((string)varkey.Value);
+                                HoverTextColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressColor")
                             {
-                                PressColor = utl.HexColor((string)varkey.Value);
+                                PressColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressBorderColor")
                             {
-                                PressBorderColor = utl.HexColor((string)varkey.Value);
+                                PressBorderColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "PressTextColor")
                             {
-                                PressTextColor = utl.HexColor((string)varkey.Value);
+                                PressTextColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "DisabledBackColor")
                             {
-                                DisabledBackColor = utl.HexColor((string)varkey.Value);
+                                DisabledBackColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "DisabledBorderColor")
                             {
-                                DisabledBorderColor = utl.HexColor((string)varkey.Value);
+                                DisabledBorderColor = _utl.HexColor((string)varkey.Value);
                             }
                             else if (varkey.Key == "DisabledForeColor")
                             {
-                                DisabledForeColor = utl.HexColor((string)varkey.Value);
+                                DisabledForeColor = _utl.HexColor((string)varkey.Value);
                             }
                         }
                     Refresh();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
             }
         }
 
@@ -335,10 +332,7 @@ namespace MetroSet_UI.Controls
         /// I make backcolor inaccessible cause we have not use of it. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor
-        {
-            get { return Color.Transparent; }
-        }
+        public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the border thickness with the control.
@@ -358,7 +352,7 @@ namespace MetroSet_UI.Controls
                 base.Enabled = value;
                 if (value == false)
                 {
-                    State = MouseMode.Disabled;
+                    _state = MouseMode.Disabled;
                 }
                 Invalidate();
             }
@@ -472,7 +466,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -483,7 +477,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            State = MouseMode.Pushed;
+            _state = MouseMode.Pushed;
             Invalidate();
         }
 
@@ -494,7 +488,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
-            State = MouseMode.Hovered;
+            _state = MouseMode.Hovered;
             Invalidate();
         }
 
@@ -505,7 +499,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseEnter(e);
-            State = MouseMode.Normal;
+            _state = MouseMode.Normal;
             Invalidate();
         }
 
