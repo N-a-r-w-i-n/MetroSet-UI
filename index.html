@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- stylesheet -->
+
+  <link rel="stylesheet" href="assets/css/style.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+  <!-- Icon -->
+
+  <link rel="icon" href="images/favicon.ico">
+
+  <title>MetroSet UI</title>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1>MetroSet UI</h1><br>
+      <h5>Windows Forms Metro Skin Style, Make The .NET Applications With Metro Styles.</h5><br>
+      <button class="btn btn-info"><a href="https://github.com/N-a-r-w-i-n/MetroSet-UI">Open Source</a></button>
+    </div>
+
+  </div>
+  <navbar class="navbar navbar-expand-sm bg-primary navbar-dark" id="navbar">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a href="#intro" class="nav-link">Introduction</a></li>
+      <li class="nav-item"><a href="#ins" class="nav-link">Installation</a></li>
+      <li class="nav-item"><a href="#ui-elements" class="nav-link">UI Elements</a></li>
+      <li class="nav-item"><a href="#demonstration" class="nav-link">Demonstration</a></li>
+      <li class="nav-item"><a href="#how-to-use" class="nav-link">How To Use</a></li>
+      <li class="nav-item"><a href="#license" class="nav-link">License</a></li>
+      <li class="nav-item"><a href="#credits" class="nav-link">Credits</a></li>
+    </ul>
+  </navbar>
+
+
+  <div class="contents">
+
+    <!-- Badges -->
+    <section class="badges">
+      <p align="center">
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/issues"> <img src="https://img.shields.io/github/issues/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square"> </a>
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/network"> <img src="https://img.shields.io/github/forks/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square"> </a>
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/stargazers"> <img src="https://img.shields.io/github/stars/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square"> </a>
+        <a href="https://raw.githubusercontent.com/N-a-r-w-i-n/MetroSet-UI/master/LICENSE.md"> <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"> </a>
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/releases/latest"> <img src="http://github-release-version.herokuapp.com/github/N-a-r-w-i-n/MetroSet-UI/release.svg?style=flat-square"> </a>
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/releases/latest"> <img src="https://img.shields.io/github/downloads/N-a-r-w-i-n/MetroSet-UI/latest/total.svg?style=flat-square"> </a>
+        <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FN-a-r-w-i-n%2FMetroSet-UI"> <img src="https://img.shields.io/twitter/url/https/github.com/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square"> </a>
+      </p>
+    </section>
+
+    <!-- Separator -->
+    <div class="separator"></div><br>
+
+    <section class="intro" id="intro">
+      <h4>Introduction</h4>
+      <p>
+        <span>MetroSet UI is a UI framework based on windows 8 metro design for .NET applications, it contains</span>
+        <span> a large number of controls and components to fun with, it supports custom themes based on .xml file,</span>
+        <span>the cusotm theme made example can be found <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20Theme.xml">here</a>.</span>
+        <span>every control in this framework has a lot of custom properties , they can be used to customizing more and more of the control.</span>
+      </p>
+      <!-- Separator -->
+      <div class="separator"></div><br>
+    </section>
+
+    <!-- Nuget -->
+    <section id="ins">
+      <h4 class="install-title">Installation</h4>
+      <p>
+        There are two common methods to install MetroSet UI to the .NET projects.
+      </p>
+      <h5 align="center">Method #1</h5>
+      <h6 align="center"><var>(Manuall Installation)</var></h6>
+      <p>
+        <ol>
+          <li>
+            Download the latest fresh build of MetroSet UI <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/releases/latest">here</a>.
+          </li>
+          <li>
+            Open Visual Studio IDE.
+          </li>
+          <li>
+            Create New Project.
+          </li>
+          <li>
+            From The "ToolBox" panel create new tab by right-clicking on the "Add Tab" then name it <span title="or any other name">"MetroSet"</span>.
+          </li>
+          <li>
+            Drag the downloaded MetroSet UI.dll into the tab.
+          </li>
+          <li>
+            after loading the controls just drag any MetroSet Control into the form then it will be referenced.
+          </li>
+          <li>
+            Have fun.
+          </li>
+        </ol>
+      </p>
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <div class="nuget-installation">
+        <h5 align="center">Method #2</h5>
+        <h6 align="center"><var>(Nuget Installation)</var></h6>
+        <p>
+          Installation via nuget is simple, just follow the below steps :
+          <ol>
+            <li>
+              Open Visual Studio IDE.
+            </li>
+            <li>
+              From Main Menu Tab Goto "Tools".
+            </li>
+            <li>
+              Goto "NuGet Package Manager".
+            </li>
+            <li>
+              Goto "Package Manager Console".
+            </li>
+            <li title="without double qoutation">
+              Type : "Install-Package MetroSet_UI".
+            </li>
+            <li>
+              Hit "Enter".
+            </li>
+          </ol>
+          <br/> Once it finished downloading have some fun.
+        </p>
+        <h6 align="center">Install via NuGet</h6>
+        <p align="center">
+
+          <div class="codeContainer">
+            <pre class="nuget-box-install">Install-Package MetroSet_UI</pre>
+          </div>
+        </p>
+
+        <h6 align="center">Direct to NuGet</h6>
+        <p class="nuget-link">
+          <a href="https://www.nuget.org/packages/MetroSet_UI/">Link</a>
+        </p>
+      </div>
+
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+    </section>
+
+    <!-- Required OS -->
+    <section>
+      <h4 align="center">Supported Platforms</h4> ➤ Windows XP SP1/SP2/SP3
+      <br/>
+      <br/> ➤ Windows Vista
+      <br/>
+      <br/> ➤ Windows 7
+      <br/>
+      <br/> ➤ Windows 8
+      <br/>
+      <br/> ➤ Windows 10
+      <br/>
+      <br/>
+    </section>
+    <br/>
+
+    <!-- Separator -->
+    <div class="separator"></div><br>
+    <br/>
+
+    <!-- Dependency -->
+    <section>
+      <h4 align="center">Dependency</h4> ➤ .NET Framework 2.0 or higher.
+      <br/>
+      <br/>
+      <!-- Separator -->
+      <div class="separator"></div><br>
+      <br/>
+    </section>
+
+    <!-- UI Elements -->
+    <div id="ui-elements">
+
+      <!-- Components Avaialble -->
+      <h4 align="center">Components Available</h4><br>
+      <div class="tables">
+        <table align="center">
+          <thead>
+            <tr>
+              <th>❖</th>
+              <th>Components</th>
+              <th>Skin Support</th>
+              <th>Custom Theme Support</th>
+              <th>Animation</th>
+              <th>Disabling</th>
+              <th>Custom Smart Tags</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">StyleManager</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetToolTip</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <br/>
+      </div>
+
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <!-- Forms Available -->
+      <h4 align="center">Forms Available</h4><br>
+      <div class="tables">
+        <table align="center">
+          <thead>
+            <tr>
+              <th>❖</th>
+              <th>Forms</th>
+              <th>Skin Support</th>
+              <th>Custom Theme Support</th>
+              <th>Animation</th>
+              <th>Disabling</th>
+              <th>Custom Smart Tags</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetForm</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetMessageBox</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+      </div>
+
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <!-- Controls Available -->
+      <h4 align="center">Controls Available</h4><br>
+      <div class="tables">
+        <table align="center">
+          <thead>
+            <tr>
+              <th>❖</th>
+              <th>Controls</th>
+              <th>Skin Support</th>
+              <th>Custom Theme Support</th>
+              <th>Animation</th>
+              <th>Disabling</th>
+              <th>Custom Smart Tags</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetBadge</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetButton</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetDefaultButton</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetCheckBox</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetComboBox</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetContextMenuStrip</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetControlBox</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetDevider</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetEllipse</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetLabel</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetLink</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetListBox</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetNumeric</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetPanel</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetProgress</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetRadioButton</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetRichTextBox</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetScrollBar</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetSwitch</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetTabControl</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetTextBox</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetTile</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+            <tr>
+              <td>➤</td>
+              <td class="itemAlign">MetroSetTrackBar</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-checked-mark">✔</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-unchecked-mark">✖</td>
+              <td class="table-checked-mark">✔</td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+      </div>
+
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+    </div>
+
+    <!-- Demonstration -->
+    <div id="demonstration">
+      <h4 align="center">Demonstration</h4>
+      <h5 align="center">Light</h5>
+      <p align="center">
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI"> <img alt="MetroSet UI Light Theme" width="100%" height="650" src="images/MetroSet%20Light.gif"> </a>
+      </p>
+      <br/>
+      <br/>
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <h5 align="center">Dark</h5>
+      <p align="center">
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI"> <img alt="MetroSet UI Dark Theme" width="100%" height="650" src="images/MetroSet%20Dark.gif"> </a>
+      </p>
+      <br/>
+      <br/>
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <h5 align="center">Custom</h5>
+      <p align="center">
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI"> <img alt="MetroSet UI Custom Theme" width="100%" height="650" src="images/MetroSet%20Orange.gif"> </a>
+      </p>
+      <br/>
+      <br/>
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <h5 align="center">Custom</h5>
+      <p align="center">
+        <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI"> <img alt="MetroSet UI Custom Theme" width="100%" height="650" src="images/MetroSet%20Green.gif"> </a>
+      </p>
+    </div>
+    <br/>
+
+    <!-- Separator -->
+    <div class="separator"></div><br>
+
+    <div class="usage" id="how-to-use">
+
+      <!-- MetroSetForm -->
+
+      <h4 align="center">Using MetroSetForm</h4><br>
+
+      <h6 align="center">C#.NET</h6><br>
+
+      <div class="codeContainer">
+        <pre class="codestyle"><span class="namespace">using</span> MetroSet_UI.Forms;
+  <span class="namespace">public</span><span class="namespace"> partial</span><span class="namespace"> class</span><span class="objects"> Form1</span> : <span class="objects">MetroSetForm</span>
+      {
+          <span class="namespace">public</span> Form1()
+          {
+              InitializeComponent();
+          }
+      }
+				</pre>
+      </div><br>
+      <h6 align="center">VB.NET</h6><br>
+
+      <div class="codeContainer">
+        <pre class="codestyle"><span class="namespace">Imports</span> MetroSet_UI.Forms
+
+<span class="namespace">public</span> <span class="namespace">class</span> <span class="objects">Form1</span> : <span class="namespace">Inherits</span> <span class="objects">MetroSetForm</span>
+
+    <span class="namespace">Sub</span> New()
+
+    <span class="namespace">End</span> <span class="namespace">Sub</span>
+
+<span class="namespace">End</span> <span class="namespace">Class</span>
+</pre>
+      </div>
+      <br/>
+      <br/>
+
+      <!-- Separator -->
+      <div class="separator"></div><br>
+
+      <!-- MetroSetMessageBox -->
+
+      <h4 align="center">MetroSetMessageBox Example</h4><br>
+
+      <h6 align="center">C#.NET</h6><br>
+      <div class="codeContainer">
+        <pre class="codestyle"><span class="namespace">using</span> System;
+  <span class="namespace">using</span> MetroSet_UI.Forms;
+  <span class="namespace">using</span> System.Windows.Forms;
+  <span class="namespace">namespace</span> MetroSet_UI_Example
+  {
+      <span class="namespace">public</span> <span class="namespace">partial</span> <span class="namespace">class</span> <span class="objects">MetroSetForm1</span> : <span class="objects">MetroSetForm</span>
+      {
+          <span class="namespace">public</span> MetroSetForm1()
+          {
+              InitializeComponent();
+          }
+
+          <span class="namespace">private</span> <span class="namespace">void</span> MetroSetButton1_Click(<span class="objects">object</span> sender, <span class="namespace">EventArgs</span> e)
+          {
+              MetroSetMessageBox.Show(<span class="namespace">this</span>, <span class="strings">&quot;Content&quot;</span>, <span class="strings">&quot;Caption&quot;</span>, MessageBoxButtons.OK, MessageBoxIcon.Question);
+          }
+
+      }
+  }
+  </pre>
+      </div><br>
+      <h6 align="center">VB.NET</h6><br>
+
+      <div class="codeContainer">
+        <pre class="codestyle"><span class="namespace">Imports</span> MetroSet_UI.Forms
+
+<span class="namespace">public</span> <span class="namespace">class</span> <span class="objects">Form1</span> : <span class="namespace">Inherits</span> <span class="objects">MetroSetForm</span>
+
+    <span class="namespace">Private</span> <span class="namespace">Sub</span> MetroSetButton1_Click(sender <span class="namespace">As</span> <span class="objects">Object</span>, e <span class="namespace">As</span> <span class="namespace">EventArgs</span>)
+	MetroSetMessageBox.Show(<span class="namespace">Me</span>, <span class="strings">&quot;Content&quot;</span>, <span class="strings">&quot;Caption&quot;</span>, MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+    <span class="namespace">End</span> <span class="namespace">Sub</span>
+
+<span class="namespace">End</span> <span class="namespace">Class</span>
+</pre>
+      </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <section id="license">
+
+      <!-- Separator -->
+      <div class="separator"></div><br>
+      <br/>
+      <br/>
+
+      <h4 align="center">License</h4>
+
+      <p align="left">
+        ➤ <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/LICENSE">MIT License</a>
+      </p>
+      <br/>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+
+  <div class="footer">
+    <div class="credits" id="credits">
+      <h4 class="creditslabel">Credits</h4>
+      <p>
+        MCF.Goodwin : <a class="credit" href="https://www.codeproject.com/Articles/30255/C-Fade-Form-Effect-With-the-AnimateWindow-API-Func">Form Fading</a>
+      </p>
+      <p>
+        Burak Ozdiken : <a class="credit" href="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/master/MetroSet%20UI/Design/MetroSetTabControlDesigner.cs">TabControlDesigner</a>
+      </p>
+      <p>
+        Mavamaarten : <a class="credit" href="https://github.com/N-a-r-w-i-n/MetroSet-UI/blob/29e65d1d2e4d12105f9b9639e9def96af0b93da2/MetroSet%20UI/Controls/MetroSetTabControl.cs#L363-L463">TabControl Transition Method</a>
+      </p>
+    </div>
+
+    <div class="copyright">
+      Copyright © 2017 <a href="https://github.com/N-a-r-w-i-n">Narwin</a>
+    </div>
+  </div>
+
+
+
+  <!-- Scripts -->
+
+  <!-- Jquery -->
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script>
+    $("li").click(function() {
+      if (!$(this).hasClass("active")) {
+        $("li.active").removeClass("active");
+        $(this).addClass("active");
+      }
+    });
+
+    window.onscroll = function() {
+      StickyNav();
+    };
+
+    var navbar = document.getElementById("navbar");
+
+    var sticky = navbar.offsetTop;
+
+    function StickyNav() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky");
+        navbar.style.margin = "0";
+      } else {
+        navbar.classList.remove("sticky");
+        navbar.style.marginTop = "-32px";
+      }
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,307 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'Segoe WP';
+  src: url(../fonts/SegoeWP.ttf)
+}
+
+@font-face {
+  font-family: 'Segoe WP Black';
+  src: url(../fonts/SegoeWP-Black.ttf)
+}
+
+@font-face {
+  font-family: 'SegoeWP Bold';
+  src: url(../fonts/SegoeWP-Bold.ttf)
+}
+
+@font-face {
+  font-family: 'SegoeWP Light';
+  src: url(../fonts/SegoeWP-Light.ttf)
+}
+
+@font-face {
+  font-family: 'SegoeWP Semibold';
+  src: url(../fonts/SegoeWP-Semibold.ttf)
+}
+
+@font-face {
+  font-family: 'Segoe WP Semilight';
+  src: url(../fonts/SegoeWP-Semilight.ttf)
+}
+
+html, body {
+  height: 100%;
+
+}
+
+h1 {
+  font-size: 3em;
+  padding-top: 40px !important
+}
+
+h1, h2, h3, h4 {
+  text-align: center
+}
+
+h1, h2, h3, h4, h5, p, ol {
+  font-family: 'Segoe WP' !important;
+}
+
+body {
+  background: #fafafa;
+  box-sizing: border-box;
+  line-height: 1.5
+}
+
+.contents {
+  padding-top: 40px;
+  max-width: 60%;
+  padding: 5px 5px;
+  margin: 0 auto
+}
+
+#intro {
+  font-family: 'Segoe WP Semilight';
+  text-transform: capitalize
+}
+
+.credits {
+  background: linear-gradient(to right, #232526, #414345);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+  color: #fff;
+  padding-left: 1em;
+  padding-top: 2px;
+  padding-bottom: 10px
+}
+
+.creditslabel {
+  color: #fff
+}
+
+.copyright {
+  color: #fff;
+  background: linear-gradient(to right, #2b2d2e, #48494a);
+  text-align: center;
+  padding-top: 10px;
+  margin: auto;
+  padding-bottom: 10px;
+}
+
+.badges a{
+  display: inline-block;
+}
+
+.jumbotron{
+  display: block;
+  text-align: center;
+  background-color: #0072C5;
+  color: white;
+  font-family: 'Segoe WP Semilight' !important;
+}
+
+.jumbotron h1{
+    margin-top: -40px !important
+}
+
+#license p a{
+  font-weight:bold;
+  font-size:18px;
+}
+
+a.credit {
+  display: inline;
+  cursor: pointer;
+  font-weight: bold
+}
+
+#navbar {
+  background: #0865AA;
+  font-family: 'Segoe WP Semilight' !important;
+  display: block;
+  margin-top: -32px;
+  color: #fff;
+}
+
+.navbar a {
+  font-family: 'Segoe WP Semilight';
+  float: left;
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 12px
+}
+
+.navbar a:hover, .navbar .active {
+  font-weight: bolder;
+  color: whitesmoke !important;
+  text-shadow: #fcfcfc 0 0 1px;
+  transition: background-color .45s ease-in
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky+.content {
+  padding-top: 60px
+}
+
+.navbar .icon {
+  display: none
+}
+
+@media screen and (max-width:600px) {
+  .navbar a:not(:first-child) {
+    display: none
+  }
+  .navbar a.icon {
+    float: right;
+    display: block
+  }
+}
+
+@media screen and (max-width:600px) {
+  .navbar.responsive {
+    position: relative
+  }
+  .navbar.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left
+  }
+}
+
+ol {
+  margin: 0;
+  padding-left: 18px;
+  font-family: 'Segoe Wp blck'
+}
+
+p {
+  font-family: 'Segoe Wp Semilight'
+}
+
+#ins p {
+  font-family: 'SegoeWP Semibold'
+}
+
+button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+button a:hover, button a:active {
+  text-decoration: none;
+  color: #fff !important;
+}
+
+a{
+  text-decoration: none !important;
+  color: #007edf
+}
+
+a:hover {
+  color: #7900ba !important;
+  text-shadow: #7612ac 0 0 2px
+}
+
+a:active {
+  color: #7900ba !important;
+  text-shadow: #7612ac 0 0 2px
+}
+
+table {
+  font-family: 'Segoe Wp';
+  border-collapse: collapse !important;
+  width: 100%
+}
+
+.tables {
+  overflow-x: auto
+}
+
+thead {
+  background-color: #f1f1f1
+}
+
+td, th {
+  border: 1px solid #ddd !important;
+  text-align: center;
+  padding: 8px
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd !important
+}
+
+tr:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
+  border: 1px solid #ddd !important
+}
+
+.itemAlign {
+  text-align: left;
+  padding-left: 1.5%
+}
+
+.table-checked-mark {
+  color: #37d200
+}
+
+.table-unchecked-mark {
+  color: #e44602
+}
+
+.separator {
+  border-bottom: 0.063em solid #EAECEF
+}
+
+.nuget-link {
+  text-decoration: none;
+  color: #4facfe;
+  text-align: center
+}
+
+.nuget-box-install {
+  margin: 0;
+  line-height: 125%;
+  text-align: center;
+  padding-top: 0.625em;
+  padding-bottom: 0.625em
+}
+
+.codeContainer {
+  background: #fff;
+  overflow: auto;
+  width: auto;
+  border: solid #EAECEF;
+  border-width: 0.063em;
+  padding: .2em .6em;
+  box-shadow: 0 0 0.625em rgba(3, 195, 255, .1)
+}
+
+span.namespace {
+  color: #00f
+}
+
+span.objects {
+  color: #2b91af
+}
+
+.codestyle {
+  margin: 0;
+  line-height: 125%
+}
+
+span.strings {
+  color: #a31515
+}
