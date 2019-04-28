@@ -124,6 +124,7 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             utl = new Utilites();
             ApplyTheme();
+            Orientation = DividerStyle.Horizontal;
         }
 
         #endregion Constructors
@@ -219,7 +220,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style associated with the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets Orientation of the control.")]
-        public DividerStyle Orientation { get; set; } = DividerStyle.Horizontal;
+        public DividerStyle Orientation { get; set; }
 
         /// <summary>
         /// Gets or sets the divider thickness.
