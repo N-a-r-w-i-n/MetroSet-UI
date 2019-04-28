@@ -232,13 +232,6 @@ namespace MetroSet_UI
                     Properties.Settings.Default.Save();
                     ControlProperties(value);
                 }
-                else
-                {
-                    Style = Style.Custom;
-                    Properties.Settings.Default.ThemeFile = value;
-                    Properties.Settings.Default.Save();
-                    ControlProperties(value);
-                }
                 _customTheme = value;
             }
         }
