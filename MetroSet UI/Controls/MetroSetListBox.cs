@@ -130,6 +130,7 @@ namespace MetroSet_UI.Controls
         private bool _multiKeyDown;
         private int _hoveredItem;
         private MetroSetScrollBar _svs;
+        private object _selectedValue;
 
         #endregion Internal Vars
 
@@ -410,6 +411,20 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
+        /// Gets or sets the value of the member property specified by the ValueMember propert.
+        /// </summary>
+        [Browsable(true), Category("MetroSet Framework"), Description("Gets or sets the value of the member property specified by the ValueMember property.")]
+        public object SelectedValue
+        {
+            get => _selectedValue;
+            set
+            {
+                _selectedValue = value;
+                Invalidate();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the ListBox supports multiple rows.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the ListBox supports multiple rows.")]
@@ -612,6 +627,10 @@ namespace MetroSet_UI.Controls
 
         public delegate void SelectedIndexChangedEventHandler(object sender);
 
+        public event SelectedValueEventHandler SelectedValueChanged;
+
+        public delegate void SelectedValueEventHandler(object sender);
+
         /// <summary>
         /// Here we update the scrollbar and it's properties while user resizes the ListBox.
         /// </summary>
@@ -647,6 +666,8 @@ namespace MetroSet_UI.Controls
                         _selectedItems.Clear();
                         SelectedIndex = index;
                         SelectedIndexChanged?.Invoke(this);
+                        SelectedValueChanged?.Invoke(this);
+
                     }
                 }
                 Invalidate();
