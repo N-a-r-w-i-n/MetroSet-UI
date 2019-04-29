@@ -116,7 +116,7 @@ namespace MetroSet_UI.Controls
         private Style _style;
         private StyleManager _styleManager;
         private bool _checked;
-        private readonly Timer _timer;
+        private readonly System.Timers.Timer _timer;
         private int _alpha;
 
         #endregion Internal Vars
@@ -135,12 +135,13 @@ namespace MetroSet_UI.Controls
             _utl = new Utilites();
             _alpha = 0;
             Cursor = Cursors.Hand;
-            _timer = new Timer()
+            _timer = new System.Timers.Timer()
             {
                 Interval = 10,
-                Enabled = false
+                AutoReset = true,
+                Enabled = true
             };
-            _timer.Tick += SetCheckedChanged;
+            _timer.Elapsed += SetCheckedChanged;
             ApplyTheme();
         }
 
@@ -369,17 +370,8 @@ namespace MetroSet_UI.Controls
                 _checked = value;
                 CheckedChanged?.Invoke(this);
                 SetCheckedChanged(this, null);
-                _timer.Enabled = value;
                 UpdateState();
-                switch (value)
-                {
-                    case true:
-                        CheckState = Enums.CheckState.Checked;
-                        break;
-                    case false:
-                        CheckState = Enums.CheckState.Unchecked;
-                        break;
-                }
+                CheckState = value ? Enums.CheckState.Checked : Enums.CheckState.Unchecked;
                 Invalidate();
             }
         }
