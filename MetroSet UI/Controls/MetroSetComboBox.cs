@@ -193,36 +193,43 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets border color used by the control
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color BorderColor { get; set; }
 
         /// <summary>
         /// Gets or sets arrow color used by the control
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color ArrowColor { get; set; }
 
         /// <summary>
         /// Gets or sets forecolor of the selected item used by the control
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color SelectedItemForeColor { get; set; }
 
         /// <summary>
         /// Gets or sets backcolor of the selected item used by the control
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color SelectedItemBackColor { get; set; }
 
         /// <summary>
         /// Gets or sets backcolor used by the control while disabled.
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color DisabledBackColor { get; set; }
 
         /// <summary>
         /// Gets or sets the forecolor of the control whenever while disabled.
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color DisabledForeColor { get; set; }
 
         /// <summary>
         /// Gets or sets the border color of the control while disabled.
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color DisabledBorderColor { get; set; }
 
         #endregion

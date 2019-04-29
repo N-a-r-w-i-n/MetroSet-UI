@@ -165,9 +165,11 @@ namespace MetroSet_UI.Controls
         public MetroSetTextBox()
         {
             SetStyle(
+                ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.ResizeRedraw |
                 ControlStyles.OptimizedDoubleBuffer |
-                ControlStyles.SupportsTransparentBackColor, true);
+                ControlStyles.SupportsTransparentBackColor |
+                ControlStyles.UserPaint, true);
             UpdateStyles();
             Font = MetroSetFonts.Regular(10);
             EvaluateVars();
@@ -286,7 +288,6 @@ namespace MetroSet_UI.Controls
                     BackColor = Color.FromArgb(238, 238, 238);
                     HoverColor = Color.FromArgb(102, 102, 102);
                     BorderColor = Color.FromArgb(155, 155, 155);
-                    WatermarkText = "";
                     DisabledBackColor = Color.FromArgb(204, 204, 204);
                     DisabledBorderColor = Color.FromArgb(155, 155, 155);
                     DisabledForeColor = Color.FromArgb(136, 136, 136);
@@ -300,7 +301,6 @@ namespace MetroSet_UI.Controls
                     BackColor = Color.FromArgb(34, 34, 34);
                     HoverColor = Color.FromArgb(65, 177, 225);
                     BorderColor = Color.FromArgb(110, 110, 110);
-                    WatermarkText = "";
                     DisabledBackColor = Color.FromArgb(80, 80, 80);
                     DisabledBorderColor = Color.FromArgb(109, 109, 109);
                     DisabledForeColor = Color.FromArgb(109, 109, 109);
@@ -499,10 +499,6 @@ namespace MetroSet_UI.Controls
             base.OnCreateControl();
             if (!Controls.Contains(T))
                 Controls.Add(T);
-            if (string.IsNullOrEmpty(T.Text) && !string.IsNullOrEmpty(WatermarkText))
-            {
-                T.Text = WatermarkText;
-            }
         }
 
 
@@ -863,7 +859,8 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the text in the TextBox while being empty.")]
         public string WatermarkText
         {
-            get => _watermarkText;
+            get
+            {return _watermarkText;}
             set
             {
                 _watermarkText = value;

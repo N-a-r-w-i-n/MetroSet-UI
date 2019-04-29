@@ -135,7 +135,7 @@
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage5);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage6);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage7);
-            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroSetTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroSetTabControl1.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(100, 38);
@@ -900,6 +900,7 @@
             this.metroSetListBox2.SelectedItem = null;
             this.metroSetListBox2.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.metroSetListBox2.SelectedItemColor = System.Drawing.Color.White;
+            this.metroSetListBox2.SelectedValue = null;
             this.metroSetListBox2.ShowBorder = false;
             this.metroSetListBox2.ShowScrollBar = true;
             this.metroSetListBox2.Size = new System.Drawing.Size(374, 286);
@@ -1188,12 +1189,11 @@
             this.metroSetTextBox2.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetTextBox2.StyleManager = this.styleManager1;
             this.metroSetTextBox2.TabIndex = 3;
-            this.metroSetTextBox2.Text = "Disabled TextBox";
             this.metroSetTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.metroSetTextBox2.ThemeAuthor = "Narwin";
             this.metroSetTextBox2.ThemeName = "MetroLite";
             this.metroSetTextBox2.UseSystemPasswordChar = false;
-            this.metroSetTextBox2.WatermarkText = "";
+            this.metroSetTextBox2.WatermarkText = "Disabled TextBox";
             // 
             // metroSetTextBox4
             // 
@@ -1217,12 +1217,11 @@
             this.metroSetTextBox4.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetTextBox4.StyleManager = this.styleManager1;
             this.metroSetTextBox4.TabIndex = 3;
-            this.metroSetTextBox4.Text = "Image TextBox";
             this.metroSetTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.metroSetTextBox4.ThemeAuthor = "Narwin";
             this.metroSetTextBox4.ThemeName = "MetroLite";
             this.metroSetTextBox4.UseSystemPasswordChar = false;
-            this.metroSetTextBox4.WatermarkText = "";
+            this.metroSetTextBox4.WatermarkText = "Image TextBox";
             // 
             // metroSetTextBox1
             // 
@@ -1247,12 +1246,11 @@
             this.metroSetTextBox1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetTextBox1.StyleManager = this.styleManager1;
             this.metroSetTextBox1.TabIndex = 3;
-            this.metroSetTextBox1.Text = "Normal TextBox";
             this.metroSetTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.metroSetTextBox1.ThemeAuthor = "Narwin";
             this.metroSetTextBox1.ThemeName = "MetroLite";
             this.metroSetTextBox1.UseSystemPasswordChar = false;
-            this.metroSetTextBox1.WatermarkText = "";
+            this.metroSetTextBox1.WatermarkText = "Normal TextBox";
             // 
             // metroSetContextMenuStrip1
             // 

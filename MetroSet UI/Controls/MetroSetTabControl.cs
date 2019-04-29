@@ -244,6 +244,12 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
+        /// Gets or sets the font used when displaying text in the control.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the font used when displaying text in the control.")]
+        public new Font Font { get; set; }
+
+        /// <summary>
         /// Gets or sets the area of the control (for example, along the top) where the tabs are aligned.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the area of the control (for example, along the top) where the tabs are aligned.")]
@@ -343,6 +349,7 @@ namespace MetroSet_UI.Controls
                             }
                         }
                         using (var tb = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
+
                         {
                             G.DrawString(TabPages[i].Text, Font, tb, r, _mth.SetPosition());
                         }

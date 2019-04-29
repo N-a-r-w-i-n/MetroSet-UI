@@ -1067,16 +1067,19 @@ namespace MetroSet_UI.Controls
         /// <summary>
         /// Gets or sets backcolor used by the control while disabled.
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color DisabledBackColor { get; set; } = Color.FromArgb(204, 204, 204);
 
         /// <summary>
         /// Gets or sets the forecolor of the control whenever while disabled.
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color DisabledForeColor { get; set; } = Color.FromArgb(136, 136, 136);
 
         /// <summary>
         /// Gets or sets the border color of the control while disabled.
         /// </summary>
+        [Category("MetroSet Framework")]
         public Color DisabledBorderColor { get; set; } = Color.FromArgb(155, 155, 155);
 
         #endregion Properties
