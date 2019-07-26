@@ -22,7 +22,9 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+using MetroSet_UI.Animates;
 using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
@@ -116,8 +118,7 @@ namespace MetroSet_UI.Controls
         private Style _style;
         private StyleManager _styleManager;
         private bool _checked;
-        private readonly System.Timers.Timer _timer;
-        private int _alpha;
+        private IntAnimate _animator;
 
         #endregion Internal Vars
 
@@ -133,15 +134,9 @@ namespace MetroSet_UI.Controls
             Font = MetroSetFonts.SemiBold(10);
             Font = new Font("Segoe UI", 10);
             _utl = new Utilites();
-            _alpha = 0;
-            Cursor = Cursors.Hand;
-            _timer = new System.Timers.Timer()
-            {
-                Interval = 10,
-                AutoReset = true,
-                Enabled = true
-            };
-            _timer.Elapsed += SetCheckedChanged;
+            _animator = new IntAnimate();
+            _animator.Setting(100, 0, 255, EasingType.Linear);
+            _animator.Update += SetCheckedChanged;
             ApplyTheme();
         }
 
@@ -240,10 +235,11 @@ namespace MetroSet_UI.Controls
             G.SmoothingMode = SmoothingMode.AntiAlias;
 
             var rect = new Rectangle(0, 0, 17, 16);
+            var alpha = _animator.Value;
 
             using (var backBrush = new SolidBrush(Enabled ? BackgroundColor : Color.FromArgb(238, 238, 238)))
             {
-                using (var checkMarkBrush = new SolidBrush(Enabled ? Checked ? Color.FromArgb(_alpha, CheckSignColor) : BackgroundColor : Checked ? Color.FromArgb(_alpha, DisabledBorderColor) : Color.FromArgb(238, 238, 238)))
+                using (var checkMarkBrush = new SolidBrush(Enabled ? Checked || _animator.Active ? Color.FromArgb(alpha, CheckSignColor) : BackgroundColor : Checked || _animator.Active ? Color.FromArgb(alpha, DisabledBorderColor) : Color.FromArgb(238, 238, 238)))
                 {
                     using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor))
                     {
@@ -284,19 +280,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         /// <param name="o">object</param>
         /// <param name="args">EventArgs</param>
-        private void SetCheckedChanged(object o, EventArgs args)
+        private void SetCheckedChanged(int value)
         {
-            if (Checked)
-            {
-                if (_alpha >= 255) return;
-                _alpha += 1;
-                Invalidate();
-            }
-            else if (_alpha > 0)
-            {
-                _alpha -= 1;
-                Invalidate();
-            }
+            Invalidate();
         }
 
         /// <summary>
@@ -369,7 +355,7 @@ namespace MetroSet_UI.Controls
             {
                 _checked = value;
                 CheckedChanged?.Invoke(this);
-                SetCheckedChanged(this, null);
+                _animator.Reverse(!value);
                 UpdateState();
                 CheckState = value ? Enums.CheckState.Checked : Enums.CheckState.Unchecked;
                 Invalidate();
@@ -437,10 +423,6 @@ namespace MetroSet_UI.Controls
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                _timer.Dispose();
-            }
             base.Dispose(disposing);
         }
 

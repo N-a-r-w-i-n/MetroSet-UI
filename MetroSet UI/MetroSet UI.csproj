@@ -76,6 +76,13 @@
     <Compile Include="Actions\MetroSetRadiobuttonActionList.cs" />
     <Compile Include="Actions\MetroSetDividerActionList.cs" />
     <Compile Include="Actions\MetroSetCheckBoxActionList.cs" />
+    <Compile Include="Animates\Animate.cs" />
+    <Compile Include="Animates\ColorAnimate.cs" />
+    <Compile Include="Animates\DoubleAnimat.cs" />
+    <Compile Include="Animates\IntAnimate.cs" />
+    <Compile Include="Animates\Interpolation.cs" />
+    <Compile Include="Animates\PointFAnimate.cs" />
+    <Compile Include="Animates\SizeFAnimate.cs" />
     <Compile Include="Child\MetroSetItemCollection.cs" />
     <Compile Include="Child\MetroSetTabPage.cs">
       <SubType>Component</SubType>
@@ -153,6 +160,7 @@
     <Compile Include="Design\MetroSetBadgeDesigner.cs" />
     <Compile Include="Design\MetroSetButtonDesigner.cs" />
     <Compile Include="Design\MetroSetListBoxDesigner.cs" />
+    <Compile Include="Enums\EasingType.cs" />
     <Compile Include="Enums\ProgressOrientation.cs" />
     <Compile Include="Forms\MetroSetMessageBox.cs">
       <SubType>Form</SubType>

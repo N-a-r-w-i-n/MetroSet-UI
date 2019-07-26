@@ -22,6 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using MetroSet_UI.Animates;
 using MetroSet_UI.Child;
 using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
@@ -113,6 +114,9 @@ namespace MetroSet_UI.Controls
 
         private Style _style;
         private StyleManager _styleManager;
+        private PointFAnimate _slideAnimator;
+        private Graphics _slideGraphics;
+        private Bitmap _slideBitmap;
 
         #endregion Internal Vars
 
@@ -131,6 +135,8 @@ namespace MetroSet_UI.Controls
             Font = MetroSetFonts.UIRegular(8);
             _mth = new Methods();
             _utl = new Utilites();
+            _slideAnimator = new PointFAnimate();
+            _slideAnimator.Update += OnSlideAnimateUpdate;
             ApplyTheme();
         }
 
@@ -215,6 +221,25 @@ namespace MetroSet_UI.Controls
         #endregion ApplyTheme
 
         #region Properties
+
+        /// <summary>
+        /// Get or set slide animate time(ms).
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Get or set slide animate time(ms).")]
+        public int AnimateTime
+        {
+            get;
+            set;
+        } = 200;
+        /// <summary>
+        /// Get or set slide animate easing type
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Get or set slide animate easing type")]
+        public EasingType AnimateEasingType
+        {
+            get;
+            set;
+        } = EasingType.CubeOut;
 
         /// <summary>
         /// Gets the collection of tab pages in this tab control.
@@ -432,56 +457,59 @@ namespace MetroSet_UI.Controls
         // Credits : Mavamaarten
 
         private int _oldIndex;
-
-        private void DoAnimationScrollLeft(Control control1, Control control2)
+        
+        private void OnSlideAnimateUpdate(PointF alpha)
         {
-            var G = control1.CreateGraphics();
-            var p1 = new Bitmap(control1.Width, control1.Height);
-            var p2 = new Bitmap(control2.Width, control2.Height);
-            control1.DrawToBitmap(p1, new Rectangle(0, 0, control1.Width, control1.Height));
-            control2.DrawToBitmap(p2, new Rectangle(0, 0, control2.Width, control2.Height));
+            _slideGraphics.DrawImage(_slideBitmap, alpha);
+        }
 
-            foreach (Control c in control1.Controls)
+        private void DoSlideAnimate(TabPage control1, TabPage control2, bool moveback)
+        {
+            _slideGraphics = Graphics.FromHwnd(control2.Handle);
+            _slideBitmap = new Bitmap(control1.Width + control2.Width, control1.Height + control2.Height);
+
+            if (moveback)
+            {
+                control2.DrawToBitmap(_slideBitmap, new Rectangle(0, 0, control2.Width, control2.Height));
+                control1.DrawToBitmap(_slideBitmap, new Rectangle(control2.Width, 0, control1.Width, control1.Height));
+            }
+            else
+            {
+                control1.DrawToBitmap(_slideBitmap, new Rectangle(0, 0, control1.Width, control1.Height));
+                control2.DrawToBitmap(_slideBitmap, new Rectangle(control1.Width, 0, control2.Width, control2.Height));
+            }
+
+            foreach (Control c in control2.Controls)
             {
                 c.Hide();
             }
 
-            var slide = control1.Width - (control1.Width % Speed);
-
-            int a;
-            for (a = 0; a <= slide; a += Speed)
-            {
-                G.DrawImage(p1, new Rectangle(a, 0, control1.Width, control1.Height));
-                G.DrawImage(p2, new Rectangle(a - control2.Width, 0, control2.Width, control2.Height));
-            }
-            a = control1.Width;
-            G.DrawImage(p1, new Rectangle(a, 0, control1.Width, control1.Height));
-            G.DrawImage(p2, new Rectangle(a - control2.Width, 0, control2.Width, control2.Height));
-
-            SelectedTab = (TabPage)control2;
-
-            foreach (Control c in control2.Controls)
-            {
-                c.Show();
-            }
-
-            foreach (Control c in control1.Controls)
-            {
-                c.Show();
-            }
+            _slideAnimator.Start(
+                AnimateTime,
+                new Point(moveback ? -control2.Width : 0, 0),
+                new Point(moveback ? 0 : -control1.Width, 0),
+                AnimateEasingType,
+                // Complate action
+                (o, e) =>
+                {
+                    SelectedTab = control2;
+                    foreach (Control c in control2.Controls)
+                    {
+                        c.Show();
+                    }
+                }
+            );
         }
 
         protected override void OnSelecting(TabControlCancelEventArgs e)
         {
             if (!UseAnimation) return;
-            if (_oldIndex < e.TabPageIndex)
+            if (_slideAnimator.Active)
             {
-                DoAnimationScrollRight(TabPages[_oldIndex], TabPages[e.TabPageIndex]);
+                e.Cancel = true;
+                return;
             }
-            else
-            {
-                DoAnimationScrollLeft(TabPages[_oldIndex], TabPages[e.TabPageIndex]);
-            }
+            DoSlideAnimate(TabPages[_oldIndex], TabPages[e.TabPageIndex], _oldIndex > e.TabPageIndex);
         }
 
         protected override void OnDeselecting(TabControlCancelEventArgs e)
