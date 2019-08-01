@@ -459,6 +459,9 @@ namespace MetroSet_UI.Controls
 
         private void DoSlideAnimate(TabPage control1, TabPage control2, bool moveback)
         {
+            // initialize control and child controls when control first painted
+            _utl.InitControlHandle(control1);
+            _utl.InitControlHandle(control2);
             _slideGraphics = Graphics.FromHwnd(control2.Handle);
             _slideBitmap = new Bitmap(control1.Width + control2.Width, control1.Height + control2.Height);
 
