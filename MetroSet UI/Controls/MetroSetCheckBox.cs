@@ -137,7 +137,7 @@ namespace MetroSet_UI.Controls
             _utl = new Utilites();
             _animator = new IntAnimate();
             _animator.Setting(100, 0, 255, EasingType.Linear);
-            _animator.Update += SetCheckedChanged;
+            _animator.Update = (alpha) => Invalidate();
             ApplyTheme();
         }
 
@@ -291,16 +291,6 @@ namespace MetroSet_UI.Controls
         public event CheckedChangedEventHandler CheckedChanged;
 
         public delegate void CheckedChangedEventHandler(object sender);
-
-        /// <summary>
-        /// The Method that increases and decreases the alpha of check symbol which it make the control animate.
-        /// </summary>
-        /// <param name="o">object</param>
-        /// <param name="args">EventArgs</param>
-        private void SetCheckedChanged(int value)
-        {
-            Invalidate();
-        }
 
         /// <summary>
         /// Here we will handle the checking state in runtime.

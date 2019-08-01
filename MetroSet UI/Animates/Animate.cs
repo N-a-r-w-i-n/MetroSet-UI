@@ -7,11 +7,15 @@ namespace MetroSet_UI.Animates
     // interpolation animate
     public abstract class Animate<T> : IDisposable
     {
-        // interface for custom animate
-        public delegate void UpdateEventHandler(T value);
+        /// <summary>
+        /// Call when animation update
+        /// </summary>
+        public Action<T> Update { get; set; }
 
-        // update event for user to do anything they want
-        public event UpdateEventHandler Update;
+        /// <summary>
+        /// Call when animation complate
+        /// </summary>
+        public MethodInvoker Complete { get; set; }
 
         #region Internal Vars
         // a bad way to record time...
@@ -20,8 +24,6 @@ namespace MetroSet_UI.Animates
         private Timer _animateTimer;
         // reverse animate
         private bool _reverse;
-        // ......
-        protected EventHandler _complated;
         #endregion
 
         #region Constructors
@@ -41,13 +43,12 @@ namespace MetroSet_UI.Animates
 
         #region Functions
         // just set once, and use start, back or reverse to play animate
-        public void Setting(int duration, T initial, T end, EasingType easing = EasingType.Linear, EventHandler complated = null)
+        public void Setting(int duration, T initial, T end, EasingType easing = EasingType.Linear)
         {
             InitialValue = initial;
             EndValue = end;
             EasingType = easing;
             Duration = duration;
-            _complated = complated;
         }
 
         // start animate with default setting
@@ -122,16 +123,16 @@ namespace MetroSet_UI.Animates
         }
 
         // start animate with specific setting
-        public void Start(int duration, T initial, T end, EasingType easing = EasingType.Linear, EventHandler callback = null)
+        public void Start(int duration, T initial, T end, EasingType easing = EasingType.Linear)
         {
-            Setting(duration, initial, end, easing, callback);
+            Setting(duration, initial, end, easing);
             Start();
         }
 
         // back animate with specific setting
-        public void Back(int duration, T initial, T end, EasingType easing = EasingType.Linear, EventHandler callback = null)
+        public void Back(int duration, T initial, T end, EasingType easing = EasingType.Linear)
         {
-            Setting(duration, initial, end, easing, callback);
+            Setting(duration, initial, end, easing);
             Back();
         }
         #endregion
@@ -150,15 +151,13 @@ namespace MetroSet_UI.Animates
 
             _lastUpdateTime = updateTime;
             Alpha = Math.Max(0.0, Math.Min(Alpha + (_reverse ? -elapsed : elapsed), 1.0));
-
-            if (Update != null)
-                Update.Invoke(Value);
+            
+            Update?.Invoke(Value);
 
             if (Alpha == 0.0 || Alpha == 1.0)
             {
                 Pause();
-                if (_complated != null)
-                    _complated.Invoke(this, null);
+                Complete?.Invoke();
             }
         }
         #endregion

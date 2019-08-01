@@ -133,7 +133,11 @@ namespace MetroSet_UI.Controls
             _utl = new Utilites();
             _animator = new IntAnimate();
             _animator.Setting(100, 0, 132, EasingType.Linear);
-            _animator.Update += SetCheckedChanged;
+            _animator.Update = (alpha) =>
+            {
+                _switchlocation = alpha;
+                Invalidate(false);
+            };
             ApplyTheme();
         }
 
@@ -275,17 +279,6 @@ namespace MetroSet_UI.Controls
         public delegate void SwitchedChangedEventHandler(object sender);
 
         public event SwitchedChangedEventHandler SwitchedChanged;
-
-        /// <summary>
-        /// The Method that increases and decreases the location symbol which it make the control animate.
-        /// </summary>
-        /// <param name="o">object</param>
-        /// <param name="args">EventArgs</param>
-        private void SetCheckedChanged(int value)
-        {
-            _switchlocation = value;
-            Invalidate(false);
-        }
 
         /// <summary>
         /// Here we will handle the checking state in runtime.

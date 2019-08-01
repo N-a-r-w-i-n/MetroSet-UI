@@ -136,7 +136,6 @@ namespace MetroSet_UI.Controls
             _mth = new Methods();
             _utl = new Utilites();
             _slideAnimator = new PointFAnimate();
-            _slideAnimator.Update += OnSlideAnimateUpdate;
             ApplyTheme();
         }
 
@@ -457,11 +456,6 @@ namespace MetroSet_UI.Controls
         // Credits : Mavamaarten
 
         private int _oldIndex;
-        
-        private void OnSlideAnimateUpdate(PointF alpha)
-        {
-            _slideGraphics.DrawImage(_slideBitmap, alpha);
-        }
 
         private void DoSlideAnimate(TabPage control1, TabPage control2, bool moveback)
         {
@@ -483,21 +477,24 @@ namespace MetroSet_UI.Controls
             {
                 c.Hide();
             }
-
+            
+            _slideAnimator.Update = (alpha) =>
+            {
+                _slideGraphics.DrawImage(_slideBitmap, alpha);
+            };
+            _slideAnimator.Complete = () =>
+            {
+                SelectedTab = control2;
+                foreach (Control c in control2.Controls)
+                {
+                    c.Show();
+                }
+            };
             _slideAnimator.Start(
                 AnimateTime,
                 new Point(moveback ? -control2.Width : 0, 0),
                 new Point(moveback ? 0 : -control1.Width, 0),
-                AnimateEasingType,
-                // Complate action
-                (o, e) =>
-                {
-                    SelectedTab = control2;
-                    foreach (Control c in control2.Controls)
-                    {
-                        c.Show();
-                    }
-                }
+                AnimateEasingType
             );
         }
 
