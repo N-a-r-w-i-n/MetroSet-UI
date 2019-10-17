@@ -24,6 +24,7 @@
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace MetroSet_UI.Extensions
 {
@@ -115,6 +116,27 @@ namespace MetroSet_UI.Extensions
         public Color GetAlphaHexColor(int alpha, string hexColor)
         {
             return Color.FromArgb(alpha, ColorTranslator.FromHtml(hexColor));
+        }
+
+        // Check and create handle of control
+        // Credits :
+        //     control invalidate does not trigger the paint event of hidden or invisible control
+        //     see https://stackoverflow.com/questions/38137654
+        //     force create handle
+        //     see https://stackoverflow.com/questions/1807921/
+        /// <summary>
+        /// Initialize the Handle of Control and child controls if their handle were not created
+        /// </summary>
+        public void InitControlHandle(Control ctrl)
+        {
+            if (!ctrl.IsHandleCreated)
+            {
+                var unused = ctrl.Handle;
+                foreach (Control child in ctrl.Controls)
+                {
+                    InitControlHandle(child);
+                }
+            }
         }
     }
 }

@@ -22,7 +22,9 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+using MetroSet_UI.Animates;
 using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 using MetroSet_UI.Native;
@@ -114,7 +116,7 @@ namespace MetroSet_UI.Controls
         private bool _switched;
         private Style _style;
         private int _switchlocation = 0;
-        private readonly Timer _timer;
+        private IntAnimate _animator;
 
         #endregion Internal Vars
 
@@ -129,12 +131,13 @@ namespace MetroSet_UI.Controls
             UpdateStyles();
             Cursor = Cursors.Hand;
             _utl = new Utilites();
-            _timer = new Timer
+            _animator = new IntAnimate();
+            _animator.Setting(100, 0, 132, EasingType.Linear);
+            _animator.Update = (alpha) =>
             {
-                Interval = 1,
-                Enabled = false
+                _switchlocation = alpha;
+                Invalidate(false);
             };
-            _timer.Tick += SetCheckedChanged;
             ApplyTheme();
         }
 
@@ -278,31 +281,6 @@ namespace MetroSet_UI.Controls
         public event SwitchedChangedEventHandler SwitchedChanged;
 
         /// <summary>
-        /// The Method that increases and decreases the location symbol which it make the control animate.
-        /// </summary>
-        /// <param name="o">object</param>
-        /// <param name="args">EventArgs</param>
-        private void SetCheckedChanged(object o, EventArgs args)
-        {
-            if (Switched)
-            {
-                if (_switchlocation >= 131) return;
-                _switchlocation += 5;
-                Invalidate(false);
-                if (_switchlocation == 132)
-                    _timer.Enabled = false;
-            }
-            else
-            {
-                if (_switchlocation <= 0) return;
-                _switchlocation -= 5;
-                Invalidate(false);
-                if (_switchlocation == 0)
-                    _timer.Enabled = false;
-            }
-        }
-
-        /// <summary>
         /// Here we will handle the checking state in runtime.
         /// </summary>
         /// <param name="e">EventArgs</param>
@@ -361,8 +339,7 @@ namespace MetroSet_UI.Controls
             {
                 _switched = value;
                 SwitchedChanged?.Invoke(this);
-                SetCheckedChanged(this, null);
-                _timer.Enabled = true;
+                _animator.Reverse(!value);
                 CheckState = value != true ? Enums.CheckState.Unchecked : Enums.CheckState.Checked;
                 Invalidate();
             }
@@ -444,10 +421,6 @@ namespace MetroSet_UI.Controls
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                _timer.Dispose();
-            }
             base.Dispose(disposing);
         }
 

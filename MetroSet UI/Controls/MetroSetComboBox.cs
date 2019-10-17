@@ -245,23 +245,20 @@ namespace MetroSet_UI.Controls
             var G = e.Graphics;
             G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            try
+            if (e.Index == -1)
             {
-                var itemState = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
-                using (var bg = new SolidBrush(itemState ? SelectedItemBackColor : BackgroundColor))
-                using (var tc = new SolidBrush(itemState ? SelectedItemForeColor : ForeColor))
-                {
-                    using (var f = new Font(Font.Name, 9))
-                    {
-                        G.FillRectangle(bg, e.Bounds);
-                        G.DrawString(GetItemText(Items[e.Index]), f, tc, e.Bounds, _mth.SetPosition(StringAlignment.Near));
-                    }
-                }
-
+                return;
             }
-            catch
+
+            var itemState = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+            using (var bg = new SolidBrush(itemState ? SelectedItemBackColor : BackgroundColor))
+            using (var tc = new SolidBrush(itemState ? SelectedItemForeColor : ForeColor))
             {
-                // 
+                using (var f = new Font(Font.Name, 9))
+                {
+                    G.FillRectangle(bg, e.Bounds);
+                    G.DrawString(GetItemText(Items[e.Index]), f, tc, e.Bounds, _mth.SetPosition(StringAlignment.Near));
+                }
             }
         }
 
