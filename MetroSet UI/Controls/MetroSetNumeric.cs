@@ -31,6 +31,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
 
 namespace MetroSet_UI.Controls
 {
@@ -114,6 +115,7 @@ namespace MetroSet_UI.Controls
         private StyleManager _styleManager;
         private Point _point;
         private int _value;
+        private readonly Timer _holdTimer;
 
         #endregion Internal Vars
 
@@ -132,6 +134,13 @@ namespace MetroSet_UI.Controls
             _utl = new Utilites();
             ApplyTheme();
             _point = new Point(0, 0);
+            _holdTimer = new Timer()
+            {
+                Interval = 10,
+                AutoReset = true,
+                Enabled = false
+            };
+            _holdTimer.Elapsed += HoldTimer_Tick;
         }
 
         #endregion Constructors
@@ -294,7 +303,7 @@ namespace MetroSet_UI.Controls
         }
 
         [Browsable(false)]
-        public override Color BackColor => Color.Transparent;
+        public sealed override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the control backcolor.
@@ -351,11 +360,10 @@ namespace MetroSet_UI.Controls
         {
             base.OnMouseMove(e);
             _point = e.Location;
-            if (_point.X > Width - 50)
-            {
-                Cursor = Cursors.Hand;
-            }
             Invalidate();
+            Cursor = _point.X > Width - 50 ? Cursors.Hand : Cursors.IBeam;
+
+
         }
 
         /// <summary>
@@ -365,17 +373,7 @@ namespace MetroSet_UI.Controls
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            if (_point.X <= Width - 45 || _point.X >= Width - 3) return;
-            if (_point.X > Width - 45 && _point.X < Width - 25)
-            {
-                if (Value + 1 <= Maximum)
-                    Value += 1;
-            }
-            else
-            {
-                if (Value - 1 >= Minimum)
-                    Value -= 1;
-            }
+            Revaluate();
         }
 
         /// <summary>
@@ -404,7 +402,42 @@ namespace MetroSet_UI.Controls
             Height = 26;
         }
 
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (_point.X <= Width - 45 || _point.X >= Width - 3) return;
+            if (e.Button == MouseButtons.Left)
+            {
+                _holdTimer.Enabled = true;
+            }
 
+            Invalidate();
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            _holdTimer.Enabled = false;
+        }
+
+        private void HoldTimer_Tick(object sender, EventArgs args)
+        {
+            Revaluate();
+        }
+
+        private void Revaluate()
+        {
+            if (_point.X <= Width - 45 || _point.X >= Width - 3) return;
+            if (_point.X > Width - 45 && _point.X < Width - 25)
+            {
+                if (Value + 1 <= Maximum)
+                    Value += 1;
+            }
+            else
+            {
+                if (Value - 1 >= Minimum)
+                    Value -= 1;
+            }
+        }
 
         #endregion
 

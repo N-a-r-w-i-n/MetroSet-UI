@@ -126,31 +126,6 @@ namespace MetroSet_UI.Controls
 
         private RichTextBox T = new RichTextBox();
 
-        private RichTextBox _T
-        {
-            get => _T;
-            set
-            {
-                if (_T != null)
-                {
-                    _T.MouseHover -= T_MouseHover;
-                    _T.MouseUp -= T_MouseUp;
-                    _T.MouseLeave -= T_Leave;
-                    _T.MouseEnter -= T_Enter;
-                    _T.KeyDown -= T_KeyDown;
-                    _T.TextChanged -= T_TextChanged;
-                }
-                _T = value;
-                if (_T == null) return;
-                _T.MouseHover += T_MouseHover;
-                _T.MouseUp += T_MouseUp;
-                _T.Leave += T_Leave;
-                _T.Enter += T_Enter;
-                _T.KeyDown += T_KeyDown;
-                _T.TextChanged += T_TextChanged;
-            }
-        }
-
         #endregion Base RichTextBox
 
         #endregion Internal Vars
@@ -195,6 +170,13 @@ namespace MetroSet_UI.Controls
             T.Location = new Point(7, 8);
             T.Font = Font;
             T.Size = new Size(Width, Height);
+
+            T.MouseHover += T_MouseHover;
+            T.MouseUp += T_MouseUp;
+            T.Leave += T_Leave;
+            T.Enter += T_Enter;
+            T.KeyDown += T_KeyDown;
+            T.TextChanged += T_TextChanged;
 
         }
 

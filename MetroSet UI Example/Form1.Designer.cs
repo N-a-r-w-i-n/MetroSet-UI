@@ -135,13 +135,12 @@
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage5);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage6);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage7);
-            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroSetTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroSetTabControl1.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl1.Location = new System.Drawing.Point(12, 70);
             this.metroSetTabControl1.Name = "metroSetTabControl1";
-            this.metroSetTabControl1.SelectedIndex = 2;
+            this.metroSetTabControl1.SelectedIndex = 0;
             this.metroSetTabControl1.Size = new System.Drawing.Size(1114, 616);
             this.metroSetTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroSetTabControl1.Speed = 100;
@@ -1257,7 +1256,7 @@
             this.metroSetContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.textBoxToolStripMenuItem});
             this.metroSetContextMenuStrip1.Name = "metroSetContextMenuStrip1";
-            this.metroSetContextMenuStrip1.Size = new System.Drawing.Size(115, 26);
+            this.metroSetContextMenuStrip1.Size = new System.Drawing.Size(116, 26);
             this.metroSetContextMenuStrip1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetContextMenuStrip1.StyleManager = null;
             this.metroSetContextMenuStrip1.ThemeAuthor = "Narwin";
@@ -1266,7 +1265,7 @@
             // textBoxToolStripMenuItem
             // 
             this.textBoxToolStripMenuItem.Name = "textBoxToolStripMenuItem";
-            this.textBoxToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.textBoxToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.textBoxToolStripMenuItem.Text = "TextBox";
             // 
             // metroSetLabel8

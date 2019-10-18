@@ -133,28 +133,6 @@ namespace MetroSet_UI.Controls
         #region Base TextBox
 
         private TextBox T = new TextBox();
-        private TextBox _T
-        {
-            get => _T;
-            set
-            {
-                if (_T != null)
-                {
-                    _T.MouseHover -= T_MouseHover;
-                    _T.MouseLeave -= T_Leave;
-                    _T.MouseEnter -= T_Enter;
-                    _T.KeyDown -= T_KeyDown;
-                    _T.TextChanged -= T_TextChanged;
-                }
-                _T = value;
-                if (_T == null) return;
-                _T.MouseHover += T_MouseHover;
-                _T.Leave += T_Leave;
-                _T.Enter += T_Enter;
-                _T.KeyDown += T_KeyDown;
-                _T.TextChanged += T_TextChanged;
-            }
-        }
 
         #endregion
 
@@ -212,6 +190,14 @@ namespace MetroSet_UI.Controls
             {
                 Height = T.Height + 11;
             }
+
+            T.MouseHover += T_MouseHover;
+            T.Leave += T_Leave;
+            T.Enter += T_Enter;
+            T.KeyDown += T_KeyDown;
+            T.TextChanged += T_TextChanged;
+            T.KeyPress += T_KeyPress;
+
         }
 
         #endregion Constructors
@@ -369,6 +355,8 @@ namespace MetroSet_UI.Controls
         public new event TextChangedEventHandler TextChanged;
         public delegate void TextChangedEventHandler(object sender);
 
+        public virtual event KeyPressEventHandler KeyPressed;
+        public delegate void KeyPressEventHandler(object sender);
 
         /// <summary>
         /// Handling textbox leave event and raising the same event here.
@@ -378,6 +366,12 @@ namespace MetroSet_UI.Controls
         public void T_Leave(object sender, EventArgs e)
         {
             base.OnMouseLeave(e);
+            Invalidate();
+        }
+
+        public void T_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            KeyPressed?.Invoke(this);
             Invalidate();
         }
 
@@ -463,7 +457,7 @@ namespace MetroSet_UI.Controls
 
 
         /// <summary>
-        /// Handling Keydown event of thextbox cotnrol.
+        /// Handling Keydown event of textbox cotnrol.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">KeyEventArgs</param>
@@ -471,11 +465,9 @@ namespace MetroSet_UI.Controls
         {
             if (e.Control && e.KeyCode == Keys.A)
                 e.SuppressKeyPress = true;
-            if (e.Control && e.KeyCode == Keys.C)
-            {
-                T.Copy();
-                e.SuppressKeyPress = true;
-            }
+            if (!e.Control || e.KeyCode != Keys.C) return;
+            T.Copy();
+            e.SuppressKeyPress = true;
         }
 
 
@@ -508,10 +500,7 @@ namespace MetroSet_UI.Controls
         /// <param name="text"></param>
         public void AppendText(string text)
         {
-            if (T != null)
-            {
-                T.AppendText(text);
-            }
+            T?.AppendText(text);
         }
 
 
@@ -520,12 +509,10 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Undo()
         {
-            if (T != null)
+            if (T == null) return;
+            if (T.CanUndo)
             {
-                if (T.CanUndo)
-                {
-                    T.Undo();
-                }
+                T.Undo();
             }
         }
 
@@ -537,14 +524,7 @@ namespace MetroSet_UI.Controls
         /// <returns></returns>
         public int GetLineFromCharIndex(int index)
         {
-            if (T != null)
-            {
-                return T.GetLineFromCharIndex(index);
-            }
-            else
-            {
-                return 0;
-            }
+            return T?.GetLineFromCharIndex(index) ?? 0;
         }
 
 
@@ -566,9 +546,7 @@ namespace MetroSet_UI.Controls
         /// <returns></returns>
         public int GetCharIndexFromPosition(Point pt)
         {
-            if (T == null)
-                return 0;
-            return T.GetCharIndexFromPosition(pt);
+            return T?.GetCharIndexFromPosition(pt) ?? 0;
         }
 
 
@@ -577,9 +555,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void ClearUndo()
         {
-            if (T == null)
-                return;
-            T.ClearUndo();
+            T?.ClearUndo();
         }
 
 
@@ -588,9 +564,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Copy()
         {
-            if (T == null)
-                return;
-            T.Copy();
+            T?.Copy();
         }
 
 
@@ -599,9 +573,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Cut()
         {
-            if (T == null)
-                return;
-            T.Cut();
+            T?.Cut();
         }
 
 
@@ -610,9 +582,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void SelectAll()
         {
-            if (T == null)
-                return;
-            T.SelectAll();
+            T?.SelectAll();
         }
 
 
@@ -621,9 +591,7 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void DeselectAll()
         {
-            if (T == null)
-                return;
-            T.DeselectAll();
+            T?.DeselectAll();
         }
 
 
@@ -633,9 +601,7 @@ namespace MetroSet_UI.Controls
         /// <param name="clipFormat"></param>
         public void Paste(string clipFormat)
         {
-            if (T == null)
-                return;
-            T.Paste(clipFormat);
+            T?.Paste(clipFormat);
         }
 
 
@@ -646,9 +612,7 @@ namespace MetroSet_UI.Controls
         /// <param name="length"></param>
         public void Select(int start, int length)
         {
-            if (T == null)
-                return;
-            T.Select(start, length);
+            T?.Select(start, length);
         }
 
         #endregion
@@ -859,8 +823,7 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the text in the TextBox while being empty.")]
         public string WatermarkText
         {
-            get
-            {return _watermarkText;}
+            get => _watermarkText;
             set
             {
                 _watermarkText = value;
@@ -945,7 +908,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the font of the text displayed by the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the font of the text displayed by the control.")]
-        public override Font Font
+        public sealed override Font Font
         {
             get => base.Font;
             set
@@ -1014,6 +977,8 @@ namespace MetroSet_UI.Controls
         public Color DisabledBorderColor { get; set; }
 
         #endregion
+
+
 
     }
 }
