@@ -26,6 +26,8 @@
 
 ## 
 
+[![Join the chat at https://gitter.im/MetroSet-UI/community](https://badges.gitter.im/MetroSet-UI/community.svg)](https://gitter.im/MetroSet-UI/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <h3 align="center">Install via NuGet</h3>
 
     Install-Package MetroSet_UI
