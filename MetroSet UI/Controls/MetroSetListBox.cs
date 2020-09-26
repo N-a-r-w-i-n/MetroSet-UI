@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -753,23 +754,29 @@ namespace MetroSet_UI.Controls
             switch (keyData)
             {
                 case Keys.Down:
-                    try
-                    {
-                        _selectedItems.Remove(_items[SelectedIndex]);
-                        SelectedIndex += 1;
-                        _selectedItems.Add(_items[SelectedIndex]);
-                    }
-                    catch { }
+	                try
+	                {
+		                _selectedItems.Remove(_items[SelectedIndex]);
+		                SelectedIndex += 1;
+		                _selectedItems.Add(_items[SelectedIndex]);
+	                }
+	                catch
+	                {
+						//
+	                }
                     break;
 
                 case Keys.Up:
-                    try
-                    {
-                        _selectedItems.Remove(_items[SelectedIndex]);
-                        SelectedIndex -= 1;
-                        _selectedItems.Add(_items[SelectedIndex]);
-                    }
-                    catch { }
+	                try
+	                {
+		                _selectedItems.Remove(_items[SelectedIndex]);
+		                SelectedIndex -= 1;
+		                _selectedItems.Add(_items[SelectedIndex]);
+	                }
+	                catch
+	                {
+						//
+	                }
                     break;
             }
             Invalidate();

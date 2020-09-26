@@ -115,6 +115,7 @@
             this.metroSetLabel18 = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
             this.metroSetToolTip1 = new MetroSet_UI.Components.MetroSetToolTip();
+            this.metroSetListBox1 = new MetroSet_UI.Controls.MetroSetListBox();
             this.metroSetTabControl1.SuspendLayout();
             this.metroSetTabPage2.SuspendLayout();
             this.metroSetTabPage1.SuspendLayout();
@@ -757,6 +758,7 @@
             // metroSetTabPage3
             // 
             this.metroSetTabPage3.BaseColor = System.Drawing.Color.White;
+            this.metroSetTabPage3.Controls.Add(this.metroSetListBox1);
             this.metroSetTabPage3.Controls.Add(this.metroSetListBox2);
             this.metroSetTabPage3.Controls.Add(this.metroSetComboBox2);
             this.metroSetTabPage3.Controls.Add(this.metroSetComboBox1);
@@ -901,6 +903,7 @@
             this.metroSetListBox2.SelectedItem = null;
             this.metroSetListBox2.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.metroSetListBox2.SelectedItemColor = System.Drawing.Color.White;
+            this.metroSetListBox2.SelectedText = null;
             this.metroSetListBox2.SelectedValue = null;
             this.metroSetListBox2.ShowBorder = false;
             this.metroSetListBox2.ShowScrollBar = true;
@@ -2215,6 +2218,38 @@
             this.metroSetToolTip1.ThemeAuthor = "Narwin";
             this.metroSetToolTip1.ThemeName = "MetroLite";
             // 
+            // metroSetListBox1
+            // 
+            this.metroSetListBox1.BorderColor = System.Drawing.Color.LightGray;
+            this.metroSetListBox1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.metroSetListBox1.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            this.metroSetListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.metroSetListBox1.HoveredItemBackColor = System.Drawing.Color.LightGray;
+            this.metroSetListBox1.HoveredItemColor = System.Drawing.Color.DimGray;
+            this.metroSetListBox1.ItemHeight = 30;
+            this.metroSetListBox1.Items.Add("Ali");
+            this.metroSetListBox1.Items.Add("Omer");
+            this.metroSetListBox1.Items.Add("Karo");
+            this.metroSetListBox1.Items.Add("Usama");
+            this.metroSetListBox1.Items.Add("Sak");
+            this.metroSetListBox1.Location = new System.Drawing.Point(553, 402);
+            this.metroSetListBox1.MultiSelect = false;
+            this.metroSetListBox1.Name = "metroSetListBox1";
+            this.metroSetListBox1.SelectedIndex = -1;
+            this.metroSetListBox1.SelectedItem = null;
+            this.metroSetListBox1.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetListBox1.SelectedItemColor = System.Drawing.Color.White;
+            this.metroSetListBox1.SelectedText = null;
+            this.metroSetListBox1.SelectedValue = null;
+            this.metroSetListBox1.ShowBorder = true;
+            this.metroSetListBox1.ShowScrollBar = true;
+            this.metroSetListBox1.Size = new System.Drawing.Size(374, 148);
+            this.metroSetListBox1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetListBox1.StyleManager = this.styleManager1;
+            this.metroSetListBox1.TabIndex = 10;
+            this.metroSetListBox1.ThemeAuthor = "Narwin";
+            this.metroSetListBox1.ThemeName = "MetroLite";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -2327,5 +2362,6 @@
         private MetroSet_UI.Components.MetroSetToolTip metroSetToolTip1;
         private MetroSet_UI.Controls.MetroSetContextMenuStrip metroSetContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem textBoxToolStripMenuItem;
+		private MetroSet_UI.Controls.MetroSetListBox metroSetListBox1;
 	}
 }
