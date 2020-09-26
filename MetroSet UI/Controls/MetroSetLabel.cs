@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
 * MetroSet UI - MetroSet UI Framewrok
 * 
 * The MIT License (MIT)
@@ -39,7 +39,6 @@ namespace MetroSet_UI.Controls
     [Designer(typeof(MetroSetLabelDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetLabel : Label, iControl
     {
         #region Interfaces

@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
 * MetroSet UI - MetroSet UI Framewrok
 * 
 * The MIT License (MIT)
@@ -40,7 +40,6 @@ namespace MetroSet_UI.Controls
     [Designer(typeof(MetroSetDividerDesigner))]
     [DefaultProperty("Orientation")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetDivider : Control, iControl
     {
         #region Interfaces

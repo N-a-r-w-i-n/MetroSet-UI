@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
 * MetroSet UI - MetroSet UI Framewrok
 * 
 * The MIT License (MIT)
@@ -40,7 +40,6 @@ namespace MetroSet_UI.Controls
     [Designer(typeof(MetroSetLinkDesigner))]
     [DefaultProperty("Text")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetLink : LinkLabel, iControl
     {
         #region Interfaces

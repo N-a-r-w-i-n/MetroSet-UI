@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)

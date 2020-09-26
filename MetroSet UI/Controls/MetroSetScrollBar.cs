@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
 * MetroSet UI - MetroSet UI Framewrok
 * 
 * The MIT License (MIT)
@@ -22,7 +22,6 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
@@ -31,7 +30,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
+using MetroSet_UI.Design;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
@@ -40,7 +39,6 @@ namespace MetroSet_UI.Controls
     [DefaultEvent("Scroll")]
     [DefaultProperty("Value")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetScrollBar : Control, iControl
     {
 

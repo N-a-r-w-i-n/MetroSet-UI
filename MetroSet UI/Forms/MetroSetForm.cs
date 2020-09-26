@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)
@@ -46,7 +46,6 @@ namespace MetroSet_UI.Forms
     [DesignTimeVisible(false)]
     [ComVisible(true)]
     [InitializationEvent("Load")]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetForm : Form, iForm
     {
 

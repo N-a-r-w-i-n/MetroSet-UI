@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * MetroSet UI - MetroSet UI Framewrok
  * 
  * The MIT License (MIT)
@@ -41,7 +41,6 @@ namespace MetroSet_UI.Controls
     [DefaultEvent("ValueChanged")]
     [DefaultProperty("Value")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetProgressBar : Control, iControl
     {
         #region Interfaces

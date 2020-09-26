@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
 * MetroSet UI - MetroSet UI Framewrok
 *
 * The MIT License (MIT)
@@ -43,7 +43,6 @@ namespace MetroSet_UI.Controls
     [DefaultProperty("Items")]
     [DefaultEvent("SelectedIndexChanged")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetListBox : Control, iControl
     {
 

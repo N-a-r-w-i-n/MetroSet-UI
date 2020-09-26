@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
 * MetroSet UI - MetroSet UI Framewrok
 * 
 * The MIT License (MIT)
@@ -43,7 +43,6 @@ namespace MetroSet_UI.Controls
     [DefaultEvent("SwitchedChanged")]
     [DefaultProperty("Switched")]
     [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
     public class MetroSetSwitch : Control, iControl, IDisposable
     {
         #region Interfaces
