@@ -7,7 +7,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MetroSet_UI</RootNamespace>
     <AssemblyName>MetroSet UI</AssemblyName>
-    <GenerateAssemblyInfo >False</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
   
   </PropertyGroup>
@@ -17,5 +17,21 @@
     <Reference Include="System.Design" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
 
 </Project>

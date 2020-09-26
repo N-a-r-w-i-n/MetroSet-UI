@@ -128,6 +128,8 @@
             // 
             // metroSetTabControl1
             // 
+            this.metroSetTabControl1.AnimateEasingType = MetroSet_UI.Enums.EasingType.CubeOut;
+            this.metroSetTabControl1.AnimateTime = 200;
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage2);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage1);
             this.metroSetTabControl1.Controls.Add(this.metroSetTabPage3);
@@ -140,7 +142,7 @@
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(100, 38);
             this.metroSetTabControl1.Location = new System.Drawing.Point(12, 70);
             this.metroSetTabControl1.Name = "metroSetTabControl1";
-            this.metroSetTabControl1.SelectedIndex = 0;
+            this.metroSetTabControl1.SelectedIndex = 2;
             this.metroSetTabControl1.Size = new System.Drawing.Size(1114, 616);
             this.metroSetTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroSetTabControl1.Speed = 100;
@@ -908,6 +910,7 @@
             this.metroSetListBox2.TabIndex = 9;
             this.metroSetListBox2.ThemeAuthor = "Narwin";
             this.metroSetListBox2.ThemeName = "MetroLite";
+            this.metroSetListBox2.SelectedIndexChanged += new MetroSet_UI.Controls.MetroSetListBox.SelectedIndexChangedEventHandler(this.metroSetListBox2_SelectedIndexChanged);
             // 
             // metroSetComboBox2
             // 
@@ -2324,5 +2327,5 @@
         private MetroSet_UI.Components.MetroSetToolTip metroSetToolTip1;
         private MetroSet_UI.Controls.MetroSetContextMenuStrip metroSetContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem textBoxToolStripMenuItem;
-    }
+	}
 }

@@ -1,5 +1,5 @@
-﻿/**
- * MetroSet UI - MetroSet UI Framewrok
+﻿/*
+ * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
  * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -384,7 +384,7 @@ namespace MetroSet_UI.Forms
             {
                 BackgroundColor = Color.FromArgb(210, 50, 45);
                 BorderColor = Color.FromArgb(210, 50, 45);
-                ForegroundColor = Color.Black;
+                ForegroundColor = Color.White;
             }
 
             else if (icon == MessageBoxIcon.Information)
@@ -398,14 +398,14 @@ namespace MetroSet_UI.Forms
             {
                 BackgroundColor = Color.FromArgb(70, 165, 70);
                 BorderColor = Color.FromArgb(70, 165, 70);
-                ForegroundColor = Color.Black;
+                ForegroundColor = Color.White;
             }
 
             else if (icon == MessageBoxIcon.Exclamation || icon == MessageBoxIcon.Warning)
             {
                 BackgroundColor = Color.FromArgb(237, 156, 40);
                 BorderColor = Color.FromArgb(237, 156, 40);
-                ForegroundColor = Color.Black;
+                ForegroundColor = Color.White;
             }
 
             else if (icon == MessageBoxIcon.None || icon == MessageBoxIcon.Asterisk || icon == MessageBoxIcon.Hand)

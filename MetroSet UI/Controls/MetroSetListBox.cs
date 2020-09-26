@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 *
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -124,7 +124,8 @@ namespace MetroSet_UI.Controls
         private List<object> _indicates;
         private bool _multiSelect;
         private int _selectedIndex;
-        private string _selectedItem;
+        private object _selectedItem;
+        private string _selectedText;
         private bool _showScrollBar;
         private bool _multiKeyDown;
         private int _hoveredItem;
@@ -385,7 +386,7 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the currently selected item in the ListBox.
         /// </summary>
         [Browsable(false), Category("MetroSet Framework"), Description("Gets or sets the currently selected item in the ListBox.")]
-        public string SelectedItem
+        public object SelectedItem
         {
             get => _selectedItem;
             set
@@ -394,6 +395,22 @@ namespace MetroSet_UI.Controls
                 Invalidate();
             }
         }
+		
+        /// <summary>
+        /// Gets or sets the currently selected item in the ListBox.
+        /// </summary>
+        [Browsable(false), Category("MetroSet Framework"),
+         Description("Gets or sets the currently selected Text in the ListBox.")]
+        public string SelectedText
+        {
+	        get => _selectedText;
+	        set
+	        {
+		        _selectedText = value;
+		        Invalidate();
+	        }
+        }
+		
 
         /// <summary>
         /// Gets or sets the zero-based index of the currently selected item in a ListBox.
@@ -457,7 +474,7 @@ namespace MetroSet_UI.Controls
             set
             {
                 _showScrollBar = value;
-                _svs.Visible = value ? true : false;
+                _svs.Visible = value;
                 Invalidate();
             }
         }
@@ -641,18 +658,18 @@ namespace MetroSet_UI.Controls
             base.OnSizeChanged(e);
         }
 
-        /// <summary>
-        /// Here we will handle the selction item(s).
-        /// </summary>
-        /// <param name="e">MouseEventArgs</param>
-        protected override void OnMouseDown(MouseEventArgs e)
+
+		/// <summary>
+		/// Here we will handle the selection item(s).
+		/// </summary>
+		/// <param name="e">MouseEventArgs</param>
+		protected override void OnMouseDown(MouseEventArgs e)
         {
             Focus();
             if (e.Button == MouseButtons.Left)
             {
-                var index = _svs.Value / ItemHeight + e.Location.Y / ItemHeight;
-
-                if (index >= 0 && index < _items.Count)
+				var index = _svs.Value / ItemHeight + e.Location.Y / ItemHeight;
+				if (index >= 0 && index < _items.Count)
                 {
                     if (MultiSelect && _multiKeyDown)
                     {
@@ -663,14 +680,16 @@ namespace MetroSet_UI.Controls
                     {
                         _indicates.Clear();
                         _selectedItems.Clear();
-                        SelectedIndex = index;
-                        SelectedIndexChanged?.Invoke(this);
+                        _selectedItem = Items[index];
+						_selectedIndex = index;
+						_selectedValue = Items[index];
+						_selectedText = Items[index].ToString();
+						SelectedIndexChanged?.Invoke(this);
                         SelectedValueChanged?.Invoke(this);
-
                     }
                 }
-                Invalidate();
-            }
+				Invalidate();
+			}
             base.OnMouseDown(e);
         }
 
@@ -705,7 +724,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// The Method to update the size and locaion of the scrollbar.
+        /// The Method to update the size and location of the scrollbar.
         /// </summary>
         private void InvalidateLayout()
         {
