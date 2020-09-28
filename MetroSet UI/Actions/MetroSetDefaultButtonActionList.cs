@@ -1,5 +1,5 @@
-﻿/**
- * MetroSet UI - MetroSet UI Framewrok
+﻿/*
+ * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
  * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -32,11 +32,11 @@ namespace MetroSet_UI.Tasks
 {
     public class MetroSetDefaultButtonActionList : DesignerActionList
     {
-        private readonly MetroDefaultSetButton _metroSetButton;
+        private readonly MetroSetDefaultButton _metroSetButton;
 
         public MetroSetDefaultButtonActionList(IComponent component) : base(component)
         {
-            _metroSetButton = (MetroDefaultSetButton)component;
+            _metroSetButton = (MetroSetDefaultButton)component;
         }
 
         public Style Style

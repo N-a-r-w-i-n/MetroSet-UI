@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -120,6 +120,12 @@ namespace MetroSet_UI.Controls
         private int _thumbSize;
         private MouseMode _thumbState;
 
+		private int _smallChange;
+		private int _largeChange;
+		private ScrollOrientate _orientation;
+		private Color _disabledForeColor;
+		private Color _disabledBackColor;
+
         #endregion Internal Vars
 
         #region Constructors
@@ -225,7 +231,7 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
 
             var r = new Rectangle(0, 0, Width, Height);
 
@@ -233,8 +239,8 @@ namespace MetroSet_UI.Controls
             {
                 using (var thumbBrush = new SolidBrush(Enabled ? ForeColor : DisabledForeColor))
                 {
-                    G.FillRectangle(bg, r);
-                    G.FillRectangle(thumbBrush, _thumb);
+                    g.FillRectangle(bg, r);
+                    g.FillRectangle(thumbBrush, _thumb);
                 }
             }
         }
@@ -332,50 +338,98 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the distance to move a scroll bar in response to a small scroll command.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the distance to move a scroll bar in response to a small scroll command.")]
-        public int SmallChange { get; set; } = 1;
+		[DefaultValue(1)]
+		public int SmallChange
+		{
+			get { return _smallChange; }
+			set
+			{
+				_smallChange = value;
+				Refresh();
+			}
+		}
 
 
-        /// <summary>
-        /// Gets or sets the distance to move a scroll bar in response to a large scroll command.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the distance to move a scroll bar in response to a large scroll command.")]
-        public int LargeChange { get; set; } = 10;
 
-        /// <summary>
-        /// Gets or sets the scroll bar orientation.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the scroll bar orientation.")]
-        public ScrollOrientate Orientation { get; set; } = ScrollOrientate.Horizontal;
+		/// <summary>
+		/// Gets or sets the distance to move a scroll bar in response to a large scroll command.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the distance to move a scroll bar in response to a large scroll command.")]
+        [DefaultValue(10)]
+		public int LargeChange
+		{
+			get { return _largeChange; }
+			set
+			{
+				_largeChange = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets forecolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the scroll bar orientation.")]
+
+		/// <summary>
+		/// Gets or sets the scroll bar orientation.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the scroll bar orientation.")]
+		[DefaultValue(ScrollOrientate.Horizontal)]
+		public ScrollOrientate Orientation
+		{
+			get { return _orientation; }
+			set
+			{
+				_orientation = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets fore color used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the scroll bar orientation.")]
         public override Color ForeColor { get; set; }
 
         /// <summary>
-        /// Gets or sets backcolor used by the control
+        /// Gets or sets back color used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
         public override Color BackColor { get; set; }
 
         /// <summary>
-        /// Gets or sets disabled forecolor used by the control
+        /// Gets or sets disabled fore color used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
-        public Color DisabledForeColor { get; set; }
+		public Color DisabledForeColor
+		{
+			get { return _disabledForeColor; }
+			set
+			{
+				_disabledForeColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets disabled backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
-        public Color DisabledBackColor { get; set; }
 
-        #endregion
+		/// <summary>
+		/// Gets or sets disabled back color used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
 
-        #region Events
 
-        protected override void OnSizeChanged(EventArgs e)
+		#endregion
+
+		#region Events
+
+		protected override void OnSizeChanged(EventArgs e)
         {
             InvalidateLayout();
         }

@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -102,7 +102,7 @@ namespace MetroSet_UI.Controls
 
         #region Global Vars
 
-        private Utilites utl;
+        private readonly Utilites _utl;
 
         #endregion Global Vars
 
@@ -110,6 +110,9 @@ namespace MetroSet_UI.Controls
 
         private Style _style;
         private StyleManager _styleManager;
+
+        private DividerStyle _orientation;
+        private int _thickness;
 
         #endregion Internal Vars
 
@@ -121,7 +124,7 @@ namespace MetroSet_UI.Controls
                 ControlStyles.OptimizedDoubleBuffer |
                 ControlStyles.SupportsTransparentBackColor, true);
             UpdateStyles();
-            utl = new Utilites();
+            _utl = new Utilites();
             ApplyTheme();
             Orientation = DividerStyle.Horizontal;
         }
@@ -176,7 +179,7 @@ namespace MetroSet_UI.Controls
                                     break;
 
                                 case "ForeColor":
-                                    ForeColor = utl.HexColor((string)varkey.Value);
+                                    ForeColor = _utl.HexColor((string)varkey.Value);
                                     break;
 
                                 default:
@@ -201,13 +204,13 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
             using (var p = new Pen(ForeColor, Thickness))
             {
                 if (Orientation == DividerStyle.Horizontal)
-                    G.DrawLine(p, 0, Thickness, Width, Thickness);
+                    g.DrawLine(p, 0, Thickness, Width, Thickness);
                 else
-                    G.DrawLine(p, Thickness, 0, Thickness, Height);
+                    g.DrawLine(p, Thickness, 0, Thickness, Height);
             }
         }
 
@@ -219,22 +222,40 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the style associated with the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets Orientation of the control.")]
-        public DividerStyle Orientation { get; set; }
+		public DividerStyle Orientation
+		{
+			get { return _orientation; }
+			set
+			{
+				_orientation = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the divider thickness.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the divider thickness.")]
-        public int Thickness { get; set; }
 
-        /// <summary>
-        /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
-        /// </summary>
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		/// <summary>
+		/// Gets or sets the divider thickness.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the divider thickness.")]
+		public int Thickness
+		{
+			get { return _thickness; }
+			set
+			{
+				_thickness = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// I make BackColor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor => Color.Transparent;
 
         /// <summary>
-        /// Gets or sets forecolor used by the control
+        /// Gets or sets ForeColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
         public override Color ForeColor { get; set; }

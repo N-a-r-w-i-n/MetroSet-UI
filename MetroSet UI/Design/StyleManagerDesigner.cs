@@ -1,6 +1,6 @@
 ﻿using MetroSet_UI.Tasks;
-/**
- * MetroSet UI - MetroSet UI Framewrok
+/*
+ * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
  * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n

@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -216,14 +216,14 @@ namespace MetroSet_UI.Controls
         #region Properties
 
         /// <summary>
-        /// Gets or sets forecolor used by the control
+        /// Gets or sets ForegroundColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
         [DisplayName("ForeColor")]
         public static Color ForegroundColor { get; set; }
 
         /// <summary>
-        /// Gets or sets backcolor used by the control
+        /// Gets or sets BackgroundColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
         [DisplayName("BackColor")]
@@ -236,19 +236,19 @@ namespace MetroSet_UI.Controls
         public static Color SeparatorColor { get; set; }
 
         /// <summary>
-        /// Gets or sets arrowcolor used by the control
+        /// Gets or sets Arrow color used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets arrowcolor used by the control.")]
         public static Color ArrowColor { get; set; }
 
         /// <summary>
-        /// Gets or sets selecteditem color used by the control
+        /// Gets or sets SelectedItem color used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets selecteditem color used by the control.")]
         public static Color SelectedItemColor { get; set; }
 
         /// <summary>
-        /// Gets or sets selecteditem backcolor used by the control
+        /// Gets or sets SelectedItem BackColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets selecteditem backcolor used by the control.")]
         public static Color SelectedItemBackColor { get; set; }

@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -73,7 +73,7 @@ namespace MetroSet_UI.Controls
                         ApplyTheme();
                         break;
                 }
-                Invalidate();
+				Refresh();
             }
         }
 
@@ -113,6 +113,15 @@ namespace MetroSet_UI.Controls
         private Style _style;
         private StyleManager _styleManager;
         private int _startIndex;
+
+        private Color _backgroundColor;
+        private Color _borderColor;
+        private Color _arrowColor;
+        private Color _selectedItemForeColor;
+        private Color _selectedItemBackColor;
+        private Color _disabledBackColor;
+        private Color _disabledForeColor;
+        private Color _disabledBorderColor;
 
         #endregion Internal Vars
 
@@ -171,13 +180,13 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets forecolor used by the control
+        /// Gets or sets ForeColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
         public override Color ForeColor { get; set; }
 
         /// <summary>
-        /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+        /// I make BackColor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor => Color.Transparent;
@@ -187,62 +196,134 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets border color used by the control
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color BorderColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets arrow color used by the control
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color ArrowColor { get; set; }
+		/// <summary>
+		/// Gets or sets border color used by the control
+		/// </summary>
+		[Category("MetroSet Framework")] 
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets forecolor of the selected item used by the control
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color SelectedItemForeColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets backcolor of the selected item used by the control
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color SelectedItemBackColor { get; set; }
+		/// <summary>
+		/// Gets or sets arrow color used by the control
+		/// </summary>
+		[Category("MetroSet Framework")]
+		public Color ArrowColor
+		{
+			get { return _arrowColor; }
+			set
+			{
+				_arrowColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets backcolor used by the control while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color DisabledBackColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the forecolor of the control whenever while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color DisabledForeColor { get; set; }
+		/// <summary>
+		/// Gets or sets ForeColor of the selected item used by the control
+		/// </summary>
+		[Category("MetroSet Framework")]
+		public Color SelectedItemForeColor
+		{
+			get { return _selectedItemForeColor; }
+			set
+			{
+				_selectedItemForeColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color of the control while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color DisabledBorderColor { get; set; }
 
-        #endregion
+		/// <summary>
+		/// Gets or sets BackColor of the selected item used by the control
+		/// </summary>
+		[Category("MetroSet Framework")]
+		public Color SelectedItemBackColor
+		{
+			get { return _selectedItemBackColor; }
+			set
+			{
+				_selectedItemBackColor = value;
+				Refresh();
+			}
+		}
 
-        #region Draw Control
 
-        /// <summary>
-        /// Here we draw the items.
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnDrawItem(DrawItemEventArgs e)
+		/// <summary>
+		/// Gets or sets BackColor used by the control while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the ForeColor of the control whenever while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		public Color DisabledForeColor
+		{
+			get { return _disabledForeColor; }
+			set
+			{
+				_disabledForeColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the border color of the control while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion
+
+		#region Draw Control
+
+		/// <summary>
+		/// Here we draw the items.
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            var G = e.Graphics;
-            G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            var g = e.Graphics;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             if (e.Index == -1)
             {
@@ -255,8 +336,8 @@ namespace MetroSet_UI.Controls
             {
                 using (var f = new Font(Font.Name, 9))
                 {
-                    G.FillRectangle(bg, e.Bounds);
-                    G.DrawString(GetItemText(Items[e.Index]), f, tc, e.Bounds, _mth.SetPosition(StringAlignment.Near));
+                    g.FillRectangle(bg, e.Bounds);
+                    g.DrawString(GetItemText(Items[e.Index]), f, tc, e.Bounds, _mth.SetPosition(StringAlignment.Near));
                 }
             }
         }
@@ -267,10 +348,10 @@ namespace MetroSet_UI.Controls
         /// <param name="e">PaintEventArgs</param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
             var rect = new Rectangle(0, 0, Width - 1, Height - 1);
             var downArrow = '▼';
-            G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             using (var bg = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
             {
@@ -282,12 +363,12 @@ namespace MetroSet_UI.Controls
                         {
                             using (var f = MetroSetFonts.SemiBold(8))
                             {
-                                G.FillRectangle(bg, rect);
-                                G.TextRenderingHint = TextRenderingHint.AntiAlias;
-                                G.DrawString(downArrow.ToString(), f, s, new Point(Width - 22, 8));
-                                G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                                G.DrawString(Text, f, tb, new Rectangle(7, 0, Width - 1, Height - 1), _mth.SetPosition(StringAlignment.Near));
-                                G.DrawRectangle(p, rect);
+                                g.FillRectangle(bg, rect);
+                                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                                g.DrawString(downArrow.ToString(), f, s, new Point(Width - 22, 8));
+                                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                                g.DrawString(Text, f, tb, new Rectangle(7, 0, Width - 1, Height - 1), _mth.SetPosition(StringAlignment.Near));
+                                g.DrawRectangle(p, rect);
                             }
                         }
                     }

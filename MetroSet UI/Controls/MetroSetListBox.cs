@@ -133,6 +133,16 @@ namespace MetroSet_UI.Controls
         private MetroSetScrollBar _svs;
         private object _selectedValue;
 
+        private int _itemHeight;
+        private bool _showBorder;
+        private Color _selectedItemColor;
+        private Color _selectedItemBackColor;
+        private Color _hoveredItemColor;
+        private Color _hoveredItemBackColor;
+        private Color _disabledForeColor;
+        private Color _disabledBackColor;
+        private Color _borderColor;
+
         #endregion Internal Vars
 
         #region Constructors
@@ -289,8 +299,8 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
-            G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            var g = e.Graphics;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             var mainRect = new Rectangle(0, 0, Width - (ShowBorder ? 1 : 0), Height - (ShowBorder ? 1 : 0));
 
             using (var bg = new SolidBrush(Enabled ? BackColor : DisabledBackColor))
@@ -310,44 +320,44 @@ namespace MetroSet_UI.Controls
                                         var firstItem = _svs.Value / ItemHeight < 0 ? 0 : _svs.Value / ItemHeight;
                                         var lastItem = _svs.Value / ItemHeight + Height / ItemHeight + 1 > Items.Count ? Items.Count : _svs.Value / ItemHeight + Height / ItemHeight + 1;
 
-                                        G.FillRectangle(bg, mainRect);
+                                        g.FillRectangle(bg, mainRect);
 
                                         for (var i = firstItem; i < lastItem; i++)
                                         {
                                             var itemText = (string)Items[i];
 
                                             var rect = new Rectangle(5, (i - firstItem) * ItemHeight, Width - 1, ItemHeight);
-                                            G.DrawString(itemText, Font, usic, rect, sf);
+                                            g.DrawString(itemText, Font, usic, rect, sf);
                                             if (MultiSelect && _indicates.Count != 0)
                                             {
                                                 if (i == _hoveredItem && !_indicates.Contains(i))
                                                 {
-                                                    G.FillRectangle(hibc, rect);
-                                                    G.DrawString(itemText, Font, hic, rect, sf);
+                                                    g.FillRectangle(hibc, rect);
+                                                    g.DrawString(itemText, Font, hic, rect, sf);
                                                 }
                                                 else if (_indicates.Contains(i))
                                                 {
-                                                    G.FillRectangle(sibc, rect);
-                                                    G.DrawString(itemText, Font, sic, rect, sf);
+                                                    g.FillRectangle(sibc, rect);
+                                                    g.DrawString(itemText, Font, sic, rect, sf);
                                                 }
                                             }
                                             else
                                             {
                                                 if (i == _hoveredItem && i != SelectedIndex)
                                                 {
-                                                    G.FillRectangle(hibc, rect);
-                                                    G.DrawString(itemText, Font, hic, rect, sf);
+                                                    g.FillRectangle(hibc, rect);
+                                                    g.DrawString(itemText, Font, hic, rect, sf);
                                                 }
                                                 else if (i == SelectedIndex)
                                                 {
-                                                    G.FillRectangle(sibc, rect);
-                                                    G.DrawString(itemText, Font, sic, rect, sf);
+                                                    g.FillRectangle(sibc, rect);
+                                                    g.DrawString(itemText, Font, sic, rect, sf);
                                                 }
                                             }
 
                                         }
                                         if (ShowBorder)
-                                            G.DrawRectangle(Pens.LightGray, mainRect);
+                                            g.DrawRectangle(Pens.LightGray, mainRect);
                                     }
                                 }
                             }
@@ -381,12 +391,21 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the height of an item in the ListBox.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the height of an item in the ListBox.")]
-        public int ItemHeight { get; set; }
+		public int ItemHeight
+		{
+			get { return _itemHeight; }
+			set
+			{
+				_itemHeight = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the currently selected item in the ListBox.
-        /// </summary>
-        [Browsable(false), Category("MetroSet Framework"), Description("Gets or sets the currently selected item in the ListBox.")]
+
+		/// <summary>
+		/// Gets or sets the currently selected item in the ListBox.
+		/// </summary>
+		[Browsable(false), Category("MetroSet Framework"), Description("Gets or sets the currently selected item in the ListBox.")]
         public object SelectedItem
         {
             get => _selectedItem;
@@ -484,16 +503,25 @@ namespace MetroSet_UI.Controls
         /// Gets or sets a value indicating whether the border shown or not.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the border shown or not.")]
-        public bool ShowBorder { get; set; } = false;
+		public bool ShowBorder
+		{
+			get { return _showBorder; }
+			set
+			{
+				_showBorder = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
+
+		/// <summary>
+		/// Gets or sets BackColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
         public override Color BackColor { get; set; }
 
         /// <summary>
-        /// Gets or sets forecolor used by the control
+        /// Gets or sets ForeColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
         public override Color ForeColor { get; set; }
@@ -506,53 +534,116 @@ namespace MetroSet_UI.Controls
         /// Gets or sets selected item used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets selected item used by the control.")]
-        public Color SelectedItemColor { get; set; }
+		public Color SelectedItemColor
+		{
+			get { return _selectedItemColor; }
+			set
+			{
+				_selectedItemColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets selected item backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets selected item backcolor used by the control.")]
-        public Color SelectedItemBackColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets hovered item used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets hovered item used by the control.")]
-        public Color HoveredItemColor { get; set; }
+		/// <summary>
+		/// Gets or sets selected item backcolor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets selected item backcolor used by the control.")]
+		public Color SelectedItemBackColor
+		{
+			get { return _selectedItemBackColor; }
+			set
+			{
+				_selectedItemBackColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets hovered item backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets hovered item backcolor used by the control.")]
-        public Color HoveredItemBackColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets disabled forecolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
-        public Color DisabledForeColor { get; set; }
+		/// <summary>
+		/// Gets or sets hovered item used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets hovered item used by the control.")]
+		public Color HoveredItemColor
+		{
+			get { return _hoveredItemColor; }
+			set
+			{
+				_hoveredItemColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets disabled backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
-        public Color DisabledBackColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets border color used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets border color used by the control.")]
-        public Color BorderColor { get; set; }
+		/// <summary>
+		/// Gets or sets hovered item BackColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets hovered item backcolor used by the control.")]
+		public Color HoveredItemBackColor
+		{
+			get { return _hoveredItemBackColor; }
+			set
+			{
+				_hoveredItemBackColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion Properties
 
-        #region Methods
+		/// <summary>
+		/// Gets or sets disabled ForeColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets disabled forecolor used by the control.")]
+		public Color DisabledForeColor
+		{
+			get { return _disabledForeColor; }
+			set
+			{
+				_disabledForeColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Adds an item to collection.
-        /// </summary>
-        /// <param name="newItem">The Item to be added into the collection.</param>
-        public void AddItem(string newItem)
+
+		/// <summary>
+		/// Gets or sets disabled BackColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets border color used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets border color used by the control.")]
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion Properties
+
+		#region Methods
+
+		/// <summary>
+		/// Adds an item to collection.
+		/// </summary>
+		/// <param name="newItem">The Item to be added into the collection.</param>
+		public void AddItem(string newItem)
         {
             _items.Add(newItem);
             InvalidateScroll(this, null);

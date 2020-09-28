@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -114,8 +114,18 @@ namespace MetroSet_UI.Controls
         private StyleManager _styleManager;
         private bool _switched;
         private Style _style;
-        private int _switchlocation = 0;
+        private int _switchLocation = 0;
         private IntAnimate _animator;
+
+        private Enums.CheckState _checkState;
+        private Color _borderColor;
+        private Color _checkColor;
+        private Color _disabledBorderColor;
+        private Color _disabledCheckColor;
+        private Color _disabledUnCheckColor;
+        private Color _backgroundColor;
+        private Color _symbolColor;
+        private Color _unCheckColor;
 
         #endregion Internal Vars
 
@@ -134,7 +144,7 @@ namespace MetroSet_UI.Controls
             _animator.Setting(100, 0, 132, EasingType.Linear);
             _animator.Update = (alpha) =>
             {
-                _switchlocation = alpha;
+                _switchLocation = alpha;
                 Invalidate(false);
             };
             ApplyTheme();
@@ -243,8 +253,8 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
-            G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            var g = e.Graphics;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             var rect = new Rectangle(1, 1, 56, 20);
 
@@ -258,13 +268,13 @@ namespace MetroSet_UI.Controls
                     {
                         using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor, 2))
                         {
-                            G.FillRectangle(backBrush, rect);
+                            g.FillRectangle(backBrush, rect);
 
-                            G.FillRectangle(checkback, rect2);
+                            g.FillRectangle(checkback, rect2);
 
-                            G.DrawRectangle(p, rect);
+                            g.DrawRectangle(p, rect);
 
-                            G.FillRectangle(checkMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (_switchlocation / 180.0))), 0, 16, 22));
+                            g.FillRectangle(checkMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (_switchLocation / 180.0))), 0, 16, 22));
                         }
                     }
                 }
@@ -325,7 +335,15 @@ namespace MetroSet_UI.Controls
         /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
         /// </summary>
         [Browsable(false)]
-        public Enums.CheckState CheckState { get; set; }
+		public Enums.CheckState CheckState
+		{
+			get { return _checkState; }
+			set
+			{
+				_checkState = value;
+				Refresh();
+			}
+		}
 
         /// <summary>
         /// Gets or sets a value indicating whether the control is checked.
@@ -348,71 +366,143 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the border color.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
-        public Color BorderColor { get; set; }
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the Checkd backColor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the Checkd backColor.")]
-        public Color CheckColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the border color while the control disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
-        public Color DisabledBorderColor { get; set; }
+		/// <summary>
+		/// Gets or sets the Checked backColor.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the Checkd backColor.")]
+		public Color CheckColor
+		{
+			get { return _checkColor; }
+			set
+			{
+				_checkColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the CheckdBackColor while disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the CheckdBackColor while disabled.")]
-        public Color DisabledCheckColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the Un-Checkd BackColor while disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the Un-Checkd BackColor while disabled.")]
-        public Color DisabledUnCheckColor { get; set; }
+		/// <summary>
+		/// Gets or sets the border color while the control disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets forecolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
+
+		/// <summary>
+		/// Gets or sets the CheckedBackColor while disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the CheckdBackColor while disabled.")]
+		public Color DisabledCheckColor
+		{
+			get { return _disabledCheckColor; }
+			set
+			{
+				_disabledCheckColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the Unchecked BackColor while disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the Un-Checkd BackColor while disabled.")]
+		public Color DisabledUnCheckColor
+		{
+			get { return _disabledUnCheckColor; }
+			set
+			{
+				_disabledUnCheckColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets fore color used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
         public override Color ForeColor { get; set; }
 
         /// <summary>
-        /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+        /// I make back color inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor => Color.Transparent;
 
         /// <summary>
-        /// Gets or sets the control backcolor.
+        /// Gets or sets the control back color.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the color of the check symbol.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the color of the check symbol.")]
-        public Color SymbolColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the Un-Checkd backColor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the Un-Checkd backColor.")]
-        public Color UnCheckColor { get; set; }
+		/// <summary>
+		/// Gets or sets the color of the check symbol.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the color of the check symbol.")]
+		public Color SymbolColor
+		{
+			get { return _symbolColor; }
+			set
+			{
+				_symbolColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion Properties
 
-        #region Disposing
+		/// <summary>
+		/// Gets or sets the Unchecked backColor.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the Un-Checkd backColor.")]
+		public Color UnCheckColor
+		{
+			get { return _unCheckColor; }
+			set
+			{
+				_unCheckColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Disposing Methods.
-        /// </summary>
-        public new void Dispose()
+
+		#endregion Properties
+
+		#region Disposing
+
+		/// <summary>
+		/// Disposing Methods.
+		/// </summary>
+		public new void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

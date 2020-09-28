@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -117,6 +117,14 @@ namespace MetroSet_UI.Controls
         private int _value;
         private int _currentValue;
 
+        private Color _valueColor;
+        private Color _handlerColor;
+        private Color _backgroundColor;
+        private Color _disabledValueColor;
+        private Color _disabledBackColor;
+        private Color _disabledBorderColor;
+        private Color _disabledHandlerColor;
+
         #endregion Internal Vars
 
         #region Constructors
@@ -225,7 +233,7 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
 
             Cursor = Cursors.Hand;
 
@@ -235,10 +243,10 @@ namespace MetroSet_UI.Controls
                 {
                     using (var vc = new SolidBrush(Enabled ? HandlerColor : DisabledHandlerColor))
                     {
-                        G.FillRectangle(bg, new Rectangle(0, 6, Width, 4));
+                        g.FillRectangle(bg, new Rectangle(0, 6, Width, 4));
                         if (_currentValue != 0)
-                            G.FillRectangle(v, new Rectangle(0, 6, _currentValue, 4));
-                        G.FillRectangle(vc, _track);
+                            g.FillRectangle(v, new Rectangle(0, 6, _currentValue, 4));
+                        g.FillRectangle(vc, _track);
                     }
                 }
             }
@@ -310,50 +318,113 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the value color in normal mouse sate.
         /// </summary>
         [Category("MetroSet Framework"), Description(" Gets or sets the value color in normal mouse sate.")]
-        public Color ValueColor { get; set; }
+		public Color ValueColor
+		{
+			get { return _valueColor; }
+			set
+			{
+				_valueColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the handler color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the handler color.")]
-        public Color HandlerColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the control backcolor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
+		/// <summary>
+		/// Gets or sets the handler color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the handler color.")]
+		public Color HandlerColor
+		{
+			get { return _handlerColor; }
+			set
+			{
+				_handlerColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the control BackColor.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the value of the control whenever while disabled
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the value of the control whenever while disabled.")]
-        public Color DisabledValueColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets disabled backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
-        public Color DisabledBackColor { get; set; }
+		/// <summary>
+		/// Gets or sets the value of the control whenever while disabled
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the value of the control whenever while disabled.")]
+		public Color DisabledValueColor
+		{
+			get { return _disabledValueColor; }
+			set
+			{
+				_disabledValueColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color while the control disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
-        public Color DisabledBorderColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the handler color while the control disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the handler color while the control disabled.")]
-        public Color DisabledHandlerColor { get; set; }
+		/// <summary>
+		/// Gets or sets disabled BackColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion
 
-        #region Events
+		/// <summary>
+		/// Gets or sets the border color while the control disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
 
-        public event ScrollEventHandler Scroll;
+
+		/// <summary>
+		/// Gets or sets the handler color while the control disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the handler color while the control disabled.")]
+		public Color DisabledHandlerColor
+		{
+			get { return _disabledHandlerColor; }
+			set
+			{
+				_disabledHandlerColor = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion
+
+		#region Events
+
+		public event ScrollEventHandler Scroll;
         public delegate void ScrollEventHandler(object sender);
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -250,13 +250,13 @@ namespace MetroSet_UI.Controls
         #region Properties
 
         /// <summary>
-        /// Gets or sets forecolor used by the control
+        /// Gets or sets ForeColor used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
         public override Color ForeColor { get; set; } = Color.Black;
 
-        // <summary>
-        /// Gets or sets the form backcolor.
+        /// <summary>
+        /// Gets or sets the form BackColor.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
         public override Color BackColor { get; set; } = Color.Transparent;

@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -116,6 +116,15 @@ namespace MetroSet_UI.Controls
         private int _value;
         private readonly Timer _holdTimer;
 
+        private int _maximum = 100;
+        private int _minimum;
+        private Color _backgroundColor;
+        private Color _disabledForeColor;
+        private Color _disabledBackColor;
+        private Color _disabledBorderColor;
+        private Color _borderColor;
+        private Color _symbolsColor;
+
         #endregion Internal Vars
 
         #region Constructors
@@ -148,8 +157,8 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
-            G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            var g = e.Graphics;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             var rect = new Rectangle(0, 0, Width - 1, Height - 1);
 
             const char plus = '+';
@@ -167,11 +176,11 @@ namespace MetroSet_UI.Controls
                             {
                                 using (var sf = new StringFormat { LineAlignment = StringAlignment.Center })
                                 {
-                                    G.FillRectangle(bg, rect);
-                                    G.DrawString(plus.ToString(), f2, s, new Rectangle(Width - 45, 1, 25, Height - 1), sf);
-                                    G.DrawString(minus.ToString(), f2, s, new Rectangle(Width - 25, -1, 20, Height - 1), sf);
-                                    G.DrawString(Value.ToString(), Font, tb, new Rectangle(0, 0, Width - 50, Height - 1), _mth.SetPosition(StringAlignment.Far));
-                                    G.DrawRectangle(p, rect);
+                                    g.FillRectangle(bg, rect);
+                                    g.DrawString(plus.ToString(), f2, s, new Rectangle(Width - 45, 1, 25, Height - 1), sf);
+                                    g.DrawString(minus.ToString(), f2, s, new Rectangle(Width - 25, -1, 20, Height - 1), sf);
+                                    g.DrawString(Value.ToString(), Font, tb, new Rectangle(0, 0, Width - 50, Height - 1), _mth.SetPosition(StringAlignment.Far));
+                                    g.DrawRectangle(p, rect);
                                 }
                             }
                         }
@@ -278,18 +287,36 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the maximum number of the Numeric.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the maximum number of the Numeric.")]
-        public int Maximum { get; set; } = 100;
+		public int Maximum
+		{
+			get { return _maximum; }
+			set
+			{
+				_maximum = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the minimum number of the Numeric.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the minimum number of the Numeric.")]
-        public int Minimum { get; set; } = 0;
 
-        /// <summary>
-        /// Gets or sets the current number of the Numeric.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the current number of the Numeric.")]
+		/// <summary>
+		/// Gets or sets the minimum number of the Numeric.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the minimum number of the Numeric.")]
+		public int Minimum
+		{
+			get { return _minimum; }
+			set
+			{
+				_minimum = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the current number of the Numeric.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the current number of the Numeric.")]
         public int Value
         {
             get => _value;
@@ -309,53 +336,107 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the forecolor of the control whenever while disabled
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the forecolor of the control whenever while disabled.")]
-        public Color DisabledForeColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets disabled backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
-        public Color DisabledBackColor { get; set; }
+		/// <summary>
+		/// Gets or sets the forecolor of the control whenever while disabled
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the forecolor of the control whenever while disabled.")]
+		public Color DisabledForeColor
+		{
+			get { return _disabledForeColor; }
+			set
+			{
+				_disabledForeColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color while the control disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
-        public Color DisabledBorderColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the border color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
-        public Color BorderColor { get; set; }
+		/// <summary>
+		/// Gets or sets disabled backcolor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets forecolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
+
+		/// <summary>
+		/// Gets or sets the border color while the control disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the border color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color.")]
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets ForeColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
         public override Color ForeColor { get; set; }
 
         /// <summary>
         /// Gets or sets arrow color used by the control
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets arrow color used by the control.")]
-        public Color SymbolsColor { get; set; }
+		public Color SymbolsColor
+		{
+			get { return _symbolsColor; }
+			set
+			{
+				_symbolsColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion
 
-        #region Events
+		#endregion
 
-        /// <summary>
-        /// Handling the mouse moving event so that we can detect if the cursor located in the postion of our need.
-        /// </summary>
-        /// <param name="e">MouseEventArgs</param>
-        protected override void OnMouseMove(MouseEventArgs e)
+		#region Events
+
+		/// <summary>
+		/// Handling the mouse moving event so that we can detect if the cursor located in the postion of our need.
+		/// </summary>
+		/// <param name="e">MouseEventArgs</param>
+		protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
             _point = e.Location;

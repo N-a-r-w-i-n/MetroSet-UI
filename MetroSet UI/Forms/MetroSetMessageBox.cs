@@ -38,13 +38,13 @@ namespace MetroSet_UI.Forms
         #region Internal vars
 
         private Size _buttonSize;
-        private MetroDefaultSetButton _okButton;
-        private MetroDefaultSetButton _yesButton;
-        private MetroDefaultSetButton _noButton;
-        private MetroDefaultSetButton _cancelButton;
-        private MetroDefaultSetButton _retryButton;
-        private MetroDefaultSetButton _abortButton;
-        private MetroDefaultSetButton _ignoreButton;
+        private MetroSetDefaultButton _okButton;
+        private MetroSetDefaultButton _yesButton;
+        private MetroSetDefaultButton _noButton;
+        private MetroSetDefaultButton _cancelButton;
+        private MetroSetDefaultButton _retryButton;
+        private MetroSetDefaultButton _abortButton;
+        private MetroSetDefaultButton _ignoreButton;
 
         #endregion
 
@@ -155,7 +155,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateRetryButton()
         {
-            _retryButton = new MetroDefaultSetButton
+            _retryButton = new MetroSetDefaultButton
             {
                 Text = "Retry",
                 Size = _buttonSize,
@@ -169,7 +169,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateCancelButton()
         {
-            _cancelButton = new MetroDefaultSetButton
+            _cancelButton = new MetroSetDefaultButton
             {
                 Text = "Cancel",
                 Size = _buttonSize,
@@ -183,7 +183,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateNoButton()
         {
-            _noButton = new MetroDefaultSetButton
+            _noButton = new MetroSetDefaultButton
             {
                 Text = "No",
                 Size = _buttonSize,
@@ -197,7 +197,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateYesButton()
         {
-            _yesButton = new MetroDefaultSetButton
+            _yesButton = new MetroSetDefaultButton
             {
                 Text = "Yes",
                 Size = _buttonSize,
@@ -211,7 +211,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateOkeyButton()
         {
-            _okButton = new MetroDefaultSetButton
+            _okButton = new MetroSetDefaultButton
             {
                 Text = "Ok",
                 Size = _buttonSize,
@@ -225,7 +225,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateAbortButton()
         {
-            _abortButton = new MetroDefaultSetButton
+            _abortButton = new MetroSetDefaultButton
             {
                 Text = "Abort",
                 Size = _buttonSize,
@@ -240,7 +240,7 @@ namespace MetroSet_UI.Forms
         /// </summary>
         private void EvaluateIgnoreButton()
         {
-            _ignoreButton = new MetroDefaultSetButton
+            _ignoreButton = new MetroSetDefaultButton
             {
                 Text = "Ignore",
                 Size = _buttonSize,

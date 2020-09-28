@@ -1,5 +1,5 @@
 ﻿/*
- * MetroSet UI - MetroSet UI Framewrok
+ * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
  * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -36,12 +36,12 @@ using System.Windows.Forms;
 namespace MetroSet_UI.Controls
 {
     [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroDefaultSetButton), "Bitmaps.Button.bmp")]
+    [ToolboxBitmap(typeof(MetroSetDefaultButton), "Bitmaps.Button.bmp")]
     [Designer(typeof(MetroSetDefaultButtonDesigner))]
     [DefaultEvent("Click")]
     [DefaultProperty("Text")]
     [ComVisible(true)]
-    public class MetroDefaultSetButton : Control, iControl
+    public class MetroSetDefaultButton : Control, iControl
     {
 
         #region Interfaces
@@ -120,11 +120,24 @@ namespace MetroSet_UI.Controls
         private Style _style;
         private StyleManager _styleManager;
 
+        private Color _normalColor;
+        private Color _normalBorderColor;
+        private Color _normalTextColor;
+        private Color _hoverColor;
+        private Color _hoverBorderColor;
+        private Color _hoverTextColor;
+        private Color _pressColor;
+        private Color _pressBorderColor;
+        private Color _pressTextColor;
+        private Color _disabledBackColor;
+        private Color _disabledForeColor;
+        private Color _disabledBorderColor;
+
         #endregion Internal Vars
 
         #region Constructors
 
-        public MetroDefaultSetButton()
+        public MetroSetDefaultButton()
         {
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint |
@@ -144,9 +157,9 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
             var r = new Rectangle(0, 0, Width - 1, Height - 1);
-            G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             switch (_state)
             {
@@ -156,9 +169,9 @@ namespace MetroSet_UI.Controls
                     using (var p = new Pen(NormalBorderColor))
                     using (var tb = new SolidBrush(NormalTextColor))
                     {
-                        G.FillRectangle(bg, r);
-                        G.DrawRectangle(p, r);
-                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
+                        g.FillRectangle(bg, r);
+                        g.DrawRectangle(p, r);
+                        g.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
@@ -170,9 +183,9 @@ namespace MetroSet_UI.Controls
                     using (var p = new Pen(HoverBorderColor))
                     using (var tb = new SolidBrush(HoverTextColor))
                     {
-                        G.FillRectangle(bg, r);
-                        G.DrawRectangle(p, r);
-                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
+                        g.FillRectangle(bg, r);
+                        g.DrawRectangle(p, r);
+                        g.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
@@ -183,9 +196,9 @@ namespace MetroSet_UI.Controls
                     using (var p = new Pen(PressBorderColor))
                     using (var tb = new SolidBrush(PressTextColor))
                     {
-                        G.FillRectangle(bg, r);
-                        G.DrawRectangle(p, r);
-                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
+                        g.FillRectangle(bg, r);
+                        g.DrawRectangle(p, r);
+                        g.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
 
                     break;
@@ -195,9 +208,9 @@ namespace MetroSet_UI.Controls
                     using (var p = new Pen(DisabledBorderColor))
                     using (var tb = new SolidBrush(DisabledForeColor))
                     {
-                        G.FillRectangle(bg, r);
-                        G.DrawRectangle(p, r);
-                        G.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
+                        g.FillRectangle(bg, r);
+                        g.DrawRectangle(p, r);
+                        g.DrawString(Text, Font, tb, new Rectangle(0, 0, Width, Height), _mth.SetPosition());
                     }
                     break;
             }
@@ -311,7 +324,7 @@ namespace MetroSet_UI.Controls
         #region Properties
 
         /// <summary>
-        /// I make backcolor inaccessible cause we have not use of it. 
+        /// I make BackColor inaccessible cause we have not use of it. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor => Color.Transparent;
@@ -339,94 +352,191 @@ namespace MetroSet_UI.Controls
         /// </summary>
         [Category("MetroSet Framework")]
         [Description("Gets or sets the button background color in normal mouse sate.")]
-        public Color NormalColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the button border color in normal mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		public Color NormalColor
+		{
+			get { return _normalColor; }
+			set
+			{
+				_normalColor = value;
+				Refresh();
+			}
+		}
+		
+		/// <summary>
+		/// Gets or sets the button border color in normal mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button border color in normal mouse sate.")]
-        public Color NormalBorderColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the button Text color in normal mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		public Color NormalBorderColor
+		{
+			get { return _normalBorderColor; }
+			set
+			{
+				_normalBorderColor = value;
+				Refresh();
+			}
+		}
+		
+		/// <summary>
+		/// Gets or sets the button Text color in normal mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button Text color in normal mouse sate.")]
-        public Color NormalTextColor { get; set; }
+		public Color NormalTextColor
+		{
+			get { return _normalTextColor; }
+			set
+			{
+				_normalTextColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the button background color in hover mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the button background color in hover mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button background color in hover mouse sate.")]
-        public Color HoverColor { get; set; }
+		public Color HoverColor
+		{
+			get { return _hoverColor; }
+			set
+			{
+				_hoverColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the button border color in hover mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the button border color in hover mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button border color in hover mouse sate.")]
-        public Color HoverBorderColor { get; set; }
+		public Color HoverBorderColor
+		{
+			get { return _hoverBorderColor; }
+			set
+			{
+				_hoverBorderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the button Text color in hover mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the button Text color in hover mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button Text color in hover mouse sate.")]
-        public Color HoverTextColor { get; set; }
+		public Color HoverTextColor
+		{
+			get { return _hoverTextColor; }
+			set
+			{
+				_hoverTextColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the button background color in pushed mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the button background color in pushed mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button background color in pushed mouse sate.")]
-        public Color PressColor { get; set; }
+		public Color PressColor
+		{
+			get { return _pressColor; }
+			set
+			{
+				_pressColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the button border color in pushed mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the button border color in pushed mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button border color in pushed mouse sate.")]
-        public Color PressBorderColor { get; set; }
+		public Color PressBorderColor
+		{
+			get { return _pressBorderColor; }
+			set
+			{
+				_pressBorderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the button Text color in pushed mouse sate.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the button Text color in pushed mouse sate.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the button Text color in pushed mouse sate.")]
-        public Color PressTextColor { get; set; }
+		public Color PressTextColor
+		{
+			get { return _pressTextColor; }
+			set
+			{
+				_pressTextColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets backcolor used by the control while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets BackColor used by the control while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets backcolor used by the control while disabled.")]
-        public Color DisabledBackColor { get; set; }
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the forecolor of the control whenever while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the ForeColor of the control whenever while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the forecolor of the control whenever while disabled.")]
-        public Color DisabledForeColor { get; set; }
+		public Color DisabledForeColor
+		{
+			get { return _disabledForeColor; }
+			set
+			{
+				_disabledForeColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color of the control while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
+		/// <summary>
+		/// Gets or sets the border color of the control while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
         [Description("Gets or sets the border color of the control while disabled.")]
-        public Color DisabledBorderColor { get; set; }
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion
 
-        #region Events
+		#endregion
 
-        /// <summary>
-        /// Handling mouse up event of the cotnrol.
-        /// </summary>
-        /// <param name="e">MouseEventArgs</param>
-        protected override void OnMouseUp(MouseEventArgs e)
+		#region Events
+
+		/// <summary>
+		/// Handling mouse up event of the control.
+		/// </summary>
+		/// <param name="e">MouseEventArgs</param>
+		protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
             _state = MouseMode.Hovered;
@@ -434,7 +544,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Handling mouse down event of the cotnrol.
+        /// Handling mouse down event of the control.
         /// </summary>
         /// <param name="e">MouseEventArgs</param>
         protected override void OnMouseDown(MouseEventArgs e)
@@ -456,7 +566,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Handling mouse leave event of the cotnrol.
+        /// Handling mouse leave event of the control.
         /// </summary>
         /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)

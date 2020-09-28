@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -107,6 +107,10 @@ namespace MetroSet_UI.Controls
         private Style _style;
         private StyleManager _styleManager;
 
+        private int _borderThickness = 1;
+        private Color _borderColor;
+        private Color _backgroundColor;
+
         #endregion Internal Vars
 
         #region Constructors 
@@ -189,15 +193,15 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
             var r = new Rectangle(BorderThickness, BorderThickness, Width - (BorderThickness * 2 + 1), Height - ((BorderThickness * 2) + 1));
 
             using (var bg = new SolidBrush(BackgroundColor))
             {
                 using (var p = new Pen(BorderColor, BorderThickness))
                 {
-                    G.FillRectangle(bg, r);
-                    G.DrawRectangle(p, r);
+                    g.FillRectangle(bg, r);
+                    g.DrawRectangle(p, r);
                 }
             }
 
@@ -229,21 +233,48 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the border thickness the control.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the border thickness the control.")]
-        public int BorderThickness { get; set; } = 1;
+		public int BorderThickness
+		{
+			get { return _borderThickness; }
+			set
+			{
+				_borderThickness = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets bordercolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets bordercolor used by the control.")]
-        public Color BorderColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
+		/// <summary>
+		/// Gets or sets BorderColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets bordercolor used by the control.")]
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets BackColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion
-    }
+
+		#endregion
+	}
 }

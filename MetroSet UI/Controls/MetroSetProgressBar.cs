@@ -1,5 +1,5 @@
 ﻿/*
- * MetroSet UI - MetroSet UI Framewrok
+ * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
  * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -114,6 +114,16 @@ namespace MetroSet_UI.Controls
         private int _value;
         private int _currentValue;
 
+        private int _maximum = 100;
+        private int _minimum;
+        private ProgressOrientation _orientation = ProgressOrientation.Horizontal;
+        private Color _backgroundColor;
+        private Color _borderColor;
+        private Color _progressColor;
+        private Color _disabledProgressColor;
+        private Color _disabledBackColor;
+        private Color _disabledBorderColor;
+
         #endregion Internal Vars
 
         #region Constructors
@@ -217,7 +227,7 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
             var rect = new Rectangle(0, 0, Width - 1, Height - 1);
 
             using (var bg = new SolidBrush(Enabled ? BackgroundColor : DisabledBackColor))
@@ -226,22 +236,22 @@ namespace MetroSet_UI.Controls
                 {
                     using (var ps = new SolidBrush(Enabled ? ProgressColor : DisabledProgressColor))
                     {
-                        G.FillRectangle(bg, rect);
+                        g.FillRectangle(bg, rect);
                         if (_currentValue != 0)
                         {
                             switch (Orientation)
                             {
                                 case ProgressOrientation.Horizontal:
-                                    G.FillRectangle(ps, new Rectangle(0, 0, _currentValue - 1, Height - 1));
+                                    g.FillRectangle(ps, new Rectangle(0, 0, _currentValue - 1, Height - 1));
                                     break;
                                 case ProgressOrientation.Vertical:
-                                    G.FillRectangle(ps, new Rectangle(0, Height - _currentValue, Width - 1, _currentValue - 1));
+                                    g.FillRectangle(ps, new Rectangle(0, Height - _currentValue, Width - 1, _currentValue - 1));
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
                             }
                         }
-                        G.DrawRectangle(p, rect);
+                        g.DrawRectangle(p, rect);
                     }
                 }
             }
@@ -275,65 +285,146 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the maximum value of the progressbar.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the maximum value of the progressbar.")]
-        public int Maximum { get; set; } = 100;
+		public int Maximum
+		{
+			get { return _maximum; }
+			set
+			{
+				_maximum = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the minimum value of the progressbar.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the minimum value of the progressbar.")]
-        public int Minimum { get; set; } = 0;
 
-        [Browsable(false)]
+		/// <summary>
+		/// Gets or sets the minimum value of the progressbar.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the minimum value of the progressbar.")]
+		public int Minimum
+		{
+			get { return _minimum; }
+			set
+			{
+				_minimum = value;
+				Refresh();
+			}
+		}
+
+
+		[Browsable(false)]
         public override Color BackColor => Color.Transparent;
 
         /// <summary>
         /// Gets or sets the minimum value of the progressbar.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the minimum value of the progressbar.")]
-        public ProgressOrientation Orientation { get; set; } = ProgressOrientation.Horizontal;
+		public ProgressOrientation Orientation
+		{
+			get { return _orientation; }
+			set
+			{
+				_orientation = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the control backcolor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
+
+		/// <summary>
+		/// Gets or sets the control BackColor.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
-        public Color BorderColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the progress color of the cotnrol.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the progress color of the cotnrol.")]
-        public Color ProgressColor { get; set; }
+		/// <summary>
+		/// Gets or sets the border color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color.")]
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the progresscolor of the control whenever while disabled
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the progresscolor of the control whenever while disabled.")]
-        public Color DisabledProgressColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets disabled backcolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
-        public Color DisabledBackColor { get; set; }
+		/// <summary>
+		/// Gets or sets the progress color of the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the progress color of the control.")]
+		public Color ProgressColor
+		{
+			get { return _progressColor; }
+			set
+			{
+				_progressColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color while the control disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
-        public Color DisabledBorderColor { get; set; }
 
-        #endregion
+		/// <summary>
+		/// Gets or sets the Progress color of the control whenever while disabled
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the progresscolor of the control whenever while disabled.")]
+		public Color DisabledProgressColor
+		{
+			get { return _disabledProgressColor; }
+			set
+			{
+				_disabledProgressColor = value;
+				Refresh();
+			}
+		}
 
-        #region Events
 
-        public event ValueChangedEventHandler ValueChanged;
+		/// <summary>
+		/// Gets or sets disabled BackColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets disabled backcolor used by the control.")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the border color while the control disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion
+
+		#region Events
+
+		public event ValueChangedEventHandler ValueChanged;
         public delegate void ValueChangedEventHandler(object sender);
 
         /// <summary>

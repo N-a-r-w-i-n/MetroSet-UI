@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -121,9 +121,13 @@ namespace MetroSet_UI.Controls
         private Color _borderColor;
         private Color _hoverColor;
 
+        private Color _disabledBackColor = Color.FromArgb(204, 204, 204);
+        private Color _disabledForeColor = Color.FromArgb(136, 136, 136);
+        private Color _disabledBorderColor = Color.FromArgb(155, 155, 155);
+
         #region Base RichTextBox
 
-        private RichTextBox T = new RichTextBox();
+        private RichTextBox _richTextBox = new RichTextBox();
 
         #endregion Base RichTextBox
 
@@ -158,24 +162,24 @@ namespace MetroSet_UI.Controls
             _borderColor = Color.FromArgb(155, 155, 155);
             _hoverColor = Color.FromArgb(102, 102, 102);
             _backColor = Color.FromArgb(238, 238, 238);
-            T.BackColor = BackColor;
-            T.ForeColor = ForeColor;
+            _richTextBox.BackColor = BackColor;
+            _richTextBox.ForeColor = ForeColor;
             _readOnly = false;
             _maxLength = 32767;
             _state = MouseMode.Normal;
             _lines = null;
-            T.Cursor = Cursors.IBeam;
-            T.BorderStyle = BorderStyle.None;
-            T.Location = new Point(7, 8);
-            T.Font = Font;
-            T.Size = new Size(Width, Height);
+            _richTextBox.Cursor = Cursors.IBeam;
+            _richTextBox.BorderStyle = BorderStyle.None;
+            _richTextBox.Location = new Point(7, 8);
+            _richTextBox.Font = Font;
+            _richTextBox.Size = new Size(Width, Height);
 
-            T.MouseHover += T_MouseHover;
-            T.MouseUp += T_MouseUp;
-            T.Leave += T_Leave;
-            T.Enter += T_Enter;
-            T.KeyDown += T_KeyDown;
-            T.TextChanged += T_TextChanged;
+            _richTextBox.MouseHover += T_MouseHover;
+            _richTextBox.MouseUp += T_MouseUp;
+            _richTextBox.Leave += T_Leave;
+            _richTextBox.Enter += T_Enter;
+            _richTextBox.KeyDown += T_KeyDown;
+            _richTextBox.TextChanged += T_TextChanged;
 
         }
 
@@ -185,9 +189,9 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
+            var g = e.Graphics;
             var rect = new Rectangle(0, 0, Width - 1, Height - 1);
-            G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             if (Enabled)
             {
@@ -197,19 +201,19 @@ namespace MetroSet_UI.Controls
                     {
                         using (var ph = new Pen(HoverColor))
                         {
-                            G.FillRectangle(bg, rect);
+                            g.FillRectangle(bg, rect);
                             switch (_state)
                             {
                                 case MouseMode.Normal:
-                                    G.DrawRectangle(p, rect);
+                                    g.DrawRectangle(p, rect);
                                     break;
                                 case MouseMode.Hovered:
-                                    G.DrawRectangle(ph, rect);
+                                    g.DrawRectangle(ph, rect);
                                     break;
                             }
 
-                            T.BackColor = BackColor;
-                            T.ForeColor = ForeColor;
+                            _richTextBox.BackColor = BackColor;
+                            _richTextBox.ForeColor = ForeColor;
                         }
                     }
                 }
@@ -220,16 +224,16 @@ namespace MetroSet_UI.Controls
                 {
                     using (var p = new Pen(DisabledBorderColor))
                     {
-                        G.FillRectangle(bg, rect);
-                        G.DrawRectangle(p, rect);
-                        T.BackColor = DisabledBackColor;
-                        T.ForeColor = DisabledForeColor;
+                        g.FillRectangle(bg, rect);
+                        g.DrawRectangle(p, rect);
+                        _richTextBox.BackColor = DisabledBackColor;
+                        _richTextBox.ForeColor = DisabledForeColor;
                     }
                 }
             }
 
-            T.Location = new Point(7, 4);
-            T.Width = Width - 10;
+            _richTextBox.Location = new Point(7, 4);
+            _richTextBox.Width = Width - 10;
 
         }
 
@@ -322,7 +326,7 @@ namespace MetroSet_UI.Controls
         private void UpdateProperties()
         {
             Invalidate();
-            T.Invalidate();
+            _richTextBox.Invalidate();
         }
 
         #endregion ApplyTheme
@@ -388,7 +392,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Handling mouse leave event of the cotnrol.
+        /// Handling mouse leave event of the control.
         /// </summary>
         /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
@@ -399,7 +403,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Handling mouse up event of the cotnrol.
+        /// Handling mouse up event of the control.
         /// </summary>
         /// <param name="e">EventArgs</param>
         protected override void OnMouseUp(MouseEventArgs e)
@@ -420,7 +424,7 @@ namespace MetroSet_UI.Controls
             if (e.Button == MouseButtons.Right)
             {
                 if (ContextMenuStrip != null)
-                    ContextMenuStrip.Show(T, new Point(e.X, e.Y));
+                    ContextMenuStrip.Show(_richTextBox, new Point(e.X, e.Y));
             }
             Invalidate();
         }
@@ -465,7 +469,7 @@ namespace MetroSet_UI.Controls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            T.Size = new Size(Width - 10, Height - 10);
+            _richTextBox.Size = new Size(Width - 10, Height - 10);
         }
 
         /// <summary>
@@ -480,7 +484,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Handling Keydown event of thextbox cotnrol.
+        /// Handling Keydown event of thextbox control.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">KeyEventArgs</param>
@@ -490,7 +494,7 @@ namespace MetroSet_UI.Controls
                 e.SuppressKeyPress = true;
             if (e.Control && e.KeyCode == Keys.C)
             {
-                T.Copy();
+                _richTextBox.Copy();
                 e.SuppressKeyPress = true;
             }
         }
@@ -502,7 +506,7 @@ namespace MetroSet_UI.Controls
         /// <param name="e"></param>
         private void T_TextChanged(object sender, EventArgs e)
         {
-            Text = T.Text;
+            Text = _richTextBox.Text;
             TextChanged?.Invoke(this);
             Invalidate();
         }
@@ -513,8 +517,8 @@ namespace MetroSet_UI.Controls
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            if (!Controls.Contains(T))
-                Controls.Add(T);
+            if (!Controls.Contains(_richTextBox))
+                Controls.Add(_richTextBox);
         }
 
         /// <summary>
@@ -523,9 +527,9 @@ namespace MetroSet_UI.Controls
         /// <param name="text"></param>
         public void AppendText(string text)
         {
-            if (T != null)
+            if (_richTextBox != null)
             {
-                T.AppendText(text);
+                _richTextBox.AppendText(text);
             }
         }
 
@@ -534,11 +538,11 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Undo()
         {
-            if (T != null)
+            if (_richTextBox != null)
             {
-                if (T.CanUndo)
+                if (_richTextBox.CanUndo)
                 {
-                    T.Undo();
+                    _richTextBox.Undo();
                 }
             }
         }
@@ -550,9 +554,9 @@ namespace MetroSet_UI.Controls
         /// <returns></returns>
         public int GetLineFromCharIndex(int index)
         {
-            if (T != null)
+            if (_richTextBox != null)
             {
-                return T.GetLineFromCharIndex(index);
+                return _richTextBox.GetLineFromCharIndex(index);
             }
             else
             {
@@ -567,7 +571,7 @@ namespace MetroSet_UI.Controls
         /// <returns></returns>
         public Point GetPositionFromCharIndex(int index)
         {
-            return T.GetPositionFromCharIndex(index);
+            return _richTextBox.GetPositionFromCharIndex(index);
         }
 
         /// <summary>
@@ -577,9 +581,9 @@ namespace MetroSet_UI.Controls
         /// <returns></returns>
         public int GetCharIndexFromPosition(Point pt)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.GetCharIndexFromPosition(pt);
+            return _richTextBox.GetCharIndexFromPosition(pt);
         }
 
         /// <summary>
@@ -587,9 +591,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void ClearUndo()
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.ClearUndo();
+            _richTextBox.ClearUndo();
         }
 
         /// <summary>
@@ -597,9 +601,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Copy()
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.Copy();
+            _richTextBox.Copy();
         }
 
         /// <summary>
@@ -607,9 +611,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void Cut()
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.Cut();
+            _richTextBox.Cut();
         }
 
         /// <summary>
@@ -617,9 +621,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void SelectAll()
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.SelectAll();
+            _richTextBox.SelectAll();
         }
 
         /// <summary>
@@ -627,9 +631,9 @@ namespace MetroSet_UI.Controls
         /// </summary>
         public void DeselectAll()
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.DeselectAll();
+            _richTextBox.DeselectAll();
         }
 
         /// <summary>
@@ -639,9 +643,9 @@ namespace MetroSet_UI.Controls
         /// <param name="length">The number of characters to select.</param>
         public void Select(int start, int length)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.Select(start, length);
+            _richTextBox.Select(start, length);
         }
 
         /// <summary>
@@ -650,9 +654,9 @@ namespace MetroSet_UI.Controls
         /// <param name="clipFormat">The Clipboard format in which the data should be obtained from the Clipboard.</param>
         public void Paste(DataFormats.Format clipFormat)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.Paste(clipFormat);
+            _richTextBox.Paste(clipFormat);
         }
 
         /// <summary>
@@ -661,9 +665,9 @@ namespace MetroSet_UI.Controls
         /// <param name="path">The name and location of the file to load into the control.</param>
         public void LoadFile(string path)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.LoadFile(path);
+            _richTextBox.LoadFile(path);
         }
 
         /// <summary>
@@ -673,9 +677,9 @@ namespace MetroSet_UI.Controls
         /// <param name="fileType">One of the System.Windows.Forms.RichTextBoxStreamType values.</param>
         public void LoadFile(string path, RichTextBoxStreamType fileType)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.LoadFile(path, fileType);
+            _richTextBox.LoadFile(path, fileType);
         }
 
         /// <summary>
@@ -685,9 +689,9 @@ namespace MetroSet_UI.Controls
         /// <param name="fileType">One of the control StreamType values.</param>
         public void LoadFile(System.IO.Stream data, RichTextBoxStreamType fileType)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.LoadFile(data, fileType);
+            _richTextBox.LoadFile(data, fileType);
         }
 
         /// <summary>
@@ -696,9 +700,9 @@ namespace MetroSet_UI.Controls
         /// <param name="path">The name and location of the file to save.</param>
         public void SaveFile(string path)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.SaveFile(path);
+            _richTextBox.SaveFile(path);
         }
 
         /// <summary>
@@ -708,9 +712,9 @@ namespace MetroSet_UI.Controls
         /// <param name="fileType">One of the control StreamType values.</param>
         public void SaveFile(string path, RichTextBoxStreamType fileType)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.SaveFile(path, fileType);
+            _richTextBox.SaveFile(path, fileType);
         }
 
         /// <summary>
@@ -720,9 +724,9 @@ namespace MetroSet_UI.Controls
         /// <param name="fileType">One of the control StreamType values.</param>
         public void SaveFile(System.IO.Stream data, RichTextBoxStreamType fileType)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return;
-            T.SaveFile(data, fileType);
+            _richTextBox.SaveFile(data, fileType);
         }
 
         /// <summary>
@@ -732,7 +736,7 @@ namespace MetroSet_UI.Controls
         /// <returns>true if you can paste data from the Clipboard in the specified data format; otherwise, false.</returns>
         public bool CanPaste(DataFormats.Format clipFormat)
         {
-            return T.CanPaste(clipFormat);
+            return _richTextBox.CanPaste(clipFormat);
         }
 
 
@@ -743,9 +747,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search characters were found or -1 if the search characters are not found or an empty search character set is specified in the char parameter.</returns>
         public int Find(char[] characterSet)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(characterSet);
+            return _richTextBox.Find(characterSet);
         }
 
         /// <summary>
@@ -756,9 +760,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search characters are found.</returns>
         public int Find(char[] characterSet, int start)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(characterSet, start);
+            return _richTextBox.Find(characterSet, start);
         }
 
         /// <summary>
@@ -770,9 +774,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search characters are found.</returns>
         public int Find(char[] characterSet, int start, int ends)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(characterSet, start, ends);
+            return _richTextBox.Find(characterSet, start, ends);
         }
 
         /// <summary>
@@ -782,9 +786,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search text was found or -1 if the search string is not found or an empty search string is specified in the str parameter.</returns>
         public int Find(string str)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(str);
+            return _richTextBox.Find(str);
         }
 
         /// <summary>
@@ -797,9 +801,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search text was found.</returns>
         public int Find(string str, int start, int ends, RichTextBoxFinds options)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(str, start, ends, options);
+            return _richTextBox.Find(str, start, ends, options);
         }
 
         /// <summary>
@@ -810,9 +814,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search text was found.</returns>
         public int Find(string str, RichTextBoxFinds options)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(str, options);
+            return _richTextBox.Find(str, options);
         }
 
         /// <summary>
@@ -824,9 +828,9 @@ namespace MetroSet_UI.Controls
         /// <returns>The location within the control where the search text was found.</returns>
         public int Find(string str, int start, RichTextBoxFinds options)
         {
-            if (T == null)
+            if (_richTextBox == null)
                 return 0;
-            return T.Find(str, start, options);
+            return _richTextBox.Find(str, start, options);
         }
 
         #endregion Events
@@ -846,9 +850,9 @@ namespace MetroSet_UI.Controls
             set
             {
                 _maxLength = value;
-                if (T != null)
+                if (_richTextBox != null)
                 {
-                    T.MaxLength = value;
+                    _richTextBox.MaxLength = value;
                 }
                 Invalidate();
             }
@@ -867,7 +871,7 @@ namespace MetroSet_UI.Controls
             set
             {
                 _backColor = value;
-                T.BackColor = value;
+                _richTextBox.BackColor = value;
                 Invalidate();
             }
         }
@@ -915,7 +919,7 @@ namespace MetroSet_UI.Controls
             set
             {
                 _foreColor = value;
-                T.ForeColor = value;
+                _richTextBox.ForeColor = value;
                 Invalidate();
             }
         }
@@ -930,9 +934,9 @@ namespace MetroSet_UI.Controls
             set
             {
                 _readOnly = value;
-                if (T != null)
+                if (_richTextBox != null)
                 {
-                    T.ReadOnly = value;
+                    _richTextBox.ReadOnly = value;
                 }
             }
         }
@@ -949,13 +953,13 @@ namespace MetroSet_UI.Controls
         [Category("MetroSet Framework"), Description("Gets or sets the current text in the RichTextBox.")]
         public override string Text
         {
-            get => T.Text;
+            get => _richTextBox.Text;
             set
             {
                 base.Text = value;
-                if (T != null)
+                if (_richTextBox != null)
                 {
-                    T.Text = value;
+                    _richTextBox.Text = value;
                 }
             }
         }
@@ -970,11 +974,11 @@ namespace MetroSet_UI.Controls
             set
             {
                 base.Font = value;
-                if (T == null)
+                if (_richTextBox == null)
                     return;
-                T.Font = value;
-                T.Location = new Point(5, 5);
-                T.Width = Width - 8;
+                _richTextBox.Font = value;
+                _richTextBox.Location = new Point(5, 5);
+                _richTextBox.Width = Width - 8;
             }
         }
 
@@ -988,9 +992,9 @@ namespace MetroSet_UI.Controls
             set
             {
                 _wordWrap = value;
-                if (T != null)
+                if (_richTextBox != null)
                 {
-                    T.WordWrap = value;
+                    _richTextBox.WordWrap = value;
                 }
             }
         }
@@ -1005,9 +1009,9 @@ namespace MetroSet_UI.Controls
             set
             {
                 _autoWordSelection = value;
-                if (T != null)
+                if (_richTextBox != null)
                 {
-                    T.AutoWordSelection = value;
+                    _richTextBox.AutoWordSelection = value;
                 }
             }
         }
@@ -1022,8 +1026,8 @@ namespace MetroSet_UI.Controls
             set
             {
                 _lines = value;
-                if (T != null)
-                    T.Lines = value;
+                if (_richTextBox != null)
+                    _richTextBox.Lines = value;
                 Invalidate();
             }
         }
@@ -1038,32 +1042,62 @@ namespace MetroSet_UI.Controls
             set
             {
                 base.ContextMenuStrip = value;
-                if (T == null)
+                if (_richTextBox == null)
                     return;
-                T.ContextMenuStrip = value;
+                _richTextBox.ContextMenuStrip = value;
                 Invalidate();
             }
         }
 
         /// <summary>
-        /// Gets or sets backcolor used by the control while disabled.
+        /// Gets or sets back color used by the control while disabled.
         /// </summary>
         [Category("MetroSet Framework")]
-        public Color DisabledBackColor { get; set; } = Color.FromArgb(204, 204, 204);
+		[Description("Gets or sets back color used by the control while disabled.")]
+		public Color DisabledBackColor
+		{
+			get { return _disabledBackColor; }
+			set
+			{
+				_disabledBackColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the forecolor of the control whenever while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color DisabledForeColor { get; set; } = Color.FromArgb(136, 136, 136);
 
-        /// <summary>
-        /// Gets or sets the border color of the control while disabled.
-        /// </summary>
-        [Category("MetroSet Framework")]
-        public Color DisabledBorderColor { get; set; } = Color.FromArgb(155, 155, 155);
+		/// <summary>
+		/// Gets or sets the fore color of the control whenever while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the fore color of the control whenever while disabled")]
+		public Color DisabledForeColor
+		{
+			get { return _disabledForeColor; }
+			set
+			{
+				_disabledForeColor = value;
+				Refresh();
+			}
+		}
 
-        #endregion Properties
 
-    }
+		/// <summary>
+		/// Gets or sets the border color of the control while disabled.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the border color of the control while disabled.")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion Properties
+
+	}
 }

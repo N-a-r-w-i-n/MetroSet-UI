@@ -1,5 +1,5 @@
 ﻿/*
- * MetroSet UI - MetroSet UI Framewrok
+ * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
  * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -49,223 +49,6 @@ namespace MetroSet_UI.Forms
     public class MetroSetForm : Form, iForm
     {
 
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the form backcolor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
-        public Color BackgroundColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the form forecolor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
-        public override Color ForeColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the form bordercolor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form bordercolor.")]
-        public Color BorderColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the form textcolor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form textcolor.")]
-        public Color TextColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the form small line color 1.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form small line color 1.")]
-        public Color SmallLineColor1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the form small line color 2.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form small line color 2.")]
-        public Color SmallLineColor2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the header color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the header color.")]
-        public Color HeaderColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the width of the small rectangle on top left of the window.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the width of the small rectangle on top left of the window.")]
-        public int SmallRectThickness { get; set; } = 10;
-
-        /// <summary>
-        /// Gets or sets whether the border be shown.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the border be shown."), DefaultValue(true)]
-        public bool ShowBorder { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the border thickness.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border thickness.")]
-        public float BorderThickness { get; set; } = 1;
-
-        /// <summary>Gets or sets the border style of the form.</summary>
-        [DefaultValue(FormBorderStyle.None)]
-        [Browsable(false)]
-        private new FormBorderStyle FormBorderStyle
-        {
-            set => base.FormBorderStyle = FormBorderStyle.None;
-        }
-
-        /// <summary>Gets or sets a value indicating whether the Maximize button is displayed in the caption bar of the form.</summary>
-        /// <returns>true to display a Maximize button for the form; otherwise, false. The default is true.</returns>
-        [Category("WindowStyle")]
-        [Browsable(false)]
-        [DefaultValue(false)]
-        [Description("FormMaximizeBox")]
-        public new bool MaximizeBox => false;
-
-        /// <summary>Gets or sets a value indicating whether the Minimize button is displayed in the caption bar of the form.</summary>
-        /// <returns>true to display a Minimize button for the form; otherwise, false. The default is true.</returns>
-        [Category("WindowStyle")]
-        [Browsable(false)]
-        [DefaultValue(false)]
-        [Description("FormMinimizeBox")]
-        public new bool MinimizeBox
-        {
-            get => false;
-            set => value = false;
-        }
-
-        /// <summary>
-        /// Gets or sets whether the title be shown.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the title be shown.")]
-        public bool ShowTitle { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the title alignment.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the title alignment.")]
-        public TextAlign TextAlign { get; set; } = TextAlign.Left;
-
-
-        /// <summary>
-        /// Gets or sets whether show the header.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether show the header.")]
-        public bool ShowHeader
-        {
-            get => _showHeader;
-            set
-            {
-                _showHeader = value;
-                if (value)
-                {
-                    ShowLeftRect = false;
-                    Padding = new Padding(2, HeaderHeight + 30, 2, 2);
-                    Text = Text.ToUpper();
-                    TextColor = Color.White;
-                    ShowTitle = true;
-                    foreach (Control c in Controls)
-                    {
-                        if (c.GetType() != typeof(MetroSetControlBox)) continue;
-                        c.BringToFront();
-                        c.Location = new Point(Width - 12, 11);
-                    }
-                }
-                else
-                {
-                    Padding = new Padding(12, 90, 12, 12);
-                    ShowTitle = false;
-                }
-                Invalidate();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets whether the small rectangle on top left of the window be shown.
-        /// </summary>
-        [Category("MetroSet Framework"),
-         Description("Gets or sets whether the small rectangle on top left of the window be shown.")]
-        public bool ShowLeftRect
-        {
-            get => _showLeftRect;
-            set
-            {
-                _showLeftRect = value;
-                if (value)
-                {
-                    ShowHeader = false;
-                }
-                Invalidate();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets whether the form can be move or not.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the form can be move or not."), DefaultValue(true)]
-        public bool Moveable { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets whether the form use animation.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the form use animation.")]
-        public bool UseSlideAnimation { get; set; } = false;
-
-        [Browsable(false)]
-        public new Padding Padding
-        {
-            get => base.Padding;
-            set => base.Padding = value;
-        }
-
-        /// <summary>
-        /// Gets or sets the backgroundimage transparency.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the backgroundimage transparency.")]
-        public float BackgroundImageTransparency
-        {
-            get => _backgorundImageTrasparency;
-            set
-            {
-                if (value > 1)
-                    throw new Exception("The Value must be between 0-1.");
-
-                _backgorundImageTrasparency = value;
-                Invalidate();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the header height.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the header height.")]
-        public int HeaderHeight { get; set; } = 30;
-
-        /// <summary>
-        /// Gets or sets the background image displayed in the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the background image displayed in the control.")]
-        public override Image BackgroundImage { get => base.BackgroundImage; set => base.BackgroundImage = value; }
-
-        /// <summary>
-        /// Gets or sets whether the drop shadow effect apply on form.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the drop shadow effect apply on form.")]
-        public bool DropShadowEffect { get; set; }
-
-        /// <summary>
-        /// Gets or sets whether the user be able to resize the form or not.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets whether the user be able to resize the form or not.")]
-        public bool AllowResize { get; set; }
-
-        #endregion Properties
-
         #region Constructor
 
         protected MetroSetForm()
@@ -283,7 +66,7 @@ namespace MetroSet_UI.Forms
             _user32 = new User32();
             Padding = new Padding(12, 70, 12, 12);
             FormBorderStyle = FormBorderStyle.None;
-            _backgorundImageTrasparency = 0.90f;
+            _backgroundImageTransparency = 0.90f;
             Font = MetroSetFonts.SemiLight(13);
             DropShadowEffect = true;
             _showLeftRect = true;
@@ -376,14 +159,381 @@ namespace MetroSet_UI.Forms
 
         #endregion Draw Control
 
-        #region Methods
+        #region Properties
 
         /// <summary>
-        /// Allows the user to resize the form at runtime.
-        /// Credits : dizzy.stackoverflow
+        /// Gets or sets the form backcolor.
         /// </summary>
-        /// <param name="message">Windows Message.</param>
-        private void ResizeForm(ref Message message)
+        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the form fore color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+        public override Color ForeColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the form border color.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the form bordercolor.")]
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the form text color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form textcolor.")]
+		public Color TextColor
+		{
+			get { return _textColor; }
+			set
+			{
+				_textColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the form small line color 1.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form small line color 1.")]
+		public Color SmallLineColor1
+		{
+			get { return _smallLineColor1; }
+			set
+			{
+				_smallLineColor1 = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the form small line color 2.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form small line color 2.")]
+		public Color SmallLineColor2
+		{
+			get { return _smallLineColor2; }
+			set
+			{
+				_smallLineColor2 = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the header color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the header color.")]
+		public Color HeaderColor
+		{
+			get { return _headerColor; }
+			set
+			{
+				_headerColor = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the width of the small rectangle on top left of the window.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the width of the small rectangle on top left of the window.")]
+		[DefaultValue(10)]
+		public int SmallRectThickness
+		{
+			get { return _smallRectThickness; }
+			set
+			{
+				_smallRectThickness = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets whether the border be shown.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets whether the border be shown."), DefaultValue(true)]
+		public bool ShowBorder
+		{
+			get { return _showBorder; }
+			set
+			{
+				_showBorder = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the border thickness.
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the border thickness.")]
+		[DefaultValue(1)]
+		public float BorderThickness
+		{
+			get { return _borderThickness; }
+			set
+			{
+				_borderThickness = value;
+				Refresh();
+			}
+		}
+
+        /// <summary>Gets or sets the border style of the form.</summary>
+        [DefaultValue(FormBorderStyle.None)]
+        [Browsable(false)]
+        private new FormBorderStyle FormBorderStyle
+        {
+            set => base.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        /// <summary>Gets or sets a value indicating whether the Maximize button is displayed in the caption bar of the form.</summary>
+        /// <returns>true to display a Maximize button for the form; otherwise, false. The default is true.</returns>
+        [Category("WindowStyle")]
+        [Browsable(false)]
+        [DefaultValue(false)]
+        [Description("FormMaximizeBox")]
+        public new bool MaximizeBox => false;
+
+        /// <summary>Gets or sets a value indicating whether the Minimize button is displayed in the caption bar of the form.</summary>
+        /// <returns>true to display a Minimize button for the form; otherwise, false. The default is true.</returns>
+        [Category("WindowStyle")]
+        [Browsable(false)]
+        [DefaultValue(false)]
+        [Description("FormMinimizeBox")]
+        public new bool MinimizeBox
+        {
+            get => false;
+            set => value = false;
+        }
+
+        /// <summary>
+        /// Gets or sets whether the title be shown.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether the title be shown.")]
+		[DefaultValue(true)]
+		public bool ShowTitle
+		{
+			get { return _showTitle; }
+			set
+			{
+				_showTitle = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the title alignment.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the title alignment.")]
+		[DefaultValue(TextAlign.Left)]
+		public TextAlign TextAlign
+		{
+			get { return _textAlign; }
+			set
+			{
+				_textAlign = value;
+				Refresh();
+			}
+		}
+
+
+
+		/// <summary>
+		/// Gets or sets whether show the header.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets whether show the header.")]
+        public bool ShowHeader
+        {
+            get => _showHeader;
+            set
+            {
+                _showHeader = value;
+                if (value)
+                {
+                    ShowLeftRect = false;
+                    Padding = new Padding(2, HeaderHeight + 30, 2, 2);
+                    Text = Text.ToUpper();
+                    TextColor = Color.White;
+                    ShowTitle = true;
+                    foreach (Control c in Controls)
+                    {
+                        if (c.GetType() != typeof(MetroSetControlBox)) continue;
+                        c.BringToFront();
+                        c.Location = new Point(Width - 12, 11);
+                    }
+                }
+                else
+                {
+                    Padding = new Padding(12, 90, 12, 12);
+                    ShowTitle = false;
+                }
+                Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether the small rectangle on top left of the window be shown.
+        /// </summary>
+        [Category("MetroSet Framework"),
+         Description("Gets or sets whether the small rectangle on top left of the window be shown.")]
+        public bool ShowLeftRect
+        {
+            get => _showLeftRect;
+            set
+            {
+                _showLeftRect = value;
+                if (value)
+                {
+                    ShowHeader = false;
+                }
+                Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether the form can be move or not.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether the form can be move or not."), DefaultValue(true)]
+		public bool Moveable
+		{
+			get { return _movable; }
+			set
+			{
+				_movable = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets whether the form use animation.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets whether the form use animation.")]
+		public bool UseSlideAnimation
+		{
+			get { return _useSlideAnimation; }
+			set
+			{
+				_useSlideAnimation = value;
+				Refresh();
+			}
+		}
+
+
+		[Browsable(false)]
+        public new Padding Padding
+        {
+            get => base.Padding;
+            set => base.Padding = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the background image transparency.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the backgroundimage transparency.")]
+        public float BackgroundImageTransparency
+        {
+            get => _backgroundImageTransparency;
+            set
+            {
+                if (value > 1)
+                    throw new Exception("The Value must be between 0-1.");
+
+                _backgroundImageTransparency = value;
+                Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the header height.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets the header height.")]
+		[DefaultValue(40)]
+		public int HeaderHeight
+		{
+			get { return _headerHeight; }
+			set
+			{
+				_headerHeight = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the background image displayed in the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the background image displayed in the control.")]
+        public override Image BackgroundImage { get => base.BackgroundImage; set => base.BackgroundImage = value; }
+
+        /// <summary>
+        /// Gets or sets whether the drop shadow effect apply on form.
+        /// </summary>
+        [Category("MetroSet Framework"), Description("Gets or sets whether the drop shadow effect apply on form.")]
+		public bool DropShadowEffect
+		{
+			get { return _dropShadowEffect; }
+			set
+			{
+				_dropShadowEffect = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets whether the user be able to resize the form or not.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets whether the user be able to resize the form or not.")]
+		public bool AllowResize
+		{
+			get { return _allowResize; }
+			set
+			{
+				_allowResize = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion Properties
+
+		#region Methods
+
+		/// <summary>
+		/// Allows the user to resize the form at runtime.
+		/// Credits : dizzy.stackoverflow
+		/// </summary>
+		/// <param name="message">Windows Message.</param>
+		private void ResizeForm(ref Message message)
         {
             if (!AllowResize) return;
             var x = (int)(message.LParam.ToInt64() & 65535);
@@ -530,7 +680,24 @@ namespace MetroSet_UI.Forms
         private StyleManager _styleManager;
         private bool _showLeftRect;
         private bool _showHeader;
-        private float _backgorundImageTrasparency;
+        private float _backgroundImageTransparency;
+
+        private Color _backgroundColor;
+        private Color _borderColor;
+        private Color _textColor;
+        private Color _smallLineColor1;
+        private Color _smallLineColor2;
+        private Color _headerColor;
+        private int _smallRectThickness;
+        private bool _showBorder;
+        private float _borderThickness;
+        private bool _showTitle;
+        private TextAlign _textAlign;
+        private bool _movable = true;
+        private bool _useSlideAnimation;
+        private int _headerHeight;
+        private bool _dropShadowEffect;
+        private bool _allowResize;
 
         #endregion Internal Vars
 

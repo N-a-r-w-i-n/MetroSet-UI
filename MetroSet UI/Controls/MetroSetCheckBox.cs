@@ -1,5 +1,5 @@
 ﻿/*
-* MetroSet UI - MetroSet UI Framewrok
+* MetroSet UI - MetroSet UI Framework
 * 
 * The MIT License (MIT)
 * Copyright (c) 2017 Narwin, https://github.com/N-a-r-w-i-n
@@ -119,6 +119,13 @@ namespace MetroSet_UI.Controls
         private bool _checked;
         private IntAnimate _animator;
 
+        private SignStyle _signStyle = SignStyle.Sign;
+        private Enums.CheckState _checkState;
+        private Color _backgroundColor;
+        private Color _borderColor;
+        private Color _disabledBorderColor;
+        private Color _checkSignColor;
+
         #endregion Internal Vars
 
         #region Constructors
@@ -233,8 +240,8 @@ namespace MetroSet_UI.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var G = e.Graphics;
-            G.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            var g = e.Graphics;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
             var rect = new Rectangle(0, 0, 16, 15);
             var alpha = _animator.Value;
@@ -251,10 +258,10 @@ namespace MetroSet_UI.Controls
                             {
                                 using (var tb = new SolidBrush(ForeColor))
                                 {
-                                    G.FillRectangle(backBrush, rect);
-                                    G.DrawRectangle(Enabled ? p : checkMarkPen, rect);
-                                    DrawSymbol(G, checkMarkPen, checkMarkBrush);
-                                    G.DrawString(Text, Font, tb, new Rectangle(19, 2, Width, Height - 4), sf);
+                                    g.FillRectangle(backBrush, rect);
+                                    g.DrawRectangle(Enabled ? p : checkMarkPen, rect);
+                                    DrawSymbol(g, checkMarkPen, checkMarkBrush);
+                                    g.DrawString(Text, Font, tb, new Rectangle(19, 2, Width, Height - 4), sf);
                                 }
                             }
                         }
@@ -354,69 +361,119 @@ namespace MetroSet_UI.Controls
         /// Gets or sets the the sign style of check.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the the sign style of check.")]
-        public SignStyle SignStyle { get; set; } = SignStyle.Sign;
+		public SignStyle SignStyle
+		{
+			get { return _signStyle; }
+			set
+			{
+				_signStyle = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
-        /// </summary>
-        [Browsable(false)]
-        public Enums.CheckState CheckState { get; set; }
 
-        /// <summary>
-        /// Gets or sets forecolor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+		/// <summary>
+		/// Specifies the state of a control, such as a check box, that can be checked, unchecked.
+		/// </summary>
+		[Browsable(false)]
+		public Enums.CheckState CheckState
+		{
+			get { return _checkState; }
+			set
+			{
+				_checkState = value;
+				Refresh();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets ForeColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
         public override Color ForeColor { get; set; }
 
         /// <summary>
-        /// I make backcolor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+        /// I make BackColor inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color BackColor => Color.Transparent;
 
         /// <summary>
-        /// Gets or sets the form backcolor.
+        /// Gets or sets the form BackColor.
         /// </summary>
         [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
         [DisplayName("BackColor")]
-        public Color BackgroundColor { get; set; }
+		public Color BackgroundColor
+		{
+			get { return _backgroundColor; }
+			set
+			{
+				_backgroundColor = value;
+				Refresh();
+			}
+		}
 
 
-        /// <summary>
-        /// Gets or sets the border color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
-        public Color BorderColor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the border color while the control disabled.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
-        public Color DisabledBorderColor { get; set; }
+		/// <summary>
+		/// Gets or sets the border color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color.")]
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				_borderColor = value;
+				Refresh();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the color of the check symbol.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the color of the check symbol.")]
-        public Color CheckSignColor { get; set; }
 
-        #endregion Properties
+		/// <summary>
+		/// Gets or sets the border color while the control disabled.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color while the control disabled.")]
+		public Color DisabledBorderColor
+		{
+			get { return _disabledBorderColor; }
+			set
+			{
+				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
 
-        #region Disposing
 
-        /// <summary>
-        /// Disposing Methods.
-        /// </summary>
-        public new void Dispose()
+		/// <summary>
+		/// Gets or sets the color of the check symbol.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the color of the check symbol.")]
+		public Color CheckSignColor
+		{
+			get { return _checkSignColor; }
+			set
+			{
+				_checkSignColor = value;
+				Refresh();
+			}
+		}
+
+
+		#endregion Properties
+
+		#region Disposing
+
+		/// <summary>
+		/// Disposing Methods.
+		/// </summary>
+		public new void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
 
         #endregion
 
