@@ -9,6 +9,14 @@
     <AssemblyName>MetroSet UI</AssemblyName>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
+    <ApplicationIcon />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/N-a-r-w-i-n/MetroSet-UI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/N-a-r-w-i-n/MetroSet-UI</RepositoryUrl>
+    <PackageId>MetroSetUI</PackageId>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   
   </PropertyGroup>
 
@@ -32,6 +40,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <!--<None Include="http://www.iconarchive.com/download/i58702/dakirby309/windows-8-metro/Folders-OS-Windows-8-Metro.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>-->
   </ItemGroup>
 
 </Project>

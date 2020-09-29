@@ -115,8 +115,8 @@ namespace MetroSet_UI.Forms
 				{
 					using (var textBrush = new SolidBrush(TextColor))
 					{
-						e.Graphics.FillRectangle(b, new Rectangle(0, 40, 10, 35));
-						e.Graphics.DrawString(Text, Font, textBrush, new Point(20, 46));
+						e.Graphics.FillRectangle(b, new Rectangle(0, 40, SmallRectThickness, 35));
+						e.Graphics.DrawString(Text, Font, textBrush, new Point(SmallRectThickness + 10, 46));
 					}
 				}
 			}
@@ -268,7 +268,6 @@ namespace MetroSet_UI.Forms
 		/// </summary>
 		[Category("MetroSet Framework")]
 		[Description("Gets or sets the width of the small rectangle on top left of the window.")]
-		[DefaultValue(10)]
 		public int SmallRectThickness
 		{
 			get { return _smallRectThickness; }
@@ -300,7 +299,6 @@ namespace MetroSet_UI.Forms
 		/// </summary>
 		[Category("MetroSet Framework")]
 		[Description("Gets or sets the border thickness.")]
-		[DefaultValue(1)]
 		public float BorderThickness
 		{
 			get { return _borderThickness; }
@@ -348,7 +346,6 @@ namespace MetroSet_UI.Forms
 		/// Gets or sets whether the title be shown.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets whether the title be shown.")]
-		[DefaultValue(true)]
 		public bool ShowTitle
 		{
 			get { return _showTitle; }
@@ -364,7 +361,6 @@ namespace MetroSet_UI.Forms
 		/// Gets or sets the title alignment.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the title alignment.")]
-		[DefaultValue(TextAlign.Left)]
 		public TextAlign TextAlign
 		{
 			get { return _textAlign; }
@@ -488,7 +484,6 @@ namespace MetroSet_UI.Forms
 		/// Gets or sets the header height.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the header height.")]
-		[DefaultValue(40)]
 		public int HeaderHeight
 		{
 			get { return _headerHeight; }
@@ -701,14 +696,14 @@ namespace MetroSet_UI.Forms
 		private Color _smallLineColor1;
 		private Color _smallLineColor2;
 		private Color _headerColor;
-		private int _smallRectThickness;
+		private int _smallRectThickness = 10;
 		private bool _showBorder;
-		private float _borderThickness;
-		private bool _showTitle;
-		private TextAlign _textAlign;
+		private float _borderThickness = 1;
+		private bool _showTitle = true;
+		private TextAlign _textAlign = TextAlign.Left;
 		private bool _movable = true;
 		private bool _useSlideAnimation;
-		private int _headerHeight;
+		private int _headerHeight = 40;
 		private bool _dropShadowEffect;
 		private bool _allowResize;
 
