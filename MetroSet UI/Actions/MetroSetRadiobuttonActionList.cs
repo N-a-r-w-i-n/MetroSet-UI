@@ -22,76 +22,76 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    internal class MetroSetCheckBoxActionList : DesignerActionList
-    {
-        private readonly MetroSetCheckBox _metroSetCheckBox;
+	internal class MetroSetCheckBoxActionList : DesignerActionList
+	{
+		private readonly MetroSetCheckBox _metroSetCheckBox;
 
-        public MetroSetCheckBoxActionList(IComponent component) : base(component)
-        {
-            _metroSetCheckBox = (MetroSetCheckBox)component;
-        }
+		public MetroSetCheckBoxActionList(IComponent component) : base(component)
+		{
+			_metroSetCheckBox = (MetroSetCheckBox)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetCheckBox.Style;
-            set => _metroSetCheckBox.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetCheckBox.Style;
+			set => _metroSetCheckBox.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetCheckBox.ThemeAuthor;
+		public string ThemeAuthor => _metroSetCheckBox.ThemeAuthor;
 
-        public string ThemeName => _metroSetCheckBox.ThemeName;
+		public string ThemeName => _metroSetCheckBox.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetCheckBox.StyleManager;
-            set => _metroSetCheckBox.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetCheckBox.StyleManager;
+			set => _metroSetCheckBox.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetCheckBox.Text;
-            set => _metroSetCheckBox.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetCheckBox.Text;
+			set => _metroSetCheckBox.Text = value;
+		}
 
-        public bool Checked
-        {
-            get => _metroSetCheckBox.Checked;
-            set => _metroSetCheckBox.Checked = value;
-        }
+		public bool Checked
+		{
+			get => _metroSetCheckBox.Checked;
+			set => _metroSetCheckBox.Checked = value;
+		}
 
-        public SignStyle SignStyle
-        {
-            get => _metroSetCheckBox.SignStyle;
-            set => _metroSetCheckBox.SignStyle = value;
-        }
+		public SignStyle SignStyle
+		{
+			get => _metroSetCheckBox.SignStyle;
+			set => _metroSetCheckBox.SignStyle = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Checked", "Checked", "Appearance", "Gets or sets a value indicating whether the control is checked."),
-            new DesignerActionPropertyItem("SignStyle", "SignStyle", "Appearance", "Gets or sets the the sign style of check.")
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Checked", "Checked", "Appearance", "Gets or sets a value indicating whether the control is checked."),
+			new DesignerActionPropertyItem("SignStyle", "SignStyle", "Appearance", "Gets or sets the the sign style of check.")
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

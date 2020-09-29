@@ -35,6 +35,7 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
 
 namespace MetroSet_UI.Controls
 {
@@ -334,19 +335,19 @@ namespace MetroSet_UI.Controls
 		public new TabDrawMode DrawMode { get; set; } = TabDrawMode.Normal;
 
 		/// <summary>
-		/// Gets or sets the backgorund color.
+		/// Gets or sets the background color.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the backgorund color.")]
 		private Color BackgroundColor { get; set; }
 
 		/// <summary>
-		/// Gets or sets the fore gorund color.
+		/// Gets or sets the foreground color.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the foregorund color.")]
 		private Color ForegroundColor { get; set; }
 
 		/// <summary>
-		/// Gets or sets the tabpage text while un-selected.
+		/// Gets or sets the tab page text while un-selected.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the tabpage text while un-selected.")]
 		public Color UnselectedTextColor
@@ -426,14 +427,12 @@ namespace MetroSet_UI.Controls
 							}
 						}
 						using (var tb = new SolidBrush(i == SelectedIndex ? SelectedTextColor : UnselectedTextColor))
-
 						{
 							g.DrawString(TabPages[i].Text, Font, tb, r, _mth.SetPosition());
 						}
 					}
 					break;
 				case TabStyle.Style2:
-
 					for (var i = 0; i <= TabCount - 1; i++)
 					{
 						var r = GetTabRect(i);
@@ -454,6 +453,7 @@ namespace MetroSet_UI.Controls
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+
 
 		}
 

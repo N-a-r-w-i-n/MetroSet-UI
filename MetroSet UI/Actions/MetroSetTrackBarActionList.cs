@@ -22,75 +22,76 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    public class MetroSetTrackBarActionList : DesignerActionList
-    {
-        private readonly MetroSetTrackBar _metroSetTrackBar;
+	public class MetroSetTrackBarActionList : DesignerActionList
+	{
+		private readonly MetroSetTrackBar _metroSetTrackBar;
 
-        public MetroSetTrackBarActionList(IComponent component) : base(component)
-        {
-            _metroSetTrackBar = (MetroSetTrackBar)component;
-        }
+		public MetroSetTrackBarActionList(IComponent component) : base(component)
+		{
+			_metroSetTrackBar = (MetroSetTrackBar)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetTrackBar.Style;
-            set => _metroSetTrackBar.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetTrackBar.Style;
+			set => _metroSetTrackBar.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetTrackBar.ThemeAuthor;
+		public string ThemeAuthor => _metroSetTrackBar.ThemeAuthor;
 
-        public string ThemeName => _metroSetTrackBar.ThemeName;
+		public string ThemeName => _metroSetTrackBar.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetTrackBar.StyleManager;
-            set => _metroSetTrackBar.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetTrackBar.StyleManager;
+			set => _metroSetTrackBar.StyleManager = value;
+		}
 
-        public int Maximum
-        {
-            get => _metroSetTrackBar.Maximum;
-            set => _metroSetTrackBar.Maximum = value;
-        }
+		public int Maximum
+		{
+			get => _metroSetTrackBar.Maximum;
+			set => _metroSetTrackBar.Maximum = value;
+		}
 
-        public int Minimum
-        {
-            get => _metroSetTrackBar.Minimum;
-            set => _metroSetTrackBar.Minimum = value;
-        }
+		public int Minimum
+		{
+			get => _metroSetTrackBar.Minimum;
+			set => _metroSetTrackBar.Minimum = value;
+		}
 
-        public int Value
-        {
-            get => _metroSetTrackBar.Value;
-            set => _metroSetTrackBar.Value = value;
-        }
+		public int Value
+		{
+			get => _metroSetTrackBar.Value;
+			set => _metroSetTrackBar.Value = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Maximum", "Maximum", "Appearance", "Gets or sets the upper limit of the range this TrackBar is working with."),
-            new DesignerActionPropertyItem("Minimum", "Minimum", "Appearance", "Gets or sets the lower limit of the range this TrackBar is working with."),
-            new DesignerActionPropertyItem("Value", "Value", "Appearance", "Gets or sets a numeric value that represents the current position of the scroll box on the track bar."),
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Maximum", "Maximum", "Appearance", "Gets or sets the upper limit of the range this TrackBar is working with."),
+			new DesignerActionPropertyItem("Minimum", "Minimum", "Appearance", "Gets or sets the lower limit of the range this TrackBar is working with."),
+			new DesignerActionPropertyItem("Value", "Value", "Appearance", "Gets or sets a numeric value that represents the current position of the scroll box on the track bar."),
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

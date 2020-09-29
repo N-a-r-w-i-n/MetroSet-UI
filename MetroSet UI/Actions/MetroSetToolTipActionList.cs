@@ -22,103 +22,103 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Components;
-using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    internal class MetroSetToolTipActionList : DesignerActionList
-    {
-        private readonly MetroSetToolTip _metroSetToolTip;
+	internal class MetroSetToolTipActionList : DesignerActionList
+	{
+		private readonly MetroSetToolTip _metroSetToolTip;
 
-        public MetroSetToolTipActionList(IComponent component) : base(component)
-        {
-            _metroSetToolTip = (MetroSetToolTip)component;
-        }
+		public MetroSetToolTipActionList(IComponent component) : base(component)
+		{
+			_metroSetToolTip = (MetroSetToolTip)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetToolTip.Style;
-            set => _metroSetToolTip.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetToolTip.Style;
+			set => _metroSetToolTip.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetToolTip.ThemeAuthor;
+		public string ThemeAuthor => _metroSetToolTip.ThemeAuthor;
 
-        public string ThemeName => _metroSetToolTip.ThemeName;
+		public string ThemeName => _metroSetToolTip.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetToolTip.StyleManager;
-            set => _metroSetToolTip.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetToolTip.StyleManager;
+			set => _metroSetToolTip.StyleManager = value;
+		}
 
-        public bool Active
-        {
-            get => _metroSetToolTip.Active;
-            set => _metroSetToolTip.Active = value;
-        }
+		public bool Active
+		{
+			get => _metroSetToolTip.Active;
+			set => _metroSetToolTip.Active = value;
+		}
 
-        public int AutomaticDelay
-        {
-            get => _metroSetToolTip.AutomaticDelay;
-            set => _metroSetToolTip.AutomaticDelay = value;
-        }
+		public int AutomaticDelay
+		{
+			get => _metroSetToolTip.AutomaticDelay;
+			set => _metroSetToolTip.AutomaticDelay = value;
+		}
 
-        public int AutoPopDelay
-        {
-            get => _metroSetToolTip.AutoPopDelay;
-            set => _metroSetToolTip.AutoPopDelay = value;
-        }
+		public int AutoPopDelay
+		{
+			get => _metroSetToolTip.AutoPopDelay;
+			set => _metroSetToolTip.AutoPopDelay = value;
+		}
 
-        public int InitialDelay
-        {
-            get => _metroSetToolTip.InitialDelay;
-            set => _metroSetToolTip.InitialDelay = value;
-        }
+		public int InitialDelay
+		{
+			get => _metroSetToolTip.InitialDelay;
+			set => _metroSetToolTip.InitialDelay = value;
+		}
 
-        public bool StripAmpersands
-        {
-            get => _metroSetToolTip.StripAmpersands;
-            set => _metroSetToolTip.StripAmpersands = value;
-        }
+		public bool StripAmpersands
+		{
+			get => _metroSetToolTip.StripAmpersands;
+			set => _metroSetToolTip.StripAmpersands = value;
+		}
 
-        public bool UseAnimation
-        {
-            get => _metroSetToolTip.UseAnimation;
-            set => _metroSetToolTip.UseAnimation = value;
-        }
+		public bool UseAnimation
+		{
+			get => _metroSetToolTip.UseAnimation;
+			set => _metroSetToolTip.UseAnimation = value;
+		}
 
-        public bool UseFading
-        {
-            get => _metroSetToolTip.UseFading;
-            set => _metroSetToolTip.UseFading = value;
-        }
+		public bool UseFading
+		{
+			get => _metroSetToolTip.UseFading;
+			set => _metroSetToolTip.UseFading = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Misc"),
-                new DesignerActionPropertyItem("Active", "Active", "Misc", "Gets or sets a value indicating whether the ToolTip is currently active."),
-                new DesignerActionPropertyItem("AutomaticDelay", "AutomaticDelay", "Misc", "Gets or sets the automatic delay for the ToolTip."),
-                new DesignerActionPropertyItem("AutoPopDelay", "AutoPopDelay", "Misc", "Gets or sets the period of time the ToolTip remains visible if the pointer is stationary on a control with specified ToolTip text."),
-                new DesignerActionPropertyItem("InitialDelay", "InitialDelay", "Misc", "Gets or sets the time that passes before the ToolTip appears."),
-                new DesignerActionPropertyItem("StripAmpersands", "StripAmpersands", "Misc", "Gets or sets a value that determines how ampersand (&) characters are treated."),
-                new DesignerActionPropertyItem("UseAnimation", "UseAnimation", "Misc", "Gets or sets a value determining whether an animation effect should be used when displaying the ToolTip."),
-                new DesignerActionPropertyItem("UseFading", "UseFading", "Appearance", "Gets or sets a value determining whether a fade effect should be used when displaying the ToolTip."),
-            };
+			new DesignerActionHeaderItem("Misc"),
+				new DesignerActionPropertyItem("Active", "Active", "Misc", "Gets or sets a value indicating whether the ToolTip is currently active."),
+				new DesignerActionPropertyItem("AutomaticDelay", "AutomaticDelay", "Misc", "Gets or sets the automatic delay for the ToolTip."),
+				new DesignerActionPropertyItem("AutoPopDelay", "AutoPopDelay", "Misc", "Gets or sets the period of time the ToolTip remains visible if the pointer is stationary on a control with specified ToolTip text."),
+				new DesignerActionPropertyItem("InitialDelay", "InitialDelay", "Misc", "Gets or sets the time that passes before the ToolTip appears."),
+				new DesignerActionPropertyItem("StripAmpersands", "StripAmpersands", "Misc", "Gets or sets a value that determines how ampersand (&) characters are treated."),
+				new DesignerActionPropertyItem("UseAnimation", "UseAnimation", "Misc", "Gets or sets a value determining whether an animation effect should be used when displaying the ToolTip."),
+				new DesignerActionPropertyItem("UseFading", "UseFading", "Appearance", "Gets or sets a value determining whether a fade effect should be used when displaying the ToolTip."),
+			};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

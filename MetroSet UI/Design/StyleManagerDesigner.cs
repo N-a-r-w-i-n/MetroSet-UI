@@ -1,5 +1,4 @@
-﻿using MetroSet_UI.Tasks;
-/*
+﻿/*
  * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
@@ -24,6 +23,7 @@
  */
 
 using System.ComponentModel.Design;
+using MetroSet_UI.Actions;
 
 namespace MetroSet_UI.Design
 {

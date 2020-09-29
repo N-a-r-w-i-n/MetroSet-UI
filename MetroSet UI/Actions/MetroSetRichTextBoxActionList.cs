@@ -22,84 +22,85 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    internal class MetroSetRichTextBoxActionList : DesignerActionList
-    {
-        private readonly MetroSetRichTextBox _metroSetRichTextBox;
+	internal class MetroSetRichTextBoxActionList : DesignerActionList
+	{
+		private readonly MetroSetRichTextBox _metroSetRichTextBox;
 
-        public MetroSetRichTextBoxActionList(IComponent component) : base(component)
-        {
-            _metroSetRichTextBox = (MetroSetRichTextBox)component;
-        }
+		public MetroSetRichTextBoxActionList(IComponent component) : base(component)
+		{
+			_metroSetRichTextBox = (MetroSetRichTextBox)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetRichTextBox.Style;
-            set => _metroSetRichTextBox.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetRichTextBox.Style;
+			set => _metroSetRichTextBox.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetRichTextBox.ThemeAuthor;
+		public string ThemeAuthor => _metroSetRichTextBox.ThemeAuthor;
 
-        public string ThemeName => _metroSetRichTextBox.ThemeName;
+		public string ThemeName => _metroSetRichTextBox.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetRichTextBox.StyleManager;
-            set => _metroSetRichTextBox.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetRichTextBox.StyleManager;
+			set => _metroSetRichTextBox.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetRichTextBox.Text;
-            set => _metroSetRichTextBox.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetRichTextBox.Text;
+			set => _metroSetRichTextBox.Text = value;
+		}
 
-        public Font Font
-        {
-            get => _metroSetRichTextBox.Font;
-            set => _metroSetRichTextBox.Font = value;
-        }
+		public Font Font
+		{
+			get => _metroSetRichTextBox.Font;
+			set => _metroSetRichTextBox.Font = value;
+		}
 
-        public bool ReadOnly
-        {
-            get => _metroSetRichTextBox.ReadOnly;
-            set => _metroSetRichTextBox.ReadOnly = value;
-        }
+		public bool ReadOnly
+		{
+			get => _metroSetRichTextBox.ReadOnly;
+			set => _metroSetRichTextBox.ReadOnly = value;
+		}
 
-        public ContextMenuStrip ContextMenuStrip
-        {
-            get => _metroSetRichTextBox.ContextMenuStrip;
-            set => _metroSetRichTextBox.ContextMenuStrip = value;
-        }
+		public ContextMenuStrip ContextMenuStrip
+		{
+			get => _metroSetRichTextBox.ContextMenuStrip;
+			set => _metroSetRichTextBox.ContextMenuStrip = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
-            new DesignerActionPropertyItem("ReadOnly", "ReadOnly", "Appearance", "Gets or sets a value indicating whether text in the rich text box is read-only."),
-            new DesignerActionPropertyItem("ContextMenuStrip", "ContextMenuStrip", "Appearance", "Gets or sets the ContextMenuStrip associated with this control."),
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
+			new DesignerActionPropertyItem("ReadOnly", "ReadOnly", "Appearance", "Gets or sets a value indicating whether text in the rich text box is read-only."),
+			new DesignerActionPropertyItem("ContextMenuStrip", "ContextMenuStrip", "Appearance", "Gets or sets the ContextMenuStrip associated with this control."),
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

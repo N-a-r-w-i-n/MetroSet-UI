@@ -22,8 +22,6 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Design;
-using MetroSet_UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,8 +31,11 @@ using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Xml;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Interfaces;
 
-namespace MetroSet_UI
+namespace MetroSet_UI.Components
 {
     [DefaultProperty("Style")]
     [Designer(typeof(StyleManagerDesigner))]
@@ -45,7 +46,7 @@ namespace MetroSet_UI
 
         #region Constructor
 
-        public StyleManager(System.Windows.Forms.Form ownerForm)
+        public StyleManager(Form ownerForm)
         {
             MetroForm = ownerForm;
         }
@@ -246,7 +247,7 @@ namespace MetroSet_UI
         public void OpenTheme()
         {
             Style = Style.Custom;
-            using (var ofd = new OpenFileDialog { Filter = "Xml File (*.xml)|*.xml" })
+            using (var ofd = new OpenFileDialog { Filter = @"Xml File (*.xml)|*.xml" })
             {
                 if (ofd.ShowDialog() != DialogResult.OK)
                 {
@@ -624,7 +625,7 @@ namespace MetroSet_UI
                 if (editorService == null) return base.EditValue(context, provider, value);
                 _ofd = new OpenFileDialog
                 {
-                    Filter = "Xml File (*.xml)|*.xml",
+                    Filter = @"Xml File (*.xml)|*.xml",
                 };
                 return _ofd.ShowDialog() == DialogResult.OK ? _ofd.FileName : base.EditValue(context, provider, value);
             }

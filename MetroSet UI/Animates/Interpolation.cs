@@ -11,9 +11,7 @@ namespace MetroSet_UI.Animates
             switch (easing)
             {
                 default:
-                case EasingType.None:
-                case EasingType.Linear:
-                    return (end * alpha) + (initial * (1 - alpha));
+	                return (end * alpha) + (initial * (1 - alpha));
                 case EasingType.QuadIn:
                 {
                     double factor = alpha * alpha;

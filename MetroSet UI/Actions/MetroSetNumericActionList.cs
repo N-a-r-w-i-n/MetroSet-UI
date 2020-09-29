@@ -1,5 +1,8 @@
-﻿using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
+﻿using System.ComponentModel;
+using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
 /*
  * MetroSet UI - MetroSet UI Framework
@@ -25,73 +28,70 @@ using MetroSet_UI.Design;
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.ComponentModel;
-using System.ComponentModel.Design;
-
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    internal class MetroSetNumericActionList : DesignerActionList
-    {
-        private readonly MetroSetNumeric _metroSetNumeric;
+	internal class MetroSetNumericActionList : DesignerActionList
+	{
+		private readonly MetroSetNumeric _metroSetNumeric;
 
-        public MetroSetNumericActionList(IComponent component) : base(component)
-        {
-            _metroSetNumeric = (MetroSetNumeric)component;
-        }
+		public MetroSetNumericActionList(IComponent component) : base(component)
+		{
+			_metroSetNumeric = (MetroSetNumeric)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetNumeric.Style;
-            set => _metroSetNumeric.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetNumeric.Style;
+			set => _metroSetNumeric.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetNumeric.ThemeAuthor;
+		public string ThemeAuthor => _metroSetNumeric.ThemeAuthor;
 
-        public string ThemeName => _metroSetNumeric.ThemeName;
+		public string ThemeName => _metroSetNumeric.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetNumeric.StyleManager;
-            set => _metroSetNumeric.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetNumeric.StyleManager;
+			set => _metroSetNumeric.StyleManager = value;
+		}
 
-        public int Maximum
-        {
-            get => _metroSetNumeric.Maximum;
-            set => _metroSetNumeric.Maximum = value;
-        }
+		public int Maximum
+		{
+			get => _metroSetNumeric.Maximum;
+			set => _metroSetNumeric.Maximum = value;
+		}
 
-        public int Minimum
-        {
-            get => _metroSetNumeric.Minimum;
-            set => _metroSetNumeric.Minimum = value;
-        }
+		public int Minimum
+		{
+			get => _metroSetNumeric.Minimum;
+			set => _metroSetNumeric.Minimum = value;
+		}
 
-        public int Value
-        {
-            get => _metroSetNumeric.Value;
-            set => _metroSetNumeric.Value = value;
-        }
+		public int Value
+		{
+			get => _metroSetNumeric.Value;
+			set => _metroSetNumeric.Value = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Value", "Value", "Appearance", "Gets or sets the current number of the Numeric."),
-            new DesignerActionPropertyItem("Minimum", "Minimum", "Appearance", "Gets or sets the minimum number of the Numeric."),
-            new DesignerActionPropertyItem("Maximum", "Maximum", "Appearance", "Gets or sets the maximum number of the Numeric."),
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Value", "Value", "Appearance", "Gets or sets the current number of the Numeric."),
+			new DesignerActionPropertyItem("Minimum", "Minimum", "Appearance", "Gets or sets the minimum number of the Numeric."),
+			new DesignerActionPropertyItem("Maximum", "Maximum", "Appearance", "Gets or sets the maximum number of the Numeric."),
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

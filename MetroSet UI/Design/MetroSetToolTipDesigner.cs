@@ -22,8 +22,8 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Tasks;
 using System.ComponentModel.Design;
+using MetroSet_UI.Actions;
 
 namespace MetroSet_UI.Design
 {

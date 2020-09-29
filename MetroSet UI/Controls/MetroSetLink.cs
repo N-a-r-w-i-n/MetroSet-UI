@@ -22,276 +22,282 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Design;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
-using MetroSet_UI.Native;
-
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetLink), "Bitmaps.LinkLabel.bmp")]
-    [Designer(typeof(MetroSetLinkDesigner))]
-    [DefaultProperty("Text")]
-    [ComVisible(true)]
-    public class MetroSetLink : LinkLabel, iControl
-    {
-        #region Interfaces
+	[ToolboxItem(true)]
+	[ToolboxBitmap(typeof(MetroSetLink), "Bitmaps.LinkLabel.bmp")]
+	[Designer(typeof(MetroSetLinkDesigner))]
+	[DefaultProperty("Text")]
+	[ComVisible(true)]
+	public class MetroSetLink : LinkLabel, iControl
+	{
+		#region Interfaces
 
-        /// <summary>
-        /// Gets or sets the style associated with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
-        public Style Style
-        {
-            get => StyleManager?.Style ?? _style;
-            set
-            {
-                _style = value;
-                switch (value)
-                {
-                    case Style.Light:
-                        ApplyTheme();
-                        break;
+		/// <summary>
+		/// Gets or sets the style associated with the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
+		public Style Style
+		{
+			get => StyleManager?.Style ?? _style;
+			set
+			{
+				_style = value;
+				switch (value)
+				{
+					case Style.Light:
+						ApplyTheme();
+						break;
 
-                    case Style.Dark:
-                        ApplyTheme(Style.Dark);
-                        break;
+					case Style.Dark:
+						ApplyTheme(Style.Dark);
+						break;
 
-                    case Style.Custom:
-                        ApplyTheme(Style.Custom);
-                        break;
+					case Style.Custom:
+						ApplyTheme(Style.Custom);
+						break;
 
-                    default:
-                        ApplyTheme();
-                        break;
-                }
-                Invalidate();
-            }
-        }
+					default:
+						ApplyTheme();
+						break;
+				}
+				Invalidate();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the Style Manager associated with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
-        public StyleManager StyleManager
-        {
-            get => _styleManager;
-            set { _styleManager = value; Invalidate(); }
-        }
+		/// <summary>
+		/// Gets or sets the Style Manager associated with the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
+		public StyleManager StyleManager
+		{
+			get => _styleManager;
+			set { _styleManager = value; Invalidate(); }
+		}
 
-        /// <summary>
-        /// Gets or sets the The Author name associated with the theme.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
-        public string ThemeAuthor { get; set; }
+		/// <summary>
+		/// Gets or sets the The Author name associated with the theme.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
+		public string ThemeAuthor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the The Theme name associated with the theme.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
-        public string ThemeName { get; set; }
+		/// <summary>
+		/// Gets or sets the The Theme name associated with the theme.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
+		public string ThemeName { get; set; }
 
-        #endregion Interfaces
+		#endregion Interfaces
 
-        #region Global Vars
+		#region Global Vars
 
-        private readonly Utilites _utl;
+		private readonly Utilites _utl;
 
-        #endregion Global Vars
+		#endregion Global Vars
 
-        #region Internal Vars
+		#region Internal Vars
 
-        private Style _style;
-        private StyleManager _styleManager;
+		private Style _style;
+		private StyleManager _styleManager;
 
-        #endregion Internal Vars
+		#endregion Internal Vars
 
-        #region Constructors
+		#region Constructors
 
-        public MetroSetLink()
-        {
-            SetStyle(
-                ControlStyles.ResizeRedraw |
-                ControlStyles.OptimizedDoubleBuffer |
-                ControlStyles.SupportsTransparentBackColor, true
-                );
-            UpdateStyles();
-            Cursor = Cursors.Hand;
-            Font = MetroSetFonts.Light(10);
-            _utl = new Utilites();
-            _style = Style.Dark;
-            ApplyTheme();
-            LinkBehavior = LinkBehavior.HoverUnderline;
-        }
+		public MetroSetLink()
+		{
+			SetStyle(
+				ControlStyles.ResizeRedraw |
+				ControlStyles.OptimizedDoubleBuffer |
+				ControlStyles.SupportsTransparentBackColor, true
+				);
+			UpdateStyles();
+			VirtualCalls();
+			_utl = new Utilites();
+			_style = Style.Dark;
+			ApplyTheme();
+			LinkBehavior = LinkBehavior.HoverUnderline;
+		}
 
-        #endregion Constructors
+		private void VirtualCalls()
+		{
+			Font = MetroSetFonts.Light(10);
+			Cursor = Cursors.Hand;
+		}
 
-        #region ApplyTheme
+		#endregion Constructors
 
-        /// <summary>
-        /// Gets or sets the style provided by the user.
-        /// </summary>
-        /// <param name="style">The Style.</param>
-        private void ApplyTheme(Style style = Style.Light)
-        {
-            switch (style)
-            {
-                case Style.Light:
-                    ForeColor = Color.Black;
-                    BackColor = Color.Transparent;
-                    ActiveLinkColor = Color.FromArgb(85, 197, 245);
-                    LinkColor = Color.FromArgb(65, 177, 225);
-                    VisitedLinkColor = Color.FromArgb(45, 157, 205);
-                    ThemeAuthor = "Narwin";
-                    ThemeName = "MetroLite";
-                    UpdateProperties();
-                    break;
+		#region ApplyTheme
 
-                case Style.Dark:
-                    ForeColor = Color.FromArgb(170, 170, 170);
-                    BackColor = Color.Transparent;
-                    ActiveLinkColor = Color.FromArgb(85, 197, 245);
-                    LinkColor = Color.FromArgb(65, 177, 225);
-                    VisitedLinkColor = Color.FromArgb(45, 157, 205);
-                    ThemeAuthor = "Narwin";
-                    ThemeName = "MetroDark";
-                    UpdateProperties();
-                    break;
+		/// <summary>
+		/// Gets or sets the style provided by the user.
+		/// </summary>
+		/// <param name="style">The Style.</param>
+		private void ApplyTheme(Style style = Style.Light)
+		{
+			switch (style)
+			{
+				case Style.Light:
+					ForeColor = Color.Black;
+					BackColor = Color.Transparent;
+					ActiveLinkColor = Color.FromArgb(85, 197, 245);
+					LinkColor = Color.FromArgb(65, 177, 225);
+					VisitedLinkColor = Color.FromArgb(45, 157, 205);
+					ThemeAuthor = "Narwin";
+					ThemeName = "MetroLite";
+					UpdateProperties();
+					break;
 
-                case Style.Custom:
-                    if (StyleManager != null)
-                        foreach (var varkey in StyleManager.LinkLabelDictionary)
-                        {
-                            switch (varkey.Key)
-                            {
-                                case "ForeColor":
-                                    ForeColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+				case Style.Dark:
+					ForeColor = Color.FromArgb(170, 170, 170);
+					BackColor = Color.Transparent;
+					ActiveLinkColor = Color.FromArgb(85, 197, 245);
+					LinkColor = Color.FromArgb(65, 177, 225);
+					VisitedLinkColor = Color.FromArgb(45, 157, 205);
+					ThemeAuthor = "Narwin";
+					ThemeName = "MetroDark";
+					UpdateProperties();
+					break;
 
-                                case "BackColor":
-                                    BackColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+				case Style.Custom:
+					if (StyleManager != null)
+						foreach (var varkey in StyleManager.LinkLabelDictionary)
+						{
+							switch (varkey.Key)
+							{
+								case "ForeColor":
+									ForeColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "LinkColor":
-                                    LinkColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "BackColor":
+									BackColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "ActiveLinkColor":
-                                    ActiveLinkColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "LinkColor":
+									LinkColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "VisitedLinkColor":
-                                    VisitedLinkColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "ActiveLinkColor":
+									ActiveLinkColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "LinkBehavior":
-                                    switch ((string)varkey.Value)
-                                    {
-                                        case "HoverUnderline":
-                                            LinkBehavior = LinkBehavior.HoverUnderline;
-                                            break;
-                                        case "AlwaysUnderline":
-                                            LinkBehavior = LinkBehavior.AlwaysUnderline;
-                                            break;
-                                        case "NeverUnderline":
-                                            LinkBehavior = LinkBehavior.NeverUnderline;
-                                            break;
-                                        case "SystemDefault":
-                                            LinkBehavior = LinkBehavior.SystemDefault;
-                                            break;
-                                    }
-                                    break;
+								case "VisitedLinkColor":
+									VisitedLinkColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                default:
-                                    return;
-                            }
-                        }
-                    UpdateProperties();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
-            }
-        }
+								case "LinkBehavior":
+									switch ((string)varkey.Value)
+									{
+										case "HoverUnderline":
+											LinkBehavior = LinkBehavior.HoverUnderline;
+											break;
+										case "AlwaysUnderline":
+											LinkBehavior = LinkBehavior.AlwaysUnderline;
+											break;
+										case "NeverUnderline":
+											LinkBehavior = LinkBehavior.NeverUnderline;
+											break;
+										case "SystemDefault":
+											LinkBehavior = LinkBehavior.SystemDefault;
+											break;
+									}
+									break;
 
-        private void UpdateProperties()
-        {
-            Invalidate();
-        }
+								default:
+									return;
+							}
+						}
+					UpdateProperties();
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(style), style, null);
+			}
+		}
 
-        #endregion ApplyTheme
+		private void UpdateProperties()
+		{
+			Invalidate();
+		}
 
-        #region Events
+		#endregion ApplyTheme
 
-        /// <summary>
-        /// Here we set the smooth mouse hand.
-        /// </summary>
-        /// <param name="m"></param>
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == User32.WM_SETCURSOR)
-            {
-                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
-                m.Result = IntPtr.Zero;
-                return;
-            }
+		#region Events
 
-            base.WndProc(ref m);
-        }
+		/// <summary>
+		/// Here we set the smooth mouse hand.
+		/// </summary>
+		/// <param name="m"></param>
+		protected override void WndProc(ref Message m)
+		{
+			if (m.Msg == User32.WM_SETCURSOR)
+			{
+				User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+				m.Result = IntPtr.Zero;
+				return;
+			}
 
-        #endregion
+			base.WndProc(ref m);
+		}
 
-        #region Properties
+		#endregion
 
-        /// <summary>
-        /// Gets or sets ForeColor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
-        public override Color ForeColor { get; set; } = Color.Black;
+		#region Properties
 
-        /// <summary>
-        /// Gets or sets the form BackColor.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
-        public override Color BackColor { get; set; } = Color.Transparent;
+		/// <summary>
+		/// Gets or sets ForeColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form forecolor.")]
+		public override Color ForeColor { get; set; } = Color.Black;
 
-        /// <summary>
-        /// Gets or sets LinkColor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets LinkColor used by the control.")]
-        public new Color LinkColor { get; set; } = Color.FromArgb(65, 177, 225);
+		/// <summary>
+		/// Gets or sets the form BackColor.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the form backcolor.")]
+		public override Color BackColor { get; set; } = Color.Transparent;
 
-        /// <summary>
-        /// Gets or sets ActiveLinkColor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets ActiveLinkColor used by the control.")]
-        public new Color ActiveLinkColor { get; set; } = Color.FromArgb(85, 197, 245);
+		/// <summary>
+		/// Gets or sets LinkColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets LinkColor used by the control.")]
+		public new Color LinkColor { get; set; } = Color.FromArgb(65, 177, 225);
 
-        /// <summary>
-        /// Gets or sets VisitedLinkColor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets VisitedLinkColor used by the control.")]
-        public new Color VisitedLinkColor { get; set; } = Color.FromArgb(45, 157, 205);
+		/// <summary>
+		/// Gets or sets ActiveLinkColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets ActiveLinkColor used by the control.")]
+		public new Color ActiveLinkColor { get; set; } = Color.FromArgb(85, 197, 245);
 
-        /// <summary>
-        /// Gets or sets LinkBehavior used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets LinkBehavior used by the control.")]
-        public new LinkBehavior LinkBehavior { get; set; }
+		/// <summary>
+		/// Gets or sets VisitedLinkColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets VisitedLinkColor used by the control.")]
+		public new Color VisitedLinkColor { get; set; } = Color.FromArgb(45, 157, 205);
 
-        /// <summary>
-        /// Gets or sets DisabledLinkColor used by the control
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets DisabledLinkColor used by the control.")]
-        public new Color DisabledLinkColor { get; set; } = Color.FromArgb(133, 133, 133);
+		/// <summary>
+		/// Gets or sets LinkBehavior used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets LinkBehavior used by the control.")]
+		public new LinkBehavior LinkBehavior { get; set; }
 
-        #endregion Properties
+		/// <summary>
+		/// Gets or sets DisabledLinkColor used by the control
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets DisabledLinkColor used by the control.")]
+		public new Color DisabledLinkColor { get; set; } = Color.FromArgb(133, 133, 133);
 
-    }
+		#endregion Properties
+
+	}
 }

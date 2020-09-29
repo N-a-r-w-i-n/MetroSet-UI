@@ -22,76 +22,77 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    public class MetroSetTileActionList : DesignerActionList
-    {
-        private readonly MetroSetTile _metroSetTile;
+	public class MetroSetTileActionList : DesignerActionList
+	{
+		private readonly MetroSetTile _metroSetTile;
 
-        public MetroSetTileActionList(IComponent component) : base(component)
-        {
-            _metroSetTile = (MetroSetTile)component;
-        }
+		public MetroSetTileActionList(IComponent component) : base(component)
+		{
+			_metroSetTile = (MetroSetTile)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetTile.Style;
-            set => _metroSetTile.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetTile.Style;
+			set => _metroSetTile.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetTile.ThemeAuthor;
+		public string ThemeAuthor => _metroSetTile.ThemeAuthor;
 
-        public string ThemeName => _metroSetTile.ThemeName;
+		public string ThemeName => _metroSetTile.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetTile.StyleManager;
-            set => _metroSetTile.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetTile.StyleManager;
+			set => _metroSetTile.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetTile.Text;
-            set => _metroSetTile.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetTile.Text;
+			set => _metroSetTile.Text = value;
+		}
 
-        public Font Font
-        {
-            get => _metroSetTile.Font;
-            set => _metroSetTile.Font = value;
-        }
+		public Font Font
+		{
+			get => _metroSetTile.Font;
+			set => _metroSetTile.Font = value;
+		}
 
-        public Image BackgroundImage
-        {
-            get => _metroSetTile.BackgroundImage;
-            set => _metroSetTile.BackgroundImage = value;
-        }
+		public Image BackgroundImage
+		{
+			get => _metroSetTile.BackgroundImage;
+			set => _metroSetTile.BackgroundImage = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
-            new DesignerActionPropertyItem("BackgroundImage", "BackgroundImage", "Appearance", "Gets or sets the BackgroundImage associated with the control."),
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
+			new DesignerActionPropertyItem("BackgroundImage", "BackgroundImage", "Appearance", "Gets or sets the BackgroundImage associated with the control."),
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

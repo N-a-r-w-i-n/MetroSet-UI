@@ -1,11 +1,7 @@
-﻿using MetroSet_UI.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using System;
 using System.Windows.Forms;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Forms;
 
 namespace MetroSet_UI_Example
 {
@@ -18,13 +14,13 @@ namespace MetroSet_UI_Example
 
 		private void MetroSetSwitch2_SwitchedChanged(object sender)
 		{
-			if (styleManager1.Style == MetroSet_UI.Design.Style.Light)
+			if (styleManager1.Style == Style.Light)
 			{
-				styleManager1.Style = MetroSet_UI.Design.Style.Dark;
+				styleManager1.Style = Style.Dark;
 			}
 			else
 			{
-				styleManager1.Style = MetroSet_UI.Design.Style.Light;
+				styleManager1.Style = Style.Light;
 			}
 		}
 

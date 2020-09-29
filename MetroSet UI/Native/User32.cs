@@ -42,8 +42,8 @@ namespace MetroSet_UI.Native
         [StructLayout(LayoutKind.Sequential)]
         public struct TCHITTESTINFO
         {
-            private readonly Point pt;
-            public readonly TabControlHitTest flags;
+	        private readonly Point _point;
+	        public readonly TabControlHitTest flags;
 
             private TCHITTESTINFO(TabControlHitTest hitTest)
                 : this()
@@ -51,16 +51,16 @@ namespace MetroSet_UI.Native
                 flags = hitTest;
             }
 
-            public TCHITTESTINFO(Point point, TabControlHitTest hitTest)
-                : this(hitTest)
-            {
-                pt = point;
-            }
+			public TCHITTESTINFO(Point point, TabControlHitTest hitTest)
+				: this(hitTest)
+			{
+				_point = point;
+			}
 
-            public TCHITTESTINFO(int x, int y, TabControlHitTest hitTest)
+			public TCHITTESTINFO(int x, int y, TabControlHitTest hitTest)
                 : this(hitTest)
             {
-                pt = new Point(x, y);
+	            Point pt = new Point(x, y);
             }
         }
 

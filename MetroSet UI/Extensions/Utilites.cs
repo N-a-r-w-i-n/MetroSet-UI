@@ -15,7 +15,7 @@
  * all copies or substantial portions of the Software.
  * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR alpha 
  * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
@@ -76,25 +76,26 @@ namespace MetroSet_UI.Extensions
         /// <summary>
         /// The Pen from RGBA color.
         /// </summary>
-        /// <param name="R">Red.</param>
-        /// <param name="G">Green.</param>
-        /// <param name="B">Blue.</param>
-        /// <param name="A">Alpha.</param>
+        /// <param name="red">Red.</param>
+        /// <param name="green">Green.</param>
+        /// <param name="blue">Blue.</param>
+        /// <param name="alpha">Alpha.</param>
+        /// <param name="size"></param>
         /// <returns>The Pen from given RGBA color.</returns>
-        public Pen PenRGBColor(int R, int G, int B, int A, float Size)
+        public Pen PenRGBColor(int red, int green, int blue, int alpha, float size)
         {
-            return new Pen(Color.FromArgb(A, R, G, B), Size);
+            return new Pen(Color.FromArgb(alpha, red, green, blue), size);
         }
 
         /// <summary>
         /// The Pen from HEX color.
         /// </summary>
-        /// <param name="C_WithoutHash">HEX Color without hash.</param>
-        /// <param name="Size">The Size of the pen.</param>
+        /// <param name="colorWithoutHash">HEX Color without hash.</param>
+        /// <param name="size">The size of the pen.</param>
         /// <returns></returns>
-        public Pen PenHTMlColor(string C_WithoutHash, float Size = 1)
+        public Pen PenHTMlColor(string colorWithoutHash, float size = 1)
         {
-            return new Pen(HexColor(C_WithoutHash), Size);
+            return new Pen(HexColor(colorWithoutHash), size);
         }
 
         /// <summary>
@@ -129,13 +130,11 @@ namespace MetroSet_UI.Extensions
         /// </summary>
         public void InitControlHandle(Control ctrl)
         {
-            if (!ctrl.IsHandleCreated)
+	        if (ctrl.IsHandleCreated) return;
+	        var unused = ctrl.Handle;
+            foreach (Control child in ctrl.Controls)
             {
-                var unused = ctrl.Handle;
-                foreach (Control child in ctrl.Controls)
-                {
-                    InitControlHandle(child);
-                }
+	            InitControlHandle(child);
             }
         }
     }

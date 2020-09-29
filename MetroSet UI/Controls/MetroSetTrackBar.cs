@@ -30,6 +30,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Controls
 {

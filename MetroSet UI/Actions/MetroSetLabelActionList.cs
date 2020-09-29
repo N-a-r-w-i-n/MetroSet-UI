@@ -1,5 +1,10 @@
-﻿using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
+﻿using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
+
 /*
  * MetroSet UI - MetroSet UI Framework
  * 
@@ -24,67 +29,63 @@ using MetroSet_UI.Design;
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
-
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    class MetroSetLabelActionList : DesignerActionList
-    {
-        private readonly MetroSetLabel _metroSetLabel;
+	class MetroSetLabelActionList : DesignerActionList
+	{
+		private readonly MetroSetLabel _metroSetLabel;
 
-        public MetroSetLabelActionList(IComponent component) : base(component)
-        {
-            _metroSetLabel = (MetroSetLabel)component;
-        }
+		public MetroSetLabelActionList(IComponent component) : base(component)
+		{
+			_metroSetLabel = (MetroSetLabel)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetLabel.Style;
-            set => _metroSetLabel.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetLabel.Style;
+			set => _metroSetLabel.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetLabel.ThemeAuthor;
+		public string ThemeAuthor => _metroSetLabel.ThemeAuthor;
 
-        public string ThemeName => _metroSetLabel.ThemeName;
+		public string ThemeName => _metroSetLabel.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetLabel.StyleManager;
-            set => _metroSetLabel.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetLabel.StyleManager;
+			set => _metroSetLabel.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetLabel.Text;
-            set => _metroSetLabel.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetLabel.Text;
+			set => _metroSetLabel.Text = value;
+		}
 
-        public Font Font
-        {
-            get => _metroSetLabel.Font;
-            set => _metroSetLabel.Font = value;
-        }
+		public Font Font
+		{
+			get => _metroSetLabel.Font;
+			set => _metroSetLabel.Font = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control.")
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control.")
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

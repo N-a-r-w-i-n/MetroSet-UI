@@ -22,31 +22,32 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Interfaces
 {
-    public interface iForm
-    {
-        /// <summary>
-        /// Gets or sets the style associated with the Form.
-        /// </summary>
-        Style Style { get; set; }
+	public interface iForm
+	{
+		/// <summary>
+		/// Gets or sets the style associated with the Form.
+		/// </summary>
+		Style Style { get; set; }
 
-        /// <summary>
-        /// Gets or sets the StyleManager associated with the Form.
-        /// </summary>
-        StyleManager StyleManager { get; set; }
+		/// <summary>
+		/// Gets or sets the StyleManager associated with the Form.
+		/// </summary>
+		StyleManager StyleManager { get; set; }
 
-        /// <summary>
-        /// Gets or sets the The Author name associated with the theme.
-        /// </summary>
-        string ThemeAuthor { get; set; }
+		/// <summary>
+		/// Gets or sets the The Author name associated with the theme.
+		/// </summary>
+		string ThemeAuthor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the The Theme name associated with the theme.
-        /// </summary>
-        string ThemeName { get; set; }
+		/// <summary>
+		/// Gets or sets the The Theme name associated with the theme.
+		/// </summary>
+		string ThemeName { get; set; }
 
-    }
+	}
 }

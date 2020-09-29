@@ -33,6 +33,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
 
 namespace MetroSet_UI.Controls
 {
@@ -384,8 +385,8 @@ namespace MetroSet_UI.Controls
         /// <param name="e">EventArgs</param>
         protected override void OnMouseLeave(EventArgs e)
         {
-            base.OnMouseLeave(e);
             _state = MouseMode.Normal;
+            base.OnMouseLeave(e);
             Invalidate();
         }
 
@@ -407,7 +408,7 @@ namespace MetroSet_UI.Controls
         protected override void OnMouseEnter(EventArgs e)
         {
             base.OnMouseEnter(e);
-            _state = MouseMode.Hovered;
+            _state = MouseMode.Pushed;
             Invalidate();
         }
 
@@ -423,7 +424,7 @@ namespace MetroSet_UI.Controls
         }
 
         /// <summary>
-        /// Handling the mouse hover event on textbox control.
+        /// Handling the mouse hover event on text box control.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">EventArgs</param>
@@ -460,7 +461,7 @@ namespace MetroSet_UI.Controls
 
 
         /// <summary>
-        /// Handling Keydown event of textbox control.
+        /// Handling Keydown event of text box control.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">KeyEventArgs</param>

@@ -22,217 +22,218 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Design;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetPanel), "Bitmaps.Panel.bmp")]
-    [ComVisible(true)]
-    public class MetroSetPanel : Panel, iControl
-    {
-        #region Interfaces
+	[ToolboxItem(true)]
+	[ToolboxBitmap(typeof(MetroSetPanel), "Bitmaps.Panel.bmp")]
+	[ComVisible(true)]
+	public class MetroSetPanel : Panel, iControl
+	{
+		#region Interfaces
 
-        /// <summary>
-        /// Gets or sets the style associated with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
-        public Style Style
-        {
-            get => StyleManager?.Style ?? _style;
-            set
-            {
-                _style = value;
-                switch (value)
-                {
-                    case Style.Light:
-                        ApplyTheme();
-                        break;
+		/// <summary>
+		/// Gets or sets the style associated with the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
+		public Style Style
+		{
+			get => StyleManager?.Style ?? _style;
+			set
+			{
+				_style = value;
+				switch (value)
+				{
+					case Style.Light:
+						ApplyTheme();
+						break;
 
-                    case Style.Dark:
-                        ApplyTheme(Style.Dark);
-                        break;
+					case Style.Dark:
+						ApplyTheme(Style.Dark);
+						break;
 
-                    case Style.Custom:
-                        ApplyTheme(Style.Custom);
-                        break;
+					case Style.Custom:
+						ApplyTheme(Style.Custom);
+						break;
 
-                    default:
-                        ApplyTheme();
-                        break;
-                }
-                Invalidate();
-            }
-        }
+					default:
+						ApplyTheme();
+						break;
+				}
+				Invalidate();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the Style Manager associated with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
-        public StyleManager StyleManager
-        {
-            get => _styleManager;
-            set { _styleManager = value; Invalidate(); }
-        }
+		/// <summary>
+		/// Gets or sets the Style Manager associated with the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
+		public StyleManager StyleManager
+		{
+			get => _styleManager;
+			set { _styleManager = value; Invalidate(); }
+		}
 
-        /// <summary>
-        /// Gets or sets the The Author name associated with the theme.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
-        public string ThemeAuthor { get; set; }
+		/// <summary>
+		/// Gets or sets the The Author name associated with the theme.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
+		public string ThemeAuthor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the The Theme name associated with the theme.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
-        public string ThemeName { get; set; }
+		/// <summary>
+		/// Gets or sets the The Theme name associated with the theme.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
+		public string ThemeName { get; set; }
 
-        #endregion Interfaces
+		#endregion Interfaces
 
-        #region Global Vars
+		#region Global Vars
 
-        private readonly Utilites _utl;
+		private readonly Utilites _utl;
 
-        #endregion Global Vars
+		#endregion Global Vars
 
-        #region Internal Vars
+		#region Internal Vars
 
-        private Style _style;
-        private StyleManager _styleManager;
+		private Style _style;
+		private StyleManager _styleManager;
 
-        private int _borderThickness = 1;
-        private Color _borderColor;
-        private Color _backgroundColor;
+		private int _borderThickness = 1;
+		private Color _borderColor;
+		private Color _backgroundColor;
 
-        #endregion Internal Vars
+		#endregion Internal Vars
 
-        #region Constructors 
+		#region Constructors 
 
-        public MetroSetPanel()
-        {
-            SetStyle(
-                ControlStyles.UserPaint |
-                ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.ResizeRedraw |
-                ControlStyles.OptimizedDoubleBuffer |
-                ControlStyles.SupportsTransparentBackColor, true);
-            BorderStyle = BorderStyle.None;
-            UpdateStyles();
-            _utl = new Utilites();
-            ApplyTheme();
-        }
+		public MetroSetPanel()
+		{
+			SetStyle(
+				ControlStyles.UserPaint |
+				ControlStyles.AllPaintingInWmPaint |
+				ControlStyles.ResizeRedraw |
+				ControlStyles.OptimizedDoubleBuffer |
+				ControlStyles.SupportsTransparentBackColor, true);
+			BorderStyle = BorderStyle.None;
+			UpdateStyles();
+			_utl = new Utilites();
+			ApplyTheme();
+		}
 
-        #endregion Constructors
+		#endregion Constructors
 
-        #region ApplyTheme
+		#region ApplyTheme
 
-        /// <summary>
-        /// Gets or sets the style provided by the user.
-        /// </summary>
-        /// <param name="style">The Style.</param>
-        private void ApplyTheme(Style style = Style.Light)
-        {
-            switch (style)
-            {
-                case Style.Light:
-                    BorderColor = Color.FromArgb(150, 150, 150);
-                    BackgroundColor = Color.White;
-                    ThemeAuthor = "Narwin";
-                    ThemeName = "MetroLite";
-                    UpdateProperties();
-                    break;
+		/// <summary>
+		/// Gets or sets the style provided by the user.
+		/// </summary>
+		/// <param name="style">The Style.</param>
+		private void ApplyTheme(Style style = Style.Light)
+		{
+			switch (style)
+			{
+				case Style.Light:
+					BorderColor = Color.FromArgb(150, 150, 150);
+					BackgroundColor = Color.White;
+					ThemeAuthor = "Narwin";
+					ThemeName = "MetroLite";
+					UpdateProperties();
+					break;
 
-                case Style.Dark:
-                    BorderColor = Color.FromArgb(110, 110, 110);
-                    BackgroundColor = Color.FromArgb(30, 30, 30);
-                    ThemeAuthor = "Narwin";
-                    ThemeName = "MetroDark";
-                    UpdateProperties();
-                    break;
+				case Style.Dark:
+					BorderColor = Color.FromArgb(110, 110, 110);
+					BackgroundColor = Color.FromArgb(30, 30, 30);
+					ThemeAuthor = "Narwin";
+					ThemeName = "MetroDark";
+					UpdateProperties();
+					break;
 
-                case Style.Custom:
-                    if (StyleManager != null)
-                        foreach (var varkey in StyleManager.LabelDictionary)
-                        {
-                            switch (varkey.Key)
-                            {
-                                case "BorderColor":
-                                    BorderColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+				case Style.Custom:
+					if (StyleManager != null)
+						foreach (var varkey in StyleManager.LabelDictionary)
+						{
+							switch (varkey.Key)
+							{
+								case "BorderColor":
+									BorderColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "BackColor":
-                                    BackgroundColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "BackColor":
+									BackgroundColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                default:
-                                    return;
-                            }
-                        }
-                    UpdateProperties();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
-            }
-        }
+								default:
+									return;
+							}
+						}
+					UpdateProperties();
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(style), style, null);
+			}
+		}
 
-        private void UpdateProperties()
-        {
-            Invalidate();
-        }
+		private void UpdateProperties()
+		{
+			Invalidate();
+		}
 
-        #endregion Theme Changing
+		#endregion Theme Changing
 
-        #region Draw Control
+		#region Draw Control
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            var r = new Rectangle(BorderThickness, BorderThickness, Width - (BorderThickness * 2 + 1), Height - ((BorderThickness * 2) + 1));
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			var g = e.Graphics;
+			var r = new Rectangle(BorderThickness, BorderThickness, Width - (BorderThickness * 2 + 1), Height - ((BorderThickness * 2) + 1));
 
-            using (var bg = new SolidBrush(BackgroundColor))
-            {
-                using (var p = new Pen(BorderColor, BorderThickness))
-                {
-                    g.FillRectangle(bg, r);
-                    g.DrawRectangle(p, r);
-                }
-            }
+			using (var bg = new SolidBrush(BackgroundColor))
+			{
+				using (var p = new Pen(BorderColor, BorderThickness))
+				{
+					g.FillRectangle(bg, r);
+					g.DrawRectangle(p, r);
+				}
+			}
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        /// <summary>
-        /// Gets the background color.
-        /// </summary>
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor => Color.Transparent;
+		/// <summary>
+		/// Gets the background color.
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		public override Color BackColor => Color.Transparent;
 
-        /// <summary>
-        /// Gets the foreground color.
-        /// </summary>
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color ForeColor => Color.Transparent;
+		/// <summary>
+		/// Gets the foreground color.
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		public override Color ForeColor => Color.Transparent;
 
-        /// <summary>
-        /// Gets or sets the border style.
-        /// </summary>
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new BorderStyle BorderStyle = BorderStyle.None;
+		/// <summary>
+		/// Gets or sets the border style.
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		public new BorderStyle BorderStyle;
 
-        /// <summary>
-        /// Gets or sets the border thickness the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border thickness the control.")]
+		/// <summary>
+		/// Gets or sets the border thickness the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border thickness the control.")]
 		public int BorderThickness
 		{
 			get { return _borderThickness; }
@@ -263,7 +264,7 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets BackColor used by the control
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets backcolor used by the control.")]
-        [DisplayName("BackColor")]
+		[DisplayName("BackColor")]
 		public Color BackgroundColor
 		{
 			get { return _backgroundColor; }

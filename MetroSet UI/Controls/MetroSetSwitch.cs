@@ -22,319 +22,325 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Animates;
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
-using MetroSet_UI.Native;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Animates;
+using MetroSet_UI.Components;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
+using MetroSet_UI.Native;
 
 namespace MetroSet_UI.Controls
 {
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(MetroSetSwitch), "Bitmaps.Switch.bmp")]
-    [Designer(typeof(MetroSetSwitchDesigner))]
-    [DefaultEvent("SwitchedChanged")]
-    [DefaultProperty("Switched")]
-    [ComVisible(true)]
-    public class MetroSetSwitch : Control, iControl, IDisposable
-    {
-        #region Interfaces
+	[ToolboxItem(true)]
+	[ToolboxBitmap(typeof(MetroSetSwitch), "Bitmaps.Switch.bmp")]
+	[Designer(typeof(MetroSetSwitchDesigner))]
+	[DefaultEvent("SwitchedChanged")]
+	[DefaultProperty("Switched")]
+	[ComVisible(true)]
+	public class MetroSetSwitch : Control, iControl, IDisposable
+	{
+		#region Interfaces
 
-        /// <summary>
-        /// Gets or sets the style associated with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
-        public Style Style
-        {
-            get => StyleManager?.Style ?? _style;
-            set
-            {
-                _style = value;
-                switch (value)
-                {
-                    case Style.Light:
-                        ApplyTheme();
-                        break;
+		/// <summary>
+		/// Gets or sets the style associated with the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the style associated with the control.")]
+		public Style Style
+		{
+			get => StyleManager?.Style ?? _style;
+			set
+			{
+				_style = value;
+				switch (value)
+				{
+					case Style.Light:
+						ApplyTheme();
+						break;
 
-                    case Style.Dark:
-                        ApplyTheme(Style.Dark);
-                        break;
+					case Style.Dark:
+						ApplyTheme(Style.Dark);
+						break;
 
-                    case Style.Custom:
-                        ApplyTheme(Style.Custom);
-                        break;
+					case Style.Custom:
+						ApplyTheme(Style.Custom);
+						break;
 
-                    default:
-                        ApplyTheme();
-                        break;
-                }
-                Invalidate();
-            }
-        }
+					default:
+						ApplyTheme();
+						break;
+				}
+				Invalidate();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the Style Manager associated with the control.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
-        public StyleManager StyleManager
-        {
-            get => _styleManager;
-            set { _styleManager = value; Invalidate(); }
-        }
+		/// <summary>
+		/// Gets or sets the Style Manager associated with the control.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the Style Manager associated with the control.")]
+		public StyleManager StyleManager
+		{
+			get => _styleManager;
+			set { _styleManager = value; Invalidate(); }
+		}
 
-        /// <summary>
-        /// Gets or sets the The Author name associated with the theme.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
-        public string ThemeAuthor { get; set; }
+		/// <summary>
+		/// Gets or sets the The Author name associated with the theme.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the The Author name associated with the theme.")]
+		public string ThemeAuthor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the The Theme name associated with the theme.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
-        public string ThemeName { get; set; }
+		/// <summary>
+		/// Gets or sets the The Theme name associated with the theme.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the The Theme name associated with the theme.")]
+		public string ThemeName { get; set; }
 
-        #endregion Interfaces
+		#endregion Interfaces
 
-        #region Global Vars
+		#region Global Vars
 
-        private readonly Utilites _utl;
+		private readonly Utilites _utl;
 
-        #endregion Global Vars
+		#endregion Global Vars
 
-        #region Internal Vars
+		#region Internal Vars
 
-        private StyleManager _styleManager;
-        private bool _switched;
-        private Style _style;
-        private int _switchLocation = 0;
-        private IntAnimate _animator;
+		private StyleManager _styleManager;
+		private bool _switched;
+		private Style _style;
+		private int _switchLocation;
+		private readonly IntAnimate _animator;
 
-        private Enums.CheckState _checkState;
-        private Color _borderColor;
-        private Color _checkColor;
-        private Color _disabledBorderColor;
-        private Color _disabledCheckColor;
-        private Color _disabledUnCheckColor;
-        private Color _backgroundColor;
-        private Color _symbolColor;
-        private Color _unCheckColor;
+		private Enums.CheckState _checkState;
+		private Color _borderColor;
+		private Color _checkColor;
+		private Color _disabledBorderColor;
+		private Color _disabledCheckColor;
+		private Color _disabledUnCheckColor;
+		private Color _backgroundColor;
+		private Color _symbolColor;
+		private Color _unCheckColor;
 
-        #endregion Internal Vars
+		#endregion Internal Vars
 
-        #region Constructors
+		#region Constructors
 
-        public MetroSetSwitch()
-        {
-            SetStyle(
-                ControlStyles.ResizeRedraw |
-                ControlStyles.OptimizedDoubleBuffer |
-                ControlStyles.SupportsTransparentBackColor, true);
-            UpdateStyles();
-            Cursor = Cursors.Hand;
-            _utl = new Utilites();
-            _animator = new IntAnimate();
-            _animator.Setting(100, 0, 132, EasingType.Linear);
-            _animator.Update = (alpha) =>
-            {
-                _switchLocation = alpha;
-                Invalidate(false);
-            };
-            ApplyTheme();
-        }
+		public MetroSetSwitch()
+		{
+			SetStyle(
+				ControlStyles.ResizeRedraw |
+				ControlStyles.OptimizedDoubleBuffer |
+				ControlStyles.SupportsTransparentBackColor, true);
+			UpdateStyles();
+			VirtualCalls();
+			_utl = new Utilites();
+			_animator = new IntAnimate();
+			_animator.Setting(100, 0, 132);
+			_animator.Update = (alpha) =>
+			{
+				_switchLocation = alpha;
+				Invalidate(false);
+			};
+			ApplyTheme();
+		}
 
-        #endregion Constructors
+		private void VirtualCalls()
+		{
+			Cursor = Cursors.Hand;
+		}
 
-        #region ApplyTheme
+		#endregion Constructors
 
-        private void UpdateProperties()
-        {
-            Invalidate();
-        }
+		#region ApplyTheme
 
-        /// <summary>
-        /// Gets or sets the style provided by the user.
-        /// </summary>
-        /// <param name="style">The Style.</param>
-        private void ApplyTheme(Style style = Style.Light)
-        {
-            switch (style)
-            {
-                case Style.Light:
-                    ForeColor = Color.Black;
-                    BackColor = Color.White;
-                    BorderColor = Color.FromArgb(165, 159, 147);
-                    DisabledBorderColor = Color.FromArgb(205, 205, 205);
-                    SymbolColor = Color.FromArgb(92, 92, 92);
-                    UnCheckColor = Color.FromArgb(155, 155, 155);
-                    CheckColor = Color.FromArgb(65, 177, 225);
-                    DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
-                    DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
-                    ThemeAuthor = "Narwin";
-                    ThemeName = "MetroLite";
-                    UpdateProperties();
-                    break;
+		private void UpdateProperties()
+		{
+			Invalidate();
+		}
 
-                case Style.Dark:
-                    ForeColor = Color.FromArgb(170, 170, 170);
-                    BackColor = Color.FromArgb(30, 30, 30);
-                    BorderColor = Color.FromArgb(155, 155, 155);
-                    DisabledBorderColor = Color.FromArgb(85, 85, 85);
-                    SymbolColor = Color.FromArgb(92, 92, 92);
-                    UnCheckColor = Color.FromArgb(155, 155, 155);
-                    CheckColor = Color.FromArgb(65, 177, 225);
-                    DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
-                    DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
-                    ThemeAuthor = "Narwin";
-                    ThemeName = "MetroDark";
-                    UpdateProperties();
-                    break;
+		/// <summary>
+		/// Gets or sets the style provided by the user.
+		/// </summary>
+		/// <param name="style">The Style.</param>
+		private void ApplyTheme(Style style = Style.Light)
+		{
+			switch (style)
+			{
+				case Style.Light:
+					ForeColor = Color.Black;
+					BackColor = Color.White;
+					BorderColor = Color.FromArgb(165, 159, 147);
+					DisabledBorderColor = Color.FromArgb(205, 205, 205);
+					SymbolColor = Color.FromArgb(92, 92, 92);
+					UnCheckColor = Color.FromArgb(155, 155, 155);
+					CheckColor = Color.FromArgb(65, 177, 225);
+					DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
+					DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
+					ThemeAuthor = "Narwin";
+					ThemeName = "MetroLite";
+					UpdateProperties();
+					break;
 
-                case Style.Custom:
+				case Style.Dark:
+					ForeColor = Color.FromArgb(170, 170, 170);
+					BackColor = Color.FromArgb(30, 30, 30);
+					BorderColor = Color.FromArgb(155, 155, 155);
+					DisabledBorderColor = Color.FromArgb(85, 85, 85);
+					SymbolColor = Color.FromArgb(92, 92, 92);
+					UnCheckColor = Color.FromArgb(155, 155, 155);
+					CheckColor = Color.FromArgb(65, 177, 225);
+					DisabledUnCheckColor = Color.FromArgb(200, 205, 205, 205);
+					DisabledCheckColor = Color.FromArgb(100, 65, 177, 225);
+					ThemeAuthor = "Narwin";
+					ThemeName = "MetroDark";
+					UpdateProperties();
+					break;
 
-                    if (StyleManager != null)
-                        foreach (var varkey in StyleManager.SwitchBoxDictionary)
-                        {
-                            switch (varkey.Key)
-                            {
-                                case "BackColor":
-                                    BackColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+				case Style.Custom:
 
-                                case "BorderColor":
-                                    BorderColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+					if (StyleManager != null)
+						foreach (var varkey in StyleManager.SwitchBoxDictionary)
+						{
+							switch (varkey.Key)
+							{
+								case "BackColor":
+									BackColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "DisabledBorderColor":
-                                    DisabledBorderColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "BorderColor":
+									BorderColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "SymbolColor":
-                                    SymbolColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "DisabledBorderColor":
+									DisabledBorderColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "UnCheckColor":
-                                    UnCheckColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "SymbolColor":
+									SymbolColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "CheckColor":
-                                    CheckColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "UnCheckColor":
+									UnCheckColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "DisabledUnCheckColor":
-                                    DisabledUnCheckColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "CheckColor":
+									CheckColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                case "DisabledCheckColor":
-                                    DisabledCheckColor = _utl.HexColor((string)varkey.Value);
-                                    break;
+								case "DisabledUnCheckColor":
+									DisabledUnCheckColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-                                default:
-                                    return;
-                            }
-                        }
-                    UpdateProperties();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
-            }
-        }
+								case "DisabledCheckColor":
+									DisabledCheckColor = _utl.HexColor((string)varkey.Value);
+									break;
 
-        #endregion ApplyTheme
+								default:
+									return;
+							}
+						}
+					UpdateProperties();
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(style), style, null);
+			}
+		}
 
-        #region Draw Control
+		#endregion ApplyTheme
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+		#region Draw Control
 
-            var rect = new Rectangle(1, 1, 56, 20);
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			var g = e.Graphics;
+			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-            var rect2 = new Rectangle(3, 3, 52, 16);
+			var rect = new Rectangle(1, 1, 56, 20);
 
-            using (var backBrush = new SolidBrush(BackgroundColor))
-            {
-                using (var checkback = new SolidBrush(Enabled ? Switched ? CheckColor : UnCheckColor : Switched ? DisabledCheckColor : DisabledUnCheckColor))
-                {
-                    using (var checkMarkBrush = new SolidBrush(SymbolColor))
-                    {
-                        using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor, 2))
-                        {
-                            g.FillRectangle(backBrush, rect);
+			var rect2 = new Rectangle(3, 3, 52, 16);
 
-                            g.FillRectangle(checkback, rect2);
+			using (var backBrush = new SolidBrush(BackgroundColor))
+			{
+				using (var checkback = new SolidBrush(Enabled ? Switched ? CheckColor : UnCheckColor : Switched ? DisabledCheckColor : DisabledUnCheckColor))
+				{
+					using (var checkMarkBrush = new SolidBrush(SymbolColor))
+					{
+						using (var p = new Pen(Enabled ? BorderColor : DisabledBorderColor, 2))
+						{
+							g.FillRectangle(backBrush, rect);
 
-                            g.DrawRectangle(p, rect);
+							g.FillRectangle(checkback, rect2);
 
-                            g.FillRectangle(checkMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (_switchLocation / 180.0))), 0, 16, 22));
-                        }
-                    }
-                }
-            }
-        }
+							g.DrawRectangle(p, rect);
 
-        #endregion Draw Control
+							g.FillRectangle(checkMarkBrush, new Rectangle((Convert.ToInt32(rect.Width * (_switchLocation / 180.0))), 0, 16, 22));
+						}
+					}
+				}
+			}
+		}
 
-        #region Events
+		#endregion Draw Control
 
-        public delegate void SwitchedChangedEventHandler(object sender);
+		#region Events
 
-        public event SwitchedChangedEventHandler SwitchedChanged;
+		public delegate void SwitchedChangedEventHandler(object sender);
 
-        /// <summary>
-        /// Here we will handle the checking state in runtime.
-        /// </summary>
-        /// <param name="e">EventArgs</param>
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-            Switched = !Switched;
-            Invalidate();
-        }
+		public event SwitchedChangedEventHandler SwitchedChanged;
 
-        /// <summary>
-        /// Here we will set the limited height for the control to avoid high and low of the text drawing.
-        /// </summary>
-        /// <param name="e">EventArgs</param>
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            Size = new Size(58, 22);
-            Invalidate();
-        }
+		/// <summary>
+		/// Here we will handle the checking state in runtime.
+		/// </summary>
+		/// <param name="e">EventArgs</param>
+		protected override void OnClick(EventArgs e)
+		{
+			base.OnClick(e);
+			Switched = !Switched;
+			Invalidate();
+		}
 
-        /// <summary>
-        /// Here we set the smooth mouse hand.
-        /// </summary>
-        /// <param name="m"></param>
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == User32.WM_SETCURSOR)
-            {
-                User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
-                m.Result = IntPtr.Zero;
-                return;
-            }
+		/// <summary>
+		/// Here we will set the limited height for the control to avoid high and low of the text drawing.
+		/// </summary>
+		/// <param name="e">EventArgs</param>
+		protected override void OnResize(EventArgs e)
+		{
+			base.OnResize(e);
+			Size = new Size(58, 22);
+			Invalidate();
+		}
 
-            base.WndProc(ref m);
-        }
+		/// <summary>
+		/// Here we set the smooth mouse hand.
+		/// </summary>
+		/// <param name="m"></param>
+		protected override void WndProc(ref Message m)
+		{
+			if (m.Msg == User32.WM_SETCURSOR)
+			{
+				User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
+				m.Result = IntPtr.Zero;
+				return;
+			}
 
-        #endregion Events
+			base.WndProc(ref m);
+		}
 
-        #region Properties
+		#endregion Events
 
-        /// <summary>
-        /// Specifies the state of a control, such as a check box, that can be checked, unchecked.
-        /// </summary>
-        [Browsable(false)]
+		#region Properties
+
+		/// <summary>
+		/// Specifies the state of a control, such as a check box, that can be checked, unchecked.
+		/// </summary>
+		[Browsable(false)]
 		public Enums.CheckState CheckState
 		{
 			get { return _checkState; }
@@ -345,27 +351,27 @@ namespace MetroSet_UI.Controls
 			}
 		}
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the control is checked.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the control is checked.")]
-        public bool Switched
-        {
-            get => _switched;
-            set
-            {
-                _switched = value;
-                SwitchedChanged?.Invoke(this);
-                _animator.Reverse(!value);
-                CheckState = value != true ? Enums.CheckState.Unchecked : Enums.CheckState.Checked;
-                Invalidate();
-            }
-        }
+		/// <summary>
+		/// Gets or sets a value indicating whether the control is checked.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets a value indicating whether the control is checked.")]
+		public bool Switched
+		{
+			get => _switched;
+			set
+			{
+				_switched = value;
+				SwitchedChanged?.Invoke(this);
+				_animator.Reverse(!value);
+				CheckState = value != true ? Enums.CheckState.Unchecked : Enums.CheckState.Checked;
+				Invalidate();
+			}
+		}
 
-        /// <summary>
-        /// Gets or sets the border color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the border color.")]
+		/// <summary>
+		/// Gets or sets the border color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the border color.")]
 		public Color BorderColor
 		{
 			get { return _borderColor; }
@@ -441,19 +447,19 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets fore color used by the control
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets forecolor used by the control.")]
-        public override Color ForeColor { get; set; }
+		public override Color ForeColor { get; set; }
 
-        /// <summary>
-        /// I make back color inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
-        /// </summary>
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public override Color BackColor => Color.Transparent;
+		/// <summary>
+		/// I make back color inaccessible cause I want it to be just transparent and I used another property for the same job in following properties. 
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		public override Color BackColor => Color.Transparent;
 
-        /// <summary>
-        /// Gets or sets the control back color.
-        /// </summary>
-        [Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
-        [DisplayName("BackColor")]
+		/// <summary>
+		/// Gets or sets the control back color.
+		/// </summary>
+		[Category("MetroSet Framework"), Description("Gets or sets the control backcolor.")]
+		[DisplayName("BackColor")]
 		public Color BackgroundColor
 		{
 			get { return _backgroundColor; }
@@ -503,17 +509,12 @@ namespace MetroSet_UI.Controls
 		/// Disposing Methods.
 		/// </summary>
 		public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
+		#endregion
 
-        #endregion
-
-    }
+	}
 }

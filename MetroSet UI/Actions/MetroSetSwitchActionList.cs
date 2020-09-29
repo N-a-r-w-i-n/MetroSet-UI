@@ -22,68 +22,69 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    internal class MetroSetSwitchActionList : DesignerActionList
-    {
-        private readonly MetroSetSwitch _metroSetSwitch;
+	internal class MetroSetSwitchActionList : DesignerActionList
+	{
+		private readonly MetroSetSwitch _metroSetSwitch;
 
-        public MetroSetSwitchActionList(IComponent component) : base(component)
-        {
-            _metroSetSwitch = (MetroSetSwitch)component;
-        }
+		public MetroSetSwitchActionList(IComponent component) : base(component)
+		{
+			_metroSetSwitch = (MetroSetSwitch)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetSwitch.Style;
-            set => _metroSetSwitch.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetSwitch.Style;
+			set => _metroSetSwitch.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetSwitch.ThemeAuthor;
+		public string ThemeAuthor => _metroSetSwitch.ThemeAuthor;
 
-        public string ThemeName => _metroSetSwitch.ThemeName;
+		public string ThemeName => _metroSetSwitch.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetSwitch.StyleManager;
-            set => _metroSetSwitch.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetSwitch.StyleManager;
+			set => _metroSetSwitch.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetSwitch.Text;
-            set => _metroSetSwitch.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetSwitch.Text;
+			set => _metroSetSwitch.Text = value;
+		}
 
-        public bool Switched
-        {
-            get => _metroSetSwitch.Switched;
-            set => _metroSetSwitch.Switched = value;
-        }
+		public bool Switched
+		{
+			get => _metroSetSwitch.Switched;
+			set => _metroSetSwitch.Switched = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Switched", "Switched", "Appearance", "Gets or sets a value indicating whether the control is switched."),
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Switched", "Switched", "Appearance", "Gets or sets a value indicating whether the control is switched."),
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

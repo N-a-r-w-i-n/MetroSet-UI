@@ -1,7 +1,8 @@
-﻿using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
-/*
+﻿using System.ComponentModel;
+using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums; /*
  * MetroSet UI - MetroSet UI Framework
  * 
  * The MIT License (MIT)
@@ -25,100 +26,97 @@ using MetroSet_UI.Enums;
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.ComponentModel;
-using System.ComponentModel.Design;
-
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    class MetroSetScrollBarActionList : DesignerActionList
-    {
-        private readonly MetroSetScrollBar _metroSetScrollBar;
+	class MetroSetScrollBarActionList : DesignerActionList
+	{
+		private readonly MetroSetScrollBar _metroSetScrollBar;
 
-        public MetroSetScrollBarActionList(IComponent component) : base(component)
-        {
-            _metroSetScrollBar = (MetroSetScrollBar)component;
-        }
+		public MetroSetScrollBarActionList(IComponent component) : base(component)
+		{
+			_metroSetScrollBar = (MetroSetScrollBar)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetScrollBar.Style;
-            set => _metroSetScrollBar.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetScrollBar.Style;
+			set => _metroSetScrollBar.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetScrollBar.ThemeAuthor;
+		public string ThemeAuthor => _metroSetScrollBar.ThemeAuthor;
 
-        public string ThemeName => _metroSetScrollBar.ThemeName;
+		public string ThemeName => _metroSetScrollBar.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetScrollBar.StyleManager;
-            set => _metroSetScrollBar.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetScrollBar.StyleManager;
+			set => _metroSetScrollBar.StyleManager = value;
+		}
 
-        public int Maximum
-        {
-            get => _metroSetScrollBar.Maximum;
-            set => _metroSetScrollBar.Maximum = value;
-        }
+		public int Maximum
+		{
+			get => _metroSetScrollBar.Maximum;
+			set => _metroSetScrollBar.Maximum = value;
+		}
 
-        public int Minimum
-        {
-            get => _metroSetScrollBar.Minimum;
-            set => _metroSetScrollBar.Minimum = value;
-        }
-
-
-        public int Value
-        {
-            get => _metroSetScrollBar.Value;
-            set => _metroSetScrollBar.Value = value;
-        }
+		public int Minimum
+		{
+			get => _metroSetScrollBar.Minimum;
+			set => _metroSetScrollBar.Minimum = value;
+		}
 
 
-        public int SmallChange
-        {
-            get => _metroSetScrollBar.SmallChange;
-            set => _metroSetScrollBar.SmallChange = value;
-        }
+		public int Value
+		{
+			get => _metroSetScrollBar.Value;
+			set => _metroSetScrollBar.Value = value;
+		}
 
 
-        public int LargeChange
-        {
-            get => _metroSetScrollBar.LargeChange;
-            set => _metroSetScrollBar.LargeChange = value;
-        }
+		public int SmallChange
+		{
+			get => _metroSetScrollBar.SmallChange;
+			set => _metroSetScrollBar.SmallChange = value;
+		}
 
-        public ScrollOrientate Orientation
-        {
-            get => _metroSetScrollBar.Orientation;
-            set => _metroSetScrollBar.Orientation = value;
-        }
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public int LargeChange
+		{
+			get => _metroSetScrollBar.LargeChange;
+			set => _metroSetScrollBar.LargeChange = value;
+		}
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+		public ScrollOrientate Orientation
+		{
+			get => _metroSetScrollBar.Orientation;
+			set => _metroSetScrollBar.Orientation = value;
+		}
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Orientation", "Orientation", "Appearance", "Gets or sets the scroll bar orientation."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Behavior"),
-            new DesignerActionPropertyItem("Maximum", "Maximum", "Behavior", "Gets or sets the upper limit of the scrollable range."),
-            new DesignerActionPropertyItem("Minimum", "Minimum", "Behavior", "Gets or sets the lower limit of the scrollable range."),
-            new DesignerActionPropertyItem("Value", "Value", "Behavior", "Gets or sets a numeric value that represents the current position of the scroll bar box."),
-            new DesignerActionPropertyItem("LargeChange", "LargeChange", "Behavior", "Gets or sets the distance to move a scroll bar in response to a large scroll command."),
-            new DesignerActionPropertyItem("SmallChange", "SmallChange", "Behavior", "Gets or sets the distance to move a scroll bar in response to a small scroll command."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Orientation", "Orientation", "Appearance", "Gets or sets the scroll bar orientation."),
 
-            return items;
-        }
-    }
+			new DesignerActionHeaderItem("Behavior"),
+			new DesignerActionPropertyItem("Maximum", "Maximum", "Behavior", "Gets or sets the upper limit of the scrollable range."),
+			new DesignerActionPropertyItem("Minimum", "Minimum", "Behavior", "Gets or sets the lower limit of the scrollable range."),
+			new DesignerActionPropertyItem("Value", "Value", "Behavior", "Gets or sets a numeric value that represents the current position of the scroll bar box."),
+			new DesignerActionPropertyItem("LargeChange", "LargeChange", "Behavior", "Gets or sets the distance to move a scroll bar in response to a large scroll command."),
+			new DesignerActionPropertyItem("SmallChange", "SmallChange", "Behavior", "Gets or sets the distance to move a scroll bar in response to a small scroll command."),
+
+		};
+
+			return items;
+		}
+	}
 }

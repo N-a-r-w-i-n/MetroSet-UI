@@ -1,6 +1,9 @@
-﻿using MetroSet_UI.Child;
+﻿using System.ComponentModel;
+using System.ComponentModel.Design;
+using MetroSet_UI.Child;
+using MetroSet_UI.Components;
 using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
 
 /*
  * MetroSet UI - MetroSet UI Framework
@@ -26,10 +29,7 @@ using MetroSet_UI.Design;
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System.ComponentModel;
-using System.ComponentModel.Design;
-
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
     internal class MetroSetListBoxActionList : DesignerActionList
     {

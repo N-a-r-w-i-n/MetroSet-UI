@@ -29,6 +29,8 @@ using MetroSet_UI.Interfaces;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Child
 {
@@ -161,14 +163,14 @@ namespace MetroSet_UI.Child
         [Browsable(false)]
         public new Color BackColor { get; set; } = Color.Transparent;
 
-        // I dont' want to recreate the following properties for specific reason but for helping
-        // user to find usage properties easily under MetroSet Framework category in propertygrid.
+        // I don't want to re-create the following properties for specific reason but for helping
+        // the users to find usage properties easily under MetroSet Framework category in property grid.
 
         [Category("MetroSet Framework")]
         public override string Text { get; set; }
 
         [Category("MetroSet Framework")]
-        public override Font Font { get; set; }
+        public sealed override Font Font { get; set; }
 
         [Category("MetroSet Framework")]
         public new int ImageIndex { get; set; }
@@ -189,11 +191,11 @@ namespace MetroSet_UI.Child
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics G = e.Graphics;
-            G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            Graphics g = e.Graphics;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             using (var bg = new SolidBrush(BaseColor))
             {
-                G.FillRectangle(bg, ClientRectangle);
+                g.FillRectangle(bg, ClientRectangle);
             }
         }
 

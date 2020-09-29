@@ -22,10 +22,6 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -33,6 +29,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
 {
@@ -154,15 +155,19 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
+			VirtualCalls();
 			_badgeAlignment = BadgeAlign.TopRight;
 			_badgeText = "3";
-			BackColor = Color.Transparent;
-			Font = MetroSetFonts.Light(10);
 			_utl = new Utilites();
 			_mth = new Methods();
 			ApplyTheme();
 		}
 
+		private void VirtualCalls()
+		{
+			Font = MetroSetFonts.Light(10);
+			BackColor = Color.Transparent;
+		}
 		#endregion Constructors
 
 		#region Properties
@@ -180,7 +185,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the badge text associated with the control.
 		/// </summary>
@@ -194,7 +199,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Handling Control Enable state to detect the disability state.
 		/// </summary>
@@ -257,7 +262,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the control background color in hover mouse sate.
 		/// </summary>
@@ -272,7 +277,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the control border color in hover mouse sate.
 		/// </summary>
@@ -287,7 +292,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the control Text color in hover mouse sate.
 		/// </summary>
@@ -302,7 +307,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the control background color in pushed mouse sate.
 		/// </summary>
@@ -317,7 +322,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the control border color in pushed mouse sate.
 		/// </summary>
@@ -377,7 +382,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the border color of the control while disabled.
 		/// </summary>
@@ -392,7 +397,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the Badge background color in normal mouse sate.
 		/// </summary>
@@ -407,7 +412,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the Badge Text color in normal mouse sate.
 		/// </summary>
@@ -422,7 +427,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the Badge background color in hover mouse sate.
 		/// </summary>
@@ -437,7 +442,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the Badge Text color in hover mouse sate.
 		/// </summary>
@@ -452,7 +457,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the Badge background color in pushed mouse sate.
 		/// </summary>
@@ -467,7 +472,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		/// <summary>
 		/// Gets or sets the Badge Text color in pushed mouse sate.
 		/// </summary>
@@ -482,7 +487,7 @@ namespace MetroSet_UI.Controls
 				Refresh();
 			}
 		}
-		
+
 		#endregion Properties
 
 		#region Draw Control

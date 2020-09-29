@@ -22,75 +22,76 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Controls;
-using MetroSet_UI.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using MetroSet_UI.Components;
+using MetroSet_UI.Controls;
+using MetroSet_UI.Enums;
 
-namespace MetroSet_UI.Tasks
+namespace MetroSet_UI.Actions
 {
-    internal class MetroSetProgressBarActionList : DesignerActionList
-    {
-        private readonly MetroSetProgressBar _metroSetProgressBar;
+	internal class MetroSetProgressBarActionList : DesignerActionList
+	{
+		private readonly MetroSetProgressBar _metroSetProgressBar;
 
-        public MetroSetProgressBarActionList(IComponent component) : base(component)
-        {
-            _metroSetProgressBar = (MetroSetProgressBar)component;
-        }
+		public MetroSetProgressBarActionList(IComponent component) : base(component)
+		{
+			_metroSetProgressBar = (MetroSetProgressBar)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetProgressBar.Style;
-            set => _metroSetProgressBar.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetProgressBar.Style;
+			set => _metroSetProgressBar.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetProgressBar.ThemeAuthor;
+		public string ThemeAuthor => _metroSetProgressBar.ThemeAuthor;
 
-        public string ThemeName => _metroSetProgressBar.ThemeName;
+		public string ThemeName => _metroSetProgressBar.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetProgressBar.StyleManager;
-            set => _metroSetProgressBar.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetProgressBar.StyleManager;
+			set => _metroSetProgressBar.StyleManager = value;
+		}
 
-        public int Value
-        {
-            get => _metroSetProgressBar.Value;
-            set => _metroSetProgressBar.Value = value;
-        }
+		public int Value
+		{
+			get => _metroSetProgressBar.Value;
+			set => _metroSetProgressBar.Value = value;
+		}
 
-        public int Maximum
-        {
-            get => _metroSetProgressBar.Maximum;
-            set => _metroSetProgressBar.Maximum = value;
-        }
+		public int Maximum
+		{
+			get => _metroSetProgressBar.Maximum;
+			set => _metroSetProgressBar.Maximum = value;
+		}
 
-        public int Minimum
-        {
-            get => _metroSetProgressBar.Minimum;
-            set => _metroSetProgressBar.Minimum = value;
-        }
+		public int Minimum
+		{
+			get => _metroSetProgressBar.Minimum;
+			set => _metroSetProgressBar.Minimum = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Minimum", "Minimum", "Appearance", "Gets or sets the minimum value of the progressbar."),
-            new DesignerActionPropertyItem("Maximum", "Maximum", "Appearance", "Gets or sets the maximum value of the progressbar."),
-            new DesignerActionPropertyItem("Value", "Value", "Appearance", "Gets or sets the current position of the progressbar."),
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Minimum", "Minimum", "Appearance", "Gets or sets the minimum value of the progressbar."),
+			new DesignerActionPropertyItem("Maximum", "Maximum", "Appearance", "Gets or sets the maximum value of the progressbar."),
+			new DesignerActionPropertyItem("Value", "Value", "Appearance", "Gets or sets the current position of the progressbar."),
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

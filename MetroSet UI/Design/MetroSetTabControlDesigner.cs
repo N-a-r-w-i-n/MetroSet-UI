@@ -184,15 +184,17 @@ namespace MetroSet_UI.Design
         {
             var parentControl = Control as MetroSetTabControl;
 
-            var oldTabs = parentControl.TabPages;
+            var oldTabs = parentControl?.TabPages;
 
             // Notify the IDE that the TabPages collection property of the current tab control has changed.
             RaiseComponentChanging(TypeDescriptor.GetProperties(parentControl)["TabPages"]);
             var newTab = (MetroSetTabPage)_designerHost.CreateComponent(typeof(MetroSetTabPage));
             newTab.Text = newTab.Name;
-            parentControl.TabPages.Add(newTab);
+            parentControl?.TabPages.Add(newTab);
+            if (parentControl == null) return;
             parentControl.SelectedTab = newTab;
-            RaiseComponentChanged(TypeDescriptor.GetProperties(parentControl)["TabPages"], oldTabs, parentControl.TabPages);
+            RaiseComponentChanged(TypeDescriptor.GetProperties(parentControl)["TabPages"], oldTabs,
+                                  parentControl.TabPages);
         }
 
         private void OnRemoveTab(Object sender, EventArgs e)
@@ -202,12 +204,12 @@ namespace MetroSet_UI.Design
             if (parentControl != null && parentControl.SelectedIndex < 0)
                 return;
 
-            var oldTabs = parentControl.TabPages;
+            var oldTabs = parentControl?.TabPages;
 
             // Notify the IDE that the TabPages collection property of the current tab control has changed.
             RaiseComponentChanging(TypeDescriptor.GetProperties(parentControl)["TabPages"]);
-            _designerHost.DestroyComponent(parentControl.SelectedTab);
-            RaiseComponentChanged(TypeDescriptor.GetProperties(parentControl)["TabPages"], oldTabs, parentControl.TabPages);
+            _designerHost.DestroyComponent(parentControl?.SelectedTab);
+            RaiseComponentChanged(TypeDescriptor.GetProperties(parentControl)["TabPages"], oldTabs, parentControl?.TabPages);
         }
 
         private void OnComponentChanged(object sender, ComponentChangedEventArgs e)

@@ -22,7 +22,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace MetroSet_UI.Design
+namespace MetroSet_UI.Enums
 {
     public enum Style
     {

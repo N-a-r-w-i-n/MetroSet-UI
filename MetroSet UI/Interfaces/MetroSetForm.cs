@@ -1,22 +1,23 @@
-﻿using MetroSet_UI.Design;
+﻿using MetroSet_UI.Components;
+using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Interfaces
 {
-    public interface iMetroSetForm
-    {
-        /// <summary>
-        ///
-        /// </summary>
-        Style Style { get; set; }
+	public interface iMetroSetForm
+	{
+		/// <summary>
+		///
+		/// </summary>
+		Style Style { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        StyleManager StyleManager { get; set; }
+		/// <summary>
+		///
+		/// </summary>
+		StyleManager StyleManager { get; set; }
 
-        string ThemeAuthor { get; set; }
+		string ThemeAuthor { get; set; }
 
-        string ThemeName { get; set; }
+		string ThemeName { get; set; }
 
-    }
+	}
 }

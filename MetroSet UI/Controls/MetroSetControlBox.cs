@@ -22,15 +22,17 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Design;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
 {
@@ -135,8 +137,13 @@ namespace MetroSet_UI.Controls
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
 			_utl = new Utilites();
-			Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			VirtualCalls();
 			ApplyTheme();
+		}
+
+		private void VirtualCalls()
+		{
+			Anchor = AnchorStyles.Top | AnchorStyles.Right;
 		}
 
 		#endregion Constructors
@@ -231,7 +238,7 @@ namespace MetroSet_UI.Controls
 									return;
 							}
 						}
-					;
+
 					break;
 
 				default:
@@ -271,7 +278,7 @@ namespace MetroSet_UI.Controls
 			get { return _minimizeBox; }
 			set
 			{
-				_minimizeBox =  value;
+				_minimizeBox = value;
 				Refresh();
 			}
 		}
@@ -455,7 +462,7 @@ namespace MetroSet_UI.Controls
 
 			using (var closeBoxState = new SolidBrush(CloseHovered ? CloseHoverBackColor : Color.Transparent))
 			{
-				using (var f = new Font("Marlett", 12))
+				using (var f = new Font(@"Marlett", 12))
 				{
 					using (var tb = new SolidBrush(CloseHovered ? CloseHoverForeColor : CloseNormalForeColor))
 					{
@@ -469,11 +476,11 @@ namespace MetroSet_UI.Controls
 			}
 			using (var maximizeBoxState = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverBackColor : Color.Transparent : Color.Transparent))
 			{
-				using (var f = new Font("Marlett", 12))
+				using (var f = new Font(@"Marlett", 12))
 				{
 					using (var tb = new SolidBrush(MaximizeBox ? MaximizeHovered ? MaximizeHoverForeColor : MaximizeNormalForeColor : DisabledForeColor))
 					{
-						var maxSymbol = Parent.FindForm().WindowState == FormWindowState.Maximized ? "2" : "1";
+						var maxSymbol = Parent.FindForm()?.WindowState == FormWindowState.Maximized ? "2" : "1";
 						using (var sf = new StringFormat { Alignment = StringAlignment.Center })
 						{
 							g.FillRectangle(maximizeBoxState, new Rectangle(38, 5, 24, Height));
@@ -484,7 +491,7 @@ namespace MetroSet_UI.Controls
 			}
 			using (var minimizeBoxState = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverBackColor : Color.Transparent : Color.Transparent))
 			{
-				using (var f = new Font("Marlett", 12))
+				using (var f = new Font(@"Marlett", 12))
 				{
 					using (var tb = new SolidBrush(MinimizeBox ? MinimizeHovered ? MinimizeHoverForeColor : MinimizeNormalForeColor : DisabledForeColor))
 					{
@@ -563,19 +570,19 @@ namespace MetroSet_UI.Controls
 			base.OnMouseDown(e);
 			if (CloseHovered)
 			{
-				Parent.FindForm().Close();
+				Parent.FindForm()?.Close();
 			}
 			else if (MinimizeHovered)
 			{
-				if (MinimizeBox)
-					Parent.FindForm().WindowState = FormWindowState.Minimized;
-
+				if (!MinimizeBox)
+					return;
+				Parent.FindForm().WindowState = FormWindowState.Minimized;
 			}
 			else if (MaximizeHovered)
 			{
 				if (MaximizeBox)
 				{
-					Parent.FindForm().WindowState = Parent.FindForm().WindowState == FormWindowState.Normal ? FormWindowState.Maximized : FormWindowState.Normal;
+					Parent.FindForm().WindowState = Parent.FindForm()?.WindowState == FormWindowState.Normal ? FormWindowState.Maximized : FormWindowState.Normal;
 				}
 			}
 		}

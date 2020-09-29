@@ -22,16 +22,17 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Components;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
 {
@@ -148,10 +149,15 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			Font = MetroSetFonts.Light(10);
+			VirtualCalls();
 			_utl = new Utilites();
 			_mth = new Methods();
 			ApplyTheme();
+		}
+
+		private void VirtualCalls()
+		{
+			Font = MetroSetFonts.Light(10);
 		}
 
 		#endregion Constructors
@@ -236,7 +242,6 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets the style provided by the user.
 		/// </summary>
 		/// <param name="style">The Style.</param>
-		/// <param name="path">The path of the custom theme.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
 			switch (style)
