@@ -157,16 +157,11 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.BackColor = Color.Transparent;
+			base.Font = MetroSetFonts.Light(10);
 			_utl = new Utilites();
 			ApplyTheme();
 			SetDefaults();
-		}
-
-		private void VirtualCalls()
-		{
-			BackColor = Color.Transparent;
-			Font = MetroSetFonts.Light(10);
 		}
 
 		private void SetDefaults()

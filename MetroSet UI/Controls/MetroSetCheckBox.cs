@@ -137,19 +137,14 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.Light(10);
+			base.Cursor = Cursors.Hand;
+			base.BackColor = Color.Transparent;
 			_utl = new Utilites();
 			_animator = new IntAnimate();
 			_animator.Setting(100, 0, 255);
 			_animator.Update = (alpha) => Invalidate();
 			ApplyTheme();
-		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.Light(10);
-			Cursor = Cursors.Hand;
-			BackColor = Color.Transparent;
 		}
 
 		#endregion Constructors

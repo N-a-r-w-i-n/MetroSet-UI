@@ -67,7 +67,7 @@ namespace MetroSet_UI.Forms
 			Padding = new Padding(12, 70, 12, 12);
 			FormBorderStyle = FormBorderStyle.None;
 			_backgroundImageTransparency = 0.90f;
-			VirtualCalls();
+			base.Font = MetroSetFonts.SemiLight(13);
 			DropShadowEffect = true;
 			_showLeftRect = true;
 			_showHeader = false;
@@ -75,12 +75,6 @@ namespace MetroSet_UI.Forms
 			ApplyTheme();
 
 		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.SemiLight(13);
-		}
-
 
 		#endregion Constructor
 

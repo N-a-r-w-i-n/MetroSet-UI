@@ -34,7 +34,6 @@ using MetroSet_UI.Design;
 using MetroSet_UI.Enums;
 using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
-using MetroSet_UI.Native;
 
 namespace MetroSet_UI.Controls
 {
@@ -139,7 +138,7 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Cursor = Cursors.Hand;
 			_utl = new Utilites();
 			_animator = new IntAnimate();
 			_animator.Setting(100, 0, 132);
@@ -149,11 +148,6 @@ namespace MetroSet_UI.Controls
 				Invalidate(false);
 			};
 			ApplyTheme();
-		}
-
-		private void VirtualCalls()
-		{
-			Cursor = Cursors.Hand;
 		}
 
 		#endregion Constructors
@@ -323,12 +317,7 @@ namespace MetroSet_UI.Controls
 		/// <param name="m"></param>
 		protected override void WndProc(ref Message m)
 		{
-			if (m.Msg == User32.WM_SETCURSOR)
-			{
-				User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
-				m.Result = IntPtr.Zero;
-				return;
-			}
+			_utl.SmoothCursor(ref m);
 
 			base.WndProc(ref m);
 		}

@@ -105,7 +105,7 @@ namespace MetroSet_UI.Forms
 		/// </summary>
 		private MetroSetMessageBox()
 		{
-			VirtualCalls();
+			base.Font = MetroSetFonts.Regular(9.5f);
 			ShowInTaskbar = false;
 			StartPosition = FormStartPosition.CenterParent;
 			_buttonSize = new Size(95, 32);
@@ -113,11 +113,6 @@ namespace MetroSet_UI.Forms
 			EvaluateControls();
 			AddControls();
 			//HideControls();
-		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.Regular(9.5f);
 		}
 
 		/// <summary>

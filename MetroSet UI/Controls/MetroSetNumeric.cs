@@ -138,7 +138,7 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.SemiLight(10);
 			BackColor = Color.Transparent;
 			_mth = new Methods();
 			_utl = new Utilites();
@@ -153,10 +153,6 @@ namespace MetroSet_UI.Controls
 			_holdTimer.Elapsed += HoldTimer_Tick;
 		}
 
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.SemiLight(10);
-		}
 
 		#endregion Constructors
 

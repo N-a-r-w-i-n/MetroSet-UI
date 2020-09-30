@@ -137,17 +137,12 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.SemiBold(10);
 			_utl = new Utilites();
 			_animator = new IntAnimate();
 			_animator.Setting(100, 0, 255);
 			_animator.Update = (alpha) => Invalidate();
 			ApplyTheme();
-		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.SemiBold(10);
 		}
 
 		#endregion Constructors

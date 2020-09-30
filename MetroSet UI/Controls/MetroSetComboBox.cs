@@ -138,7 +138,9 @@ namespace MetroSet_UI.Controls
 				ControlStyles.SupportsTransparentBackColor,
 				true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.Regular(11);
+			base.BackColor = Color.Transparent;
+			base.AllowDrop = true;
 			DrawMode = DrawMode.OwnerDrawFixed;
 			ItemHeight = 20;
 			_startIndex = 0;
@@ -148,13 +150,6 @@ namespace MetroSet_UI.Controls
 			_utl = new Utilites();
 
 			ApplyTheme();
-		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.Regular(11);
-			BackColor = Color.Transparent;
-			AllowDrop = true;
 		}
 
 		#endregion Constructors

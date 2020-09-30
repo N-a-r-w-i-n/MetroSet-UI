@@ -137,13 +137,8 @@ namespace MetroSet_UI.Controls
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
 			_utl = new Utilites();
-			VirtualCalls();
+			base.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			ApplyTheme();
-		}
-
-		private void VirtualCalls()
-		{
-			Anchor = AnchorStyles.Top | AnchorStyles.Right;
 		}
 
 		#endregion Constructors

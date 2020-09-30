@@ -144,15 +144,10 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.Regular(10);
 			EvaluateVars();
 			ApplyTheme();
 			T_Defaults();
-		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.Regular(10);
 		}
 
 		private void EvaluateVars()

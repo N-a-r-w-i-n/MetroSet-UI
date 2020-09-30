@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/MetroSet UI/Controls/MetroSetDataGrid.cs

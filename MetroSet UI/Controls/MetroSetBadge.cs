@@ -155,7 +155,8 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.Light(10);
+			base.BackColor = Color.Transparent;
 			_badgeAlignment = BadgeAlign.TopRight;
 			_badgeText = "3";
 			_utl = new Utilites();
@@ -163,11 +164,6 @@ namespace MetroSet_UI.Controls
 			ApplyTheme();
 		}
 
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.Light(10);
-			BackColor = Color.Transparent;
-		}
 		#endregion Constructors
 
 		#region Properties

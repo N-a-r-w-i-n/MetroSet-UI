@@ -22,20 +22,19 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using MetroSet_UI.Animates;
-using MetroSet_UI.Child;
-using MetroSet_UI.Design;
-using MetroSet_UI.Enums;
-using MetroSet_UI.Extensions;
-using MetroSet_UI.Interfaces;
-using MetroSet_UI.Native;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MetroSet_UI.Animates;
+using MetroSet_UI.Child;
 using MetroSet_UI.Components;
+using MetroSet_UI.Design;
+using MetroSet_UI.Enums;
+using MetroSet_UI.Extensions;
+using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
 {
@@ -119,7 +118,7 @@ namespace MetroSet_UI.Controls
 		private Bitmap _slideBitmap;
 
 		private bool _useAnimation;
-		private int _speed;
+		private int _speed = 100;
 		private Color _unselectedTextColor;
 		private Color _selectedTextColor;
 		private TabStyle _tabStyle;
@@ -138,7 +137,7 @@ namespace MetroSet_UI.Controls
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
 			ItemSize = new Size(100, 38);
-			Font = MetroSetFonts.UIRegular(8);
+			base.Font = MetroSetFonts.UIRegular(8);
 			_mth = new Methods();
 			_utl = new Utilites();
 			_slideAnimator = new PointFAnimate();
@@ -205,8 +204,7 @@ namespace MetroSet_UI.Controls
 						}
 					UpdateProperties();
 					break;
-				default:
-					throw new ArgumentOutOfRangeException(nameof(style), style, null);
+
 			}
 		}
 
@@ -217,9 +215,9 @@ namespace MetroSet_UI.Controls
 				InvalidateTabPage(BackgroundColor);
 				Invalidate();
 			}
-			catch (Exception ex)
+			catch
 			{
-				throw new Exception(ex.StackTrace);
+				//throw new Exception(ex.StackTrace);
 			}
 		}
 
@@ -287,7 +285,7 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets the font used when displaying text in the control.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the font used when displaying text in the control.")]
-		public new Font Font { get; set; }
+		public override Font Font { get; set; }
 
 		/// <summary>
 		/// Gets or sets the area of the control (for example, along the top) where the tabs are aligned.
@@ -450,8 +448,6 @@ namespace MetroSet_UI.Controls
 						}
 					}
 					break;
-				default:
-					throw new ArgumentOutOfRangeException();
 			}
 
 
@@ -495,12 +491,7 @@ namespace MetroSet_UI.Controls
 		/// <param name="m"></param>
 		protected override void WndProc(ref Message m)
 		{
-			if (m.Msg == User32.WM_SETCURSOR)
-			{
-				User32.SetCursor(User32.LoadCursor(IntPtr.Zero, User32.IDC_HAND));
-				m.Result = IntPtr.Zero;
-				return;
-			}
+			_utl.SmoothCursor(ref m);
 
 			base.WndProc(ref m);
 		}

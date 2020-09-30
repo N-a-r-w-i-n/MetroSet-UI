@@ -146,14 +146,9 @@ namespace MetroSet_UI.Controls
 				ControlStyles.OptimizedDoubleBuffer |
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
-			VirtualCalls();
+			base.Font = MetroSetFonts.Light(10);
 			_utl = new Utilites();
 			ApplyTheme();
-		}
-
-		private void VirtualCalls()
-		{
-			Font = MetroSetFonts.Light(10);
 		}
 
 		#endregion Constructors
