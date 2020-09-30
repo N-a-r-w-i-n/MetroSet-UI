@@ -17,7 +17,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-  
+
   </PropertyGroup>
 
 
@@ -44,10 +44,30 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <!--<None Include="http://www.iconarchive.com/download/i58702/dakirby309/windows-8-metro/Folders-OS-Windows-8-Metro.ico">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>-->
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\Button.bmp" />
+    <EmbeddedResource Include="Bitmaps\CheckBox.bmp" />
+    <EmbeddedResource Include="Bitmaps\ComoBox.bmp" />
+    <EmbeddedResource Include="Bitmaps\ContextMenu.bmp" />
+    <EmbeddedResource Include="Bitmaps\ControlButton.bmp" />
+    <EmbeddedResource Include="Bitmaps\Divider.png" />
+    <EmbeddedResource Include="Bitmaps\Ellipse.bmp" />
+    <EmbeddedResource Include="Bitmaps\LinkLabel.bmp" />
+    <EmbeddedResource Include="Bitmaps\ListBox.bmp" />
+    <EmbeddedResource Include="Bitmaps\Numeric.bmp" />
+    <EmbeddedResource Include="Bitmaps\Panel.bmp" />
+    <EmbeddedResource Include="Bitmaps\Progress.bmp" />
+    <EmbeddedResource Include="Bitmaps\RadioButton.bmp" />
+    <EmbeddedResource Include="Bitmaps\RitchTextBox.bmp" />
+    <EmbeddedResource Include="Bitmaps\ScrollBar.bmp" />
+    <EmbeddedResource Include="Bitmaps\Slider.bmp" />
+    <EmbeddedResource Include="Bitmaps\Style.bmp" />
+    <EmbeddedResource Include="Bitmaps\Switch.bmp" />
+    <EmbeddedResource Include="Bitmaps\TabControl.bmp" />
+    <EmbeddedResource Include="Bitmaps\TextBox.bmp" />
+    <EmbeddedResource Include="Bitmaps\ToolTip.bmp" />
+</ItemGroup>
 
 </Project>

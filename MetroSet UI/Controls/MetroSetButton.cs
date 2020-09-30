@@ -35,7 +35,7 @@ using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
-{
+{  
 	[ToolboxItem(true)]
 	[ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
 	[Designer(typeof(MetroSetButtonDesigner))]

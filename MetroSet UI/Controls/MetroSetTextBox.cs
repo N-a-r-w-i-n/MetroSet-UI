@@ -370,7 +370,6 @@ namespace MetroSet_UI.Controls
 		{
 			base.OnMouseLeave(e);
 			Leave?.Invoke(sender, e);
-			Invalidate();
 		}
 
 		public void T_KeyPress(object sender, KeyPressEventArgs e)
@@ -387,7 +386,6 @@ namespace MetroSet_UI.Controls
 		{
 			_state = MouseMode.Normal;
 			base.OnMouseLeave(e);
-			Invalidate();
 		}
 
 		/// <summary>
