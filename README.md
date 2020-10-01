@@ -9,6 +9,9 @@
 <h3  align="center">Windows Forms Metro Skin Style, Make The .NET Applications With Metro Styles.</h3>
 
 <p  align="center">
+  <a href="https://gitter.im/MetroSet-UI/community">
+    <img src="https://badges.gitter.im/MetroSet-UI/community.svg">
+  </a>
   <a href="https://github.com/N-a-r-w-i-n/MetroSet-UI/issues">
     <img src="https://img.shields.io/github/issues/N-a-r-w-i-n/MetroSet-UI.svg?style=flat-square">
   </a>
@@ -21,12 +24,12 @@
  </a>
   <a href="https://raw.githubusercontent.com/N-a-r-w-i-n/MetroSet-UI/master/LICENSE.md">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square">
-  </a>
+  </a>  
 </p >
 
 ## 
 
-[![Join the chat at https://gitter.im/MetroSet-UI/community](https://badges.gitter.im/MetroSet-UI/community.svg)](https://gitter.im/MetroSet-UI/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 <h3 align="center">Install via NuGet</h3>
 
