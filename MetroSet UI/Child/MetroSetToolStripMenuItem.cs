@@ -22,36 +22,36 @@
 * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-using MetroSet_UI.Controls;
 using System.Drawing;
 using System.Windows.Forms;
+using MetroSet_UI.Controls;
 
 namespace MetroSet_UI.Child
 {
 
-    public sealed class MetroSetToolStripMenuItem : ToolStripMenuItem
-    {
-        #region Constructors
+	public sealed class MetroSetToolStripMenuItem : ToolStripMenuItem
+	{
+		#region Constructors
 
-        public MetroSetToolStripMenuItem()
-        {
-            AutoSize = false;
-            Size = new Size(160, 30);
-        }
+		public MetroSetToolStripMenuItem()
+		{
+			AutoSize = false;
+			Size = new Size(160, 30);
+		}
 
-        #endregion Constructors
+		#endregion Constructors
 
-        #region Adding DropDowns
+		#region Adding DropDowns
 
-        protected override ToolStripDropDown CreateDefaultDropDown()
-        {
-            if (DesignMode)
-            { return base.CreateDefaultDropDown(); }
-            var dp = new MetroSetContextMenuStrip();
-            dp.Items.AddRange(base.CreateDefaultDropDown().Items);
-            return dp;
-        }
+		protected override ToolStripDropDown CreateDefaultDropDown()
+		{
+			if (DesignMode)
+			{ return base.CreateDefaultDropDown(); }
+			var dp = new MetroSetContextMenuStrip();
+			dp.Items.AddRange(base.CreateDefaultDropDown().Items);
+			return dp;
+		}
 
-        #endregion Adding DropDowns
-    }
+		#endregion Adding DropDowns
+	}
 }

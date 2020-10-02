@@ -31,77 +31,77 @@ using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Actions
 {
-    public class MetroSetBadgeActionList : DesignerActionList
-    {
-        private readonly MetroSetBadge _metroSetBadge;
+	public class MetroSetBadgeActionList : DesignerActionList
+	{
+		private readonly MetroSetBadge _metroSetBadge;
 
-        public MetroSetBadgeActionList(IComponent component) : base(component)
-        {
-            _metroSetBadge = (MetroSetBadge)component;
-        }
+		public MetroSetBadgeActionList(IComponent component) : base(component)
+		{
+			_metroSetBadge = (MetroSetBadge)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetBadge.Style;
-            set => _metroSetBadge.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetBadge.Style;
+			set => _metroSetBadge.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetBadge.ThemeAuthor;
+		public string ThemeAuthor => _metroSetBadge.ThemeAuthor;
 
-        public string ThemeName => _metroSetBadge.ThemeName;
+		public string ThemeName => _metroSetBadge.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetBadge.StyleManager;
-            set => _metroSetBadge.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetBadge.StyleManager;
+			set => _metroSetBadge.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetBadge.Text;
-            set => _metroSetBadge.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetBadge.Text;
+			set => _metroSetBadge.Text = value;
+		}
 
-        public Font Font
-        {
-            get => _metroSetBadge.Font;
-            set => _metroSetBadge.Font = value;
-        }
+		public Font Font
+		{
+			get => _metroSetBadge.Font;
+			set => _metroSetBadge.Font = value;
+		}
 
-        public BadgeAlign BadgeAlignment
-        {
-            get => _metroSetBadge.BadgeAlignment;
-            set => _metroSetBadge.BadgeAlignment = value;
-        }
+		public BadgeAlign BadgeAlignment
+		{
+			get => _metroSetBadge.BadgeAlignment;
+			set => _metroSetBadge.BadgeAlignment = value;
+		}
 
-        public string BadgeText
-        {
-            get => _metroSetBadge.BadgeText;
-            set => _metroSetBadge.BadgeText = value;
-        }
+		public string BadgeText
+		{
+			get => _metroSetBadge.BadgeText;
+			set => _metroSetBadge.BadgeText = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			var items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
 
-            new DesignerActionHeaderItem("Badge"),
-            new DesignerActionPropertyItem("BadgeText", "BadgeText", "Badge", "Gets or sets the badge text associated with the control."),
-            new DesignerActionPropertyItem("BadgeAlignment", "BadgeAlignment", "Badge", "Gets or sets the badge alignment associated with the control.")
-        };
+			new DesignerActionHeaderItem("Badge"),
+			new DesignerActionPropertyItem("BadgeText", "BadgeText", "Badge", "Gets or sets the badge text associated with the control."),
+			new DesignerActionPropertyItem("BadgeAlignment", "BadgeAlignment", "Badge", "Gets or sets the badge alignment associated with the control.")
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

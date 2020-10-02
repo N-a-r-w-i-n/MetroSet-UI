@@ -41,7 +41,7 @@ namespace MetroSet_UI.Controls
 	[Designer(typeof(MetroSetControBoxDesigner))]
 	[DefaultProperty("Click")]
 	[ComVisible(true)]
-	public class MetroSetControlBox : Control, iControl
+	public class MetroSetControlBox : Control, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -151,6 +151,9 @@ namespace MetroSet_UI.Controls
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -247,6 +250,25 @@ namespace MetroSet_UI.Controls
 		#region Properties
 
 		#region Public
+
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+				Refresh();
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the Maximize button is Enabled in the caption bar of the form.

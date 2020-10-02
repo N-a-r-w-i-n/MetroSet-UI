@@ -35,7 +35,7 @@ using MetroSet_UI.Interfaces;
 namespace MetroSet_UI.Child
 {
 	[Designer(typeof(MetroSetTabPageDesigner))]
-	public class MetroSetTabPage : TabPage, iControl
+	public class MetroSetSetTabPage : TabPage, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -107,7 +107,7 @@ namespace MetroSet_UI.Child
 
 		#region Constructors
 
-		public MetroSetTabPage()
+		public MetroSetSetTabPage()
 		{
 			SetStyle(
 				ControlStyles.UserPaint |
@@ -130,6 +130,9 @@ namespace MetroSet_UI.Child
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -170,7 +173,7 @@ namespace MetroSet_UI.Child
 		public override string Text { get; set; }
 
 		[Category("MetroSet Framework")]
-		public override Font Font { get; set; }
+		public new Font Font { get; set; }
 
 		[Category("MetroSet Framework")]
 		public new int ImageIndex { get; set; }
@@ -184,6 +187,25 @@ namespace MetroSet_UI.Child
 		[Category("MetroSet Framework")]
 		[Bindable(false)]
 		public Color BaseColor { get; set; }
+
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent form style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+				Refresh();
+			}
+		}
 
 		#endregion Properties
 

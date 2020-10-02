@@ -46,7 +46,7 @@ namespace MetroSet_UI.Forms
 	[DesignTimeVisible(false)]
 	[ComVisible(true)]
 	[InitializationEvent("Load")]
-	public class MetroSetForm : Form, iForm
+	public class MetroSetForm : Form, IMetroForm
 	{
 
 		#region Constructor

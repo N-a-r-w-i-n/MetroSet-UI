@@ -39,7 +39,7 @@ namespace MetroSet_UI.Controls
 	[ToolboxBitmap(typeof(MetroSetContextMenuStrip), "Bitmaps.ContextMenu.bmp")]
 	[DefaultEvent("Opening")]
 	[ComVisible(true)]
-	public class MetroSetContextMenuStrip : ContextMenuStrip, iControl
+	public class MetroSetContextMenuStrip : ContextMenuStrip, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -133,6 +133,9 @@ namespace MetroSet_UI.Controls
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -260,6 +263,25 @@ namespace MetroSet_UI.Controls
 		public static Color DisabledForeColor { get; set; }
 
 		public static new Font Font => MetroSetFonts.UIRegular(10);
+
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+				Refresh();
+			}
+		}
 
 		#endregion
 

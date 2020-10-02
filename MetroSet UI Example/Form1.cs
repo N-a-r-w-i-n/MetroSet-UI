@@ -56,7 +56,7 @@ namespace MetroSet_UI_Example
 
 		private void metroSetListBox2_SelectedIndexChanged(object sender)
 		{
-			MetroSetMessageBox.Show(this, metroSetListBox2.SelectedText);
+			MetroSetMessageBox.Show(this, _metroSetListBox2.SelectedText);
 		}
 
 	}

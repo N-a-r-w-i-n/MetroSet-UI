@@ -42,7 +42,7 @@ namespace MetroSet_UI.Controls
 	[ToolboxBitmap(typeof(MetroSetTabControl), "Bitmaps.TabControl.bmp")]
 	[Designer(typeof(MetroSetTabControlDesigner))]
 	[ComVisible(true)]
-	public class MetroSetTabControl : TabControl, iControl
+	public class MetroSetTabControl : TabControl, IMetroSetControl
 	{
 		#region Interfaces
 
@@ -137,7 +137,7 @@ namespace MetroSet_UI.Controls
 				ControlStyles.SupportsTransparentBackColor, true);
 			UpdateStyles();
 			ItemSize = new Size(100, 38);
-			base.Font = MetroSetFonts.UIRegular(8);
+			Font = MetroSetFonts.UIRegular(8);
 			_mth = new Methods();
 			_utl = new Utilites();
 			_slideAnimator = new PointFAnimate();
@@ -154,6 +154,9 @@ namespace MetroSet_UI.Controls
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -285,7 +288,7 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets the font used when displaying text in the control.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the font used when displaying text in the control.")]
-		public override Font Font { get; set; }
+		public new Font Font { get; set; }
 
 		/// <summary>
 		/// Gets or sets the area of the control (for example, along the top) where the tabs are aligned.
@@ -336,7 +339,7 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets the background color.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the backgorund color.")]
-		private Color BackgroundColor { get; set; }
+		public Color BackgroundColor { get; set; }
 
 		/// <summary>
 		/// Gets or sets the foreground color.
@@ -389,6 +392,24 @@ namespace MetroSet_UI.Controls
 			}
 		}
 
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+				Refresh();
+			}
+		}
 
 		#endregion Properties
 
@@ -613,7 +634,7 @@ namespace MetroSet_UI.Controls
 		/// <param name="c"></param>
 		private void InvalidateTabPage(Color c)
 		{
-			foreach (MetroSetTabPage T in TabPages)
+			foreach (MetroSetSetTabPage T in TabPages)
 			{
 				T.Style = Style;
 				T.BaseColor = c;

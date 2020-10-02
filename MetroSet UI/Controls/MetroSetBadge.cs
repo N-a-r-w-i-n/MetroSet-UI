@@ -43,7 +43,7 @@ namespace MetroSet_UI.Controls
 	[DefaultEvent("Click")]
 	[DefaultProperty("Text")]
 	[ComVisible(true)]
-	public class MetroSetBadge : Control, iControl
+	public class MetroSetBadge : Control, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -484,6 +484,25 @@ namespace MetroSet_UI.Controls
 			}
 		}
 
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+				Refresh();
+			}
+		}
+
 		#endregion Properties
 
 		#region Draw Control
@@ -607,6 +626,9 @@ namespace MetroSet_UI.Controls
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:

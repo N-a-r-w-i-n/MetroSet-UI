@@ -31,61 +31,61 @@ using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Actions
 {
-    public class MetroSetButtonActionList : DesignerActionList
-    {
-        private readonly MetroSetButton _metroSetButton;
+	public class MetroSetButtonActionList : DesignerActionList
+	{
+		private readonly MetroSetButton _metroSetButton;
 
-        public MetroSetButtonActionList(IComponent component) : base(component)
-        {
-            _metroSetButton = (MetroSetButton)component;
-        }
+		public MetroSetButtonActionList(IComponent component) : base(component)
+		{
+			_metroSetButton = (MetroSetButton)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetButton.Style;
-            set => _metroSetButton.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetButton.Style;
+			set => _metroSetButton.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetButton.ThemeAuthor;
+		public string ThemeAuthor => _metroSetButton.ThemeAuthor;
 
-        public string ThemeName => _metroSetButton.ThemeName;
+		public string ThemeName => _metroSetButton.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetButton.StyleManager;
-            set => _metroSetButton.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetButton.StyleManager;
+			set => _metroSetButton.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetButton.Text;
-            set => _metroSetButton.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetButton.Text;
+			set => _metroSetButton.Text = value;
+		}
 
-        public Font Font
-        {
-            get => _metroSetButton.Font;
-            set => _metroSetButton.Font = value;
-        }
+		public Font Font
+		{
+			get => _metroSetButton.Font;
+			set => _metroSetButton.Font = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            var items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			var items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control.")
-        };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control.")
+		};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

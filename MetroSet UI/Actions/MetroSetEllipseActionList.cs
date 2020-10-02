@@ -31,80 +31,80 @@ using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Actions
 {
-    public class MetroSetEllipseActionList : DesignerActionList
-    {
-        private readonly MetroSetEllipse _metroSetEllipse;
+	public class MetroSetEllipseActionList : DesignerActionList
+	{
+		private readonly MetroSetEllipse _metroSetEllipse;
 
-        public MetroSetEllipseActionList(IComponent component) : base(component)
-        {
-            _metroSetEllipse = (MetroSetEllipse)component;
-        }
+		public MetroSetEllipseActionList(IComponent component) : base(component)
+		{
+			_metroSetEllipse = (MetroSetEllipse)component;
+		}
 
-        public Style Style
-        {
-            get => _metroSetEllipse.Style;
-            set => _metroSetEllipse.Style = value;
-        }
+		public Style Style
+		{
+			get => _metroSetEllipse.Style;
+			set => _metroSetEllipse.Style = value;
+		}
 
-        public string ThemeAuthor => _metroSetEllipse.ThemeAuthor;
+		public string ThemeAuthor => _metroSetEllipse.ThemeAuthor;
 
-        public string ThemeName => _metroSetEllipse.ThemeName;
+		public string ThemeName => _metroSetEllipse.ThemeName;
 
-        public StyleManager StyleManager
-        {
-            get => _metroSetEllipse.StyleManager;
-            set => _metroSetEllipse.StyleManager = value;
-        }
+		public StyleManager StyleManager
+		{
+			get => _metroSetEllipse.StyleManager;
+			set => _metroSetEllipse.StyleManager = value;
+		}
 
-        public string Text
-        {
-            get => _metroSetEllipse.Text;
-            set => _metroSetEllipse.Text = value;
-        }
+		public string Text
+		{
+			get => _metroSetEllipse.Text;
+			set => _metroSetEllipse.Text = value;
+		}
 
-        public Font Font
-        {
-            get => _metroSetEllipse.Font;
-            set => _metroSetEllipse.Font = value;
-        }
+		public Font Font
+		{
+			get => _metroSetEllipse.Font;
+			set => _metroSetEllipse.Font = value;
+		}
 
-        public int BorderThickness
-        {
-            get => _metroSetEllipse.BorderThickness;
-            set => _metroSetEllipse.BorderThickness = value;
-        }
-        public Size ImageSize
-        {
-            get => _metroSetEllipse.ImageSize;
-            set => _metroSetEllipse.ImageSize = value;
-        }
-        public Image Image
-        {
-            get => _metroSetEllipse.Image;
-            set => _metroSetEllipse.Image = value;
-        }
+		public int BorderThickness
+		{
+			get => _metroSetEllipse.BorderThickness;
+			set => _metroSetEllipse.BorderThickness = value;
+		}
+		public Size ImageSize
+		{
+			get => _metroSetEllipse.ImageSize;
+			set => _metroSetEllipse.ImageSize = value;
+		}
+		public Image Image
+		{
+			get => _metroSetEllipse.Image;
+			set => _metroSetEllipse.Image = value;
+		}
 
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
-            DesignerActionItemCollection items = new DesignerActionItemCollection
-        {
-            new DesignerActionHeaderItem("MetroSet Framework"),
-            new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
-            new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
+		public override DesignerActionItemCollection GetSortedActionItems()
+		{
+			DesignerActionItemCollection items = new DesignerActionItemCollection
+		{
+			new DesignerActionHeaderItem("MetroSet Framework"),
+			new DesignerActionPropertyItem("StyleManager", "StyleManager", "MetroSet Framework", "Gets or sets the stylemanager for the control."),
+			new DesignerActionPropertyItem("Style", "Style", "MetroSet Framework", "Gets or sets the style."),
 
-            new DesignerActionHeaderItem("Informations"),
-            new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
-            new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
+			new DesignerActionHeaderItem("Informations"),
+			new DesignerActionPropertyItem("ThemeName", "ThemeName", "Informations", "Gets or sets the The Theme name associated with the theme."),
+			new DesignerActionPropertyItem("ThemeAuthor", "ThemeAuthor", "Informations", "Gets or sets the The Author name associated with the theme."),
 
-            new DesignerActionHeaderItem("Appearance"),
-            new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
-            new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
-            new DesignerActionPropertyItem("BorderThickness", "BorderThickness", "Appearance", "Gets or sets the border thickness associated with the control."),
-            new DesignerActionPropertyItem("Image", "Image", "Appearance", "Gets or sets the image associated with the control."),
-            new DesignerActionPropertyItem("ImageSize", "ImageSize", "Appearance", "Gets or sets the image size associated with the control."),
-            };
+			new DesignerActionHeaderItem("Appearance"),
+			new DesignerActionPropertyItem("Text", "Text", "Appearance", "Gets or sets the The text associated with the control."),
+			new DesignerActionPropertyItem("Font", "Font", "Appearance", "Gets or sets the The font associated with the control."),
+			new DesignerActionPropertyItem("BorderThickness", "BorderThickness", "Appearance", "Gets or sets the border thickness associated with the control."),
+			new DesignerActionPropertyItem("Image", "Image", "Appearance", "Gets or sets the image associated with the control."),
+			new DesignerActionPropertyItem("ImageSize", "ImageSize", "Appearance", "Gets or sets the image size associated with the control."),
+			};
 
-            return items;
-        }
-    }
+			return items;
+		}
+	}
 }

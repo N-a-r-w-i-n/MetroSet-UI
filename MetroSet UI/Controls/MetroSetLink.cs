@@ -40,7 +40,7 @@ namespace MetroSet_UI.Controls
 	[Designer(typeof(MetroSetLinkDesigner))]
 	[DefaultProperty("Text")]
 	[ComVisible(true)]
-	public class MetroSetLink : LinkLabel, iControl
+	public class MetroSetLink : LinkLabel, IMetroSetControl
 	{
 		#region Interfaces
 
@@ -141,6 +141,9 @@ namespace MetroSet_UI.Controls
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -285,6 +288,25 @@ namespace MetroSet_UI.Controls
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets DisabledLinkColor used by the control.")]
 		public new Color DisabledLinkColor { get; set; } = Color.FromArgb(133, 133, 133);
+
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+				Refresh();
+			}
+		}
 
 		#endregion Properties
 

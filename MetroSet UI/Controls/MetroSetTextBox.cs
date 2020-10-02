@@ -42,7 +42,7 @@ namespace MetroSet_UI.Controls
 	[Designer(typeof(MetroSetTextBoxDesigner))]
 	[DefaultProperty("Text")]
 	[ComVisible(true)]
-	public class MetroSetTextBox : Control, iControl
+	public class MetroSetTextBox : Control, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -269,8 +269,11 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets the style provided by the user.
 		/// </summary>
 		/// <param name="style">The Style.</param>
-		internal void ApplyTheme(Style style = Style.Light)
+		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -1007,6 +1010,25 @@ namespace MetroSet_UI.Controls
 			set
 			{
 				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
+
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
 				Refresh();
 			}
 		}

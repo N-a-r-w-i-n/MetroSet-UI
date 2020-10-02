@@ -27,15 +27,15 @@ using MetroSet_UI.Enums;
 
 namespace MetroSet_UI.Interfaces
 {
-	public interface iForm
+	public interface IMetroSetControl
 	{
 		/// <summary>
-		/// Gets or sets the style associated with the Form.
+		/// Gets or sets the style associated with the control.
 		/// </summary>
 		Style Style { get; set; }
 
 		/// <summary>
-		/// Gets or sets the StyleManager associated with the Form.
+		/// Gets or sets the StyleManager associated with the control.
 		/// </summary>
 		StyleManager StyleManager { get; set; }
 
@@ -49,5 +49,12 @@ namespace MetroSet_UI.Interfaces
 		/// </summary>
 		string ThemeName { get; set; }
 
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		bool IsDerivedStyle { get; set; }
 	}
+
+
 }

@@ -36,10 +36,10 @@ namespace MetroSet_UI.Components
 {
 
 	[ToolboxItem(true)]
-	[ToolboxBitmap(typeof(MetroSetToolTip), "Bitmaps.ToolTip.bmp")]
+	[ToolboxBitmap(typeof(MetroSetSetToolTip), "Bitmaps.ToolTip.bmp")]
 	[Designer(typeof(MetroSetToolTipDesigner))]
 	[DefaultEvent("Popup")]
-	public class MetroSetToolTip : ToolTip, iControl
+	public class MetroSetSetToolTip : ToolTip, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -115,7 +115,7 @@ namespace MetroSet_UI.Components
 
 		#region Constructors
 
-		public MetroSetToolTip()
+		public MetroSetSetToolTip()
 		{
 			OwnerDraw = true;
 			Draw += OnDraw;
@@ -156,6 +156,9 @@ namespace MetroSet_UI.Components
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -270,6 +273,24 @@ namespace MetroSet_UI.Components
 		[Category("MetroSet Framework"), Description("Gets or sets the border color for the ToolTip.")]
 		public Color BorderColor { get; set; }
 
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -301,19 +322,19 @@ namespace MetroSet_UI.Components
 		private void ToolTip_Popup(object sender, PopupEventArgs e)
 		{
 			var control = e.AssociatedControl;
-			if (control is iControl iControl)
+			if (control is IMetroSetControl iControl)
 			{
 				Style = iControl.Style;
 				ThemeAuthor = iControl.ThemeAuthor;
 				ThemeName = iControl.ThemeName;
 				StyleManager = iControl.StyleManager;
 			}
-			else if (control is iForm)
+			else if (control is IMetroForm)
 			{
-				Style = ((iForm)control).Style;
-				ThemeAuthor = ((iForm)control).ThemeAuthor;
-				ThemeName = ((iForm)control).ThemeName;
-				StyleManager = ((iForm)control).StyleManager;
+				Style = ((IMetroForm)control).Style;
+				ThemeAuthor = ((IMetroForm)control).ThemeAuthor;
+				ThemeName = ((IMetroForm)control).ThemeName;
+				StyleManager = ((IMetroForm)control).StyleManager;
 			}
 			e.ToolTipSize = new Size(e.ToolTipSize.Width + 30, e.ToolTipSize.Height + 6);
 		}

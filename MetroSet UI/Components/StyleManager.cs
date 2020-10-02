@@ -56,7 +56,7 @@ namespace MetroSet_UI.Components
 				var themeFile = Properties.Settings.Default.ThemeFile;
 				_customTheme = File.Exists(themeFile) ? themeFile : ThemeFilePath(themeFile);
 			}
-			EvaluateDicts();
+			InitializeDictionaries();
 		}
 
 		#endregion
@@ -70,7 +70,7 @@ namespace MetroSet_UI.Components
 		{
 			switch (MetroForm)
 			{
-				case iForm form:
+				case IMetroForm form:
 					form.Style = Style;
 					form.ThemeAuthor = ThemeAuthor;
 					form.ThemeName = ThemeName;
@@ -90,11 +90,10 @@ namespace MetroSet_UI.Components
 		/// </summary>
 		private void UpdateControls(Control.ControlCollection controls)
 		{
-			if (controls == null)
-				throw new ArgumentNullException(nameof(controls));
+
 			foreach (Control ctrl in controls)
 			{
-				var control = ctrl as iControl;
+				var control = ctrl as IMetroSetControl;
 				if (control != null && CustomTheme != null)
 				{
 					control.Style = Style;
@@ -106,7 +105,7 @@ namespace MetroSet_UI.Components
 				{
 					foreach (TabPage c in tabControl.TabPages)
 					{
-						if (c is iControl)
+						if (c is IMetroSetControl)
 						{
 							control.Style = Style;
 							control.StyleManager = this;
@@ -119,12 +118,12 @@ namespace MetroSet_UI.Components
 
 				foreach (Control child in ctrl.Controls)
 				{
-					if (!(child is iControl))
+					if (!(child is IMetroSetControl))
 						continue;
-					((iControl)child).Style = Style;
-					((iControl)child).StyleManager = this;
-					((iControl)child).ThemeAuthor = ThemeAuthor;
-					((iControl)child).ThemeName = ThemeName;
+					((IMetroSetControl)child).Style = Style;
+					((IMetroSetControl)child).StyleManager = this;
+					((IMetroSetControl)child).ThemeAuthor = ThemeAuthor;
+					((IMetroSetControl)child).ThemeName = ThemeName;
 
 				}
 			}
@@ -135,8 +134,10 @@ namespace MetroSet_UI.Components
 		/// </summary>
 		private void ControlAdded(object sender, ControlEventArgs e)
 		{
-			if (e.Control is iControl control && CustomTheme != null)
+			if (e.Control is IMetroSetControl control)
 			{
+				if (!control.IsDerivedStyle)
+					return;
 				control.Style = Style;
 				control.ThemeAuthor = ThemeAuthor;
 				control.ThemeName = ThemeName;
@@ -185,6 +186,7 @@ namespace MetroSet_UI.Components
 			{
 				if (_metroForm != null)
 					return;
+
 				_metroForm = value;
 				_metroForm.ControlAdded += ControlAdded;
 				UpdateForm();
@@ -410,6 +412,11 @@ namespace MetroSet_UI.Components
 		/// </summary>
 		public Dictionary<string, object> ListBoxDictionary;
 
+		/// <summary>
+		/// The ListBox properties from custom theme will be stored into this dictionary.
+		/// </summary>
+		public Dictionary<string, object> DataGridDictionary;
+
 
 		#endregion
 
@@ -443,13 +450,14 @@ namespace MetroSet_UI.Components
 			TrackBarDictionary.Clear();
 			ContextMenuDictionary.Clear();
 			ListBoxDictionary.Clear();
+			DataGridDictionary.Clear();
 		}
 
 		#endregion
 
 		#region Evaluate
 
-		private void EvaluateDicts()
+		private void InitializeDictionaries()
 		{
 			ButtonDictionary = new Dictionary<string, object>();
 			DefaultButtonDictionary = new Dictionary<string, object>();
@@ -476,6 +484,7 @@ namespace MetroSet_UI.Components
 			TrackBarDictionary = new Dictionary<string, object>();
 			ContextMenuDictionary = new Dictionary<string, object>();
 			ListBoxDictionary = new Dictionary<string, object>();
+			DataGridDictionary = new Dictionary<string, object>();
 		}
 
 		#endregion
@@ -545,6 +554,8 @@ namespace MetroSet_UI.Components
 			ContextMenuDictionary = GetValues(path, "ContextMenu");
 
 			ListBoxDictionary = GetValues(path, "ListBox");
+
+			DataGridDictionary = GetValues(path, "DataGrid");
 
 			ThemeDetailsReader(path);
 

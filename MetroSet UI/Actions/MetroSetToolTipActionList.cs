@@ -31,69 +31,69 @@ namespace MetroSet_UI.Actions
 {
 	internal class MetroSetToolTipActionList : DesignerActionList
 	{
-		private readonly MetroSetToolTip _metroSetToolTip;
+		private readonly MetroSetSetToolTip _metroSetSetToolTip;
 
 		public MetroSetToolTipActionList(IComponent component) : base(component)
 		{
-			_metroSetToolTip = (MetroSetToolTip)component;
+			_metroSetSetToolTip = (MetroSetSetToolTip)component;
 		}
 
 		public Style Style
 		{
-			get => _metroSetToolTip.Style;
-			set => _metroSetToolTip.Style = value;
+			get => _metroSetSetToolTip.Style;
+			set => _metroSetSetToolTip.Style = value;
 		}
 
-		public string ThemeAuthor => _metroSetToolTip.ThemeAuthor;
+		public string ThemeAuthor => _metroSetSetToolTip.ThemeAuthor;
 
-		public string ThemeName => _metroSetToolTip.ThemeName;
+		public string ThemeName => _metroSetSetToolTip.ThemeName;
 
 		public StyleManager StyleManager
 		{
-			get => _metroSetToolTip.StyleManager;
-			set => _metroSetToolTip.StyleManager = value;
+			get => _metroSetSetToolTip.StyleManager;
+			set => _metroSetSetToolTip.StyleManager = value;
 		}
 
 		public bool Active
 		{
-			get => _metroSetToolTip.Active;
-			set => _metroSetToolTip.Active = value;
+			get => _metroSetSetToolTip.Active;
+			set => _metroSetSetToolTip.Active = value;
 		}
 
 		public int AutomaticDelay
 		{
-			get => _metroSetToolTip.AutomaticDelay;
-			set => _metroSetToolTip.AutomaticDelay = value;
+			get => _metroSetSetToolTip.AutomaticDelay;
+			set => _metroSetSetToolTip.AutomaticDelay = value;
 		}
 
 		public int AutoPopDelay
 		{
-			get => _metroSetToolTip.AutoPopDelay;
-			set => _metroSetToolTip.AutoPopDelay = value;
+			get => _metroSetSetToolTip.AutoPopDelay;
+			set => _metroSetSetToolTip.AutoPopDelay = value;
 		}
 
 		public int InitialDelay
 		{
-			get => _metroSetToolTip.InitialDelay;
-			set => _metroSetToolTip.InitialDelay = value;
+			get => _metroSetSetToolTip.InitialDelay;
+			set => _metroSetSetToolTip.InitialDelay = value;
 		}
 
 		public bool StripAmpersands
 		{
-			get => _metroSetToolTip.StripAmpersands;
-			set => _metroSetToolTip.StripAmpersands = value;
+			get => _metroSetSetToolTip.StripAmpersands;
+			set => _metroSetSetToolTip.StripAmpersands = value;
 		}
 
 		public bool UseAnimation
 		{
-			get => _metroSetToolTip.UseAnimation;
-			set => _metroSetToolTip.UseAnimation = value;
+			get => _metroSetSetToolTip.UseAnimation;
+			set => _metroSetSetToolTip.UseAnimation = value;
 		}
 
 		public bool UseFading
 		{
-			get => _metroSetToolTip.UseFading;
-			set => _metroSetToolTip.UseFading = value;
+			get => _metroSetSetToolTip.UseFading;
+			set => _metroSetSetToolTip.UseFading = value;
 		}
 
 		public override DesignerActionItemCollection GetSortedActionItems()

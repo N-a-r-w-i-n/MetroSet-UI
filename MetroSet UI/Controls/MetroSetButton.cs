@@ -26,7 +26,6 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MetroSet_UI.Components;
 using MetroSet_UI.Design;
@@ -35,14 +34,13 @@ using MetroSet_UI.Extensions;
 using MetroSet_UI.Interfaces;
 
 namespace MetroSet_UI.Controls
-{  
+{
 	[ToolboxItem(true)]
 	[ToolboxBitmap(typeof(MetroSetButton), "Bitmaps.Button.bmp")]
 	[Designer(typeof(MetroSetButtonDesigner))]
 	[DefaultEvent("Click")]
 	[DefaultProperty("Text")]
-	[ComVisible(true)]
-	public class MetroSetButton : Control, iControl
+	public class MetroSetButton : Control, IMetroSetControl
 	{
 
 		#region Interfaces
@@ -231,6 +229,9 @@ namespace MetroSet_UI.Controls
 		/// <param name="style">The Style.</param>
 		private void ApplyTheme(Style style = Style.Light)
 		{
+			if (!IsDerivedStyle)
+				return;
+
 			switch (style)
 			{
 				case Style.Light:
@@ -524,6 +525,25 @@ namespace MetroSet_UI.Controls
 			set
 			{
 				_disabledBorderColor = value;
+				Refresh();
+			}
+		}
+
+		private bool _isDerivedStyle = true;
+
+		/// <summary>
+		/// Gets or sets the whether this control reflect to parent form style.
+		/// Set it to false if you want the style of this control be independent. 
+		/// </summary>
+		[Category("MetroSet Framework")]
+		[Description("Gets or sets the whether this control reflect to parent(s) style. \n " +
+					 "Set it to false if you want the style of this control be independent. ")]
+		public bool IsDerivedStyle
+		{
+			get { return _isDerivedStyle; }
+			set
+			{
+				_isDerivedStyle = value;
 				Refresh();
 			}
 		}
