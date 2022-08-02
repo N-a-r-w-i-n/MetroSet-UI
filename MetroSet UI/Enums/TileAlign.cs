@@ -44,5 +44,13 @@ namespace MetroSet_UI.Enums
         // Sets the Tile to BottomCenter corner.
         BottomCenter
 
+        // Sets The Tile to MiddleLeft corner.
+        MiddleLeft,
+        
+        // Sets The Tile to MiddleRight corner.
+        MiddleRight,
+        
+        // Sets The Tile to MiddleCenter corner.
+        MiddleCenter,
     }
 }
