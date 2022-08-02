@@ -158,7 +158,7 @@ namespace MetroSet_UI.Controls
 			ApplyTheme();
 			T_Defaults();
 			if (!Multiline)
-				Size = new Size(135, 30);
+				Size = new Size(135, 23);
 		}
 
 		private void EvaluateVars()
