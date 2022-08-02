@@ -165,13 +165,13 @@ namespace MetroSet_UI.Controls
 
 			switch (TileAlign)
 			{
-				case TileAlign.BottmLeft:
+				case TileAlign.BottomLeft:
 					sf = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Far };
 					break;
 				case TileAlign.BottomRight:
 					sf = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Far };
 					break;
-				case TileAlign.Topleft:
+				case TileAlign.TopLeft:
 					sf = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Near };
 					break;
 				case TileAlign.TopRight:
@@ -182,6 +182,15 @@ namespace MetroSet_UI.Controls
 					break;
 				case TileAlign.BottomCenter:
 					sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far };
+					break;
+				case TileAlign.MiddleLeft:
+					sf = new StringFormat { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center };
+					break;
+				case TileAlign.MiddleRight:
+					sf = new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center };
+					break;
+				case TileAlign.MiddleCenter:
+					sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -431,7 +440,7 @@ namespace MetroSet_UI.Controls
 		/// Gets or sets the TileAlign associated with the control.
 		/// </summary>
 		[Category("MetroSet Framework"), Description("Gets or sets the TileAlign associated with the control.")]
-		[DefaultValue(TileAlign.BottmLeft)]
+		[DefaultValue(TileAlign.MiddleCenter)]
 		public TileAlign TileAlign
 		{
 			get { return _textAlign; }
